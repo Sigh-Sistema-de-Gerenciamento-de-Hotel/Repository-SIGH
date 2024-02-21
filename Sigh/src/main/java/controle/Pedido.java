@@ -11,9 +11,6 @@ public class Pedido {
 	private Hospedagem hospedagem;
 	private LocalDateTime dataHorario;
 	private Setor setorResponsavel;
-	private ArrayList<Produto> produtos;
 	private String descricao;
-	private float preco;
-	private Status status;
-	private boolean pago;
+	private boolean feito;
 }

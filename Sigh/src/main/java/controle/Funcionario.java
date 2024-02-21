@@ -6,6 +6,6 @@ public class Funcionario {
 	private String usuario;
 	private String senha;
 	private String cargo;
-	private Setor setor;
+	private Setor setor; 
 	
 }

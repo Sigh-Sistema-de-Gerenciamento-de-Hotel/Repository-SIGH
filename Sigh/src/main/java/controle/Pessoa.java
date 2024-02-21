@@ -1,5 +1,5 @@
 package controle;
 
-public class Pessoa {
+public interface Pessoa {
 
 }
