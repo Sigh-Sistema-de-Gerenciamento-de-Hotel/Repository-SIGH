@@ -1,4 +1,4 @@
-package controle;
+package modelo;
 
 public class Funcionario {
 
