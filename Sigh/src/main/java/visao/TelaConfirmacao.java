@@ -8,14 +8,13 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
 import java.awt.Panel;
-import java.awt.Window.Type;
 import java.awt.Label;
-import java.awt.TextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaConfirmacao extends JFrame {
 
@@ -42,7 +41,7 @@ public class TelaConfirmacao extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaConfirmacao() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\logo sigh.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setType(Type.POPUP);
 		setForeground(new Color(255, 253, 253));
 		setTitle("Confirmação de cadastro");
@@ -108,7 +107,21 @@ public class TelaConfirmacao extends JFrame {
 		contentPane.add(usuario);
 		
 		JLabel lblNewLabel = new JLabel("  ");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoOKverde.png"));
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblNewLabel.setIcon(new ImageIcon("src/main/resources/botaoOk.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblNewLabel.setIcon(new ImageIcon("src/main/resources/botaoOKverde.png"));
+			}
+		});
+		lblNewLabel.setIcon(new ImageIcon("src/main/resources/botaoOKverde.png"));
 		lblNewLabel.setBounds(317, 208, 86, 26);
 		contentPane.add(lblNewLabel);
 	}
