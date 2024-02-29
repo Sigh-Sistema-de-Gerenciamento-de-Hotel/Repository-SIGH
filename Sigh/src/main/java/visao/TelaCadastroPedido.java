@@ -63,10 +63,10 @@ public class TelaCadastroPedido extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Gabrieli\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\logo sigh.png"));
-		lblNewLabel.setBounds(34, -19, 149, 267);
-		contentPane.add(lblNewLabel);
+		JLabel lblLogoSIGH = new JLabel("");
+		lblLogoSIGH.setIcon(new ImageIcon("C:\\Users\\Gabrieli\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\logo sigh.png"));
+		lblLogoSIGH.setBounds(34, -19, 149, 267);
+		contentPane.add(lblLogoSIGH);
 		
 		JLabel lblTelaCinza = new JLabel("");
 		lblTelaCinza.setIcon(new ImageIcon("C:\\Users\\Gabrieli\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\fundo cinza (menu).png"));
@@ -157,5 +157,9 @@ public class TelaCadastroPedido extends JFrame {
 		lblNewLabel_11 = new JLabel("Pedidos");
 		lblNewLabel_11.setBounds(240, 11, 46, 14);
 		contentPane.add(lblNewLabel_11);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(85, 311, 46, 14);
+		contentPane.add(lblNewLabel);
 	}
 }
