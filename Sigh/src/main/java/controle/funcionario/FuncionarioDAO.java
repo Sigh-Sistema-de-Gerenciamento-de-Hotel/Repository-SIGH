@@ -29,7 +29,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 
 	@Override
 	public int inserirFuncionario(Funcionario fun) {
-		String SQL = "INSERT INTO funcionaios (id_funcionario, nome, usuario, nome_social, email, id_cargo, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO funcionaios (id_funcionario, usuario, senha, cargo) VALUES (?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
