@@ -65,7 +65,7 @@ public class TelaCadastroPedido extends JFrame {
 		
 		JLabel lblLogoSIGH = new JLabel("");
 		lblLogoSIGH.setIcon(new ImageIcon("C:\\Users\\Gabrieli\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\logo sigh.png"));
-		lblLogoSIGH.setBounds(34, -19, 149, 267);
+		lblLogoSIGH.setBounds(34, 11, 149, 237);
 		contentPane.add(lblLogoSIGH);
 		
 		JLabel lblTelaCinza = new JLabel("");
