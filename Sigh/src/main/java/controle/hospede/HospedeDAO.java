@@ -30,15 +30,28 @@ public class HospedeDAO implements IHospedeDAO{
 	public int inserirHospede(Hospede hos) {
 		// TODO Auto-generated method stub
 		
-		String SQL = "INSERT INTO Hospede (id_hospede, primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsável) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+		String SQL = "INSERT INTO Hospede (id_hospede, genero, data_nascimento, nacionalidade, cpf, passaporte, telefone, id_endereco, id_responsável) VALUES (?,?,?,?,?,?,?,?,?)"; 
 		
 		Conexao con = Conexao.getInstancia(); 
 		
 		Connection ConBD = con.conectar(); 
 		try {
+			
 			PreparedStatement ps = ConBD.prepareStatement(SQL);
 			
-			ResultSet rs = ps.executeQuery(); 
+			ps.setInt(1, hos.getId());
+			ps.setString(2, hos.getGenero()); 
+			//*ps.setString(3, hos.getData_nascimento()); 
+			ps.setString(4, hos.getNacionalidade()); 
+			ps.setInt(5, hos.getCpf()); 
+			ps.setString(6, hos.getPassaporte()); 
+			ps.setInt(7, hos.getTelefone()); 
+			//*	ps.setString(8, hos.getendereco()); 
+			//*ps.setString(9, hos.getResponsavel()); 
+			
+			
+			
+			ps.executeUpdate(); 
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -56,7 +69,9 @@ public class HospedeDAO implements IHospedeDAO{
 		
 		ArrayList <Hospede> Hospede = new ArrayList<Hospede>(); 
 		
-		String SQL = "SELECT * FROM Hospede"; 
+		//* Erro mal resolvido (Gaby vai resolver) *// 
+		String SQL = "SELECT endereco, responsavel FROM Hospede INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID";
+		
 		
 		Conexao con = Conexao.getInstancia(); 
 		
@@ -69,10 +84,7 @@ public class HospedeDAO implements IHospedeDAO{
 			
 			while(rs.next()) {
 				
-				//* Erro mal resolvido (Gaby vai resolver) *// 
-				//String SQL = "SELECT endereco, responsavel FROM Hospede INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID";
-				
-				
+			
 				
 				Hospede hos = new Hospede(); 
 				
@@ -104,7 +116,7 @@ public class HospedeDAO implements IHospedeDAO{
 				hos.setCpf(cpf);
 				hos.setPassaporte(passaporte);
 				hos.setTelefone(telefone);
-				// hos.setEndereco(endereco);
+				//*hos.setEndereco(endereco);
 				hos.setResponsavel(respon);
 				
 				
