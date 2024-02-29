@@ -46,13 +46,18 @@ public class TelaLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\pessoa no login.png"));
-		lblNewLabel_2.setBounds(1056, 590, 46, 14);
+		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/pessoa no login.png"));
+		lblNewLabel_2.setBounds(892, 158, 150, 150);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\fundo verde.png"));
+		JLabel lblNewLabel = new JLabel(" ");
+		lblNewLabel.setIcon(new ImageIcon("src/main/resources/fundo verde.png"));
 		lblNewLabel.setBounds(584, 95, 751, 895);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("src/main/resources/Heading.png"));
+		lblNewLabel_1.setBounds(813, 629, 100, 14);
+		contentPane.add(lblNewLabel_1);
 	}
 }
