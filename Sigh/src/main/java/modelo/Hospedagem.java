@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -9,8 +10,8 @@ public class Hospedagem {
 	private Quarto quarto;
 	private int numHospedes;
 	private ArrayList<Hospede> hospedes;
-	private LocalDateTime dataHorarioEntrada;
-	private LocalDateTime dataHorarioSaida;
+	private LocalDate dataEntrada;
+	private LocalDate dataSaida;
 	private ArrayList<Pedido> pedidos;
 	
 	public int getId() {
@@ -37,17 +38,17 @@ public class Hospedagem {
 	public void setHospedes(ArrayList<Hospede> hospedes) {
 		this.hospedes = hospedes;
 	}
-	public LocalDateTime getDataHorarioEntrada() {
-		return dataHorarioEntrada;
+	public LocalDate getDataEntrada() {
+		return dataEntrada;
 	}
-	public void setDataHorarioEntrada(LocalDateTime dataHorarioEntrada) {
-		this.dataHorarioEntrada = dataHorarioEntrada;
+	public void setDataEntrada(LocalDate dataEntrada) {
+		this.dataEntrada = dataEntrada;
 	}
-	public LocalDateTime getDataHorarioSaida() {
-		return dataHorarioSaida;
+	public LocalDate getDataSaida() {
+		return dataSaida;
 	}
-	public void setDataHorarioSaida(LocalDateTime dataHorarioSaida) {
-		this.dataHorarioSaida = dataHorarioSaida;
+	public void setDataSaida(LocalDate dataSaida) {
+		this.dataSaida = dataSaida;
 	}
 	public ArrayList<Pedido> getPedidos() {
 		return pedidos;
