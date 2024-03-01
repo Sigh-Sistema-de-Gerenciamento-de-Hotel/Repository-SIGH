@@ -53,7 +53,7 @@ public class HospedeDAO implements IHospedeDAO{
 			
 			while(rs.next()) {
 				
-				String SQL = "SELECT endereco, responsavel FROM Hospede INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID";
+				//String SQL = "SELECT endereco, responsavel FROM Hospede INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID";
 				
 				
 				
@@ -87,7 +87,7 @@ public class HospedeDAO implements IHospedeDAO{
 				hos.setCpf(cpf);
 				hos.setPassaporte(passaporte);
 				hos.setTelefone(telefone);
-				hos.setEndereco(endereco);
+				// hos.setEndereco(endereco);
 				hos.setResponsavel(respon);
 				
 				
