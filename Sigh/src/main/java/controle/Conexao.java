@@ -19,7 +19,7 @@ public class Conexao {
 	 * 
 	 * @return conexao
 	 */
-	public static Conexao getConexao() {
+	public static Conexao getInstancia() {
 		if(instancia == null) {
 			instancia = new Conexao();
 		}
@@ -56,5 +56,7 @@ public class Conexao {
 		}
 		return false;
 	}
+
+	
 
 }
