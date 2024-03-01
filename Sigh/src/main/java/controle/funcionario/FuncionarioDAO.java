@@ -30,6 +30,28 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 	@Override
 	public int inserirFuncionario(Funcionario fun) {
 		String SQL = "INSERT INTO funcionaios (id_funcionario, nome, usuario, nome_social, email, id_cargo, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, fun.getId());
+			ps.setString(2, fun.getUsuario());
+			ps.setString(3, fun.getSenha());
+			ps.setString(4, fun.getCargo());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
 		return 0;
 	}
 
