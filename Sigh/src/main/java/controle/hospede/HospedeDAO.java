@@ -31,6 +31,22 @@ public class HospedeDAO implements IHospedeDAO{
 		// TODO Auto-generated method stub
 		
 		String SQL = "INSERT INTO Hospede (id_hospede, primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsável) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+		
+		Conexao con = Conexao.getInstancia(); 
+		
+		Connection ConBD = con.conectar(); 
+		try {
+			PreparedStatement ps = ConBD.prepareStatement(SQL);
+			
+			ResultSet rs = ps.executeQuery(); 
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao(); 
+		}
+		
 		return 0;
 	}
 
@@ -53,6 +69,7 @@ public class HospedeDAO implements IHospedeDAO{
 			
 			while(rs.next()) {
 				
+				//* Erro mal resolvido (Gaby vai resolver) *// 
 				//String SQL = "SELECT endereco, responsavel FROM Hospede INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID";
 				
 				
@@ -66,8 +83,8 @@ public class HospedeDAO implements IHospedeDAO{
 				Integer cpf = rs.getInt("cpf"); 
 				String passaporte = rs.getString("passaporte"); 
 				Integer telefone = rs.getInt("telefone"); 
-				String id_endereco = rs.getString("endereco"); 
-				Integer id_responsavel = rs.getInt("responsavel"); 
+				String id_endereco = rs.getString("endereco"); //* Erro mal resolvido (Gaby vai resolver) *// 
+				Integer id_responsavel = rs.getInt("responsavel"); //* Erro mal resolvido (Gaby vai resolver) *// 
 				
 				Hospede respon  = new Hospede();
 				respon = null;
