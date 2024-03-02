@@ -29,6 +29,25 @@ public class HospedagemDAO implements IHospedagemDAO{
 	@Override
 	public int inserirHospedagem(Hospedagem hosp) {
 		String SQL = "insert into hospedagens (id_hospedagem, data_saida, data_entrada) values (?, ?, ?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, hosp.getId());
+			
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
 		return 0;
 	}
 
