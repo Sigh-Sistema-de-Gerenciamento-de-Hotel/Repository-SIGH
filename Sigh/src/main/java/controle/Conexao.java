@@ -57,11 +57,6 @@ public class Conexao {
 		return false;
 	}
 
-	public static Conexao getInstancia() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 
 }
