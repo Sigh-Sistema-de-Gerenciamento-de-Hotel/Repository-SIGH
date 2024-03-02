@@ -60,7 +60,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 				hos.setDataHorarioEntrada(LocalDateTime.parse(dataHorarioEntrada));
 				hos.setDataHorarioSaida(LocalDateTime.parse(dataHorarioSaida));
 				
-				
+				hospedagens.add(hos);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

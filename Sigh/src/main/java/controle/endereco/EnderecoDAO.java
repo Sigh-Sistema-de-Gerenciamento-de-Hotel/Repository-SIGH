@@ -66,6 +66,8 @@ public class EnderecoDAO implements IEnderecoDAO {
 				end.setComplemento(complemento);
 				end.setNumero(numero);
 				
+				enderecos.add(end);
+				
 			}
 			
 		} catch (SQLException e) {
