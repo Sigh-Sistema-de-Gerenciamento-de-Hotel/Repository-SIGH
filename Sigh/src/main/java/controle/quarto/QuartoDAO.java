@@ -27,7 +27,7 @@ public class QuartoDAO implements IQuartoDAO{
 
 	@Override
 	public int inserirQuarto(Quarto qua) {
-		String SQL = "SELECT INTO quartos (numero, numCamaCasal, numCamaSolteiro, numMaxHospedes, arCondicionado, frigobar, banheira, acessibilidade, preco, precisaLimpeza, precisaConserto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO quartos (numero, numCamaCasal, numCamaSolteiro, numMaxHospedes, arCondicionado, frigobar, banheira, acessibilidade, preco, precisaLimpeza, precisaConserto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Conexao con = Conexao.getInstancia();
         Connection conBD = con.conectar();
