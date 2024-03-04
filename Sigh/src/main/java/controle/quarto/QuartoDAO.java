@@ -39,13 +39,23 @@ public class QuartoDAO implements IQuartoDAO{
 			ps.setInt(2, qua.getNumCamaCasal());
 			ps.setInt(3, qua.getNumCamaSolteiro());
 			ps.setInt(4, qua.getNumMaxHospedes());
+			ps.setBoolean(5, qua.isArCondicionado());
+			ps.setBoolean(6, qua.isFrigobar());
+			ps.setBoolean(7,  qua.isBanheira());
+			ps.setBoolean(8, qua.isAcessibilidade());
+			ps.setFloat(9, qua.getPreco());
+			ps.setBoolean(10, qua.isPrecisaLimpeza());
+			ps.setBoolean(11, qua.isPrecisaConserto());
+			
+			ps.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
 		}
 		
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
