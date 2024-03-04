@@ -15,12 +15,12 @@ public class RoundJFormattedTextField extends JFormattedTextField {
 
 	private static final long serialVersionUID = 1L;
 	private Shape shape;
-	private int radii = 10;
+	private int radii = 8;
 	protected Color color;
 	
     public RoundJFormattedTextField(MaskFormatter mf) {
     	super(mf);
-    	this.color = new Color(45,45,45);
+    	this.color = new Color(208,213,221);
         setOpaque(false); // As suggested by @AVD in comment.
     }
     
