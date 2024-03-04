@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import visao.padrao.RoundJFormattedTextField;
+
 import java.awt.Color;
 import java.awt.Panel;
 import java.awt.Label;
@@ -15,11 +17,13 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
 public class TelaConfirmacao extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -124,5 +128,6 @@ public class TelaConfirmacao extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon("src/main/resources/botaoOKverde.png"));
 		lblNewLabel.setBounds(317, 208, 86, 26);
 		contentPane.add(lblNewLabel);
+		
 	}
 }
