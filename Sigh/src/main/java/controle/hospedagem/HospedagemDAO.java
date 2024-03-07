@@ -90,10 +90,23 @@ public class HospedagemDAO implements IHospedagemDAO{
 				// Hospede
 				ArrayList<Hospede> hospedes = new ArrayList<Hospede>();
 				Hospede hospede = new Hospede();
-				int idHospede = rs.getInt("id_hospede");
-				String nome = rs.getString("primeiro_nome");
-				String sobrenome = rs.getString("sobrenome");
-				String nomeSocial = rs.getString("nome_social");
+				Integer id_hospede = rs.getInt("id"); 
+				String genero = rs.getString("genero");
+				String dataNascimento = rs.getString("dataNascimento");
+				String nacionalidade = rs.getString("nacionalidade"); 
+				Integer cpf = rs.getInt("cpf"); 
+				String passaporte = rs.getString("passaporte"); 
+				Integer telefone = rs.getInt("telefone"); 
+				
+				hospede.setId(id_hospede);			
+				hospede.setGenero(genero);
+				hospede.setDataNascimento(LocalDateTime.parse( dataNascimento));
+				hospede.setNacionalidade(nacionalidade);
+				hospede.setCpf(cpf);
+				hospede.setPassaporte(passaporte);
+				hospede.setTelefone(telefone);
+				
+				hospedes.add(hospede);
 				
 				// Quarto
 				Quarto quarto = new Quarto();
