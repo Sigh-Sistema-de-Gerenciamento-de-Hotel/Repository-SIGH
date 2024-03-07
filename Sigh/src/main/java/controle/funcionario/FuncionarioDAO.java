@@ -29,7 +29,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 
 	@Override
 	public int inserirFuncionario(Funcionario fun) {
-		String SQL = "INSERT INTO funcionaios (id_funcionario, usuario, senha, cargo) VALUES (?, ?, ?, ?)";
+		String SQL = "INSERT INTO funcionarios (id_funcionario, primeiroNome, sobrenome, nomeSocial, usuario, senha, cargo) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -38,9 +38,12 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			ps.setInt(1, fun.getId());
-			ps.setString(2, fun.getUsuario());
-			ps.setString(3, fun.getSenha());
-			ps.setString(4, fun.getCargo());
+			ps.setString(2, fun.getPrimeiroNome());
+			ps.setString(3, fun.getSobrenome());
+			ps.setString(4, fun.getNomeSocial());
+			ps.setString(4, fun.getUsuario());
+			ps.setString(5, fun.getSenha());
+			ps.setString(6, fun.getCargo());
 			
 			ps.executeUpdate();
 			
@@ -74,11 +77,17 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 				Funcionario fun = new Funcionario();
 				
 				int id = rs.getInt("id_funcionario");
+				String primeiroNome = rs.getString("primeiroNome");
+				String sobrenome = rs.getString("sobrenome");
+				String nomeSocial = rs.getString("nomeSocial");
 				String usuario = rs.getString("usuario");
 				String senha = rs.getString("senha");
 				String cargo = rs.getString("cargo");
 				
 				fun.setId(id);
+				fun.setPrimeiroNome(primeiroNome);
+				fun.setSobrenome(sobrenome);
+				fun.setNomeSocial(nomeSocial);
 				fun.setUsuario(usuario);
 				fun.setSenha(senha);
 				fun.setCargo(cargo);
@@ -98,8 +107,36 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 
 	@Override
 	public boolean atualizarFuncionario(Funcionario fun) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String SQL = "UPDATE funcionarios SET primeiroNome = ?, sobrenome = ?, nomeSocial = ?, usuario = ?, senha = ?, cargo = ? WHERE id_funcionario = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, fun.getId());
+			ps.setString(2, fun.getNomeSocial());
+			ps.setString(3, fun.getSobrenome());
+			ps.setString(4, fun.getNomeSocial());
+			ps.setString(5, fun.getUsuario());
+			ps.setString(6, fun.getSenha());
+			ps.setString(7, fun.getCargo());
+			
+			retorno = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
+		return (retorno == 0? false : true);
 	}
 
 	@Override
