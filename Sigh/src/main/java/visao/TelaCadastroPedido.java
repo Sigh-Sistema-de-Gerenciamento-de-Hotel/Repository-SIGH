@@ -231,7 +231,7 @@ public class TelaCadastroPedido extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//PROGRAMAR BOTAO DE SALVAR
+				//PROGRAMAR BOTAO DE SALVAR//
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
