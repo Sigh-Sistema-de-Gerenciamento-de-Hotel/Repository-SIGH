@@ -168,7 +168,7 @@ public class TelaCadastroPedido extends JFrame {
 				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
 			}
 		});
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.pngg"));
 		lblPedidos.setBounds(10, 284, 339, 50);
 		contentPane.add(lblPedidos);
 		
@@ -196,7 +196,7 @@ public class TelaCadastroPedido extends JFrame {
 		
 		JLabel lblTelaCinza = new JLabel("");
 		lblTelaCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
-		lblTelaCinza.setBounds(-1591, -1056, 420, 1080);
+		lblTelaCinza.setBounds(0, 0, 355, 749);
 		contentPane.add(lblTelaCinza);
 		
 		JLabel lblTelaBrancaMenor = new JLabel("");
@@ -228,7 +228,7 @@ public class TelaCadastroPedido extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//PROGRAMAR BOTAO DE SALVAR////
+				//PROGRAMAR BOTAO DE SALVAR//
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -248,7 +248,6 @@ public class TelaCadastroPedido extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
