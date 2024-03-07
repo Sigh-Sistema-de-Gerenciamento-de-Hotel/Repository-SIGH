@@ -37,12 +37,12 @@ public class PedidoDAO implements IPedidoDAO{
 					PreparedStatement ps = conBD.prepareStatement(SQL);
 					
 					ps.setInt(1, ped.getId());
-					ps.setString(2, ped.getHospede());
-					ps.setString(3, ped.getHospedagem());
-					ps.setString(4,  ped.getDataHorario());
-					ps.setString(5, ped.getSetorResponsavel());
-					ps.setString(6, ped.getDescricao());
-					ps.setString(7, ped.getQuarto());
+					//ps.setString(2, ped.getHospede());
+					//ps.setString(3, ped.getHospedagem());
+					//ps.setString(4,  ped.getDataHorario());
+					//ps.setString(5, ped.getSetorResponsavel());
+					//ps.setString(6, ped.getDescricao());
+					//ps.setString(7, ped.getQuarto());
 					ps.setBoolean(8, ped.isFeito());
 				
 					ps.executeUpdate(); //executa sem esperar retorno do BD

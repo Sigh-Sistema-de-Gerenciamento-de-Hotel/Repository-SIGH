@@ -1,10 +1,11 @@
 package controle.hospedagem;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.ArrayList;
 
 import controle.Conexao;
@@ -28,7 +29,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 
 	@Override
 	public int inserirHospedagem(Hospedagem hosp) {
-		String SQL = "insert into hospedagens (id_hospedagem, data_saida, data_entrada) values (?, ?, ?)";
+		String SQL = "insert into hospedagens (id_hospedagem, data_entrada, data_saida) values (?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -37,6 +38,8 @@ public class HospedagemDAO implements IHospedagemDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			ps.setInt(1, hosp.getId());
+			ps.setDate(2, Date.valueOf(hosp.getDataEntrada()));
+			ps.setDate(3, Date.valueOf(hosp.getDataSaida()));
 			
 			ps.executeUpdate();
 			
@@ -72,12 +75,12 @@ public class HospedagemDAO implements IHospedagemDAO{
 				Hospedagem hos = new Hospedagem();
 				
 				int id = rs.getInt("id_hospedagem");
-				String dataHorarioSaida = rs.getString("data_saida");
-				String dataHorarioEntrada = rs.getString("data_entrada");
+				LocalDate dataEntrada = LocalDate.parse(rs.getString("data_entrada"));
+				LocalDate dataSaida = LocalDate.parse(rs.getString("data_saida"));
 				
 				hos.setId(id);
-				hos.setDataHorarioEntrada(LocalDateTime.parse(dataHorarioEntrada));
-				hos.setDataHorarioSaida(LocalDateTime.parse(dataHorarioSaida));
+				hos.setDataEntrada(dataEntrada);
+				hos.setDataSaida(dataSaida);
 				
 				hospedagens.add(hos);
 			}
