@@ -28,7 +28,7 @@ public class PedidoDAO implements IPedidoDAO{
 	@Override
 	public int inserirPedido(Pedido ped) {
 		
-		String SQL = "INSERT INTO inserirPedido (id, hospede, hospedagem, dataHorario, setorResponsavel, descricao, feito) VALUES (?,?,?,?,?,?,?,?)";
+		String SQL = "INSERT INTO inserirPedido (id, hospede, hospedagem, dataHorario, setorResponsavel, quarto, descricao, feito) VALUES (?,?,?,?,?,?,?,?)";
 		
 				Conexao con = Conexao.getInstancia();
 				Connection conBD = con.conectar(); 
@@ -41,8 +41,8 @@ public class PedidoDAO implements IPedidoDAO{
 					//ps.setString(3, ped.getHospedagem());
 					//ps.setString(4,  ped.getDataHorario());
 					//ps.setString(5, ped.getSetorResponsavel());
-					//ps.setString(6, ped.getDescricao());
 					//ps.setString(7, ped.getQuarto());
+					ps.setString(6, ped.getDescricao());
 					ps.setBoolean(8, ped.isFeito());
 				
 					ps.executeUpdate(); //executa sem esperar retorno do BD
@@ -79,30 +79,31 @@ public class PedidoDAO implements IPedidoDAO{
 			
 			while(rs.next()) {
 				
-				// String SQL ="SELECT Quarto, Hospede, Hospedagem, LocalDateTime, SetorResponsavel"
+				//String SQL =" SELECT Quarto, Hospede, Hospedagem, LocalDateTime, SetorResponsavel"
 				//		+ "FROM Pedido\n"
-				//		+ "INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID";
+				//		+ "INNER JOIN Categories ON Pedido.Quarto = Pedido.Hospede = Pedido.Hospedagem = Pedido.LocalDateTime = Pedido.SetorResponsavel";
+				
 						
 				// Criar Objeto
 				Pedido ped = new Pedido();
 				
 				// Pega os valores de cada coluna do registro
 				int id = rs.getInt("id");
-				String Quarto = rs.getString("Quarto");
 				String Hospede = rs.getString("Hospede");
 				String Hospedagem = rs.getString("Hospedagem");
-				String LocalDateTime = rs.getString("LocalDateTime");
+				String DataHorario = rs.getString("DataHorario");
 				String SetorResponsavel = rs.getString("SetorResponsavel");
+				String Quarto = rs.getString("Quarto");
 				String descricao = rs.getString("descricao");
 				boolean feito = rs.getBoolean("Feito");
 				
 				// Set os valores no obj java
 				ped.setId(id);
-				ped.setQuarto(null);
 				ped.setHospede(null);
 				ped.setHospedagem(null);
 				ped.setDataHorario(null);
 				ped.setSetorResponsavel(null);
+				ped.setQuarto(null);
 				ped.setDescricao(descricao);
 				ped.setFeito(feito);
 				
@@ -122,9 +123,39 @@ public class PedidoDAO implements IPedidoDAO{
 	}
 
 	@Override
+	
 	public boolean atualizarPedido(Pedido ped) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String SQL = "UPDATE pedidos SET id = ? WHERE hospede = ? WHERE hospedagem = ? WHERE dataHorario ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, ped.getId());
+			//ps.setString(2, ped.getHospede());
+			//ps.setString(3, ped.getHospedagem());
+			//ps.setString(4,  ped.getDataHorario());
+			//ps.setString(5, ped.getSetorResponsavel());
+			//ps.setString(7, ped.getQuarto());
+			//ps.setString(6, ped.getDescricao());
+			ps.setBoolean(8, ped.isFeito());
+			
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		//if Ternario (operador condicional ternario)
+		return (retorno == 0 ? false : true);
 	}
 
 	@Override
