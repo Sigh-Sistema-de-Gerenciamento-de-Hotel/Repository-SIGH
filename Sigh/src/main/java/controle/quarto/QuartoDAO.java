@@ -27,7 +27,7 @@ public class QuartoDAO implements IQuartoDAO{
 
 	@Override
 	public int inserirQuarto(Quarto qua) {
-		String SQL = "SELECT INTO quartos (numero, numCamaCasal, numCamaSolteiro, numMaxHospedes, arCondicionado, frigobar, banheira, acessibilidade, preco, precisaLimpeza, precisaConserto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO quartos (numero, numCamaCasal, numCamaSolteiro, numMaxHospedes, arCondicionado, frigobar, banheira, acessibilidade, preco, precisaLimpeza, precisaConserto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Conexao con = Conexao.getInstancia();
         Connection conBD = con.conectar();
@@ -39,13 +39,23 @@ public class QuartoDAO implements IQuartoDAO{
 			ps.setInt(2, qua.getNumCamaCasal());
 			ps.setInt(3, qua.getNumCamaSolteiro());
 			ps.setInt(4, qua.getNumMaxHospedes());
+			ps.setBoolean(5, qua.isArCondicionado());
+			ps.setBoolean(6, qua.isFrigobar());
+			ps.setBoolean(7,  qua.isBanheira());
+			ps.setBoolean(8, qua.isAcessibilidade());
+			ps.setFloat(9, qua.getPreco());
+			ps.setBoolean(10, qua.isPrecisaLimpeza());
+			ps.setBoolean(11, qua.isPrecisaConserto());
+			
+			ps.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
 		}
 		
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -109,8 +119,38 @@ public class QuartoDAO implements IQuartoDAO{
 
 	@Override
 	public boolean atualizarQuarto(Quarto qua) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String SQL = "UPDATE quartos SET numCamaCasal = ?, numCamaSolteiro = ?, numMaxHospedes = ?, arCondicionado = ?, frigobar = ?, banheira = ?, acessibilidade = ?, preco = ?, precisaLimpeza = ?, precisaConserto = ? WHERE numero = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, qua.getNumero());
+			ps.setInt(2, qua.getNumCamaCasal());
+			ps.setInt(3, qua.getNumCamaSolteiro());
+			ps.setInt(4, qua.getNumMaxHospedes());
+			ps.setBoolean(5, qua.isArCondicionado());
+			ps.setBoolean(6, qua.isFrigobar());
+			ps.setBoolean(7, qua.isBanheira());
+			ps.setBoolean(8, qua.isAcessibilidade());
+			ps.setFloat(9, qua.getPreco());
+			ps.setBoolean(10, qua.isPrecisaLimpeza());
+			ps.setBoolean(11, qua.isPrecisaConserto());
+			
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return (retorno == 0? false : true);
 	}
 
 	@Override
