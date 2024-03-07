@@ -13,6 +13,8 @@ public class Quarto {
 	private float preco;
 	private boolean precisaLimpeza;
 	private boolean precisaConserto;
+	
+	
 	public int getNumero() {
 		return numero;
 	}
