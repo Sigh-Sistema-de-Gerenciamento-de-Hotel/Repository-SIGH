@@ -106,8 +106,34 @@ public class EnderecoDAO implements IEnderecoDAO {
 
 	@Override
 	public boolean atualizarEndereco(Endereco end) {
+		
 		String SQL = "UPDATE enderecos SET estado = ?, cidade = ?, endereco = ?, complemento = ?, numero = ?  WHERE id_endereco = ?";
-		return false;
+		
+		// Cria a "ponte de conexao" com MYSQL
+		Conexao con = Conexao.getInstancia(); // Instancia a conexao
+		Connection conBD = con.conectar(); // Cria a ponte com o MySQL
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, end.getId());
+			ps.setString(2, end.getEstado());
+			ps.setString(3, end.getCidade());
+			ps.setString(4, end.getEndereco());
+			ps.setString(5, end.getComplemento());
+			ps.setInt(6, end.getNumero());
+			
+			retorno = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		return (retorno == 0? false : true);
 	}
 
 	@Override
