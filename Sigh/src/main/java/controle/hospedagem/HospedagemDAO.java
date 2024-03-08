@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import controle.Conexao;
 import modelo.Hospedagem;
+import modelo.Hospede;
+import modelo.Quarto;
 
 public class HospedagemDAO implements IHospedagemDAO{
 
@@ -63,7 +65,10 @@ public class HospedagemDAO implements IHospedagemDAO{
 		ArrayList<Hospedagem> hospedagens = new ArrayList<Hospedagem>();
 
 		// Comando SQL a ser executado
-		String SQL = "SELECT * FROM	hospedagens INNER JOIN hospede_hospedagem ON hospedagens.id_hospedagem = hospede_hospedagem.id_hospedagem";
+		String SQL = "SELECT * FROM hospede_hospedagem "
+				+ "INNER JOIN hospedagens ON hospede_hospedagem.id_hospedagem = hospedagens.id_hospedagem "
+				+ "INNER JOIN hospedes ON hospede_hospedagem.id_hospede = hospedes.id_hospede "
+				+ "INNER JOIN quartos ON hospede_hospedagem.id_quarto = quartos.id_quarto";
 
 		// Cria a "ponte de conexao" com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -77,13 +82,50 @@ public class HospedagemDAO implements IHospedagemDAO{
 			while(rs.next()) {
 				Hospedagem hos = new Hospedagem();
 
+				// Hospedagem 
 				int id = rs.getInt("id_hospedagem");
 				LocalDate dataEntrada = LocalDate.parse(rs.getString("data_entrada"));
 				LocalDate dataSaida = LocalDate.parse(rs.getString("data_saida"));
 				
+				// Hospede
+				ArrayList<Hospede> hospedes = new ArrayList<Hospede>();
+				Hospede hospede = new Hospede();
+				int idHospede = rs.getInt("id_hospede");
+				String nome = rs.getString("primeiro_nome");
+				String sobrenome = rs.getString("sobrenome");
+				String nomeSocial = rs.getString("nome_social");
+				
+				// Quarto
+				Quarto quarto = new Quarto();
+				int numero = rs.getInt("id_quarto");
+				int numCamaCasal = rs.getInt("numCamaCasal");
+				int numCamaSolteiro = rs.getInt("numCamaSolteiro");
+				int numMaxHospedes = rs.getInt("numMaxHospedes");
+				boolean arCondicionado = rs.getBoolean("arCondicionado");
+				boolean frigobar = rs.getBoolean("frigobar");
+				boolean banheira = rs.getBoolean("banheira");
+				boolean acessibilidade = rs.getBoolean("acessibilidade");
+				float preco = rs.getFloat("preco");
+				boolean precisaLimpeza = rs.getBoolean("precisaLimpexa");
+				boolean precisaConserto = rs.getBoolean("precisaConserto");
+				
+				quarto.setNumero(numero);
+				quarto.setNumCamaCasal(numCamaCasal);
+				quarto.setNumCamaSolteiro(numCamaSolteiro);
+				quarto.setNumMaxHospedes(numMaxHospedes);
+				quarto.setArCondicionado(arCondicionado);
+				quarto.setFrigobar(frigobar);
+				quarto.setBanheira(banheira);
+				quarto.setAcessibilidade(acessibilidade);
+				quarto.setPreco(preco);
+				quarto.setPrecisaLimpeza(precisaLimpeza);
+				quarto.setPrecisaConserto(precisaConserto);
+				
 				hos.setId(id);
 				hos.setDataEntrada(dataEntrada);
 				hos.setDataSaida(dataSaida);
+				hos.setHospedes(hospedes);
+				hos.setQuarto(quarto);
 
 				hospedagens.add(hos);
 			}
