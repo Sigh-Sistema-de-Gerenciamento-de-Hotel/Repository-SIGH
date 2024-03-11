@@ -82,7 +82,7 @@ public class TelaCadastroPedido extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza escuro.png"));
+				lblSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -269,7 +269,7 @@ public class TelaCadastroPedido extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar verde claro.png"));
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {

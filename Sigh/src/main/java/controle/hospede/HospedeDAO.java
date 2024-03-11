@@ -5,10 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import controle.Conexao;
+import modelo.Endereco;
 import modelo.Hospede;
 
 public class HospedeDAO implements IHospedeDAO{
@@ -70,7 +72,7 @@ public class HospedeDAO implements IHospedeDAO{
 		ArrayList <Hospede> Hospede = new ArrayList<Hospede>(); 
 		
 		
-		String SQL = "SELECT endereco, responsavel FROM Hospede INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID";
+		String SQL = "SELECT * FROM hospedes INNER JOIN enderecos ON hospedes.id_endereco = enderecos.id_endereco";
 		
 		
 		Conexao con = Conexao.getInstancia(); 
@@ -84,43 +86,73 @@ public class HospedeDAO implements IHospedeDAO{
 			
 			while(rs.next()) {
 				
-			
-				
 				Hospede hos = new Hospede(); 
 				
-				Integer id_hospede = rs.getInt("id"); 
+				Integer id_hospede = rs.getInt("id_hospede"); 
+				String nome = rs.getString("nome");
+				String sobrenome = rs.getString("sobrenome");
+				String nomeSocial = rs.getString("nome_social");
 				String genero = rs.getString("genero");
-				String dataNascimento = rs.getString("dataNascimento");
+				Date dataNascimento = rs.getDate("dataNascimento");
 				String nacionalidade = rs.getString("nacionalidade"); 
 				Integer cpf = rs.getInt("cpf"); 
 				String passaporte = rs.getString("passaporte"); 
 				Integer telefone = rs.getInt("telefone"); 
-				String id_endereco = rs.getString("endereco"); //* Erro mal resolvido (Gaby vai resolver) *// 
-				Integer id_responsavel = rs.getInt("responsavel"); //* Erro mal resolvido (Gaby vai resolver) *// 
 				
+				// Endereco
+				
+				Endereco end = new Endereco();
+				
+				int id = rs.getInt("id_endereco");
+				String estado = rs.getString("estado");
+				String cidade = rs.getString("cidade");
+				String endereco = rs.getString("endereco");
+				String complemento = rs.getString("complemento");
+				int numero = rs.getInt("numero");
+				
+				end.setId(id);
+				end.setEstado(estado);
+				end.setCidade(cidade);
+				end.setEndereco(endereco);
+				end.setComplemento(complemento);
+				end.setNumero(numero);
+				
+				// Responsavel
 				Hospede respon  = new Hospede();
-				respon = null;
 				
+				Integer id_hospedeR = rs.getInt("id_hospede"); 
+				String nomeR = rs.getString("nome");
+				String sobrenomeR = rs.getString("sobrenome");
+				String nomeSocialR = rs.getString("nome_social");
+				String generoR = rs.getString("genero");
+				Date dataNascimentoR = rs.getDate("dataNascimento");
+				String nacionalidadeR = rs.getString("nacionalidade"); 
+				Integer cpfR = rs.getInt("cpf"); 
+				String passaporteR = rs.getString("passaporte"); 
+				Integer telefoneR = rs.getInt("telefone"); 
 				
-				for (Hospede h : Hospede) {
-					if(h.getId() == id_responsavel) {
-						respon = h;
-					}
-				}
+				respon.setId(id_hospedeR);			
+				respon.setGenero(genero);
+				respon.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimentoR)));
+				respon.setNacionalidade(nacionalidadeR);
+				respon.setCpf(cpfR);
+				respon.setPassaporte(passaporteR);
+				respon.setTelefone(telefoneR);
 				
+				/*
+				 * for (Hospede h : Hospede) { if(h.getId() == id_responsavel) { respon = h;
+				 * break; } }
+				 */
 				
 				hos.setId(id_hospede);			
 				hos.setGenero(genero);
-				hos.setDataNascimento(LocalDateTime.parse( dataNascimento));
+				hos.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
 				hos.setNacionalidade(nacionalidade);
 				hos.setCpf(cpf);
 				hos.setPassaporte(passaporte);
 				hos.setTelefone(telefone);
-				//*hos.setEndereco(endereco);
+				hos.setEndereco(end);
 				hos.setResponsavel(respon);
-				
-				
-				
 				
 				Hospede.add(hos);
 				
