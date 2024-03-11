@@ -28,7 +28,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		}
 
 	@Override
-	public int inserirFuncionario(Funcionario fun) {
+	public boolean inserirFuncionario(Funcionario fun) {
 		String SQL = "INSERT INTO funcionarios (id_funcionario, primeiroNome, sobrenome, nomeSocial, usuario, senha, cargo) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
@@ -55,7 +55,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		}
 		
 		
-		return 0;
+		return false;
 	}
 
 	@Override
