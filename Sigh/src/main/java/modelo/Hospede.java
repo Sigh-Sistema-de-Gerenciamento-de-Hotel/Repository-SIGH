@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Hospede {
@@ -12,7 +13,7 @@ public class Hospede {
 	private int cpf;
 	private int telefone;
 	private Endereco endereco;
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 
 	public int getId() {
 		return id;
@@ -62,10 +63,10 @@ public class Hospede {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(LocalDateTime dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setDataNascimento(LocalDate localDateTime) {
+		this.dataNascimento = localDateTime;
 	}
 }
