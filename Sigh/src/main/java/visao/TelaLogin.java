@@ -55,7 +55,7 @@ public class TelaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
+		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/pessoa no login.png"));
 		lblNewLabel_2.setBounds(892, 158, 150, 150);
 		contentPane.add(lblNewLabel_2);
@@ -78,7 +78,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(textField_0);
 		textField_0.setColumns(10);
 		textField = new RoundJFormattedTextField(null);
-		textField.addMouseListener(new MouseAdapter() {
+		textField_0.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				textField_0.setText("");
@@ -88,7 +88,6 @@ public class TelaLogin extends JFrame {
 		textField.setBounds(682, 486, 547, 64);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		textField.setText("blabla");
 		
 		JLabel lblNewLabel_3 = new JLabel("USUÁRIO *");
 		lblNewLabel_3.setForeground(new Color(52, 64, 84));
