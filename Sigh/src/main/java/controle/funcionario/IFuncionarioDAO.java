@@ -7,7 +7,7 @@ import modelo.Setor;
 
 public interface IFuncionarioDAO {
 
-	public int inserirFuncionario(Funcionario fun);
+	public boolean inserirFuncionario(Funcionario fun);
 
 	public ArrayList<Funcionario> listarFuncionario();
 
