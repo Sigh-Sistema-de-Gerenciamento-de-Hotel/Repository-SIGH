@@ -69,7 +69,7 @@ public class HospedeDAO implements IHospedeDAO{
 		
 		ArrayList <Hospede> Hospede = new ArrayList<Hospede>(); 
 		
-		//* Erro mal resolvido (Gaby vai resolver) *// 
+		
 		String SQL = "SELECT endereco, responsavel FROM Hospede INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID";
 		
 		
@@ -141,8 +141,47 @@ public class HospedeDAO implements IHospedeDAO{
 	@Override
 	public boolean atualizarHospede(Hospede hos) {
 	
-		// TODO Auto-generated method stub
-		return false;
+
+		String SQL = "UPDATE Hospede SET id  = ? WHERE genero = ?, WHERE cpf = ?, WHERE DataNascimento = ?, WHERE Nacionalidade = ?, WHERE Passaporte = ?, "
+				+ "WHERE Telefone = ?, WHERE Endereco = ?, WHERE Responsavel = ?";
+		
+		Conexao con = Conexao.getInstancia(); 
+		Connection conBD = con.conectar(); 
+		
+		int retorno = 0; 
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setString(1, hos.getGenero());
+			ps.setInt(2, hos.getCpf()); 
+			/*ps.setInt(3, hos.getDataNascimento()); */
+			ps.setString(4, hos.getNacionalidade());
+			ps.setString(5, hos.getPassaporte());
+			ps.setInt(6, hos.getTelefone());
+			/*ps.setString(7, hos.getEndereco());
+			ps.setString(8, hos.getResponsavel());*/
+			
+			
+			
+			retorno = ps.executeUpdate(); 
+			
+			
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			
+		}
+		
+		
+		return (retorno == 0? false: true);
 	}
 
 	@Override

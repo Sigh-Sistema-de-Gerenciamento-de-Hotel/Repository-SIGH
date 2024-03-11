@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 
 public class TelaCadastroPedido extends JFrame {
 
@@ -61,6 +63,7 @@ public class TelaCadastroPedido extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroPedido() {
+		setTitle("Cadastrar Pedido");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1404, 788);
@@ -168,7 +171,7 @@ public class TelaCadastroPedido extends JFrame {
 				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
 			}
 		});
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.pngg"));
+		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
 		lblPedidos.setBounds(10, 284, 339, 50);
 		contentPane.add(lblPedidos);
 		
@@ -209,9 +212,6 @@ public class TelaCadastroPedido extends JFrame {
 		lblTelaBrancaMaior.setBounds(351, 61, 1019, 69);
 		contentPane.add(lblTelaBrancaMaior);
 		
-		JLabel label = new JLabel("New label");
-		label.setBounds(51, 57, 46, 14);
-		contentPane.add(label);
 		
 		txtNome = new RoundJFormattedTextField(null);
 		txtNome.setBounds(418, 222, 183, 26);
@@ -226,12 +226,46 @@ public class TelaCadastroPedido extends JFrame {
 		lblDepartamento.setBounds(1013, 286, 92, 14);
 		contentPane.add(lblDepartamento);
 		
+		
 		lblBotaoSalvar = new JLabel("");
+		lblBotaoSalvar.addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+				
+//				String sobrenome = textSobrenome.getText();
+				
+				//if(sobrenome.isEmpty()) {
+				//	JanelaErro janelo = new JanelaErro();
+				//	janela.setVisible(true);
+				//	else {
+				//		Cliente c = new Cliente();
+				//		c.setSobrenome(sobrenome);
+						
+						
+						
+				//		ClienteDAO dao = ClienteDAO.setInstancia();
+				//		
+				//		int id = dao.inserirCliente(c);
+				//		boolean validou = dao.inserirCliente(); //VERDADEIRO OU FALSO
+				//		
+				//		if(validou == true) {
+				//			//MENSAGEM DE SUCESSO
+				//		}
+				//		else {
+				//			//mensagem de ERRO
+				//		}
+				//	}
+				//}
+				
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+		});
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//PROGRAMAR BOTAO DE SALVAR//
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -298,7 +332,7 @@ public class TelaCadastroPedido extends JFrame {
 		contentPane.add(lblHospedag);
 		
 		comboBox2Departamento = new JComboBox();
-		comboBox2Departamento.setBounds(1013, 300, 183, 26);
+		comboBox2Departamento.setBounds(1013, 300, 177, 26);
 		contentPane.add(comboBox2Departamento);
 		
 		comboBox1Quarto = new JComboBox();
