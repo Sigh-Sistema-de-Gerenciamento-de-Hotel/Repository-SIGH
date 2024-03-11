@@ -55,7 +55,7 @@ public class TelaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
+		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/pessoa no login.png"));
 		lblNewLabel_2.setBounds(892, 158, 150, 150);
 		contentPane.add(lblNewLabel_2);
@@ -78,7 +78,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(textField_0);
 		textField_0.setColumns(10);
 		textField = new RoundJFormattedTextField(null);
-		textField.addMouseListener(new MouseAdapter() {
+		textField_0.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				textField_0.setText("");
@@ -88,7 +88,6 @@ public class TelaLogin extends JFrame {
 		textField.setBounds(682, 486, 547, 64);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		textField.setText("blabla");
 		
 		JLabel lblNewLabel_3 = new JLabel("USUÁRIO *");
 		lblNewLabel_3.setForeground(new Color(52, 64, 84));
@@ -116,20 +115,38 @@ public class TelaLogin extends JFrame {
 		contentPane.add(lblNewLabel_3_1);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/olho - ver senha.png"));
-		lblNewLabel_4.setBounds(687, 698, 18, 10);
+		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/mostrar senha preto.png"));
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/mostrar senha claro.png"));
+			}
+		});
+		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/mostrar senha preto.png"));
+		lblNewLabel_4.setBounds(687, 698, 200, 10);
 		contentPane.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("  Mostrar senha");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_5.setBounds(705, 691, 116, 24);
-		contentPane.add(lblNewLabel_5);
+		
 		
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/Frame 670.png"));
 			}
 		});
 		lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
