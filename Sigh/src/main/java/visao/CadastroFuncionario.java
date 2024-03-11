@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
+import modelo.Usuario;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
@@ -252,19 +253,33 @@ public class CadastroFuncionario extends JFrame {
 					func.setCargo(cargo);
 				}
 				
+				Usuario u = new Usuario();
+				
 				String usuario = txtUsuarioText.getText();
 				if(usuario.isEmpty()) {
 					// ERRO
 				} else {
-					func.setUsuario(usuario);
+					u.setUsuario(usuario);
+//					func.setUsuario(usuario);
 				}
 				
 				String senha = txtSenhaText.getText();
 				if(senha.isEmpty()) {
 					// ERRO
 				} else {
-					func.setSenha(senha);
+					u.setSenha(senha);
+//					func.setSenha(senha);
 				}
+				
+				int idGerado =0;
+				if(!u.getUsuario().isEmpty() && !u.getSenha().isEmpty()) {
+					//UsuarioDAO dao = UsuarioDAO.getInstancia();
+					//idGerado = dao.inserirUsuario(u);
+					//u.setIdUsuario(idGerado);
+				}
+				
+				func.setUsuario(u);
+				
 				
 				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
 				

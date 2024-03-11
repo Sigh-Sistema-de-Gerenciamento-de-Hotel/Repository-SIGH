@@ -6,7 +6,7 @@ public class Funcionario {
 	private String primeiroNome;
 	private String sobrenome;
 	private String nomeSocial;
-	private String usuario;
+	private Usuario usuario;
 	private String senha;
 	private String cargo;
 	//private Setor setor;
@@ -36,11 +36,11 @@ public class Funcionario {
 	public void setNomeSocial(String nomeSocial) {
 		this.nomeSocial = nomeSocial;
 	}
-	public String getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsuario(Usuario u) {
+		this.usuario = u;
 	}
 	public String getSenha() {
 		return senha;
