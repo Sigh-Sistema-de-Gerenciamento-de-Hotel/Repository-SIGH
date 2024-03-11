@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 
 public class TelaCadastroPedido extends JFrame {
 
@@ -61,6 +63,7 @@ public class TelaCadastroPedido extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroPedido() {
+		setTitle("Cadastrar Pedido");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1404, 788);
@@ -223,12 +226,46 @@ public class TelaCadastroPedido extends JFrame {
 		lblDepartamento.setBounds(1013, 286, 92, 14);
 		contentPane.add(lblDepartamento);
 		
+		
 		lblBotaoSalvar = new JLabel("");
+		lblBotaoSalvar.addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+				
+//				String sobrenome = textSobrenome.getText();
+				
+				//if(sobrenome.isEmpty()) {
+				//	JanelaErro janelo = new JanelaErro();
+				//	janela.setVisible(true);
+				//	else {
+				//		Cliente c = new Cliente();
+				//		c.setSobrenome(sobrenome);
+						
+						
+						
+				//		ClienteDAO dao = ClienteDAO.setInstancia();
+				//		
+				//		int id = dao.inserirCliente(c);
+				//		boolean validou = dao.inserirCliente(); //VERDADEIRO OU FALSO
+				//		
+				//		if(validou == true) {
+				//			//MENSAGEM DE SUCESSO
+				//		}
+				//		else {
+				//			//mensagem de ERRO
+				//		}
+				//	}
+				//}
+				
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+		});
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//PROGRAMAR BOTAO DE SALVAR//
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
