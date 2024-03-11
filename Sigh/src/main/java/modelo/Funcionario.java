@@ -9,7 +9,7 @@ public class Funcionario {
 	private String usuario;
 	private String senha;
 	private String cargo;
-	private Setor setor;
+	//private Setor setor;
 	
 	
 	public int getId() {
@@ -54,11 +54,11 @@ public class Funcionario {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	public Setor getSetor() {
+	/*public Setor getSetor() {
 		return setor;
 	}
 	public void setSetor(Setor setor) {
 		this.setor = setor;
-	} 
+	} */
 	
 }

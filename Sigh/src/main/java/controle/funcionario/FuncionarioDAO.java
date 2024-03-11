@@ -63,7 +63,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		
 		ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
 		
-		String SQL = "SELECT * FROM funcionarios";
+		String SQL = "SELECT * FROM funcionarios INNER JOIN usuarios_senhas ON funcionarios.usuario = usuarios_senhas.usuario INNER JOIN cargos ON funcionarios.id_cargo = cargos.id_cargo";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
