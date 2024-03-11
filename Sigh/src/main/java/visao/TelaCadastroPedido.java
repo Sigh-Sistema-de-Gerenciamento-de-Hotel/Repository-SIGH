@@ -168,7 +168,7 @@ public class TelaCadastroPedido extends JFrame {
 				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
 			}
 		});
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.pngg"));
+		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
 		lblPedidos.setBounds(10, 284, 339, 50);
 		contentPane.add(lblPedidos);
 		
@@ -295,7 +295,7 @@ public class TelaCadastroPedido extends JFrame {
 		contentPane.add(lblHospedag);
 		
 		comboBox2Departamento = new JComboBox();
-		comboBox2Departamento.setBounds(1013, 300, 183, 26);
+		comboBox2Departamento.setBounds(1013, 300, 177, 26);
 		contentPane.add(comboBox2Departamento);
 		
 		comboBox1Quarto = new JComboBox();
