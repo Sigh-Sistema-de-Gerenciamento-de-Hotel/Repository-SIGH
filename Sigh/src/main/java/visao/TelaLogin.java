@@ -130,6 +130,14 @@ public class TelaLogin extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/Frame 670.png"));
+			}
 		});
 		lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
 		lblNewLabel_6.setBounds(781, 803, 359, 59);
