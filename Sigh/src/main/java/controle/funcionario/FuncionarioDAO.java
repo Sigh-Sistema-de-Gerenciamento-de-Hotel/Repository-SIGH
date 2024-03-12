@@ -41,7 +41,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 			ps.setString(2, fun.getPrimeiroNome());
 			ps.setString(3, fun.getSobrenome());
 			ps.setString(4, fun.getNomeSocial());
-			ps.setInt(4, fun.getUsuario().getIdUsuario());
+			ps.setString(4, fun.getUsuario());
 			ps.setString(5, fun.getSenha());
 			ps.setString(6, fun.getCargo());
 			
@@ -80,7 +80,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 				String primeiroNome = rs.getString("primeiroNome");
 				String sobrenome = rs.getString("sobrenome");
 				String nomeSocial = rs.getString("nomeSocial");
-//				String usuario = rs.getString("usuario");
+				String usuario = rs.getString("usuario");
 				String senha = rs.getString("senha");
 				String cargo = rs.getString("cargo");
 				
@@ -88,7 +88,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 				fun.setPrimeiroNome(primeiroNome);
 				fun.setSobrenome(sobrenome);
 				fun.setNomeSocial(nomeSocial);
-//				fun.setUsuario(usuario);
+				fun.setUsuario(usuario);
 				fun.setSenha(senha);
 				fun.setCargo(cargo);
 				

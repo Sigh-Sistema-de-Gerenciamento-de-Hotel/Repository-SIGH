@@ -253,32 +253,20 @@ public class CadastroFuncionario extends JFrame {
 					func.setCargo(cargo);
 				}
 				
-				Usuario u = new Usuario();
 				
 				String usuario = txtUsuarioText.getText();
 				if(usuario.isEmpty()) {
 					// ERRO
 				} else {
-					u.setUsuario(usuario);
-//					func.setUsuario(usuario);
+					func.setUsuario(usuario);
 				}
 				
 				String senha = txtSenhaText.getText();
 				if(senha.isEmpty()) {
 					// ERRO
 				} else {
-					u.setSenha(senha);
-//					func.setSenha(senha);
+					func.setSenha(senha);
 				}
-				
-				int idGerado =0;
-				if(!u.getUsuario().isEmpty() && !u.getSenha().isEmpty()) {
-					//UsuarioDAO dao = UsuarioDAO.getInstancia();
-					//idGerado = dao.inserirUsuario(u);
-					//u.setIdUsuario(idGerado);
-				}
-				
-				func.setUsuario(u);
 				
 				
 				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
