@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 public class CadastroFuncionario extends JFrame {
 
@@ -19,8 +20,9 @@ public class CadastroFuncionario extends JFrame {
 	private JTextField txtNomeText;
 	private JTextField txtNomeSocialText;
 	private JTextField txtCargoText;
-	private JTextField txtSetorText;
 	private JTextField txtUsuarioText;
+	private JTextField txtSobrenomeText;
+	private JTextField txtSenhaText;
 
 	/**
 	 * Launch the application.
@@ -140,52 +142,71 @@ public class CadastroFuncionario extends JFrame {
 		
 		txtNomeText = new JTextField();
 		txtNomeText.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtNomeText.setBounds(650, 298, 323, 48);
+		txtNomeText.setBounds(650, 298, 343, 48);
 		contentPane.add(txtNomeText);
 		txtNomeText.setColumns(10);
 		
 		JLabel lblNomeSocialLabel = new JLabel("Nome Social");
 		lblNomeSocialLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNomeSocialLabel.setBounds(650, 388, 90, 18);
+		lblNomeSocialLabel.setBounds(650, 420, 90, 18);
 		contentPane.add(lblNomeSocialLabel);
 		
 		txtNomeSocialText = new JTextField();
-		txtNomeSocialText.setBounds(650, 426, 343, 48);
+		txtNomeSocialText.setBounds(650, 450, 343, 48);
 		contentPane.add(txtNomeSocialText);
 		txtNomeSocialText.setColumns(10);
 		
 		JLabel lblCargoLabel = new JLabel("Cargo *");
 		lblCargoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCargoLabel.setBounds(650, 540, 70, 18);
+		lblCargoLabel.setBounds(650, 568, 70, 18);
 		contentPane.add(lblCargoLabel);
 		
 		txtCargoText = new JTextField();
-		txtCargoText.setBounds(650, 566, 343, 48);
+		txtCargoText.setBounds(650, 598, 343, 48);
 		contentPane.add(txtCargoText);
 		txtCargoText.setColumns(10);
 		
-		JLabel lblSetorLabel = new JLabel("Setor *");
-		lblSetorLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSetorLabel.setBounds(650, 688, 46, 18);
-		contentPane.add(lblSetorLabel);
-		
-		txtSetorText = new JTextField();
-		txtSetorText.setBounds(650, 712, 343, 48);
-		contentPane.add(txtSetorText);
-		txtSetorText.setColumns(10);
-		
 		JLabel lblUsuarioLabel = new JLabel("Usuário *");
 		lblUsuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUsuarioLabel.setBounds(650, 800, 58, 14);
+		lblUsuarioLabel.setBounds(650, 716, 58, 14);
 		contentPane.add(lblUsuarioLabel);
 		
 		txtUsuarioText = new JTextField();
-		txtUsuarioText.setBounds(650, 900, 343, 48);
+		txtUsuarioText.setBounds(650, 746, 343, 48);
 		contentPane.add(txtUsuarioText);
 		txtUsuarioText.setColumns(10);
+		
+		JLabel lblSobrenomeLabel = new JLabel("Sobrenome *");
+		lblSobrenomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSobrenomeLabel.setBounds(1261, 291, 90, 14);
+		contentPane.add(lblSobrenomeLabel);
+		
+		txtSobrenomeText = new JTextField();
+		txtSobrenomeText.setBounds(1261, 321, 343, 48);
+		contentPane.add(txtSobrenomeText);
+		txtSobrenomeText.setColumns(10);
+		
+		JLabel lblSenhaLabel = new JLabel("Senha *");
+		lblSenhaLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSenhaLabel.setBounds(1261, 450, 80, 14);
+		contentPane.add(lblSenhaLabel);
+		
+		txtSenhaText = new JTextField();
+		txtSenhaText.setBounds(1261, 480, 343, 48);
+		contentPane.add(txtSenhaText);
+		txtSenhaText.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao salvar.png"));
+		lblNewLabel.setBounds(1245, 902, 343, 50);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
+		lblNewLabel_1.setBounds(1595, 902, 300, 50);
+		contentPane.add(lblNewLabel_1);
 		
 		
 		
 	}
-
 }
