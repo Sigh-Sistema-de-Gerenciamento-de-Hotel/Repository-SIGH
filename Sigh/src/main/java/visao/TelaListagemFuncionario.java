@@ -8,11 +8,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class TelaListagemFuncionario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -82,5 +87,34 @@ public class TelaListagemFuncionario extends JFrame {
 		lblNewLabel.setBounds(0, 0, 420, 1080);
 		lblNewLabel.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\barra funcionários.png"));
+		lblNewLabel_7.setBounds(408, 0, 1512, 62);
+		contentPane.add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cadastrar.png"));
+		lblNewLabel_10.setBounds(1721, 164, 120, 34);
+		contentPane.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\Frame 681.png"));
+		lblNewLabel_9.setBounds(444, 115, 1455, 126);
+		contentPane.add(lblNewLabel_9);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(444, 308, 1455, 600);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Nome Completo", "Cargo", "Setor", "Usu\u00E1rio", "Data de nascimento"
+			}
+		));
 	}
 }
