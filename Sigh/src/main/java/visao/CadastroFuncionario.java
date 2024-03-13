@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import visao.padrao.RoundJFormattedTextField;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -12,6 +15,8 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CadastroFuncionario extends JFrame {
 
@@ -111,6 +116,21 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblCadastroDe);
 		
 		JLabel lblBotaoSair = new JLabel("");
+		lblBotaoSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza escuro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoSair.setIcon(new ImageIcon("src\\main\\resources\\botao sair.png"));
+			}
+		});
 		lblBotaoSair.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao sair.png"));
 		lblBotaoSair.setBounds(84, 958, 270, 40);
 		contentPane.add(lblBotaoSair);
@@ -140,7 +160,7 @@ public class CadastroFuncionario extends JFrame {
 		lblNomeLabel.setBounds(650, 272, 55, 18);
 		contentPane.add(lblNomeLabel);
 		
-		txtNomeText = new JTextField();
+		txtNomeText = new RoundJFormattedTextField(null);
 		txtNomeText.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtNomeText.setBounds(650, 298, 343, 48);
 		contentPane.add(txtNomeText);
@@ -151,7 +171,7 @@ public class CadastroFuncionario extends JFrame {
 		lblNomeSocialLabel.setBounds(650, 420, 90, 18);
 		contentPane.add(lblNomeSocialLabel);
 		
-		txtNomeSocialText = new JTextField();
+		txtNomeSocialText = new RoundJFormattedTextField(null);
 		txtNomeSocialText.setBounds(650, 450, 343, 48);
 		contentPane.add(txtNomeSocialText);
 		txtNomeSocialText.setColumns(10);
@@ -161,7 +181,7 @@ public class CadastroFuncionario extends JFrame {
 		lblCargoLabel.setBounds(650, 568, 70, 18);
 		contentPane.add(lblCargoLabel);
 		
-		txtCargoText = new JTextField();
+		txtCargoText = new RoundJFormattedTextField(null);
 		txtCargoText.setBounds(650, 598, 343, 48);
 		contentPane.add(txtCargoText);
 		txtCargoText.setColumns(10);
@@ -171,7 +191,7 @@ public class CadastroFuncionario extends JFrame {
 		lblUsuarioLabel.setBounds(650, 716, 58, 14);
 		contentPane.add(lblUsuarioLabel);
 		
-		txtUsuarioText = new JTextField();
+		txtUsuarioText = new RoundJFormattedTextField(null);
 		txtUsuarioText.setBounds(650, 746, 343, 48);
 		contentPane.add(txtUsuarioText);
 		txtUsuarioText.setColumns(10);
@@ -181,7 +201,7 @@ public class CadastroFuncionario extends JFrame {
 		lblSobrenomeLabel.setBounds(1261, 291, 90, 14);
 		contentPane.add(lblSobrenomeLabel);
 		
-		txtSobrenomeText = new JTextField();
+		txtSobrenomeText = new RoundJFormattedTextField(null);
 		txtSobrenomeText.setBounds(1261, 321, 343, 48);
 		contentPane.add(txtSobrenomeText);
 		txtSobrenomeText.setColumns(10);
@@ -191,20 +211,49 @@ public class CadastroFuncionario extends JFrame {
 		lblSenhaLabel.setBounds(1261, 450, 80, 14);
 		contentPane.add(lblSenhaLabel);
 		
-		txtSenhaText = new JTextField();
+		txtSenhaText = new RoundJFormattedTextField(null);
 		txtSenhaText.setBounds(1261, 480, 343, 48);
 		contentPane.add(txtSenhaText);
 		txtSenhaText.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao salvar.png"));
-		lblNewLabel.setBounds(1245, 902, 343, 50);
-		contentPane.add(lblNewLabel);
+		JLabel lblBotaoSalvar = new JLabel("");
+		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar verde claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+			}
+		});
+		lblBotaoSalvar.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao salvar.png"));
+		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
+		contentPane.add(lblBotaoSalvar);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
-		lblNewLabel_1.setBounds(1595, 902, 300, 50);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblBotaoCancelar = new JLabel("");
+		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				 lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				 lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+			}
+		});
+		
+		lblBotaoCancelar.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
+		lblBotaoCancelar.setBounds(1595, 902, 300, 50);
+		contentPane.add(lblBotaoCancelar);
 		
 		
 		
