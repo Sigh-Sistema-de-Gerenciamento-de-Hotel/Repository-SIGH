@@ -61,7 +61,7 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblBarraMenu = new JLabel("");
-		lblBarraMenu.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\divisor (menu).png"));
+		lblBarraMenu.setIcon(new ImageIcon("src\\main\\resources\\divisor (menu).png"));
 		lblBarraMenu.setBounds(88, 900, 260, 14);
 		contentPane.add(lblBarraMenu);
 		
@@ -83,27 +83,79 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblEscritaMenu);
 		
 		JLabel lblBotaoFuncionarios = new JLabel("");
-		lblBotaoFuncionarios.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu - funcionarios selecionado.png"));
+		 lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseClicked(MouseEvent e) {
+	            }
+	            @Override
+	            public void mouseEntered(MouseEvent e) {
+	                lblBotaoFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+	            }
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	                lblBotaoFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+	            }
+	        });
+		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu - funcionarios selecionado.png"));
 		lblBotaoFuncionarios.setBounds(48, 523, 335, 50);
 		contentPane.add(lblBotaoFuncionarios);
 		
 		JLabel lblBotaoHospedagem = new JLabel("");
-		lblBotaoHospedagem.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu hospedagem.png"));
+		 lblBotaoHospedagem.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseClicked(MouseEvent e) {
+	            }
+	            @Override
+	            public void mouseEntered(MouseEvent e) {
+	                lblBotaoHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+	            }
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	                lblBotaoHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+	            }
+	        });
+		lblBotaoHospedagem.setIcon(new ImageIcon("src\\main\\resources\\menu hospedagem.png"));
 		lblBotaoHospedagem.setBounds(68, 472, 190, 40);
 		contentPane.add(lblBotaoHospedagem);
 		
 		JLabel lblBotaoHospede = new JLabel("");
-		lblBotaoHospede.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu - hospede.png"));
+		 lblBotaoHospede.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseClicked(MouseEvent e) {
+	            }
+	            @Override
+	            public void mouseEntered(MouseEvent e) {
+	                lblBotaoHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+	            }
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	                lblBotaoHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+	            }
+	        });
+		lblBotaoHospede.setIcon(new ImageIcon("src\\main\\resources\\menu - hospede.png"));
 		lblBotaoHospede.setBounds(68, 410, 190, 40);
 		contentPane.add(lblBotaoHospede);
 		
 		JLabel lblPretoNot = new JLabel("");
-		lblPretoNot.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\fundinho preto n° notificação.png"));
+		lblPretoNot.setIcon(new ImageIcon("src\\main\\resources\\fundinho preto n° notificação.png"));
 		lblPretoNot.setBounds(318, 350, 39, 27);
 		contentPane.add(lblPretoNot);
 		
 		JLabel lblBotaoPedido = new JLabel("");
-		lblBotaoPedido.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu pedidos.png"));
+		 lblBotaoPedido.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseClicked(MouseEvent e) {
+	            }
+	            @Override
+	            public void mouseEntered(MouseEvent e) {
+	                lblBotaoPedido.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+	            }
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	                lblBotaoPedido.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+	            }
+	        });
+		lblBotaoPedido.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
 		lblBotaoPedido.setBounds(68, 348, 190, 40);
 		contentPane.add(lblBotaoPedido);
 		
@@ -133,27 +185,27 @@ public class CadastroFuncionario extends JFrame {
 				lblBotaoSair.setIcon(new ImageIcon("src\\main\\resources\\botao sair.png"));
 			}
 		});
-		lblBotaoSair.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao sair.png"));
+		lblBotaoSair.setIcon(new ImageIcon("src\\main\\resources\\botao sair.png"));
 		lblBotaoSair.setBounds(84, 958, 270, 40);
 		contentPane.add(lblBotaoSair);
 		
 		JLabel lblParteSuperior = new JLabel("");
-		lblParteSuperior.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\parte superior pequena.png"));
+		lblParteSuperior.setIcon(new ImageIcon("src\\main\\resources\\parte superior pequena.png"));
 		lblParteSuperior.setBounds(421, 0, 1498, 60);
 		contentPane.add(lblParteSuperior);
 		
 		JLabel lblTituloSuperior = new JLabel("");
-		lblTituloSuperior.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\Hero block.png"));
+		lblTituloSuperior.setIcon(new ImageIcon("src\\main\\resources\\Hero block.png"));
 		lblTituloSuperior.setBounds(442, 108, 1455, 129);
 		contentPane.add(lblTituloSuperior);
 		
 		JLabel lblSimbolo = new JLabel("");
-		lblSimbolo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\logo sigh.png"));
+		lblSimbolo.setIcon(new ImageIcon("src\\main\\resources\\logo sigh.png"));
 		lblSimbolo.setBounds(131, 35, 150, 200);
 		contentPane.add(lblSimbolo);
 		
 		JLabel lblMenu = new JLabel("");
-		lblMenu.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\fundo cinza (menu).png"));
+		lblMenu.setIcon(new ImageIcon("src\\main\\resources\\fundo cinza (menu).png"));
 		lblMenu.setBounds(0, 0, 450, 1050);
 		contentPane.add(lblMenu);
 		
@@ -287,7 +339,7 @@ public class CadastroFuncionario extends JFrame {
 				 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
 			}
 		});
-		lblBotaoSalvar.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao salvar.png"));
+		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		contentPane.add(lblBotaoSalvar);
 		
@@ -307,7 +359,7 @@ public class CadastroFuncionario extends JFrame {
 			}
 		});
 		
-		lblBotaoCancelar.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
+		lblBotaoCancelar.setIcon(new ImageIcon("src\\main\\resources\\botao cancelar.png"));
 		lblBotaoCancelar.setBounds(1595, 902, 300, 50);
 		contentPane.add(lblBotaoCancelar);
 		
