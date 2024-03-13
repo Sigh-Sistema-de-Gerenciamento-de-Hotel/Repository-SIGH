@@ -12,6 +12,10 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import java.awt.Component;
+import javax.swing.ScrollPaneConstants;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 
 public class TelaListagemFuncionario extends JFrame {
 
@@ -43,6 +47,7 @@ public class TelaListagemFuncionario extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100,  1920, 1080);
 		contentPane = new JPanel();
+		contentPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -84,6 +89,7 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_8);
 		
 		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setForeground(new Color(0, 128, 0));
 		lblNewLabel.setBounds(0, 0, 420, 1080);
 		lblNewLabel.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		contentPane.add(lblNewLabel);
@@ -93,17 +99,10 @@ public class TelaListagemFuncionario extends JFrame {
 		lblNewLabel_7.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblNewLabel_7);
 		
-		JLabel lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cadastrar.png"));
-		lblNewLabel_10.setBounds(1721, 164, 120, 34);
-		contentPane.add(lblNewLabel_10);
-		
-		JLabel lblNewLabel_9 = new JLabel("");
-		lblNewLabel_9.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\Frame 681.png"));
-		lblNewLabel_9.setBounds(444, 115, 1455, 126);
-		contentPane.add(lblNewLabel_9);
-		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(null);
+		scrollPane.setBackground(new Color(255, 255, 255));
+		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		scrollPane.setBounds(444, 308, 1455, 600);
 		contentPane.add(scrollPane);
 		
@@ -116,5 +115,15 @@ public class TelaListagemFuncionario extends JFrame {
 				"Nome Completo", "Cargo", "Setor", "Usu\u00E1rio", "Data de nascimento"
 			}
 		));
+		
+		JLabel lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cadastrar.png"));
+		lblNewLabel_10.setBounds(1721, 164, 120, 34);
+		contentPane.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\Frame 681.png"));
+		lblNewLabel_9.setBounds(444, 115, 1455, 126);
+		contentPane.add(lblNewLabel_9);
 	}
 }
