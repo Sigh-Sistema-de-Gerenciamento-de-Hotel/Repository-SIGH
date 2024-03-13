@@ -23,10 +23,10 @@ public class CadastroFuncionario extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNomeText;
-	private JTextField txtNomeSocialText;
-	private JTextField txtCargoText;
-	private JTextField txtUsuarioText;
 	private JTextField txtSobrenomeText;
+	private JTextField txtNomeSocialText;
+	private JTextField txtSetorText;
+	private JTextField txtUsusarioText;
 	private JTextField txtSenhaText;
 
 	/**
@@ -166,45 +166,45 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(txtNomeText);
 		txtNomeText.setColumns(10);
 		
-		JLabel lblNomeSocialLabel = new JLabel("Nome Social");
-		lblNomeSocialLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNomeSocialLabel.setBounds(650, 420, 90, 18);
-		contentPane.add(lblNomeSocialLabel);
-		
-		txtNomeSocialText = new RoundJFormattedTextField(null);
-		txtNomeSocialText.setBounds(650, 450, 343, 48);
-		contentPane.add(txtNomeSocialText);
-		txtNomeSocialText.setColumns(10);
-		
-		JLabel lblCargoLabel = new JLabel("Cargo *");
-		lblCargoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCargoLabel.setBounds(650, 568, 70, 18);
-		contentPane.add(lblCargoLabel);
-		
-		txtCargoText = new RoundJFormattedTextField(null);
-		txtCargoText.setBounds(650, 598, 343, 48);
-		contentPane.add(txtCargoText);
-		txtCargoText.setColumns(10);
-		
-		JLabel lblUsuarioLabel = new JLabel("Usuário *");
-		lblUsuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUsuarioLabel.setBounds(650, 716, 58, 14);
-		contentPane.add(lblUsuarioLabel);
-		
-		txtUsuarioText = new RoundJFormattedTextField(null);
-		txtUsuarioText.setBounds(650, 746, 343, 48);
-		contentPane.add(txtUsuarioText);
-		txtUsuarioText.setColumns(10);
-		
 		JLabel lblSobrenomeLabel = new JLabel("Sobrenome *");
 		lblSobrenomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSobrenomeLabel.setBounds(1261, 291, 90, 14);
+		lblSobrenomeLabel.setBounds(650, 420, 90, 18);
 		contentPane.add(lblSobrenomeLabel);
 		
 		txtSobrenomeText = new RoundJFormattedTextField(null);
-		txtSobrenomeText.setBounds(1261, 321, 343, 48);
+		txtSobrenomeText.setBounds(650, 450, 343, 48);
 		contentPane.add(txtSobrenomeText);
 		txtSobrenomeText.setColumns(10);
+		
+		JLabel lblNomeSocialLabel = new JLabel("Nome Social");
+		lblNomeSocialLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNomeSocialLabel.setBounds(650, 568, 90, 18);
+		contentPane.add(lblNomeSocialLabel);
+		
+		txtNomeSocialText = new RoundJFormattedTextField(null);
+		txtNomeSocialText.setBounds(650, 598, 343, 48);
+		contentPane.add(txtNomeSocialText);
+		txtNomeSocialText.setColumns(10);
+		
+		JLabel lblSetorLabel = new JLabel("Setor *");
+		lblSetorLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSetorLabel.setBounds(650, 716, 58, 14);
+		contentPane.add(lblSetorLabel);
+		
+		txtSetorText = new RoundJFormattedTextField(null);
+		txtSetorText.setBounds(650, 746, 343, 48);
+		contentPane.add(txtSetorText);
+		txtSetorText.setColumns(10);
+		
+		JLabel lblUsuarioLabel = new JLabel("Usuário *");
+		lblUsuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUsuarioLabel.setBounds(1261, 291, 90, 14);
+		contentPane.add(lblUsuarioLabel);
+		
+		txtUsusarioText = new RoundJFormattedTextField(null);
+		txtUsusarioText.setBounds(1261, 321, 343, 48);
+		contentPane.add(txtUsusarioText);
+		txtUsusarioText.setColumns(10);
 		
 		JLabel lblSenhaLabel = new JLabel("Senha *");
 		lblSenhaLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
