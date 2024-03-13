@@ -122,7 +122,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 			ps.setString(2, fun.getNomeSocial());
 			ps.setString(3, fun.getSobrenome());
 			ps.setString(4, fun.getNomeSocial());
-			ps.setString(5, fun.getUsuario());
+//			ps.setString(5, fun.getUsuario());
 			ps.setString(6, fun.getSenha());
 			ps.setString(7, fun.getCargo());
 			

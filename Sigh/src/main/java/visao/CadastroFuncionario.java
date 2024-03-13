@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
+import modelo.Usuario;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
@@ -252,6 +253,7 @@ public class CadastroFuncionario extends JFrame {
 					func.setCargo(cargo);
 				}
 				
+				
 				String usuario = txtUsuarioText.getText();
 				if(usuario.isEmpty()) {
 					// ERRO
@@ -265,6 +267,7 @@ public class CadastroFuncionario extends JFrame {
 				} else {
 					func.setSenha(senha);
 				}
+				
 				
 				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
 				

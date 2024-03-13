@@ -9,7 +9,6 @@ public class Funcionario {
 	private String usuario;
 	private String senha;
 	private String cargo;
-	//private Setor setor;
 	
 	
 	public int getId() {
@@ -39,8 +38,8 @@ public class Funcionario {
 	public String getUsuario() {
 		return usuario;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsuario(String u) {
+		this.usuario = u;
 	}
 	public String getSenha() {
 		return senha;
