@@ -100,7 +100,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 				
 				hospede.setId(id_hospede);			
 				hospede.setGenero(genero);
-				hospede.setDataNascimento(LocalDateTime.parse( dataNascimento));
+				hospede.setDataNascimento(LocalDate.parse( dataNascimento));
 				hospede.setNacionalidade(nacionalidade);
 				hospede.setCpf(cpf);
 				hospede.setPassaporte(passaporte);
