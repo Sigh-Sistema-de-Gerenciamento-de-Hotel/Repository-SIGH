@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.funcionario.FuncionarioDAO;
+import modelo.Funcionario;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
@@ -220,7 +222,61 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Funcionario func = new Funcionario();
 				
+				String nome = txtNomeText.getText();
+				if(nome.isEmpty()) {
+					// ERRO
+				} else {
+					func.setPrimeiroNome(nome);
+				}
+				
+				String sobrenome = txtSobrenomeText.getText();
+				if(sobrenome.isEmpty()){
+					// ERRO
+				} else {
+					func.setSobrenome(sobrenome);
+				}
+				
+				String nomeSocial = txtNomeSocialText.getText();
+				if(!nomeSocial.isEmpty()) {
+					func.setNomeSocial(nomeSocial);
+				} else {
+					
+				}
+				
+				String cargo = txtCargoText.getText();
+				if(cargo.isEmpty()) {
+					// ERRO
+				}  else {
+					func.setCargo(cargo);
+				}
+				
+				String usuario = txtUsuarioText.getText();
+				if(usuario.isEmpty()) {
+					// ERRO
+				} else {
+					func.setUsuario(usuario);
+				}
+				
+				String senha = txtSenhaText.getText();
+				if(senha.isEmpty()) {
+					// ERRO
+				} else {
+					func.setSenha(senha);
+				}
+				
+				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
+				
+				boolean validacao = dao.inserirFuncionario(func);
+				
+				if(validacao == true) {
+					TelaConfirmacao telaConfirmacao = new TelaConfirmacao();
+					telaConfirmacao.setVisible(true);
+				}
+				else {
+					//mensagem de ERRO
+				}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
