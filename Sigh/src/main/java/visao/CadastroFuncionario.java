@@ -28,8 +28,8 @@ public class CadastroFuncionario extends JFrame {
 	private JTextField txtNomeText;
 	private JTextField txtSobrenomeText;
 	private JTextField txtNomeSocialText;
-	private JTextField txtSetorText;
-	private JTextField txtUsusarioText;
+	private JTextField txtCargoText;
+	private JTextField txtUsuarioText;
 	private JTextField txtSenhaText;
 
 	/**
@@ -246,20 +246,20 @@ public class CadastroFuncionario extends JFrame {
 		lblSetorLabel.setBounds(650, 716, 58, 14);
 		contentPane.add(lblSetorLabel);
 		
-		txtSetorText = new RoundJFormattedTextField(null);
-		txtSetorText.setBounds(650, 746, 343, 48);
-		contentPane.add(txtSetorText);
-		txtSetorText.setColumns(10);
+		txtCargoText = new RoundJFormattedTextField(null);
+		txtCargoText.setBounds(650, 746, 343, 48);
+		contentPane.add(txtCargoText);
+		txtCargoText.setColumns(10);
 		
 		JLabel lblUsuarioLabel = new JLabel("Usuário *");
 		lblUsuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUsuarioLabel.setBounds(1261, 291, 90, 14);
 		contentPane.add(lblUsuarioLabel);
 		
-		txtUsusarioText = new RoundJFormattedTextField(null);
-		txtUsusarioText.setBounds(1261, 321, 343, 48);
-		contentPane.add(txtUsusarioText);
-		txtUsusarioText.setColumns(10);
+		txtUsuarioText = new RoundJFormattedTextField(null);
+		txtUsuarioText.setBounds(1261, 321, 343, 48);
+		contentPane.add(txtUsuarioText);
+		txtUsuarioText.setColumns(10);
 		
 		JLabel lblSenhaLabel = new JLabel("Senha *");
 		lblSenhaLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -365,8 +365,6 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoCancelar.setIcon(new ImageIcon("src\\main\\resources\\botao cancelar.png"));
 		lblBotaoCancelar.setBounds(1595, 902, 300, 50);
 		contentPane.add(lblBotaoCancelar);
-		
-		
-		
+	
 	}
 }

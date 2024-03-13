@@ -14,10 +14,6 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 	
 	    private static FuncionarioDAO instancia;
 	    
-	    private FuncionarioDAO(){
-	    
-	    }
-	    
 	    public static FuncionarioDAO getInstancia() {
 	    	
 	    	if(instancia == null) {

@@ -95,7 +95,7 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_7 = new JLabel("");
-		lblNewLabel_7.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\barra funcionários.png"));
+		lblNewLabel_7.setIcon(new ImageIcon("src/main/resources/barra funcionários.png"));
 		lblNewLabel_7.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblNewLabel_7);
 		
@@ -112,17 +112,17 @@ public class TelaListagemFuncionario extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Nome Completo", "Cargo", "Setor", "Usu\u00E1rio", "Data de nascimento"
+				"Nome Completo", "CPF", "Cargo", "Nome Social", "Usuario"
 			}
 		));
 		
 		JLabel lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cadastrar.png"));
+		lblNewLabel_10.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
 		lblNewLabel_10.setBounds(1721, 164, 120, 34);
 		contentPane.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_9 = new JLabel("");
-		lblNewLabel_9.setIcon(new ImageIcon("C:\\Users\\Aluno\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\Frame 681.png"));
+		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/Frame 681.png"));
 		lblNewLabel_9.setBounds(444, 115, 1455, 126);
 		contentPane.add(lblNewLabel_9);
 	}

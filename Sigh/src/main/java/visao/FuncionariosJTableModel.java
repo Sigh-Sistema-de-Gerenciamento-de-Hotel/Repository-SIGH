@@ -8,10 +8,13 @@ import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
 
 public class FuncionariosJTableModel extends AbstractTableModel {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	FuncionarioDAO dao = new FuncionarioDAO();
 	private ArrayList<Funcionario> lista = dao.listarFuncionario();
-	private String[] colunas ={"Nome Completo", "Cargo", "Setor", "Usu\u00E1rio", "Data de nascimento"};
+	private String[] colunas ={"Nome Completo", "CPF", "Cargo", "Nome Social", "Usuario"};
 	
 	@Override
 	public int getRowCount() {
@@ -26,36 +29,27 @@ public class FuncionariosJTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Funcionario f = lista.get(rowIndex);
-		/*if(columnIndex == 0) {
-			
-			return f.getnome;
+		
+		String primeiroNome = "PrimeiroNome";
+		String sobrenome = "Sobrenome";
+		String nomeCompleto = primeiroNome+sobrenome;
+		
+		System.out.println(nomeCompleto);
+		
+		if(columnIndex == 0) {
+			return f.getPrimeiroNome();
 		} else if(columnIndex == 1) {
-			return q.getCodigo();
+			return f.getSobrenome();
 		} else if(columnIndex == 2) {
-			return q.getMaxHospedes();
+			return f.getId();
 		} else if(columnIndex == 3) {
-			return q.getCama();
+			return f.getCargo();
 		} else if(columnIndex == 4) {
-			if (q.isBanheira() == true) {
-				return "sim";
-			} else {
-				return "não";
-			}
+			return f.getUsuario();
 		} else if(columnIndex == 5) {
-			if (q.isFrigobar() == true) {
-				return "sim";
-			} else {
-				return "não";
-			}
-		} else if(columnIndex == 6) {
-			return q.getVista();
-		} else if(columnIndex == 7) {
-			return "R$" + q.getPreco();
-		} else if(columnIndex == 8) {
-			return q.getStatus();
-		} 
-		return null;*/
+			return f.getNomeSocial();
+		}	
 		return null;
-	}
 
+    }
 }
