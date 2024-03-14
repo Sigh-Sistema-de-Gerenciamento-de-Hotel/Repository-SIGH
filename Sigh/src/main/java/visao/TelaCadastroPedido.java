@@ -19,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
+import java.awt.Color;
 
 public class TelaCadastroPedido extends JFrame {
 
@@ -34,7 +35,7 @@ public class TelaCadastroPedido extends JFrame {
 	private JLabel lblQuarto;
 	private JLabel lblNumReserva;
 	private JLabel lblDescricao;
-	private JTextField txtPreco;
+	private JTextField txtHospedagem;
 	private JLabel lblHospedag;
 	private JComboBox comboBox2Departamento;
 	private JComboBox comboBox1Quarto;
@@ -66,7 +67,7 @@ public class TelaCadastroPedido extends JFrame {
 		setTitle("Cadastrar Pedido");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1404, 788);
+		setBounds(100, 100, 1386, 860);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -75,7 +76,7 @@ public class TelaCadastroPedido extends JFrame {
 		
 		JLabel lblSair = new JLabel("");
 		lblSair.addMouseListener(new MouseAdapter() {
-			@Override
+			@Override 
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,15 +93,15 @@ public class TelaCadastroPedido extends JFrame {
 		
 		JLabel lblCadastrarPedidoGrande = new JLabel("CADASTRAR PEDIDO");
 		lblCadastrarPedidoGrande.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblCadastrarPedidoGrande.setBounds(401, 79, 224, 26);
+		lblCadastrarPedidoGrande.setBounds(473, 158, 224, 26);
 		contentPane.add(lblCadastrarPedidoGrande);
 		
 		JLabel lblCadastrarPedido = new JLabel("Cadastrar Pedido");
-		lblCadastrarPedido.setBounds(431, 11, 126, 14);
+		lblCadastrarPedido.setBounds(512, 21, 126, 14);
 		contentPane.add(lblCadastrarPedido);
 		
 		JLabel lblPedidosNaBarra = new JLabel("Pedidos >");
-		lblPedidosNaBarra.setBounds(370, 11, 60, 14);
+		lblPedidosNaBarra.setBounds(442, 21, 60, 14);
 		contentPane.add(lblPedidosNaBarra);
 		
 		JLabel lblFuncionarios = new JLabel("");
@@ -118,7 +119,7 @@ public class TelaCadastroPedido extends JFrame {
 			}
 		});
 		lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblFuncionarios.setBounds(10, 465, 339, 49);
+		lblFuncionarios.setBounds(68, 523, 335, 50);
 		contentPane.add(lblFuncionarios);
 		
 		JLabel lblHospedagem = new JLabel("");
@@ -136,7 +137,7 @@ public class TelaCadastroPedido extends JFrame {
 			}
 		});
 		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblHospedagem.setBounds(10, 405, 339, 49);
+		lblHospedagem.setBounds(68, 472, 335, 50);
 		contentPane.add(lblHospedagem);
 		
 		JLabel lblHospedes = new JLabel("");
@@ -154,7 +155,7 @@ public class TelaCadastroPedido extends JFrame {
 			}
 		});
 		lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		lblHospedes.setBounds(10, 345, 339, 49);
+		lblHospedes.setBounds(68, 410, 335, 50);
 		contentPane.add(lblHospedes);
 		
 		JLabel lblPedidos = new JLabel("");
@@ -172,58 +173,62 @@ public class TelaCadastroPedido extends JFrame {
 			}
 		});
 		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblPedidos.setBounds(10, 284, 339, 50);
+		lblPedidos.setBounds(68, 348, 335, 50);
 		contentPane.add(lblPedidos);
 		
 		JLabel lblNomeUsuario = new JLabel("JULIA ALMEIDA");
-		lblNomeUsuario.setBounds(51, 585, 92, 14);
+		lblNomeUsuario.setBounds(129, 798, 100, 14);
 		contentPane.add(lblNomeUsuario);
 		
 		JLabel lblConta = new JLabel("Conta");
-		lblConta.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblConta.setBounds(32, 560, 46, 14);
+		lblConta.setForeground(new Color(128, 128, 128));
+		lblConta.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblConta.setBounds(79, 760, 46, 14);
 		contentPane.add(lblConta);
 		
 		JLabel lblMenu = new JLabel("Menu");
-		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblMenu.setBounds(33, 259, 46, 14);
+		lblMenu.setForeground(new Color(128, 128, 128));
+		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblMenu.setBounds(67, 289, 46, 14);
 		contentPane.add(lblMenu);
 		lblSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
-		lblSair.setBounds(43, 629, 268, 55);
+		lblSair.setBounds(84, 958, 270, 40);
 		contentPane.add(lblSair);
 		
 		JLabel lblLogoSIGH = new JLabel("");
 		lblLogoSIGH.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
-		lblLogoSIGH.setBounds(108, 11, 149, 237);
+		lblLogoSIGH.setBounds(131, 35, 150, 200);
 		contentPane.add(lblLogoSIGH);
 		
 		JLabel lblTelaCinza = new JLabel("");
 		lblTelaCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
-		lblTelaCinza.setBounds(0, 0, 355, 749);
+		lblTelaCinza.setBounds(0, 0, 420, 1080);
 		contentPane.add(lblTelaCinza);
 		
 		JLabel lblTelaBrancaMenor = new JLabel("");
 		lblTelaBrancaMenor.setIcon(new ImageIcon("src/main/resources/Hero block.png"));
-		lblTelaBrancaMenor.setBounds(351, 0, 1019, 36);
+		lblTelaBrancaMenor.setBounds(421, 0, 1498, 60);
 		contentPane.add(lblTelaBrancaMenor);
 		
 		JLabel lblTelaBrancaMaior = new JLabel("");
 		lblTelaBrancaMaior.setIcon(new ImageIcon("src/main/resources/Hero block.png"));
-		lblTelaBrancaMaior.setBounds(351, 61, 1019, 69);
+		lblTelaBrancaMaior.setBounds(442, 108, 1455, 129);
 		contentPane.add(lblTelaBrancaMaior);
 		
 		
 		txtNome = new RoundJFormattedTextField(null);
-		txtNome.setBounds(418, 222, 183, 26);
+		txtNome.setBounds(554, 326, 343, 48);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
 		
 		lblNome = new JLabel("Nome*");
-		lblNome.setBounds(418, 206, 139, 14);
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNome.setBounds(554, 306, 139, 14);
 		contentPane.add(lblNome);
 		
 		lblDepartamento = new JLabel("Departamento*");
-		lblDepartamento.setBounds(1013, 286, 92, 14);
+		lblDepartamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDepartamento.setBounds(1450, 300, 201, 26);
 		contentPane.add(lblDepartamento);
 		
 		
@@ -277,7 +282,7 @@ public class TelaCadastroPedido extends JFrame {
 			}
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
-		lblBotaoSalvar.setBounds(787, 611, 292, 77);
+		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		contentPane.add(lblBotaoSalvar);
 		
 		lblBotaoCancelar = new JLabel("");
@@ -296,74 +301,81 @@ public class TelaCadastroPedido extends JFrame {
 			}
 		});
 		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-		lblBotaoCancelar.setBounds(1133, 627, 139, 44);
+		lblBotaoCancelar.setBounds(1595, 902, 300, 50);
 		contentPane.add(lblBotaoCancelar);
 		
 		txtDescricao = new RoundJFormattedTextField(null);
 		txtDescricao.setHorizontalAlignment(SwingConstants.LEFT);
-		txtDescricao.setBounds(418, 455, 486, 85);
+		txtDescricao.setBounds(554, 641, 343, 85);
 		contentPane.add(txtDescricao);
 		txtDescricao.setColumns(10);
 		
 		txtNumReserva = new RoundJFormattedTextField(null);
-		txtNumReserva.setBounds(418, 300, 183, 26);
+		txtNumReserva.setBounds(554, 425, 343, 48);
 		contentPane.add(txtNumReserva);
 		txtNumReserva.setColumns(10);
 		
 		lblQuarto = new JLabel("Quarto*");
-		lblQuarto.setBounds(1013, 206, 46, 14);
+		lblQuarto.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblQuarto.setBounds(1450, 399, 150, 26);
 		contentPane.add(lblQuarto);
 		
 		lblNumReserva = new JLabel("Número da Reserva*");
-		lblNumReserva.setBounds(418, 286, 120, 14);
+		lblNumReserva.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNumReserva.setBounds(554, 405, 231, 14);
 		contentPane.add(lblNumReserva);
 		
 		lblDescricao = new JLabel("Descrição*");
-		lblDescricao.setBounds(418, 441, 92, 14);
+		lblDescricao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDescricao.setBounds(554, 606, 112, 26);
 		contentPane.add(lblDescricao);
 		
-		txtPreco = new RoundJFormattedTextField(null);
-		txtPreco.setBounds(418, 383, 183, 26);
-		contentPane.add(txtPreco);
-		txtPreco.setColumns(10);
+		txtHospedagem = new RoundJFormattedTextField(null);
+		txtHospedagem.setBounds(554, 524, 343, 48);
+		contentPane.add(txtHospedagem);
+		txtHospedagem.setColumns(10);
 		
 		lblHospedag = new JLabel("Hospedagem*");
-		lblHospedag.setBounds(418, 369, 92, 14);
+		lblHospedag.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblHospedag.setBounds(554, 494, 143, 26);
 		contentPane.add(lblHospedag);
 		
 		comboBox2Departamento = new JComboBox();
-		comboBox2Departamento.setBounds(1013, 300, 177, 26);
+		comboBox2Departamento.setBounds(1450, 326, 343, 48);
 		contentPane.add(comboBox2Departamento);
 		
 		comboBox1Quarto = new JComboBox();
-		comboBox1Quarto.setBounds(1013, 222, 177, 26);
+		comboBox1Quarto.setBounds(1450, 425, 343, 48);
 		contentPane.add(comboBox1Quarto);
 		
 		txtData = new RoundJFormattedTextField(null);
-		txtData.setBounds(715, 222, 183, 26);
+		txtData.setBounds(1001, 523, 343, 48);
 		contentPane.add(txtData);
 		txtData.setColumns(10);
 		
 		txtHora = new RoundJFormattedTextField(null);
-		txtHora.setBounds(715, 300, 183, 26);
+		txtHora.setBounds(1001, 326, 343, 48);
 		contentPane.add(txtHora);
 		txtHora.setColumns(10);
 		
 		txtFeito = new RoundJFormattedTextField(null);
-		txtFeito.setBounds(715, 383, 183, 26);
+		txtFeito.setBounds(1001, 425, 343, 48);
 		contentPane.add(txtFeito);
 		txtFeito.setColumns(10);
 		
 		JLabel lblData = new JLabel("Data*");
-		lblData.setBounds(715, 206, 46, 14);
+		lblData.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblData.setBounds(1001, 500, 46, 14);
 		contentPane.add(lblData);
 		
 		JLabel lblHora = new JLabel("Hora*");
-		lblHora.setBounds(715, 286, 46, 14);
+		lblHora.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblHora.setBounds(1001, 306, 46, 14);
 		contentPane.add(lblHora);
 		
 		JLabel lblFeito = new JLabel("Feito*");
-		lblFeito.setBounds(715, 369, 46, 14);
+		lblFeito.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblFeito.setBounds(1001, 405, 46, 14);
 		contentPane.add(lblFeito);
 	}
 }
