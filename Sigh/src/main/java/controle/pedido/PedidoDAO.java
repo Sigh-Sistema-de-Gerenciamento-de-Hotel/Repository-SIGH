@@ -123,7 +123,7 @@ public class PedidoDAO implements IPedidoDAO{
 	
 	public boolean atualizarPedido(Pedido ped) {
 		
-		String SQL = "UPDATE pedidos SET id = ? WHERE hospedagem = ? WHERE dataHorario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?";
+		String SQL = "UPDATE atualizarPedido SET id = ? WHERE hospedagem = ? WHERE dataHorario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -157,7 +157,7 @@ public class PedidoDAO implements IPedidoDAO{
 	@Override
 	public boolean removerPedido(Pedido ped) {
 		
-		String SQL = "DELETE FROM enderecos WHERE id = ? WHERE hospedagem = ? WHERE dataHorario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?\";";
+		String SQL = "DELETE FROM removerPedido WHERE id = ? WHERE hospedagem = ? WHERE dataHorario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?\";";
 
 		Conexao con = Conexao.getInstancia(); // instanciando
 		Connection conBD = con.conectar(); // cria "ponte"
