@@ -8,9 +8,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import controle.funcionario.FuncionarioDAO;
+import modelo.Funcionario;
+
 import javax.swing.JScrollPane;
 import java.awt.Component;
 import javax.swing.ScrollPaneConstants;
@@ -21,7 +27,11 @@ public class TelaListagemFuncionario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
+	private JTable table; 
+	
+	FuncionarioDAO dao = new FuncionarioDAO();
+	
+	ArrayList<Funcionario> lista = dao.listarFuncionario();
 
 	/**
 	 * Launch the application.
@@ -44,6 +54,7 @@ public class TelaListagemFuncionario extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaListagemFuncionario() {
+		TelaListagemFuncionario janela = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100,  1920, 1080);
 		contentPane = new JPanel();
@@ -112,9 +123,10 @@ public class TelaListagemFuncionario extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Nome Completo", "CPF", "Cargo", "Nome Social", "Usuario"
+				"CPF", "Nome Completo", "Nome Social",  "Usuario", "Cargo"
 			}
 		));
+		atualizarJTableModel();
 		
 		JLabel lblNewLabel_10 = new JLabel("");
 		lblNewLabel_10.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
@@ -125,5 +137,9 @@ public class TelaListagemFuncionario extends JFrame {
 		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/Frame 681.png"));
 		lblNewLabel_9.setBounds(444, 115, 1455, 126);
 		contentPane.add(lblNewLabel_9);
+	}
+	
+	public void atualizarJTableModel() {
+		table.setModel(new FuncionariosJTableModel(lista));
 	}
 }

@@ -25,7 +25,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 
 	@Override
 	public boolean inserirFuncionario(Funcionario fun) {
-		String SQL = "INSERT INTO funcionarios (id_funcionario, primeiroNome, sobrenome, nomeSocial, usuario, senha, cargo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, usuario, senha, cargo) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -37,21 +37,21 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 			ps.setString(2, fun.getPrimeiroNome());
 			ps.setString(3, fun.getSobrenome());
 			ps.setString(4, fun.getNomeSocial());
-			ps.setString(4, fun.getUsuario());
-			ps.setString(5, fun.getSenha());
-			ps.setString(6, fun.getCargo());
+			ps.setString(5, fun.getUsuario());
+			ps.setString(6, fun.getSenha());
+			ps.setString(7, fun.getCargo());
 			
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} finally {
 			con.fecharConexao();
 		}
 		
 		
-		return false;
+		return true;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		
 		ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
 		
-		String SQL = "SELECT * FROM funcionarios INNER JOIN usuarios_senhas ON funcionarios.usuario = usuarios_senhas.usuario INNER JOIN cargos ON funcionarios.id_cargo = cargos.id_cargo";
+		String SQL = "SELECT * FROM funcionarios";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -73,9 +73,9 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 				Funcionario fun = new Funcionario();
 				
 				int id = rs.getInt("id_funcionario");
-				String primeiroNome = rs.getString("primeiroNome");
+				String primeiroNome = rs.getString("primeiro_nome");
 				String sobrenome = rs.getString("sobrenome");
-				String nomeSocial = rs.getString("nomeSocial");
+				String nomeSocial = rs.getString("nome_social");
 				String usuario = rs.getString("usuario");
 				String senha = rs.getString("senha");
 				String cargo = rs.getString("cargo");
@@ -104,7 +104,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 	@Override
 	public boolean atualizarFuncionario(Funcionario fun) {
 		
-		String SQL = "UPDATE funcionarios SET primeiroNome = ?, sobrenome = ?, nomeSocial = ?, usuario = ?, senha = ?, cargo = ? WHERE id_funcionario = ?";
+		String SQL = "UPDATE funcionarios SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, usuario = ?, senha = ?, cargo = ? WHERE id_funcionario = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -118,7 +118,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 			ps.setString(2, fun.getNomeSocial());
 			ps.setString(3, fun.getSobrenome());
 			ps.setString(4, fun.getNomeSocial());
-//			ps.setString(5, fun.getUsuario());
+			ps.setString(5, fun.getUsuario());
 			ps.setString(6, fun.getSenha());
 			ps.setString(7, fun.getCargo());
 			

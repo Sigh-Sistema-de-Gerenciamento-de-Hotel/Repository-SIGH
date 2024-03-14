@@ -14,7 +14,11 @@ public class FuncionariosJTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	FuncionarioDAO dao = new FuncionarioDAO();
 	private ArrayList<Funcionario> lista = dao.listarFuncionario();
-	private String[] colunas ={"Nome Completo", "CPF", "Cargo", "Nome Social", "Usuario"};
+	private String[] colunas ={"CPF", "Nome Completo", "Nome Social",  "Usuario", "Cargo"};
+	
+	public FuncionariosJTableModel(ArrayList<Funcionario> lista) {
+		this.lista=lista;
+	}
 	
 	@Override
 	public int getRowCount() {
@@ -30,25 +34,23 @@ public class FuncionariosJTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Funcionario f = lista.get(rowIndex);
 		
-		String primeiroNome = "PrimeiroNome";
-		String sobrenome = "Sobrenome";
+		String primeiroNome = f.getPrimeiroNome();
+		String sobrenome = f.getSobrenome();
 		String nomeCompleto = primeiroNome+sobrenome;
 		
 		System.out.println(nomeCompleto);
 		
 		if(columnIndex == 0) {
-			return f.getPrimeiroNome();
-		} else if(columnIndex == 1) {
-			return f.getSobrenome();
-		} else if(columnIndex == 2) {
 			return f.getId();
-		} else if(columnIndex == 3) {
-			return f.getCargo();
-		} else if(columnIndex == 4) {
-			return f.getUsuario();
-		} else if(columnIndex == 5) {
+		} else if(columnIndex == 1) {
+			return nomeCompleto;
+		} else if(columnIndex == 2) {
 			return f.getNomeSocial();
-		}	
+		} else if(columnIndex == 3) {
+			return f.getUsuario();
+		} else if(columnIndex == 4) {
+			return f.getCargo();
+		}
 		return null;
 
     }
