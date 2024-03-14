@@ -7,7 +7,6 @@ public class Pedido {
 	
 	private int id;
 	private Quarto quarto;
-	private Hospede hospede;
 	private Hospedagem hospedagem;
 	private LocalDateTime dataHorario;
 	private Setor setorResponsavel;
@@ -25,12 +24,6 @@ public class Pedido {
 	}
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
-	}
-	public Hospede getHospede() {
-		return hospede;
-	}
-	public void setHospede(Hospede hospede) {
-		this.hospede = hospede;
 	}
 	public Hospedagem getHospedagem() {
 		return hospedagem;
