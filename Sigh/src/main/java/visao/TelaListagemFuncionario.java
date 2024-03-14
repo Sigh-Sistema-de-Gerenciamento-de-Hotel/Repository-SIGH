@@ -29,7 +29,7 @@ public class TelaListagemFuncionario extends JFrame {
 	private JPanel contentPane;
 	private JTable table; 
 	
-	FuncionarioDAO dao = new FuncionarioDAO();
+	FuncionarioDAO dao = new FuncionarioDAO().getInstancia();
 	
 	ArrayList<Funcionario> lista = dao.listarFuncionario();
 
