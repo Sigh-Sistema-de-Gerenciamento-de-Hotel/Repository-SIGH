@@ -14,6 +14,6 @@ public interface IEnderecoDAO {
 
 	public boolean removerEndereco(Endereco end);
 
-	public Endereco buscarEnderecoPorCep(int cep);
+	public ArrayList<Endereco> buscarEnderecoPorCep(int cep);
 
 }
