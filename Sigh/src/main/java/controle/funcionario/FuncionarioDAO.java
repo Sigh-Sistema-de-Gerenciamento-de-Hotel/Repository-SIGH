@@ -137,7 +137,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 
 	@Override
 	public boolean removerFuncionarios(Funcionario fun) {
-		String SQL = "DELETE FROM funcionarios WHERE id_funcionario = ?, primeiro_nome = ?, sobrenome = ?, nome_social = ?, usuario = ?, senha = ?, cargo = ?";
+		String SQL = "DELETE FROM funcionarios WHERE id_funcionario = ?";
 				
 				Conexao con = Conexao.getInstancia(); // instanciando
 				Connection conBD = con.conectar(); // cria "ponte"
