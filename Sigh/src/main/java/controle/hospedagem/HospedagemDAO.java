@@ -30,12 +30,14 @@ public class HospedagemDAO implements IHospedagemDAO{
 	}
 
 	@Override
-	public int inserirHospedagem(Hospedagem hosp) {
+	public boolean inserirHospedagem(Hospedagem hosp) {
 		String SQL = "INSERT INTO hospedagens (id_hospedagem, data_entrada, data_saida) VALUES (?, ?, ?)";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 
+		int retorno = 0;
+		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
@@ -44,7 +46,8 @@ public class HospedagemDAO implements IHospedagemDAO{
 			ps.setDate(3, Date.valueOf(hosp.getDataSaida()));
 
 			ps.executeUpdate();
-
+			
+			retorno = ps.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,8 +55,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 			con.fecharConexao();
 		}
 
-
-		return 0;
+		return (retorno == 0? false : true);
 	}
 	
 	
@@ -164,10 +166,10 @@ public class HospedagemDAO implements IHospedagemDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
-			ps.setInt(1, hosp.getId());
+			ps.setDate(1, Date.valueOf(hosp.getDataSaida()));
 			ps.setDate(2, Date.valueOf(hosp.getDataEntrada()));
-			ps.setDate(3, Date.valueOf(hosp.getDataSaida()));
-
+			ps.setInt(3, hosp.getId());
+			
 			retorno = ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -183,7 +185,26 @@ public class HospedagemDAO implements IHospedagemDAO{
 	@Override
 	public boolean removerHospedagem(Hospedagem hosp) {
 		String SQL = "DELETE FROM hospedagens WHERE id_hospedagem = ?";
-		return false;
+		
+		Conexao con = Conexao.getInstancia(); // Instancia a conexao
+		Connection conBD = con.conectar(); // Cria a ponte com o MySQL
+
+		int retorno = 0;
+
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+
+			ps.setInt(1, hosp.getId());
+			
+			retorno = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+
+		return (retorno == 0? false : true);
 	}
 
 }

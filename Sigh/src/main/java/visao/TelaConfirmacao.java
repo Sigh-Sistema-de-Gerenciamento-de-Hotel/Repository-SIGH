@@ -12,6 +12,8 @@ import java.awt.Panel;
 import java.awt.Label;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
@@ -22,7 +24,26 @@ public class TelaConfirmacao extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private String txtNome;
+	private String txtSobrenome;
+	private String txtNomeSocial;
+	private String txtUsuario;
+	private String txtCargo;
+	
+	
+	
+	public TelaConfirmacao(String txtNome, String txtSobrenome, String txtNomeSocial, String txtUsuario,
+			String txtCargo) throws HeadlessException {
+		super();
+		this.txtNome = txtNome;
+		this.txtSobrenome = txtSobrenome;
+		this.txtNomeSocial = txtNomeSocial;
+		this.txtUsuario = txtUsuario;
+		this.txtCargo = txtCargo;
+	}
+
+
+
 
 	/**
 	 * Launch the application.
@@ -39,6 +60,9 @@ public class TelaConfirmacao extends JFrame {
 			}
 		});
 	}
+
+	
+
 
 	/**
 	 * Create the frame.
@@ -70,15 +94,21 @@ public class TelaConfirmacao extends JFrame {
 		lblConfirmacao.setBounds(30, 10, 375, 22);
 		panel.add(lblConfirmacao);
 		
+		
 		Label lblNome = new Label("Nome: ");
 		lblNome.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
 		lblNome.setBounds(50, 61, 62, 22);
 		contentPane.add(lblNome);
 		
-		Label lblSetor = new Label("Setor: ");
+		/*Label lblSetor = new Label("Setor: ");
 		lblSetor.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
 		lblSetor.setBounds(50, 94, 62, 22);
-		contentPane.add(lblSetor);
+		contentPane.add(lblSetor);*/
+		
+		Label lblNomeSocial = new Label("Nome social: ");
+		lblNomeSocial.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
+		lblNomeSocial.setBounds(50, 94, 62, 22);
+		contentPane.add(lblNomeSocial);
 		
 		Label lblCargo = new Label("Cargo: ");
 		lblCargo.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
@@ -90,22 +120,29 @@ public class TelaConfirmacao extends JFrame {
 		lblUsuario.setBounds(50, 163, 62, 22);
 		contentPane.add(lblUsuario);
 		
-		JLabel nome = new JLabel("Nome ");
+		String nomeCompleto = txtNome + txtSobrenome;
+		
+		JLabel nome = new JLabel(nomeCompleto);
 		nome.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
 		nome.setBounds(141, 61, 271, 22);
 		contentPane.add(nome);
 		
-		JLabel setor = new JLabel("Setor ");
+		/*JLabel setor = new JLabel("Setor ");
 		setor.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
 		setor.setBounds(141, 94, 271, 22);
-		contentPane.add(setor);
+		contentPane.add(setor);*/
 		
-		JLabel cargo = new JLabel("Cargo ");
+		JLabel nomeSocial = new JLabel(txtNomeSocial);
+		nomeSocial.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
+		nomeSocial.setBounds(141, 94, 271, 22);
+		contentPane.add(nomeSocial);
+		
+		JLabel cargo = new JLabel(txtCargo);
 		cargo.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
 		cargo.setBounds(141, 127, 291, 22);
 		contentPane.add(cargo);
 		
-		JLabel usuario = new JLabel("Usuário ");
+		JLabel usuario = new JLabel(txtUsuario);
 		usuario.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
 		usuario.setBounds(141, 163, 281, 22);
 		contentPane.add(usuario);
