@@ -28,7 +28,7 @@ public class PedidoDAO implements IPedidoDAO{
 	@Override
 	public int inserirPedido(Pedido ped) {
 		
-		String SQL = "INSERT INTO inserirPedido (id, hospede, hospedagem, dataHorario, setorResponsavel, quarto, descricao, feito) VALUES (?,?,?,?,?,?,?,?)";
+		String SQL = "INSERT INTO inserirPedido (id, hospedagem, dataHorario, setorResponsavel, quarto, descricao, feito) VALUES (?,?,?,?,?,?,?,?)";
 		
 				Conexao con = Conexao.getInstancia();
 				Connection conBD = con.conectar(); 
@@ -37,7 +37,6 @@ public class PedidoDAO implements IPedidoDAO{
 					PreparedStatement ps = conBD.prepareStatement(SQL);
 					
 					ps.setInt(1, ped.getId());
-					//ps.setString(2, ped.getHospede());
 					//ps.setString(3, ped.getHospedagem());
 					//ps.setString(4,  ped.getDataHorario());
 					//ps.setString(5, ped.getSetorResponsavel());
@@ -79,9 +78,9 @@ public class PedidoDAO implements IPedidoDAO{
 			
 			while(rs.next()) {
 				
-				//String SQL =" SELECT Quarto, Hospede, Hospedagem, LocalDateTime, SetorResponsavel"
+				//String SQL =" SELECT Quarto, Hospedagem, LocalDateTime, SetorResponsavel"
 				//		+ "FROM Pedido\n"
-				//		+ "INNER JOIN Categories ON Pedido.Quarto = Pedido.Hospede = Pedido.Hospedagem = Pedido.LocalDateTime = Pedido.SetorResponsavel";
+				//		+ "INNER JOIN Categories ON Pedido.Quarto = Pedido.Hospedagem = Pedido.LocalDateTime = Pedido.SetorResponsavel";
 				
 						
 				// Criar Objeto
@@ -89,17 +88,15 @@ public class PedidoDAO implements IPedidoDAO{
 				
 				// Pega os valores de cada coluna do registro
 				int id = rs.getInt("id");
-				String Hospede = rs.getString("Hospede");
 				String Hospedagem = rs.getString("Hospedagem");
-				String DataHorario = rs.getString("DataHorario");
-				String SetorResponsavel = rs.getString("SetorResponsavel");
+				String LocalDateTime = rs.getString("DataHorario");
+				String Setor = rs.getString("SetorResponsavel");
 				String Quarto = rs.getString("Quarto");
 				String descricao = rs.getString("descricao");
 				boolean feito = rs.getBoolean("Feito");
 				
 				// Set os valores no obj java
 				ped.setId(id);
-				ped.setHospede(null);
 				ped.setHospedagem(null);
 				ped.setDataHorario(null);
 				ped.setSetorResponsavel(null);
@@ -126,7 +123,7 @@ public class PedidoDAO implements IPedidoDAO{
 	
 	public boolean atualizarPedido(Pedido ped) {
 		
-		String SQL = "UPDATE pedidos SET id = ? WHERE hospede = ? WHERE hospedagem = ? WHERE dataHorario ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?";
+		String SQL = "UPDATE pedidos SET id = ? WHERE hospedagem = ? WHERE dataHorario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -137,7 +134,6 @@ public class PedidoDAO implements IPedidoDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			ps.setInt(1, ped.getId());
-			//ps.setString(2, ped.getHospede());
 			//ps.setString(3, ped.getHospedagem());
 			//ps.setString(4,  ped.getDataHorario());
 			//ps.setString(5, ped.getSetorResponsavel());
@@ -160,8 +156,33 @@ public class PedidoDAO implements IPedidoDAO{
 
 	@Override
 	public boolean removerPedido(Pedido ped) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String SQL = "DELETE FROM enderecos WHERE id = ? WHERE hospedagem = ? WHERE dataHorario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?\";";
+
+		Conexao con = Conexao.getInstancia(); // instanciando
+		Connection conBD = con.conectar(); // cria "ponte"
+
+		int retorno = 0;
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, ped.getId());
+			//ps.setString(3, ped.getHospedagem());
+			//ps.setString(4,  ped.getDataHorario());
+			//ps.setString(5, ped.getSetorResponsavel());
+			//ps.setString(7, ped.getQuarto());
+			//ps.setString(6, ped.getDescricao());
+			ps.setBoolean(8, ped.isFeito());
+
+			retorno = ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+
+		return (retorno == 0 ? false : true);
 	}
 
 	@Override
@@ -175,5 +196,4 @@ public class PedidoDAO implements IPedidoDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
