@@ -27,37 +27,38 @@ public class EnderecoDAO implements IEnderecoDAO {
 
 	@Override
 	public int inserirEndereco(Endereco end) {
-		String SQL = "INSERT INTO enderecos (id_endereco, cep, estado, cidade, endereco, complemento, numero) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO enderecos (cep, estado, cidade, endereco, complemento, numero) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
-		int retorno = 0;
+		int chaveGerada = 0;
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, end.getId());
-			ps.setInt(2, end.getCep());
-			ps.setString(3, end.getEstado());
-			ps.setString(4, end.getCidade());
-			ps.setString(5, end.getEndereco());
-			ps.setString(6, end.getComplemento());
-			ps.setInt(7, end.getNumero());
+			ps.setInt(1, end.getCep());
+			ps.setString(2, end.getEstado());
+			ps.setString(3, end.getCidade());
+			ps.setString(4, end.getEndereco());
+			ps.setString(5, end.getComplemento());
+			ps.setInt(6, end.getNumero());
 			
 			ps.executeUpdate();
 			
-			retorno = ps.executeUpdate();
+			ResultSet rs = ps.executeQuery();
 			
-			
+			if (rs != null) {
+				chaveGerada = rs.getInt(1);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			con.fecharConexao();
 		}
-		
-		
-		return 0;
+
+		return chaveGerada;
 	}
 
 	@Override
