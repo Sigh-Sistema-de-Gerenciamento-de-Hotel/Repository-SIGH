@@ -30,13 +30,13 @@ public class HospedagemDAO implements IHospedagemDAO{
 	}
 
 	@Override
-	public boolean inserirHospedagem(Hospedagem hosp) {
+	public int inserirHospedagem(Hospedagem hosp) {
 		String SQL = "INSERT INTO hospedagens (id_hospedagem, data_entrada, data_saida) VALUES (?, ?, ?)";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 
-		int retorno = 0;
+		int chaveGerada = 0;
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
@@ -47,7 +47,11 @@ public class HospedagemDAO implements IHospedagemDAO{
 
 			ps.executeUpdate();
 			
-			retorno = ps.executeUpdate();
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs != null) {
+				chaveGerada = rs.getInt(1);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,7 +59,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 			con.fecharConexao();
 		}
 
-		return (retorno == 0? false : true);
+		return chaveGerada;
 	}
 	
 	
