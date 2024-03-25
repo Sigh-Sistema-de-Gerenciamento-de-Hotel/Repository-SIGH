@@ -57,6 +57,7 @@ public class CadastroFuncionario extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroFuncionario() {
+		setTitle("Cadastro de Funcionário");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1404, 1050);
 		contentPane = new JPanel();
