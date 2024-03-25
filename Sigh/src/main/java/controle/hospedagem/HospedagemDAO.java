@@ -17,7 +17,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 
 	private static HospedagemDAO instancia;
 
-	private HospedagemDAO() {
+	public HospedagemDAO() {
 
 	}
 
