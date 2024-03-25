@@ -137,8 +137,27 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 
 	@Override
 	public boolean removerFuncionarios(Funcionario fun) {
-		// TODO Auto-generated method stub
-		return false;
+		String SQL = "DELETE FROM funcionarios WHERE id_funcionario = ?";
+				
+				Conexao con = Conexao.getInstancia(); // instanciando
+				Connection conBD = con.conectar(); // cria "ponte"
+				
+				int retorno = 0;
+				try {
+					PreparedStatement ps = conBD.prepareStatement(SQL);
+					
+					ps.setInt(1, fun.getId());
+					
+					retorno = ps.executeUpdate();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					con.fecharConexao();
+				}
+				
+		return (retorno == 0? false : true);
 	}
 
 	@Override

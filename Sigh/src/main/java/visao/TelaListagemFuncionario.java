@@ -29,7 +29,7 @@ public class TelaListagemFuncionario extends JFrame {
 	private JPanel contentPane;
 	private JTable table; 
 	
-	FuncionarioDAO dao = new FuncionarioDAO();
+	FuncionarioDAO dao = new FuncionarioDAO().getInstancia();
 	
 	ArrayList<Funcionario> lista = dao.listarFuncionario();
 
@@ -54,6 +54,7 @@ public class TelaListagemFuncionario extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaListagemFuncionario() {
+		setTitle("Listagem de funcionário");
 		TelaListagemFuncionario janela = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100,  1920, 1080);
