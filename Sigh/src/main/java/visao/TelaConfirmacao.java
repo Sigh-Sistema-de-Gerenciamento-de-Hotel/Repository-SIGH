@@ -107,7 +107,7 @@ public class TelaConfirmacao extends JFrame {
 		
 		Label lblNomeSocial = new Label("Nome social: ");
 		lblNomeSocial.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		lblNomeSocial.setBounds(50, 94, 62, 22);
+		lblNomeSocial.setBounds(50, 94, 92, 22);
 		contentPane.add(lblNomeSocial);
 		
 		Label lblCargo = new Label("Cargo: ");

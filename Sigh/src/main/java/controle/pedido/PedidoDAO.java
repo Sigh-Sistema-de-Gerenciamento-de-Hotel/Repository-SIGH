@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import controle.Conexao;
+import modelo.Hospedagem;
 import modelo.Pedido;
+import modelo.Quarto;
 import modelo.Setor;
 
 public class PedidoDAO implements IPedidoDAO{
@@ -28,7 +30,7 @@ public class PedidoDAO implements IPedidoDAO{
 	@Override
 	public int inserirPedido(Pedido ped) {
 		
-		String SQL = "INSERT INTO inserirPedido (id, hospedagem, dataHorario, setorResponsavel, quarto, descricao, feito) VALUES (?,?,?,?,?,?,?,?)";
+		String SQL = "INSERT INTO inserirPedido (id, hospedagem, data, horario, setorResponsavel, quarto, descricao, feito) VALUES (?,?,?,?,?,?,?,?,?)";
 		
 				Conexao con = Conexao.getInstancia();
 				Connection conBD = con.conectar(); 
@@ -37,11 +39,15 @@ public class PedidoDAO implements IPedidoDAO{
 					PreparedStatement ps = conBD.prepareStatement(SQL);
 					
 					ps.setInt(1, ped.getId());
-					//ps.setString(3, ped.getHospedagem());
-					//ps.setString(4,  ped.getDataHorario());
-					//ps.setString(5, ped.getSetorResponsavel());
-					//ps.setString(7, ped.getQuarto());
-					ps.setString(6, ped.getDescricao());
+					Hospedagem hosp = ped.getHospedagem();
+					ps.setInt(2, hosp.getId());
+					ps.setDate(3,  ped.getData());
+					ps.setTime(4, ped.getHorario());
+					Setor setor = ped.getSetorResponsavel();
+					ps.setInt(5, setor.getId());
+					Quarto q = ped.getQuarto();
+					ps.setInt(6, q.getNumero());
+					ps.setString(7, ped.getDescricao());
 					ps.setBoolean(8, ped.isFeito());
 				
 					ps.executeUpdate(); //executa sem esperar retorno do BD
@@ -98,7 +104,8 @@ public class PedidoDAO implements IPedidoDAO{
 				// Set os valores no obj java
 				ped.setId(id);
 				ped.setHospedagem(null);
-				ped.setDataHorario(null);
+				ped.setData(null);
+				ped.setHorario(null);
 				ped.setSetorResponsavel(null);
 				ped.setQuarto(null);
 				ped.setDescricao(descricao);
