@@ -148,6 +148,8 @@ public class QuartoDAO implements IQuartoDAO{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
 		}
 		
 		return (retorno == 0? false : true);
@@ -155,8 +157,28 @@ public class QuartoDAO implements IQuartoDAO{
 
 	@Override
 	public boolean removerQuarto(Quarto qua) {
-		// TODO Auto-generated method stub
-		return false;
+		String SQL = "DELETE FROM quartos WHERE numero = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, qua.getNumero());
+			
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		return (retorno == 0? false : true);
 	}
 
 }

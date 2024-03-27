@@ -1,15 +1,19 @@
 package modelo;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Pedido {
 	
 	private int id;
 	private Quarto quarto;
-	private Hospede hospede;
 	private Hospedagem hospedagem;
-	private LocalDateTime dataHorario;
+	private Date data;
+	private Time horario;
 	private Setor setorResponsavel;
 	private String descricao;
 	private boolean feito;
@@ -26,23 +30,11 @@ public class Pedido {
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
 	}
-	public Hospede getHospede() {
-		return hospede;
-	}
-	public void setHospede(Hospede hospede) {
-		this.hospede = hospede;
-	}
 	public Hospedagem getHospedagem() {
 		return hospedagem;
 	}
 	public void setHospedagem(Hospedagem hospedagem) {
 		this.hospedagem = hospedagem;
-	}
-	public LocalDateTime getDataHorario() {
-		return dataHorario;
-	}
-	public void setDataHorario(LocalDateTime dataHorario) {
-		this.dataHorario = dataHorario;
 	}
 	public Setor getSetorResponsavel() {
 		return setorResponsavel;
@@ -62,4 +54,17 @@ public class Pedido {
 	public void setFeito(boolean feito) {
 		this.feito = feito;
 	}
+	public Date getData() {
+		return data;
+	}
+	public void setData(Date data) {
+		this.data = data;
+	}
+	public Time getHorario() {
+		return horario;
+	}
+	public void setHorario(Time horario) {
+		this.horario = horario;
+	}
+	
 }
