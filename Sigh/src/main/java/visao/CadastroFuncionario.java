@@ -1,28 +1,22 @@
 package visao;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
 import modelo.Usuario;
 import visao.padrao.RoundJFormattedTextField;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.Window;
-
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class CadastroFuncionario extends JFrame {
 
@@ -31,7 +25,7 @@ public class CadastroFuncionario extends JFrame {
 	private JTextField txtNomeText;
 	private JTextField txtSobrenomeText;
 	private JTextField txtNomeSocialText;
-	private JTextField txtCargoText;
+	private JTextField txtSetorText;
 	private JTextField txtUsuarioText;
 	private JTextField txtSenhaText;
 	private JTextField txtCpf;
@@ -231,7 +225,7 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblNomeLabel);
 		
 		txtNomeText = new RoundJFormattedTextField(null);
-		txtNomeText.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txtNomeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNomeText.setBounds(650, 298, 343, 48);
 		contentPane.add(txtNomeText);
 		txtNomeText.setColumns(10);
@@ -242,7 +236,8 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblSobrenomeLabel);
 		
 		txtSobrenomeText = new RoundJFormattedTextField(null);
-		txtSobrenomeText.setBounds(1245, 298, 343, 48);
+		txtSobrenomeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSobrenomeText.setBounds(650, 450, 343, 48);
 		contentPane.add(txtSobrenomeText);
 		txtSobrenomeText.setColumns(10);
 		
@@ -252,7 +247,8 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblNomeSocialLabel);
 		
 		txtNomeSocialText = new RoundJFormattedTextField(null);
-		txtNomeSocialText.setBounds(1245, 464, 343, 48);
+		txtNomeSocialText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtNomeSocialText.setBounds(650, 598, 343, 48);
 		contentPane.add(txtNomeSocialText);
 		txtNomeSocialText.setColumns(10);
 		
@@ -261,10 +257,11 @@ public class CadastroFuncionario extends JFrame {
 		lblCargoLabel.setBounds(650, 716, 58, 14);
 		contentPane.add(lblCargoLabel);
 		
-		txtCargoText = new RoundJFormattedTextField(null);
-		txtCargoText.setBounds(650, 746, 343, 48);
-		contentPane.add(txtCargoText);
-		txtCargoText.setColumns(10);
+		txtSetorText = new RoundJFormattedTextField(null);
+		txtSetorText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSetorText.setBounds(650, 746, 343, 48);
+		contentPane.add(txtSetorText);
+		txtSetorText.setColumns(10);
 		
 		JLabel lblUsuarioLabel = new JLabel("Usuário *");
 		lblUsuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -272,7 +269,8 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblUsuarioLabel);
 		
 		txtUsuarioText = new RoundJFormattedTextField(null);
-		txtUsuarioText.setBounds(650, 619, 343, 48);
+		txtUsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtUsuarioText.setBounds(1261, 321, 343, 48);
 		contentPane.add(txtUsuarioText);
 		txtUsuarioText.setColumns(10);
 		
@@ -282,7 +280,8 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblSenhaLabel);
 		
 		txtSenhaText = new RoundJFormattedTextField(null);
-		txtSenhaText.setBounds(1258, 619, 343, 48);
+		txtSenhaText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSenhaText.setBounds(1261, 480, 343, 48);
 		contentPane.add(txtSenhaText);
 		txtSenhaText.setColumns(10);
 		
@@ -309,8 +308,7 @@ public class CadastroFuncionario extends JFrame {
 				String nomeSocial = txtNomeSocialText.getText();
 				func.setNomeSocial(nomeSocial);
 				
-				
-				String cargo = txtCargoText.getText();
+				String cargo = txtSetorText.getText();
 				if(cargo.isEmpty()) {
 					// ERRO
 				}  else {
@@ -369,13 +367,15 @@ public class CadastroFuncionario extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar verde claro.png"));
+				 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
 			}
 		});
+		
+		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		contentPane.add(lblBotaoSalvar);
 		
