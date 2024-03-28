@@ -12,7 +12,6 @@ public class Hospedagem {
 	private ArrayList<Hospede> hospedes;
 	private LocalDate dataEntrada;
 	private LocalDate dataSaida;
-	private ArrayList<Pedido> pedidos;
 	
 	public int getId() {
 		return id;
@@ -50,13 +49,6 @@ public class Hospedagem {
 	public void setDataSaida(LocalDate dataSaida) {
 		this.dataSaida = dataSaida;
 	}
-	public ArrayList<Pedido> getPedidos() {
-		return pedidos;
-	}
-	public void setPedidos(ArrayList<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-	
 	
 	
 }
