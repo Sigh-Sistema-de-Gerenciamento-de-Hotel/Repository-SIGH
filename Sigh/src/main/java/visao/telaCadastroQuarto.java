@@ -33,7 +33,7 @@ public class telaCadastroQuarto extends JFrame {
 	 */
 	public telaCadastroQuarto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 944, 802);
+		setBounds(100, 100, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -41,8 +41,7 @@ public class telaCadastroQuarto extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(441, 10, 46, 14);
+		lblNewLabel.setBounds(182, 581, 46, 14);
 		contentPane.add(lblNewLabel);
 	}
-
 }
