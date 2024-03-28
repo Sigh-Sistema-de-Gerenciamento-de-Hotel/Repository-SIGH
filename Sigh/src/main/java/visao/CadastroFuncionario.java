@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
@@ -23,12 +24,13 @@ public class CadastroFuncionario extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNomeText;
-	private JTextField txtSobrenomeText;
 	private JTextField txtNomeSocialText;
+	private JTextField txtCargoText;
+	private JTextField txtCpfText;
+	private JTextField txtSenhaText;
+	private JTextField txtSobrenomeText;
 	private JTextField txtSetorText;
 	private JTextField txtUsuarioText;
-	private JTextField txtSenhaText;
-	private JTextField txtCpf;
 
 	/**
 	 * Launch the application.
@@ -97,7 +99,7 @@ public class CadastroFuncionario extends JFrame {
 	            }
 	        });
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu - funcionarios selecionado.png"));
-		lblBotaoFuncionarios.setBounds(48, 523, 335, 50);
+		lblBotaoFuncionarios.setBounds(68, 523, 335, 50);
 		contentPane.add(lblBotaoFuncionarios);
 		
 		JLabel lblBotaoHospedagem = new JLabel("");
@@ -115,7 +117,7 @@ public class CadastroFuncionario extends JFrame {
 	            }
 	        });
 		lblBotaoHospedagem.setIcon(new ImageIcon("src\\main\\resources\\menu hospedagem.png"));
-		lblBotaoHospedagem.setBounds(68, 472, 190, 40);
+		lblBotaoHospedagem.setBounds(68, 472, 335, 50);
 		contentPane.add(lblBotaoHospedagem);
 		
 		JLabel lblBotaoHospede = new JLabel("");
@@ -133,7 +135,7 @@ public class CadastroFuncionario extends JFrame {
 	            }
 	        });
 		lblBotaoHospede.setIcon(new ImageIcon("src\\main\\resources\\menu - hospede.png"));
-		lblBotaoHospede.setBounds(68, 410, 190, 40);
+		lblBotaoHospede.setBounds(68, 410, 335, 50);
 		contentPane.add(lblBotaoHospede);
 		
 		JLabel lblPretoNot = new JLabel("");
@@ -156,7 +158,7 @@ public class CadastroFuncionario extends JFrame {
 	            }
 	        });
 		lblBotaoPedido.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
-		lblBotaoPedido.setBounds(68, 348, 190, 40);
+		lblBotaoPedido.setBounds(68, 348, 335, 50);
 		contentPane.add(lblBotaoPedido);
 		
 		JLabel lblFuncionarioEscrita = new JLabel("Funcionários");
@@ -195,8 +197,8 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblParteSuperior);
 		
 		JLabel lblTituloSuperior = new JLabel("");
-		lblTituloSuperior.setIcon(new ImageIcon("src\\main\\resources\\Hero block.png"));
-		lblTituloSuperior.setBounds(442, 108, 1455, 129);
+		lblTituloSuperior.setIcon(new ImageIcon("src/main/resources/retangulo branco.png"));
+		lblTituloSuperior.setBounds(442, 108, 1445, 138);
 		contentPane.add(lblTituloSuperior);
 		
 		JLabel lblSimbolo = new JLabel("");
@@ -208,16 +210,17 @@ public class CadastroFuncionario extends JFrame {
 		lblMenu.setIcon(new ImageIcon("src\\main\\resources\\fundo cinza (menu).png"));
 		lblMenu.setBounds(0, 0, 450, 1050);
 		contentPane.add(lblMenu);
-		JLabel lblCpfLabel = new JLabel("CPF *");
-		lblCpfLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCpfLabel.setBounds(650, 438, 55, 18);
-		contentPane.add(lblCpfLabel);
 		
-		txtCpf = new RoundJFormattedTextField(null);
-		txtCpf.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtCpf.setBounds(650, 464, 343, 48);
-		contentPane.add(txtCpf);
-		txtCpf.setColumns(10);
+		JLabel lblNomeSociallLabel = new JLabel("Sobrenome *");
+		lblNomeSociallLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNomeSociallLabel.setBounds(650, 410, 100, 18);
+		contentPane.add(lblNomeSociallLabel);
+		
+		txtSobrenomeText = new RoundJFormattedTextField(null);
+		txtSobrenomeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSobrenomeText.setBounds(650, 436, 343, 48);
+		contentPane.add(txtSobrenomeText);
+		txtSobrenomeText.setColumns(10);
 		
 		JLabel lblNomeLabel = new JLabel("Nome *");
 		lblNomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -230,58 +233,52 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(txtNomeText);
 		txtNomeText.setColumns(10);
 		
-		JLabel lblSobrenomeLabel = new JLabel("Sobrenome *");
-		lblSobrenomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSobrenomeLabel.setBounds(1245, 268, 90, 18);
-		contentPane.add(lblSobrenomeLabel);
+		JLabel lblUsuarioLabel = new JLabel("Usuário *");
+		lblUsuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUsuarioLabel.setBounds(1245, 360, 90, 18);
+		contentPane.add(lblUsuarioLabel);
 		
-		txtSobrenomeText = new RoundJFormattedTextField(null);
-		txtSobrenomeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtSobrenomeText.setBounds(650, 450, 343, 48);
-		contentPane.add(txtSobrenomeText);
-		txtSobrenomeText.setColumns(10);
-		
-		JLabel lblNomeSocialLabel = new JLabel("Nome Social");
-		lblNomeSocialLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNomeSocialLabel.setBounds(1245, 434, 90, 18);
-		contentPane.add(lblNomeSocialLabel);
+		JLabel lblCpfLabel = new JLabel("Cpf *");
+		lblCpfLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCpfLabel.setBounds(1245, 498, 90, 18);
+		contentPane.add(lblCpfLabel);
 		
 		txtNomeSocialText = new RoundJFormattedTextField(null);
 		txtNomeSocialText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtNomeSocialText.setBounds(650, 598, 343, 48);
+		txtNomeSocialText.setBounds(650, 574, 343, 48);
 		contentPane.add(txtNomeSocialText);
 		txtNomeSocialText.setColumns(10);
 		
 		JLabel lblCargoLabel = new JLabel("Cargo *");
 		lblCargoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCargoLabel.setBounds(650, 716, 58, 14);
+		lblCargoLabel.setBounds(650, 686, 58, 18);
 		contentPane.add(lblCargoLabel);
 		
-		txtSetorText = new RoundJFormattedTextField(null);
-		txtSetorText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtSetorText.setBounds(650, 746, 343, 48);
-		contentPane.add(txtSetorText);
-		txtSetorText.setColumns(10);
+		txtCargoText = new RoundJFormattedTextField(null);
+		txtCargoText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtCargoText.setBounds(650, 712, 343, 48);
+		contentPane.add(txtCargoText);
+		txtCargoText.setColumns(10);
 		
-		JLabel lblUsuarioLabel = new JLabel("Usuário *");
-		lblUsuarioLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUsuarioLabel.setBounds(650, 589, 90, 14);
-		contentPane.add(lblUsuarioLabel);
+		JLabel lblNomeSocialLabel = new JLabel("Nome Social");
+		lblNomeSocialLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNomeSocialLabel.setBounds(650, 548, 90, 14);
+		contentPane.add(lblNomeSocialLabel);
 		
-		txtUsuarioText = new RoundJFormattedTextField(null);
-		txtUsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtUsuarioText.setBounds(1261, 321, 343, 48);
-		contentPane.add(txtUsuarioText);
-		txtUsuarioText.setColumns(10);
+		txtCpfText = new RoundJFormattedTextField(null);
+		txtCpfText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtCpfText.setBounds(1245, 524, 343, 48);
+		contentPane.add(txtCpfText);
+		txtCpfText.setColumns(10);
 		
 		JLabel lblSenhaLabel = new JLabel("Senha *");
 		lblSenhaLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSenhaLabel.setBounds(1258, 589, 80, 14);
+		lblSenhaLabel.setBounds(1245, 636, 80, 14);
 		contentPane.add(lblSenhaLabel);
 		
 		txtSenhaText = new RoundJFormattedTextField(null);
 		txtSenhaText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtSenhaText.setBounds(1261, 480, 343, 48);
+		txtSenhaText.setBounds(1245, 662, 343, 48);
 		contentPane.add(txtSenhaText);
 		txtSenhaText.setColumns(10);
 		
@@ -308,7 +305,7 @@ public class CadastroFuncionario extends JFrame {
 				String nomeSocial = txtNomeSocialText.getText();
 				func.setNomeSocial(nomeSocial);
 				
-				String cargo = txtSetorText.getText();
+				String cargo = txtCargoText.getText();
 				if(cargo.isEmpty()) {
 					// ERRO
 				}  else {
@@ -316,7 +313,7 @@ public class CadastroFuncionario extends JFrame {
 				}
 				
 				
-				String usuario = txtUsuarioText.getText();
+				String usuario = txtCpfText.getText();
 				if(usuario.isEmpty()) {
 					// ERRO
 				} else {
@@ -330,7 +327,7 @@ public class CadastroFuncionario extends JFrame {
 					func.setSenha(senha);
 				}
 				
-				String idS = txtCpf.getText();
+				String idS = txtSobrenomeText.getText();
 				
 				if(idS.isEmpty()) {
 					// ERRO
@@ -398,5 +395,22 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoCancelar.setIcon(new ImageIcon("src\\main\\resources\\botao cancelar.png"));
 		lblBotaoCancelar.setBounds(1595, 902, 300, 50);
 		contentPane.add(lblBotaoCancelar);
+		
+		JLabel lblSetorLabel = new JLabel("Setor *");
+		lblSetorLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSetorLabel.setBounds(650, 824, 46, 14);
+		contentPane.add(lblSetorLabel);
+		
+		txtSetorText = new RoundJFormattedTextField(null);
+		txtSetorText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSetorText.setBounds(650, 850, 343, 48);
+		contentPane.add(txtSetorText);
+		txtSetorText.setColumns(10);
+		
+		txtUsuarioText = new RoundJFormattedTextField(null);
+		txtUsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtUsuarioText.setBounds(1245, 386, 343, 48);
+		contentPane.add(txtUsuarioText);
+		txtUsuarioText.setColumns(10);
 	}
 }
