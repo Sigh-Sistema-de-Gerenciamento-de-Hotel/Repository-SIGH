@@ -95,9 +95,9 @@ public class HospedagemDAO implements IHospedagemDAO{
 				// Hospede
 				ArrayList<Hospede> hospedes = new ArrayList<Hospede>();
 				Hospede hospede = new Hospede();
-				Integer id_hospede = rs.getInt("id"); 
+				Integer id_hospede = rs.getInt("id_hospede"); 
 				String genero = rs.getString("genero");
-				String dataNascimento = rs.getString("dataNascimento");
+				String dataNascimento = rs.getString("data_nascimento");
 				String nacionalidade = rs.getString("nacionalidade"); 
 				Integer cpf = rs.getInt("cpf"); 
 				String passaporte = rs.getString("passaporte"); 
@@ -116,16 +116,16 @@ public class HospedagemDAO implements IHospedagemDAO{
 				// Quarto
 				Quarto quarto = new Quarto();
 				int numero = rs.getInt("id_quarto");
-				int numCamaCasal = rs.getInt("numCamaCasal");
-				int numCamaSolteiro = rs.getInt("numCamaSolteiro");
-				int numMaxHospedes = rs.getInt("numMaxHospedes");
-				boolean arCondicionado = rs.getBoolean("arCondicionado");
+				int numCamaCasal = rs.getInt("num_cama_casal");
+				int numCamaSolteiro = rs.getInt("num_cama_solteiro");
+				int numMaxHospedes = rs.getInt("nummax_hospedes");
+				boolean arCondicionado = rs.getBoolean("ar_condicionado");
 				boolean frigobar = rs.getBoolean("frigobar");
 				boolean banheira = rs.getBoolean("banheira");
-				boolean acessibilidade = rs.getBoolean("acessibilidade");
+				String acessibilidade = rs.getString("acessibilidade");
 				float preco = rs.getFloat("preco");
-				boolean precisaLimpeza = rs.getBoolean("precisaLimpexa");
-				boolean precisaConserto = rs.getBoolean("precisaConserto");
+				boolean precisaLimpeza = rs.getBoolean("limpeza");
+				boolean precisaConserto = rs.getBoolean("conserto");
 				
 				quarto.setNumero(numero);
 				quarto.setNumCamaCasal(numCamaCasal);
