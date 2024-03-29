@@ -31,7 +31,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 
 	@Override
 	public int inserirHospedagem(Hospedagem hosp) {
-		String SQL = "INSERT INTO hospedagens (id_hospedagem, data_entrada, data_saida) VALUES (?, ?, ?)";
+		String SQL = "INSERT INTO hospedagens (data_entrada, data_saida) VALUES (?, ?)";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -41,9 +41,8 @@ public class HospedagemDAO implements IHospedagemDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
-			ps.setInt(1, hosp.getId());
-			ps.setDate(2, Date.valueOf(hosp.getDataEntrada()));
-			ps.setDate(3, Date.valueOf(hosp.getDataSaida()));
+			ps.setDate(1, Date.valueOf(hosp.getDataEntrada()));
+			ps.setDate(2, Date.valueOf(hosp.getDataSaida()));
 
 			ps.executeUpdate();
 			
