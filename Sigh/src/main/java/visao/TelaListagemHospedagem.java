@@ -26,10 +26,8 @@ public class TelaListagemHospedagem extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	
-	HospedagemDAO dao = new HospedagemDAO().getInstancia();
-	
-	ArrayList<Hospedagem> lista = dao.listarHospedagem();
+	private HospedagemDAO dao;	
+	private ArrayList<Hospedagem> lista;
 
 	/**
 	 * Launch the application.
@@ -52,6 +50,7 @@ public class TelaListagemHospedagem extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaListagemHospedagem() {
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Listagem Hospedagem");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +60,20 @@ public class TelaListagemHospedagem extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		// Listagem
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(null);
+		scrollPane.setBackground(new Color(255, 255, 255));
+		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		scrollPane.setBounds(444, 308, 1455, 600);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"}));
+		// atualiza JTable
+		atualizarJTable();
 		
 		// Menu
 		
@@ -114,24 +127,20 @@ public class TelaListagemHospedagem extends JFrame {
 		menu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		menu.setBounds(0, 0, 420, 1080);
 		contentPane.add(menu);	
-		
-		// Listagem
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBorder(null);
-		scrollPane.setBackground(new Color(255, 255, 255));
-		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		scrollPane.setBounds(444, 308, 1455, 600);
-		contentPane.add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setColumnHeaderView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"}));
-		atualizarJTableModel();
 	}
 	
-	public void atualizarJTableModel() {
-		table.setModel(new HospedagemJTableModel(lista));
+	protected void atualizarJTable() {
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"});
+
+		dao = HospedagemDAO.getInstancia();
+		lista = dao.listarHospedagem();
+
+		for (int i = 0; i < lista.size(); i++) {
+			Hospedagem hosp = lista.get(i);
+			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getHospedes().size(), hosp.getDataEntrada(), hosp.getDataSaida()});
+		}
+
+		table.setModel(modelo);
 	}
 	
 }

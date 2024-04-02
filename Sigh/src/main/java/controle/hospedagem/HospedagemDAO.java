@@ -67,7 +67,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 	@Override
 	public ArrayList<Hospedagem> listarHospedagem() {
 		// ArrayList para armazenar resultado select
-		ArrayList<Hospedagem> hospedagens = new ArrayList<Hospedagem>();
+		ArrayList<Hospedagem> hospedagens = null;
 
 		// Comando SQL a ser executado
 		String SQL = "SELECT * FROM hospede_hospedagem "
@@ -85,12 +85,17 @@ public class HospedagemDAO implements IHospedagemDAO{
 			ResultSet rs = ps.executeQuery();
 
 			while(rs.next()) {
+				hospedagens = new ArrayList<Hospedagem>();
 				Hospedagem hos = new Hospedagem();
 
 				// Hospedagem 
 				int id = rs.getInt("id_hospedagem");
 				LocalDate dataEntrada = LocalDate.parse(rs.getString("data_entrada"));
-				LocalDate dataSaida = LocalDate.parse(rs.getString("data_saida"));
+				String dataSaidatxt = rs.getString("data_saida");
+				LocalDate dataSaida = null;
+				if(dataSaidatxt!=null) {
+					dataSaida = LocalDate.parse(dataSaidatxt);
+				}
 				
 				// Hospede
 				ArrayList<Hospede> hospedes = new ArrayList<Hospede>();
@@ -127,6 +132,16 @@ public class HospedagemDAO implements IHospedagemDAO{
 				boolean precisaLimpeza = rs.getBoolean("limpeza");
 				boolean precisaConserto = rs.getBoolean("conserto");
 				
+				for (Hospedagem hospedagem : hospedagens) {
+					if(hospedagem.getQuarto().getNumero() == numero) {
+						hospedagem.getHospedes().add(hospede);
+					} else {
+						hospedes.add(hospede);
+						hospedagem.setHospedes(hospedes);
+					}
+				}
+				
+
 				quarto.setNumero(numero);
 				quarto.setNumCamaCasal(numCamaCasal);
 				quarto.setNumCamaSolteiro(numCamaSolteiro);
