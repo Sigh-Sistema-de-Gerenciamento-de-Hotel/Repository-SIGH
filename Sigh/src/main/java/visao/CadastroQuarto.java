@@ -42,6 +42,12 @@ public class CadastroQuarto extends JFrame {
 	private JLabel lblNewLabel_14;
 	private JLabel lblNewLabel_15;
 	private JLabel lblNewLabel_16;
+	private JLabel lblNewLabel_17;
+	private JLabel lblNewLabel_18;
+	private JLabel lblNewLabel_19;
+	private JLabel lblNewLabel_20;
+	private JLabel lblNewLabel_21;
+	private JLabel lblNewLabel_22;
 
 	/**
 	 * Launch the application.
@@ -73,6 +79,36 @@ public class CadastroQuarto extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		lblNewLabel_22 = new JLabel("");
+		lblNewLabel_22.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\divisor (menu).png"));
+		lblNewLabel_22.setBounds(90, 897, 400, 30);
+		contentPane.add(lblNewLabel_22);
+		
+		lblNewLabel_21 = new JLabel("");
+		lblNewLabel_21.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao sair.png"));
+		lblNewLabel_21.setBounds(84, 955, 263, 45);
+		contentPane.add(lblNewLabel_21);
+		
+		lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu funcionarios.png"));
+		lblNewLabel_20.setBounds(91, 532, 145, 22);
+		contentPane.add(lblNewLabel_20);
+		
+		lblNewLabel_19 = new JLabel("");
+		lblNewLabel_19.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu hospedagem.png"));
+		lblNewLabel_19.setBounds(91, 468, 130, 22);
+		contentPane.add(lblNewLabel_19);
+		
+		lblNewLabel_18 = new JLabel("");
+		lblNewLabel_18.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu - hospede.png"));
+		lblNewLabel_18.setBounds(92, 404, 120, 22);
+		contentPane.add(lblNewLabel_18);
+		
+		lblNewLabel_17 = new JLabel("");
+		lblNewLabel_17.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu pedidos.png"));
+		lblNewLabel_17.setBounds(92, 345, 120, 22);
+		contentPane.add(lblNewLabel_17);
 		
 		lblNewLabel_16 = new JLabel("");
 		lblNewLabel_16.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\logo sigh.png"));
