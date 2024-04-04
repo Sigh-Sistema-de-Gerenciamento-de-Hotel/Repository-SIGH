@@ -42,6 +42,8 @@ public class TelaCadastroPedido extends JFrame {
 	private JTextField txtData;
 	private JTextField txtHora;
 	private JTextField txtFeito;
+	private JLabel lbltitulo;
+	private JLabel lblcaminho;
 
 	/**
 	 * Launch the application.
@@ -90,19 +92,6 @@ public class TelaCadastroPedido extends JFrame {
 				lblSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 			}
 		});
-		
-		JLabel lblCadastrarPedidoGrande = new JLabel("CADASTRAR PEDIDO");
-		lblCadastrarPedidoGrande.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblCadastrarPedidoGrande.setBounds(473, 158, 224, 26);
-		contentPane.add(lblCadastrarPedidoGrande);
-		
-		JLabel lblCadastrarPedido = new JLabel("Cadastrar Pedido");
-		lblCadastrarPedido.setBounds(512, 21, 126, 14);
-		contentPane.add(lblCadastrarPedido);
-		
-		JLabel lblPedidosNaBarra = new JLabel("Pedidos >");
-		lblPedidosNaBarra.setBounds(442, 21, 60, 14);
-		contentPane.add(lblPedidosNaBarra);
 		
 		JLabel lblFuncionarios = new JLabel("");
 		lblFuncionarios.addMouseListener(new MouseAdapter() {
@@ -204,16 +193,6 @@ public class TelaCadastroPedido extends JFrame {
 		lblTelaCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		lblTelaCinza.setBounds(0, 0, 420, 1080);
 		contentPane.add(lblTelaCinza);
-		
-		JLabel lblTelaBrancaMenor = new JLabel("");
-		lblTelaBrancaMenor.setIcon(new ImageIcon("src/main/resources/Hero block.png"));
-		lblTelaBrancaMenor.setBounds(421, 0, 1498, 60);
-		contentPane.add(lblTelaBrancaMenor);
-		
-		JLabel lblTelaBrancaMaior = new JLabel("");
-		lblTelaBrancaMaior.setIcon(new ImageIcon("src/main/resources/Hero block.png"));
-		lblTelaBrancaMaior.setBounds(442, 108, 1455, 129);
-		contentPane.add(lblTelaBrancaMaior);
 		
 		
 		txtNome = new RoundJFormattedTextField(null);
@@ -377,5 +356,15 @@ public class TelaCadastroPedido extends JFrame {
 		lblFeito.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFeito.setBounds(1001, 405, 46, 14);
 		contentPane.add(lblFeito);
+		
+		lbltitulo = new JLabel("");
+		lbltitulo.setIcon(new ImageIcon("src/main/resources/TituloCadastroPedidos.png"));
+		lbltitulo.setBounds(443, 119, 1455, 126);
+		contentPane.add(lbltitulo);
+		
+		lblcaminho = new JLabel("");
+		lblcaminho.setIcon(new ImageIcon("src/main/resources/CaminhoCadastrarPedido.png"));
+		lblcaminho.setBounds(420, 0, 1500, 62);
+		contentPane.add(lblcaminho);
 	}
 }

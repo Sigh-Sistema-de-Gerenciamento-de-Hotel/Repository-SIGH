@@ -6,7 +6,7 @@ import modelo.Hospedagem;
 
 public interface IHospedagemDAO {
 
-	public boolean inserirHospedagem(Hospedagem hosp);
+	public int inserirHospedagem(Hospedagem hosp);
 
 	public ArrayList<Hospedagem> listarHospedagem();
 

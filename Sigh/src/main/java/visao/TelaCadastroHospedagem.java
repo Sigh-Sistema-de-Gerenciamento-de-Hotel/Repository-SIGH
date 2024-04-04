@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import visao.padrao.RoundJFormattedTextField;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -18,6 +21,8 @@ public class TelaCadastroHospedagem extends JFrame {
 	private JPanel contentPane;
 	private final JLabel lblMenu = new JLabel("");
 	private JTextField txtDataCheckin;
+	private JTextField txtDataCheckout;
+	private JTextField txtTotalPagarText;
 
 	/**
 	 * Launch the application.
@@ -50,7 +55,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		
 		JLabel lblBotaoFuncionarios = new JLabel("");
 		lblBotaoFuncionarios.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\menu funcionarios.png"));
-		lblBotaoFuncionarios.setBounds(67, 525, 295, 38);
+		lblBotaoFuncionarios.setBounds(48, 523, 295, 38);
 		contentPane.add(lblBotaoFuncionarios);
 		
 		JLabel lblSimboloSigh = new JLabel("");
@@ -61,7 +66,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		JLabel lblMenuEscrita = new JLabel("Menu");
 		lblMenuEscrita.setForeground(Color.GRAY);
 		lblMenuEscrita.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblMenuEscrita.setBounds(67, 286, 42, 14);
+		lblMenuEscrita.setBounds(67, 289, 42, 14);
 		contentPane.add(lblMenuEscrita);
 		
 		JLabel lblBotaoPedidos = new JLabel("");
@@ -82,12 +87,12 @@ public class TelaCadastroHospedagem extends JFrame {
 		JLabel lblConta = new JLabel("Conta");
 		lblConta.setForeground(Color.GRAY);
 		lblConta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblConta.setBounds(79, 739, 46, 14);
+		lblConta.setBounds(79, 760, 46, 14);
 		contentPane.add(lblConta);
 		
 		JLabel lblNomeConta = new JLabel("Julia Almeida");
 		lblNomeConta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNomeConta.setBounds(120, 780, 80, 30);
+		lblNomeConta.setBounds(129, 798, 80, 30);
 		contentPane.add(lblNomeConta);
 		
 		JLabel lblDivisaoMenu = new JLabel("");
@@ -113,10 +118,10 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblEscritaHospedagem.setBounds(473, 132, 400, 55);
 		contentPane.add(lblEscritaHospedagem);
 		
-		JLabel lblHeroBlock = new JLabel("");
-		lblHeroBlock.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\Hero block.png"));
-		lblHeroBlock.setBounds(440, 100, 1455, 119);
-		contentPane.add(lblHeroBlock);
+		JLabel lblRetanguloBranco = new JLabel("");
+		lblRetanguloBranco.setIcon(new ImageIcon("src/main/resources/retangulo branco.png"));
+		lblRetanguloBranco.setBounds(440, 100, 1455, 119);
+		contentPane.add(lblRetanguloBranco);
 		
 		JLabel lblNumHospedes = new JLabel("Número de Hóspedes *");
 		lblNumHospedes.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -124,6 +129,8 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(lblNumHospedes);
 		
 		JComboBox comboBoxHospedes = new JComboBox();
+		comboBoxHospedes.setForeground(Color.BLACK);
+		comboBoxHospedes.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxHospedes.setBounds(502, 355, 343, 48);
 		contentPane.add(comboBoxHospedes);
 		
@@ -132,9 +139,52 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblDataCheckin.setBounds(502, 510, 145, 40);
 		contentPane.add(lblDataCheckin);
 		
-		txtDataCheckin = new JTextField();
+		txtDataCheckin = new RoundJFormattedTextField(null);
+		txtDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDataCheckin.setBounds(502, 548, 343, 48);
 		contentPane.add(txtDataCheckin);
 		txtDataCheckin.setColumns(10);
+		
+		JLabel lblQuartos = new JLabel("Quartos *");
+		lblQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblQuartos.setBounds(1010, 315, 145, 40);
+		contentPane.add(lblQuartos);
+		
+		JComboBox comboBoxQuartos = new JComboBox();
+		comboBoxQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboBoxQuartos.setBounds(1010, 355, 343, 48);
+		contentPane.add(comboBoxQuartos);
+		
+		JLabel lblDataCheckout = new JLabel("Data check-out");
+		lblDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDataCheckout.setBounds(1010, 510, 145, 40);
+		contentPane.add(lblDataCheckout);
+		
+		txtDataCheckout = new RoundJFormattedTextField(null);
+		txtDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtDataCheckout.setBounds(1010, 548, 343, 48);
+		contentPane.add(txtDataCheckout);
+		txtDataCheckout.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Total a pagar ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(1010, 703, 145, 40);
+		contentPane.add(lblNewLabel);
+		
+		txtTotalPagarText = new RoundJFormattedTextField(null);
+		txtTotalPagarText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtTotalPagarText.setBounds(1010, 746, 343, 48);
+		contentPane.add(txtTotalPagarText);
+		txtTotalPagarText.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao salvar.png"));
+		lblNewLabel_1.setBounds(1245, 902, 343, 50);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
+		lblNewLabel_2.setBounds(1595, 902, 300, 50);
+		contentPane.add(lblNewLabel_2);
 	}
 }

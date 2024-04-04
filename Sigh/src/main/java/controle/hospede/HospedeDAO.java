@@ -37,32 +37,40 @@ public class HospedeDAO implements IHospedeDAO{
 		Conexao con = Conexao.getInstancia(); 
 		
 		Connection ConBD = con.conectar(); 
+		
+		int chaveGerada = 0;
+		
 		try {
 			
 			PreparedStatement ps = ConBD.prepareStatement(SQL);
 			
 			ps.setInt(1, hos.getId());
 			ps.setString(2, hos.getGenero()); 
-			//*ps.setString(3, hos.getData_nascimento()); 
+			ps.setString(3, String.valueOf(hos.getDataNascimento())); 
 			ps.setString(4, hos.getNacionalidade()); 
 			ps.setInt(5, hos.getCpf()); 
 			ps.setString(6, hos.getPassaporte()); 
 			ps.setInt(7, hos.getTelefone()); 
-			//*	ps.setString(8, hos.getendereco()); 
-			//*ps.setString(9, hos.getResponsavel()); 
-			
-			
+			Endereco end = hos.getEndereco();
+			ps.setInt(8, end.getId()); 
+			Hospede resp = hos.getResponsavel();
+			ps.setInt(9, resp.getId()); 
 			
 			ps.executeUpdate(); 
 			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs != null) {
+				chaveGerada = rs.getInt(1);
+			}
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			con.fecharConexao(); 
+			con.fecharConexao();
 		}
-		
-		return 0;
+
+		return chaveGerada;
 	}
 
 	@Override
