@@ -310,6 +310,11 @@ insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (18
 insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (19, 19, 183);
 insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (20, 20, 533);
 
+
+
+insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (3, 1, 554);
+insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (3, 4, 554);
+
 --------------------------------------------------------------------------------------------------------------------
 
 -- inserts necessidades_especiais 
