@@ -42,7 +42,7 @@ public class QuartoDAO implements IQuartoDAO{
 			ps.setBoolean(5, qua.isArCondicionado());
 			ps.setBoolean(6, qua.isFrigobar());
 			ps.setBoolean(7,  qua.isBanheira());
-			ps.setBoolean(8, qua.isAcessibilidade());
+			ps.setString(8, qua.isAcessibilidade());
 			ps.setFloat(9, qua.getPreco());
 			ps.setBoolean(10, qua.isPrecisaLimpeza());
 			ps.setBoolean(11, qua.isPrecisaConserto());
@@ -84,7 +84,7 @@ public class QuartoDAO implements IQuartoDAO{
 				boolean arCondicionado = rs.getBoolean("arCondicionado");
 				boolean frigobar = rs.getBoolean("frigobar");
 				boolean banheira = rs.getBoolean("banheira");
-				boolean acessibilidade = rs.getBoolean("acessibilidade");
+				String acessibilidade = rs.getString("acessibilidade");
 				float preco = rs.getFloat("preco");
 				boolean precisaLimpeza = rs.getBoolean("precisaLimpexa");
 				boolean precisaConserto = rs.getBoolean("precisaConserto");
@@ -137,7 +137,7 @@ public class QuartoDAO implements IQuartoDAO{
 			ps.setBoolean(5, qua.isArCondicionado());
 			ps.setBoolean(6, qua.isFrigobar());
 			ps.setBoolean(7, qua.isBanheira());
-			ps.setBoolean(8, qua.isAcessibilidade());
+			ps.setString(8, qua.isAcessibilidade());
 			ps.setFloat(9, qua.getPreco());
 			ps.setBoolean(10, qua.isPrecisaLimpeza());
 			ps.setBoolean(11, qua.isPrecisaConserto());
