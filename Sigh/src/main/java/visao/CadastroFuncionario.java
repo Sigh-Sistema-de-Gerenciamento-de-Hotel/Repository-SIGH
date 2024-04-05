@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +19,7 @@ import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
 import modelo.Usuario;
 import visao.padrao.RoundJFormattedTextField;
+import javax.swing.JPasswordField;
 
 public class CadastroFuncionario extends JFrame {
 
@@ -27,10 +29,10 @@ public class CadastroFuncionario extends JFrame {
 	private JTextField txtNomeSocialText;
 	private JTextField txtCargoText;
 	private JTextField txtCpfText;
-	private JTextField txtSenhaText;
 	private JTextField txtSobrenomeText;
 	private JTextField txtSetorText;
 	private JTextField txtUsuarioText;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -276,12 +278,6 @@ public class CadastroFuncionario extends JFrame {
 		lblSenhaLabel.setBounds(1245, 636, 80, 14);
 		contentPane.add(lblSenhaLabel);
 		
-		txtSenhaText = new RoundJFormattedTextField(null);
-		txtSenhaText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtSenhaText.setBounds(1245, 662, 343, 48);
-		contentPane.add(txtSenhaText);
-		txtSenhaText.setColumns(10);
-		
 		JLabel lblBotaoSalvar = new JLabel("");
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -320,10 +316,12 @@ public class CadastroFuncionario extends JFrame {
 					func.setUsuario(usuario);
 				}
 				
-				String senha = txtSenhaText.getText();
-				if(senha.isEmpty()) {
+				char[] senhaChar = passwordField.getPassword();
+				
+				if(senhaChar != null) {
 					// ERRO
 				} else {
+					String senha = senhaChar.toString();
 					func.setSenha(senha);
 				}
 				
@@ -380,7 +378,8 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				new TelaListagemFuncionario().setVisible(true);
+				dispose();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -412,5 +411,9 @@ public class CadastroFuncionario extends JFrame {
 		txtUsuarioText.setBounds(1245, 386, 343, 48);
 		contentPane.add(txtUsuarioText);
 		txtUsuarioText.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(1245, 660, 343, 48);
+		contentPane.add(passwordField);
 	}
 }
