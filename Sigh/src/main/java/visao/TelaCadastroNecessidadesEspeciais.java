@@ -12,6 +12,7 @@ import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -228,7 +229,7 @@ public class TelaCadastroNecessidadesEspeciais extends JFrame {
 		
 		JLabel lblNacionalidade = new JLabel("Nacionalidade*");
 		lblNacionalidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNacionalidade.setBounds(554, 508, 231, 14);
+		lblNacionalidade.setBounds(554, 495, 231, 14);
 		contentPane.add(lblNacionalidade);
 		
 		JLabel lblSobrenome = new JLabel("Sobrenome*");
@@ -252,7 +253,26 @@ public class TelaCadastroNecessidadesEspeciais extends JFrame {
 		txtDescricao.setColumns(10);
 		
 		JComboBox comboBoxNacionalidade = new JComboBox();
-		comboBoxNacionalidade.setBounds(554, 533, 343, 48);
+		comboBoxNacionalidade.setModel(new DefaultComboBoxModel(new String[] {" afegão", " ", "albanês", " ", " angolano", " ", " argentino  ", 
+				" ", " australiano  ", " ", " austríaco ", " ", " bangladês ", " ", " barbadiano  ", " ", "bielorrusso  ", " ", 
+				" belizenho ", " ", "Belga  ", " ", "Boliviano  ", " ", "Brasileiro  ", " ", "Bbúlgaro  ", " ", "Butanês  ", " ", "Camaronês  ",
+				" ", "Canadense  ", " ", "Chileno  ", " ", "Chinês  ", " ", "Colombiano  ", " ", "Costa-riquenho  ",
+				" ", "Croata  ", " ", "Cubano  ", " ", "Dinamarquês  ", " ", "Dominicano  ", " ",
+				"Equatoriano  ", " ", "Egípcio  ", " ", "Salvadorenho  ", " ", "Inglês  ", " ",
+				"Etíope  ", " ", "Finlandês  ", " ", "Francês  ", " ", "Ganese/ganês  ", " ", "Alemão  ",
+				" ", "Grego  ", " ", "Guatemalteco  ", " ", "Guianês  ", " ", "Haitiano  ", " ", "Húngaro  ", 
+				" ", "Iindiano  ", " ", "Iraniano  ", " ", "Irraquiano  ", " ", "Irlandês  ", " ", "Israelita  ", " ",
+				"Iitaliano  ", " ", "Costa-marfinense  ", " ", "Japonês  ", " ", "Jordaniana  ", " ", "Queniano  ", " ", "Kuwaitiano  ", 
+				" ", "Libanês  ", " ", "Líbio  ", " ", "Llituano  ", " ", "Luxemburguês  ", " ", "Madagascarense/ malgaxe  ", " ", "Malaio  ",
+				" ", "Mexicano  ", " ", "Marroquino  ", " ", "Moçambiquenho ", " ", "Nepalês", "  ", "Holandês  ", " ", "Neozelandês  ", 
+				" ", "Nicaraguense  ", " ", "Nigeriano  ", " ", "Norueguês  ", " ", "Norte-coreano  ", " ", "Panamenho  ", " ", "Paraguaio  ", " ",
+				"Peruano  ", " ", "Filipino  ", " ", "Polonês  ", " ", "Português  ", " ", "Romeno  ", " ", "Russo  ", " ", "Senegalês  ", " ", "Sérvio  ", " ", "Singapuriano  ", " ", "Sírio  ", " ", "Sslovaco  ", " ", "Esloveno  ", " ", "Sul-africano  ", " ", "Sul-coreano  ", "", "Espanhol  ", " ", "Surimanês  ",
+				" ", "Sueco  ", " ", "Suíço  ", " ", "Tailandês  ", " ", "Togolês  ", " ", "Tunisino  ", " ", "Tuurco ", " ", "Ucraniano  ", 
+				" ", "Ugandês  ", " ", "Árabe  ", "", "Britânico  ", " ", "Americano", " ",
+				"Uruguaio  ", " ", "Venezuelano  ", " ", "Vietnamita  "}));
+		
+		
+		comboBoxNacionalidade.setBounds(553, 526, 343, 48);
 		contentPane.add(comboBoxNacionalidade);
 		
 		JLabel lblNecessidadeEspecial1 = new JLabel("Necessidade Especial*");
@@ -291,12 +311,12 @@ public class TelaCadastroNecessidadesEspeciais extends JFrame {
 		contentPane.add(lblFundoCinza);
 		
 		JLabel lblCaminho = new JLabel("");
-		lblCaminho.setIcon(new ImageIcon("C:\\Users\\Gabrieli\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoCadastrarNecessidadesEspeciais.png"));
+		lblCaminho.setIcon(new ImageIcon("src/main/resources/CaminhoCadastrarNecessidadesEspeciais.png"));
 		lblCaminho.setBounds(420, 0, 1500, 62);
 		contentPane.add(lblCaminho);
 		
 		JLabel lblTitulo = new JLabel("");
-		lblTitulo.setIcon(new ImageIcon("C:\\Users\\Gabrieli\\Documents\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloCadastrarNecessidadesEspeciais.png"));
+		lblTitulo.setIcon(new ImageIcon("src/main/resources/TituloCadastrarNecessidadesEspeciais.png"));
 		lblTitulo.setBounds(445, 105, 1455, 119);
 		contentPane.add(lblTitulo);
 		
