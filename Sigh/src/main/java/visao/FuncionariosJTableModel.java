@@ -17,6 +17,7 @@ public class FuncionariosJTableModel extends AbstractTableModel {
 	private String[] colunas ={"CPF", "Nome Completo", "Nome Social",  "Usuario", "Cargo"};
 	
 	public FuncionariosJTableModel(ArrayList<Funcionario> lista) {
+		super();
 		this.lista=lista;
 	}
 	

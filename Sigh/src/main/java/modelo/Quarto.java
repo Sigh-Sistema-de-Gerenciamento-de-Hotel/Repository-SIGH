@@ -9,7 +9,7 @@ public class Quarto {
 	private boolean arCondicionado;
 	private boolean frigobar;
 	private boolean banheira;
-	private boolean acessibilidade;
+	private String acessibilidade;
 	private float preco;
 	private boolean precisaLimpeza;
 	private boolean precisaConserto;
@@ -57,10 +57,10 @@ public class Quarto {
 	public void setBanheira(boolean banheira) {
 		this.banheira = banheira;
 	}
-	public boolean isAcessibilidade() {
+	public String isAcessibilidade() {
 		return acessibilidade;
 	}
-	public void setAcessibilidade(boolean acessibilidade) {
+	public void setAcessibilidade(String acessibilidade) {
 		this.acessibilidade = acessibilidade;
 	}
 	public float getPreco() {

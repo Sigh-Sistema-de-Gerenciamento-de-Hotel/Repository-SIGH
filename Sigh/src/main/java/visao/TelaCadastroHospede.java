@@ -476,8 +476,11 @@ public class TelaCadastroHospede extends JFrame {
 				" ", "Mexicano  ", " ", "Marroquino  ", " ", "Moçambiquenho ", " ", "Nepalês", "  ", "Holandês  ", " ", "Neozelandês  ", 
 				" ", "Nicaraguense  ", " ", "Nigeriano  ", " ", "Norueguês  ", " ", "Norte-coreano  ", " ", "Panamenho  ", " ", "Paraguaio  ", " ",
 				"Peruano  ", " ", "Filipino  ", " ", "Polonês  ", " ", "Português  ", " ", "Romeno  ", " ", "Russo  ", " ", "Senegalês  ", " ", "Sérvio  ", " ", "Singapuriano  ", " ", "Sírio  ", " ", "Sslovaco  ", " ", "Esloveno  ", " ", "Sul-africano  ", " ", "Sul-coreano  ", "", "Espanhol  ", " ", "Surimanês  ",
-				" ", "Sueco  ", " ", "Suíço  ", " ", "Tailandês  ", " ", "Togolês  ", " ", "Tunisino  ", " ", "Tuurco ", " ", "Ucraniano  ", " ", "Ugandês  ", " ", "Árabe  ", "", "Britânico  ", " ", "Americano", " ",
+				" ", "Sueco  ", " ", "Suíço  ", " ", "Tailandês  ", " ", "Togolês  ", " ", "Tunisino  ", " ", "Tuurco ", " ", "Ucraniano  ", 
+				" ", "Ugandês  ", " ", "Árabe  ", "", "Britânico  ", " ", "Americano", " ",
 				"Uruguaio  ", " ", "Venezuelano  ", " ", "Vietnamita  "}));
+		
+		
 		comboBox_1.setBounds(554, 515, 343, 48);
 		contentPane.add(comboBox_1);
 		
