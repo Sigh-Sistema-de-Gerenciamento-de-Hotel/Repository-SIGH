@@ -122,17 +122,12 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(lblMenu);
 		
 		JLabel lblParteSuperiorPequena = new JLabel("");
-		lblParteSuperiorPequena.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\parte superior pequena.png"));
+		lblParteSuperiorPequena.setIcon(new ImageIcon("src/main/resources/Caminho Cadastrar Hospedagem.png"));
 		lblParteSuperiorPequena.setBounds(420, 0, 1500, 62);
 		contentPane.add(lblParteSuperiorPequena);
 		
-		JLabel lblEscritaHospedagem = new JLabel("Cadastrar Hospedagem");
-		lblEscritaHospedagem.setFont(new Font("Swis721 LtEx BT", Font.PLAIN, 32));
-		lblEscritaHospedagem.setBounds(473, 132, 400, 55);
-		contentPane.add(lblEscritaHospedagem);
-		
 		JLabel lblRetanguloBranco = new JLabel("");
-		lblRetanguloBranco.setIcon(new ImageIcon("src/main/resources/retangulo branco.png"));
+		lblRetanguloBranco.setIcon(new ImageIcon("src/main/resources/Titulo Cadastrar Hospedagem.png"));
 		lblRetanguloBranco.setBounds(440, 100, 1455, 119);
 		contentPane.add(lblRetanguloBranco);
 		
