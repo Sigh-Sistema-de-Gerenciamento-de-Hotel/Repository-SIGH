@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +21,7 @@ import modelo.Hospedagem;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 
 
 
@@ -64,13 +68,18 @@ public class TelaListagemHospedagem extends JFrame {
 		
 		// Listagem
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBorder(null);
+		scrollPane.setBorder(new LineBorder(new Color(237, 237, 237), 2, true));
 		scrollPane.setBackground(new Color(255, 255, 255));
 		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		scrollPane.setBounds(444, 308, 1455, 600);
 		contentPane.add(scrollPane);
 		
+		
 		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		table.setBackground(new Color(255, 255, 255));
+		table.setGridColor(new Color(229, 233, 235));
+		table.setRowHeight(40);
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"}));
 		// atualiza JTable
@@ -130,12 +139,12 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(menu);	
 		
 		caminho = new JLabel("Caminho");
-		caminho.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
+		caminho.setIcon(new ImageIcon("src/main/resources/CaminhoListagemHospedagem.png"));
 		caminho.setBounds(420, 0, 1500, 60);
 		contentPane.add(caminho);
 		
 		JLabel titulo = new JLabel("Titulo");
-		titulo.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
+		titulo.setIcon(new ImageIcon("src/main/resources/TituloListagemHospedagem.png"));
 		titulo.setBounds(439, 101, 1444, 119);
 		contentPane.add(titulo);
 	}
