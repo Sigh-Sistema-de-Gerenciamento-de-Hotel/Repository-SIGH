@@ -83,9 +83,10 @@ public class HospedagemDAO implements IHospedagemDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
 			ResultSet rs = ps.executeQuery();
+			
+			hospedagens = new ArrayList<Hospedagem>();
 
 			while(rs.next()) {
-				hospedagens = new ArrayList<Hospedagem>();
 				Hospedagem hos = new Hospedagem();
 
 				// Hospedagem 
@@ -98,7 +99,6 @@ public class HospedagemDAO implements IHospedagemDAO{
 				}
 				
 				// Hospede
-				ArrayList<Hospede> hospedes = new ArrayList<Hospede>();
 				Hospede hospede = new Hospede();
 				Integer id_hospede = rs.getInt("id_hospede"); 
 				String genero = rs.getString("genero");
@@ -116,7 +116,6 @@ public class HospedagemDAO implements IHospedagemDAO{
 				hospede.setPassaporte(passaporte);
 				hospede.setTelefone(telefone);
 				
-				hospedes.add(hospede);
 				
 				// Quarto
 				Quarto quarto = new Quarto();
@@ -132,16 +131,6 @@ public class HospedagemDAO implements IHospedagemDAO{
 				boolean precisaLimpeza = rs.getBoolean("limpeza");
 				boolean precisaConserto = rs.getBoolean("conserto");
 				
-				for (Hospedagem hospedagem : hospedagens) {
-					if(hospedagem.getQuarto().getNumero() == numero) {
-						hospedagem.getHospedes().add(hospede);
-					} else {
-						hospedes.add(hospede);
-						hospedagem.setHospedes(hospedes);
-					}
-				}
-				
-
 				quarto.setNumero(numero);
 				quarto.setNumCamaCasal(numCamaCasal);
 				quarto.setNumCamaSolteiro(numCamaSolteiro);
@@ -154,13 +143,30 @@ public class HospedagemDAO implements IHospedagemDAO{
 				quarto.setPrecisaLimpeza(precisaLimpeza);
 				quarto.setPrecisaConserto(precisaConserto);
 				
-				hos.setId(id);
-				hos.setDataEntrada(dataEntrada);
-				hos.setDataSaida(dataSaida);
-				hos.setHospedes(hospedes);
-				hos.setQuarto(quarto);
-
-				hospedagens.add(hos);
+				// Conferindo se a hospedagem já existe
+				
+				boolean novaHosp = true;
+				for (Hospedagem hospedagem : hospedagens) {
+					if(hospedagem.getId() == id) {
+						hospedagem.getHospedes().add(hospede);
+						novaHosp = false;
+					} 
+				}
+				
+				// Se a hospedagem não estiver listada ainda, adiciona a listagem
+				if(novaHosp == true) {
+					ArrayList<Hospede> hospedes = new ArrayList<>();
+					hospedes.add(hospede);
+					hos.setHospedes(hospedes);
+					hos.setId(id);
+					hos.setDataEntrada(dataEntrada);
+					hos.setDataSaida(dataSaida);
+					hos.setQuarto(quarto);
+					
+					hospedagens.add(hos);
+				}
+				
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
