@@ -161,7 +161,7 @@ public class CadastroFuncionario extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza escuro.png"));
+				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
