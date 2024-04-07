@@ -180,7 +180,23 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 		public void mouseClicked(MouseEvent e) {
-				Hospedagem hos = new Hospedagem();
+		/*	Hospedagem hos = new Hospedagem();
+				
+				int numHospedes = (int) comboBoxHospedes.getSelectedIndex();
+				if(numHospedes.isEmpty()) {
+					//ERRO
+				}else {
+					hos.setNumHospedes(numHospedes);
+				}
+				
+				int quartos = (int) comboBoxQuartos.getSelectedIndex();
+				if(quartos.isEmpty()) {
+					//ERRO
+				}else {
+					hos.setQuarto(null);
+				}
+				
+				
 				
 				HospedagemDAO dao = HospedagemDAO.getInstancia();
 				
@@ -197,7 +213,7 @@ public class TelaCadastroHospedagem extends JFrame {
 				else {
 					//mensagem de ERRO
 				}
-		}
+		} 
 		public void mouseEntered(MouseEvent e) {
 			 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
 		}
@@ -205,7 +221,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		public void mouseExited(MouseEvent e) {
 			 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
 		}
-	});
+	});       */
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		contentPane.add(lblBotaoSalvar);
