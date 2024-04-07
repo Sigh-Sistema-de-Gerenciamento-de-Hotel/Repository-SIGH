@@ -190,7 +190,7 @@ public class TelaCadastroHospedagem extends JFrame {
 					TelaListagemHospedagem lh = new TelaListagemHospedagem();
 					lh.setVisible(true);
 					lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(hos.getId(), hos.getNumHospedes(), hos.getQuarto(), hos.getDataEntrada(), hos.getDataSaida());
+					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(hos.getNumHospedes(), hos.getQuarto(), hos.getDataEntrada(), hos.getDataSaida());
 					telaConfirmacao.setVisible(true);
 					setVisible(false);
 				}
