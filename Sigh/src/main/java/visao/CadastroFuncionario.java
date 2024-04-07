@@ -80,12 +80,6 @@ public class CadastroFuncionario extends JFrame {
 		lblConta.setBounds(79, 760, 46, 14);
 		contentPane.add(lblConta);
 		
-		JLabel lblEscritaMenu = new JLabel("Menu");
-		lblEscritaMenu.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblEscritaMenu.setForeground(SystemColor.textInactiveText);
-		lblEscritaMenu.setBounds(67, 289, 46, 14);
-		contentPane.add(lblEscritaMenu);
-		
 		JLabel lblBotaoFuncionarios = new JLabel("");
 		 lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
 	            @Override
@@ -140,11 +134,6 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoHospede.setBounds(68, 410, 335, 50);
 		contentPane.add(lblBotaoHospede);
 		
-		JLabel lblPretoNot = new JLabel("");
-		lblPretoNot.setIcon(new ImageIcon("src\\main\\resources\\fundinho preto n° notificação.png"));
-		lblPretoNot.setBounds(318, 350, 39, 27);
-		contentPane.add(lblPretoNot);
-		
 		JLabel lblBotaoPedido = new JLabel("");
 		 lblBotaoPedido.addMouseListener(new MouseAdapter() {
 	            @Override
@@ -162,16 +151,6 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoPedido.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
 		lblBotaoPedido.setBounds(68, 348, 335, 50);
 		contentPane.add(lblBotaoPedido);
-		
-		JLabel lblFuncionarioEscrita = new JLabel("Funcionários");
-		lblFuncionarioEscrita.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblFuncionarioEscrita.setBounds(476, 168, 160, 35);
-		contentPane.add(lblFuncionarioEscrita);
-		
-		JLabel lblCadastroDe = new JLabel("Cadastro de ");
-		lblCadastroDe.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCadastroDe.setBounds(477, 136, 100, 30);
-		contentPane.add(lblCadastroDe);
 		
 		JLabel lblBotaoSair = new JLabel("");
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
@@ -194,12 +173,12 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblBotaoSair);
 		
 		JLabel lblParteSuperior = new JLabel("");
-		lblParteSuperior.setIcon(new ImageIcon("src\\main\\resources\\parte superior pequena.png"));
+		lblParteSuperior.setIcon(new ImageIcon("src/main/resources/CaminhoCadsatrarFuncionario.png"));
 		lblParteSuperior.setBounds(421, 0, 1498, 60);
 		contentPane.add(lblParteSuperior);
 		
 		JLabel lblTituloSuperior = new JLabel("");
-		lblTituloSuperior.setIcon(new ImageIcon("src/main/resources/retangulo branco.png"));
+		lblTituloSuperior.setIcon(new ImageIcon("src/main/resources/TituloCadastrarFuncionario.png"));
 		lblTituloSuperior.setBounds(442, 108, 1445, 138);
 		contentPane.add(lblTituloSuperior);
 		
