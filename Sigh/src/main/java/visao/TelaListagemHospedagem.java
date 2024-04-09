@@ -66,6 +66,11 @@ public class TelaListagemHospedagem extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel botaoCadastrar = new JLabel("Cadastrar");
+		botaoCadastrar.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
+		botaoCadastrar.setBounds(1720, 144, 120, 34);
+		contentPane.add(botaoCadastrar);
+		
 		// Listagem
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(new Color(237, 237, 237), 2, true));
