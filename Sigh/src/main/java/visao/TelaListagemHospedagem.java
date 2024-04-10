@@ -126,7 +126,17 @@ public class TelaListagemHospedagem extends JFrame {
 		JLabel menu = new JLabel("Menu");
 		menu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		menu.setBounds(0, 0, 420, 1080);
-		contentPane.add(menu);	
+		contentPane.add(menu);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
+		lblNewLabel.setBounds(420, 0, 1500, 60);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
+		lblNewLabel_1.setBounds(439, 101, 1444, 119);
+		contentPane.add(lblNewLabel_1);
 	}
 	
 	protected void atualizarJTable() {
