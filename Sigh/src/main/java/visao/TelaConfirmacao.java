@@ -41,29 +41,7 @@ public class TelaConfirmacao extends JFrame {
 		this.txtUsuario = txtUsuario;
 		this.txtCargo = txtCargo;
 	}
-
-
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaConfirmacao frame = new TelaConfirmacao();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	
-
-
 	/**
 	 * Create the frame.
 	 */
