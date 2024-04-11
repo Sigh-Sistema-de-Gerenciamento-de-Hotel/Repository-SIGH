@@ -177,51 +177,6 @@ public class TelaCadastroHospedagem extends JFrame {
 		txtDataCheckout.setColumns(10);
 		
 		JLabel lblBotaoSalvar = new JLabel("");
-		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
-			@Override
-		public void mouseClicked(MouseEvent e) {
-		/*	Hospedagem hos = new Hospedagem();
-				
-				int numHospedes = (int) comboBoxHospedes.getSelectedIndex();
-				if(numHospedes.isEmpty()) {
-					//ERRO
-				}else {
-					hos.setNumHospedes(numHospedes);
-				}
-				
-				int quartos = (int) comboBoxQuartos.getSelectedIndex();
-				if(quartos.isEmpty()) {
-					//ERRO
-				}else {
-					hos.setQuarto(null);
-				}
-				
-				
-				
-				HospedagemDAO dao = HospedagemDAO.getInstancia();
-				
-				boolean validacao = dao.inserirHospedagem(hos);
-				
-				if(validacao == true) {
-					TelaListagemHospedagem lh = new TelaListagemHospedagem();
-					lh.setVisible(true);
-					lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(hos.getNumHospedes(), hos.getQuarto(), hos.getDataEntrada(), hos.getDataSaida());
-					telaConfirmacao.setVisible(true);
-					setVisible(false);
-				}
-				else {
-					//mensagem de ERRO
-				}
-		} 
-		public void mouseEntered(MouseEvent e) {
-			 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
-		}
-		@Override
-		public void mouseExited(MouseEvent e) {
-			 lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
-		}
-	});       */
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		contentPane.add(lblBotaoSalvar);
@@ -247,3 +202,4 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(lblBotaoCancelar);
 	}
 }
+
