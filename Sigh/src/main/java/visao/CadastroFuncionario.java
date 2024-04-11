@@ -288,7 +288,7 @@ public class CadastroFuncionario extends JFrame {
 				}
 				
 				
-				String usuario = txtCpfText.getText();
+				String usuario = txtUsuarioText.getText();
 				if(usuario.isEmpty()) {
 					// ERRO
 				} else {
@@ -297,14 +297,14 @@ public class CadastroFuncionario extends JFrame {
 				
 				char[] senhaChar = passwordField.getPassword();
 				
-				if(senhaChar != null) {
+				if(senhaChar == null) {
 					// ERRO
 				} else {
 					String senha = senhaChar.toString();
 					func.setSenha(senha);
 				}
 				
-				String idS = txtSobrenomeText.getText();
+				String idS = txtCpfText.getText();
 				
 				if(idS.isEmpty()) {
 					// ERRO
@@ -331,8 +331,8 @@ public class CadastroFuncionario extends JFrame {
 					TelaListagemFuncionario lf = new TelaListagemFuncionario();
 					lf.setVisible(true);
 					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(), func.getNomeSocial(), func.getUsuario(), func.getCargo());
-					telaConfirmacao.setVisible(true);
+					//TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(), func.getNomeSocial(), func.getUsuario(), func.getCargo());
+					//telaConfirmacao.setVisible(true);
 					setVisible(false);
 				}
 				else {
