@@ -484,5 +484,15 @@ public class TelaCadastroHospede extends JFrame {
 		comboBox_1.setBounds(554, 515, 343, 48);
 		contentPane.add(comboBox_1);
 		
+		JLabel lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoCadastrarHospede.png"));
+		lblNewLabel_10.setBounds(408, 0, 1512, 62);
+		contentPane.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloCadastrarHospede.png"));
+		lblNewLabel_11.setBounds(446, 108, 1455, 126);
+		contentPane.add(lblNewLabel_11);
+		
 	}
 }
