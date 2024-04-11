@@ -137,7 +137,7 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_9 = new JLabel("");
-		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/Frame 681.png"));
+		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/TituloListagemFuncionario.png"));
 		lblNewLabel_9.setBounds(444, 115, 1455, 126);
 		contentPane.add(lblNewLabel_9);
 	}
