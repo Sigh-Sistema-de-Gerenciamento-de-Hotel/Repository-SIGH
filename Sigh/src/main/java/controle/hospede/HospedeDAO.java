@@ -13,15 +13,15 @@ import controle.Conexao;
 import modelo.Endereco;
 import modelo.Hospede;
 
-public class HospedeDAO implements IHospedeDAO{
+public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a interface IHospedeDAO.//
 	
 	private static HospedeDAO instancia; 
 	
-	private HospedeDAO() {
-		
+	private HospedeDAO() { //evitar a criação de instâncias fora da classe.//
 	}
+		
 	
-	public static HospedeDAO getInstancia () { 
+	public static HospedeDAO getInstancia () { //retorna a instância única da classe HospedeDAO. Implementa o padrão Singleton.//
 		if (instancia == null) {
 			instancia = new HospedeDAO();
 			}
@@ -34,7 +34,7 @@ public class HospedeDAO implements IHospedeDAO{
 		
 		String SQL = "INSERT INTO Hospede (id_hospede, genero, data_nascimento, nacionalidade, cpf, passaporte, telefone, id_endereco, id_responsável) VALUES (?,?,?,?,?,?,?,?,?)"; 
 		
-		Conexao con = Conexao.getInstancia(); 
+		Conexao con = Conexao.getInstancia(); // conexão com o banco de dados.//
 		
 		Connection ConBD = con.conectar(); 
 		
@@ -226,8 +226,31 @@ public class HospedeDAO implements IHospedeDAO{
 
 	@Override
 	public boolean removerHospede(Hospede hos) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+		String SQL = "DELETE FROM Hospede WHERE id_Hospede = ?";
+		
+		Conexao con = Conexao.getInstancia(); // instanciando
+		Connection conBD = con.conectar(); // cria "ponte"
+		
+		int retorno = 0;
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, hos.getId());
+			
+			retorno = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+return (retorno == 0? false : true);}
 }
+
+			
+
+	
+
+
