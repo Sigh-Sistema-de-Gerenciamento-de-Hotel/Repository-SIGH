@@ -15,7 +15,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controle.funcionario.FuncionarioDAO;
+import controle.hospedagem.HospedagemDAO;
 import modelo.Funcionario;
+import modelo.Hospedagem;
 
 import javax.swing.JScrollPane;
 import java.awt.Component;
@@ -124,7 +126,7 @@ public class TelaListagemFuncionario extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"CPF", "Nome Completo", "Nome Social",  "Usuario", "Cargo"
+				"CPF", "Nome Completo",  "Usuario", "Cargo"
 			}
 		));
 		atualizarJTableModel();
@@ -139,8 +141,27 @@ public class TelaListagemFuncionario extends JFrame {
 		lblNewLabel_9.setBounds(444, 115, 1455, 126);
 		contentPane.add(lblNewLabel_9);
 	}
-	
-	public void atualizarJTableModel() {
-		table.setModel(new FuncionariosJTableModel(lista));
+
+protected void atualizarJTableModel() {
+	DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"CPF", "Nome Completo",  "Usuario", "Cargo"});
+
+	dao = FuncionarioDAO.getInstancia();
+	lista = dao.listarFuncionario();
+
+	for (int i = 0; i < lista.size(); i++) {
+		Funcionario fun = lista.get(i);
+		String nomeCompleto;
+		if (fun.getNomeSocial() == null) {
+			nomeCompleto = fun.getPrimeiroNome() + " " + fun.getSobrenome();
+			modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo()});
+		} else {
+			nomeCompleto = fun.getNomeSocial() + " " + fun.getSobrenome();
+			modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo()});
+		}
+		
 	}
+
+	table.setModel(modelo);
 }
+}
+
