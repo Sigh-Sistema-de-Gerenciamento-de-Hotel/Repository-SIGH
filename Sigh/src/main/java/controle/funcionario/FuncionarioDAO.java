@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import controle.Conexao;
+import modelo.Endereco;
 import modelo.Funcionario;
 import modelo.Setor;
 
@@ -162,8 +163,52 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 
 	@Override
 	public ArrayList<Funcionario> listarFuncionarioPorSetor(Setor s) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		
+		String SQL = "SELECT * FROM funcionarios WHERE id_departamento = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, s.getId());
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Funcionario fun = new Funcionario();
+				
+				int id = rs.getInt("id_funcionario");
+				String primeiroNome = rs.getString("primeiro_nome");
+				String sobrenome = rs.getString("sobrenome");
+				String nomeSocial = rs.getString("nome_social");
+				String usuario = rs.getString("usuario");
+				String senha = rs.getString("senha");
+				String cargo = rs.getString("cargo");
+				
+				fun.setId(id);
+				fun.setPrimeiroNome(primeiroNome);
+				fun.setSobrenome(sobrenome);
+				fun.setNomeSocial(nomeSocial);
+				fun.setUsuario(usuario);
+				fun.setSenha(senha);
+				fun.setCargo(cargo);
+				
+				funcionarios.add(fun);
+				
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		return funcionarios;
 	}
 
 	
