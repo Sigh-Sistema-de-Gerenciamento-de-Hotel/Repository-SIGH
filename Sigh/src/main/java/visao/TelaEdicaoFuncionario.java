@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Funcionario;
+import modelo.Hospede;
 import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
@@ -30,7 +32,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,10 +47,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		});
 	}
 
-	/**
+	
 	 * Create the frame.
 	 */
-	public TelaEdicaoFuncionario() {
+	public TelaEdicaoFuncionario(Funcionario func) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Edição de Funcionario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -229,17 +231,23 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblNome.setBounds(554, 306, 139, 14);
 		contentPane.add(lblNome);
 		
+		String nome = func.getNome();
+		
 		txtNome = new RoundJFormattedTextField(null);
+		txtNome.setText(nome);
 		txtNome.setBounds(554, 326, 343, 48);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
 		
-		JLabel lblNomeSocial = new JLabel("Nome Social*");
+		JLabel lblNomeSocial = new JLabel("Nome Social");
 		lblNomeSocial.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNomeSocial.setBounds(554, 385, 139, 14);
 		contentPane.add(lblNomeSocial);
 		
+		String nomeSocial = func.getNomeSocial();
+		
 		txtNomeSocial = new RoundJFormattedTextField(null);
+		txtNomeSocial.setText(nomeSocial);
 		txtNomeSocial.setBounds(554, 410, 343, 48);
 		contentPane.add(txtNomeSocial);
 		txtNomeSocial.setColumns(10);
@@ -249,7 +257,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblCargo.setBounds(554, 472, 139, 22);
 		contentPane.add(lblCargo);
 		
+		String cargo = func.getCargo();
+		
 		txtCargo = new RoundJFormattedTextField(null);
+		txtCargo.setText(cargo);
 		txtCargo.setBounds(554, 497, 343, 48);
 		contentPane.add(txtCargo);
 		txtCargo.setColumns(10);
@@ -259,7 +270,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblSenha.setBounds(1001, 476, 139, 14);
 		contentPane.add(lblSenha);
 		
+		String senha = func.getSenha();
+		
 		txtSenha = new RoundJFormattedTextField(null);
+		txtSenha.setText(senha);
 		txtSenha.setBounds(1001, 497, 343, 48);
 		contentPane.add(txtSenha);
 		txtSenha.setColumns(10);
@@ -269,7 +283,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblUsuario.setBounds(1001, 384, 139, 14);
 		contentPane.add(lblUsuario);
 		
+		String usuario = func.getUsuario();
+		
 		txtUsuario = new RoundJFormattedTextField(null);
+		txtUsuario.setText(usuario);
 		txtUsuario.setBounds(1001, 412, 343, 48);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
@@ -279,7 +296,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblSobrenome.setBounds(1001, 306,  139, 14);
 		contentPane.add(lblSobrenome);
 		
+		String sobrenome = func.getSobrenome();
+		
 		txtSobrenome = new RoundJFormattedTextField(null);
+		txtSobrenome.setText(sobrenome);
 		txtSobrenome.setBounds(1001, 326, 343, 48);
 		contentPane.add(txtSobrenome);
 		txtSobrenome.setColumns(10);
