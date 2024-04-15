@@ -25,6 +25,7 @@ public class EnderecoDAO implements IEnderecoDAO {
 		return instancia;
 	}
 
+	
 	@Override
 	public int inserirEndereco(Endereco end) {
 		String SQL = "INSERT INTO enderecos (cep, estado, cidade, endereco, complemento, numero) VALUES (?, ?, ?, ?, ?, ?)";
@@ -177,6 +178,7 @@ public class EnderecoDAO implements IEnderecoDAO {
 		
 		String SQL = "SELECT * FROM enderecos WHERE cep = ?";
 		
+		
 		// Cria a "ponte de conexao" com MYSQL
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -184,6 +186,8 @@ public class EnderecoDAO implements IEnderecoDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
+			ps.setInt(1, cep);
+		
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -218,7 +222,5 @@ public class EnderecoDAO implements IEnderecoDAO {
 		
 		return enderecos;
 	}
-
-
 
 }
