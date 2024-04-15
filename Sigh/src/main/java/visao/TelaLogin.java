@@ -17,12 +17,20 @@ import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.text.MaskFormatter;
 
+import controle.funcionario.FuncionarioDAO;
+import modelo.Funcionario;
+
+import javax.swing.JFormattedTextField;
+import javax.swing.JPasswordField;
+
 public class TelaLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_0;
+	private JTextField txtUsuario;
+	private JPasswordField passwordField;
+	private FuncionarioDAO func = FuncionarioDAO.getInstancia();
 
 	/**
 	 * Launch the application.
@@ -56,33 +64,33 @@ public class TelaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/pessoa no login.png"));
-		lblNewLabel_2.setBounds(892, 158, 150, 150);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblPessoaLogin = new JLabel("");
+		lblPessoaLogin.setIcon(new ImageIcon("src/main/resources/pessoa no login.png"));
+		lblPessoaLogin.setBounds(892, 158, 150, 150);
+		contentPane.add(lblPessoaLogin);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("src/main/resources/Heading.png"));
-		lblNewLabel_1.setBounds(906, 343, 150, 40);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblNomeLogin = new JLabel("");
+		lblNomeLogin.setIcon(new ImageIcon("src/main/resources/TituloLogIn.png"));
+		lblNomeLogin.setBounds(906, 343, 150, 40);
+		contentPane.add(lblNomeLogin);
 		
-		textField_0 = new RoundJFormattedTextField(null);
-		textField_0.addMouseListener(new MouseAdapter() {
+		txtUsuario = new RoundJFormattedTextField(null);
+		txtUsuario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				textField.setText("");
 			}
 		});
-		textField_0.setForeground(new Color(102, 112, 133));
-		textField_0.setText("       Digite seu usuário");
-		textField_0.setBounds(682, 486, 547, 64);
-		contentPane.add(textField_0);
-		textField_0.setColumns(10);
+		txtUsuario.setForeground(new Color(102, 112, 133));
+		txtUsuario.setText("       Digite seu usuário");
+		txtUsuario.setBounds(682, 486, 547, 64);
+		contentPane.add(txtUsuario);
+		txtUsuario.setColumns(10);
 		textField = new RoundJFormattedTextField(null);
-		textField_0.addMouseListener(new MouseAdapter() {
+		txtUsuario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textField_0.setText("");
+				txtUsuario.setText("");
 				
 			}
 		});
@@ -90,81 +98,104 @@ public class TelaLogin extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("USUÁRIO *");
-		lblNewLabel_3.setForeground(new Color(52, 64, 84));
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_3.setBounds(682, 460, 80, 14);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblUsuario = new JLabel("USUÁRIO *");
+		lblUsuario.setForeground(new Color(52, 64, 84));
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUsuario.setBounds(682, 460, 80, 14);
+		contentPane.add(lblUsuario);
 		
-		RoundJFormattedTextField textField_1 = new RoundJFormattedTextField((MaskFormatter) null);
-		textField_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				textField_1.setText("");
-			}
-			
-		});
-		textField_1.setText("       Digite sua senha");
-		textField_1.setForeground(new Color(102, 112, 133));
-		textField_1.setColumns(10);
-		textField_1.setBounds(682, 615, 547, 64);
-		contentPane.add(textField_1);
+		JLabel lblSenha = new JLabel("SENHA *");
+		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblSenha.setBounds(682, 590, 80, 14);
+		contentPane.add(lblSenha);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("SENHA *");
-		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_3_1.setBounds(682, 590, 80, 14);
-		contentPane.add(lblNewLabel_3_1);
-		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+		JLabel lblMostrarSenha = new JLabel("");
+		lblMostrarSenha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/mostrar senha preto.png"));
+				lblMostrarSenha.setIcon(new ImageIcon("src/main/resources/mostrar senha preto.png"));
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/mostrar senha claro.png"));
+				lblMostrarSenha.setIcon(new ImageIcon("src/main/resources/mostrar senha claro.png"));
 			}
 		});
-		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/mostrar senha preto.png"));
-		lblNewLabel_4.setBounds(687, 698, 200, 10);
-		contentPane.add(lblNewLabel_4);
+		lblMostrarSenha.setIcon(new ImageIcon("src/main/resources/mostrar senha preto.png"));
+		lblMostrarSenha.setBounds(687, 698, 200, 10);
+		contentPane.add(lblMostrarSenha);
 		
 		
 		
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.addMouseListener(new MouseAdapter() {
+		JLabel lblBotaoSalvar = new JLabel("");
+		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-			}
+		/*		// Pega a string senha do TextField
+				String login = txtUsuario.getText();
+				
+				// Pega o vetor de senha do TextField
+				char[] pass = passwordField.getPassword();
+				
+				// Cria uma variável senha pra colocar o vetor
+				String senha = "";
+				
+				// Se o vetor de senha não for nulo e maior do que 0...
+				if(pass !=null && pass.length > 0) {
+					
+					// Atribui o vetor pra uma variavel senha
+					senha = String.valueOf(pass);
+				
+				} else { 
+					
+					// Cria obj Funcionário para atribuir login e senha
+					Funcionario testelogin = new Funcionario();
+					testelogin.setUsuario(login);
+					testelogin.setSenha(senha);
+					
+					// Cria uma variavel boolean login1 que verifica se há o usuário no banco
+					Funcionario funcTesteLogin = func.usuario(testelogin); 
+					
+					if(funcTestLogin != null) {
+						// Passa para a proxima tela
+						TelaListagemFuncionario listagemFuncionario = new TelaListagemFuncionario();
+						dispose();
+						listagemFuncionario.setExtendedState(MAXIMIZED_BOTH);
+						listagemFuncionario.setVisible(true);
+					}
+				} */
+			} 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/Frame 670.png"));
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/Frame 670.png"));
 			}
 		});
-		lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
-		lblNewLabel_6.setBounds(781, 803, 359, 59);
-		contentPane.add(lblNewLabel_6);
+		lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
+		lblBotaoSalvar.setBounds(781, 803, 359, 59);
+		contentPane.add(lblBotaoSalvar);
 		
-		JLabel lblNewLabel_7 = new JLabel("Funcionários");
-		lblNewLabel_7.setForeground(new Color(102, 112, 133));
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_7.setBounds(920, 401, 90, 30);
-		contentPane.add(lblNewLabel_7);
+		JLabel lblEscritaFuncionarios = new JLabel("Funcionários");
+		lblEscritaFuncionarios.setForeground(new Color(102, 112, 133));
+		lblEscritaFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblEscritaFuncionarios.setBounds(920, 401, 90, 30);
+		contentPane.add(lblEscritaFuncionarios);
 		
-		JLabel lblNewLabel = new JLabel(" ");
-		lblNewLabel.setForeground(new Color(52, 64, 84));
-		lblNewLabel.setIcon(new ImageIcon("src/main/resources/fundo verde.png"));
-		lblNewLabel.setBounds(584, 95, 751, 895);
-		contentPane.add(lblNewLabel);
+		JLabel lblFundo = new JLabel(" ");
+		lblFundo.setForeground(new Color(52, 64, 84));
+		lblFundo.setIcon(new ImageIcon("src/main/resources/fundo verde.png"));
+		lblFundo.setBounds(584, 95, 751, 895);
+		contentPane.add(lblFundo);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(682, 616, 547, 64);
+		contentPane.add(passwordField);
 		
 		
 	}
