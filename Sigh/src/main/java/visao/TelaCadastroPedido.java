@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
@@ -347,7 +348,7 @@ public class TelaCadastroPedido extends JFrame {
 		comboBox1Quarto.setBounds(1450, 425, 343, 48);
 		contentPane.add(comboBox1Quarto);
 		
-		txtData = new RoundJFormattedTextField(null);
+		txtData = new DateTextField();
 		txtData.setBounds(1001, 523, 343, 48);
 		contentPane.add(txtData);
 		txtData.setColumns(10);
