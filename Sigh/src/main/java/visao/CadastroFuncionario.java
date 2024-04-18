@@ -61,6 +61,13 @@ public class CadastroFuncionario extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+		
+		
+		
+		
+		
+		
+		String bla;
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		

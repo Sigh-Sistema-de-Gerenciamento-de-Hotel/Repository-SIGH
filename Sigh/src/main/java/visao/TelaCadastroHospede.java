@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
@@ -253,7 +254,7 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		
-		txtData = new RoundJFormattedTextField(null);
+		txtData = new DateTextField();
 		txtData.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtData.setBounds(1000, 415, 343, 48);
 		contentPane.add(txtData);

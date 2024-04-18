@@ -131,9 +131,14 @@ public class TelaListagemFuncionario extends JFrame {
 		));
 		atualizarJTableModel();
 		
+		JLabel botaoEditar = new JLabel("");
+		botaoEditar.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
+		botaoEditar.setBounds(1570, 164, 120, 34);
+		contentPane.add(botaoEditar);
+		
 		JLabel lblNewLabel_10 = new JLabel("");
 		lblNewLabel_10.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
-		lblNewLabel_10.setBounds(1721, 164, 120, 34);
+		lblNewLabel_10.setBounds(1400, 164, 120, 34);
 		contentPane.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_9 = new JLabel("");

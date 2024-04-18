@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import controle.Conexao;
-import modelo.Endereco;
+
 import modelo.Funcionario;
 import modelo.Setor;
 
@@ -115,13 +115,13 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, fun.getId());
-			ps.setString(2, fun.getNomeSocial());
-			ps.setString(3, fun.getSobrenome());
-			ps.setString(4, fun.getNomeSocial());
-			ps.setString(5, fun.getUsuario());
-			ps.setString(6, fun.getSenha());
-			ps.setString(7, fun.getCargo());
+			ps.setString(1, fun.getPrimeiroNome());
+			ps.setString(2, fun.getSobrenome());
+			ps.setString(3, fun.getNomeSocial());
+			ps.setString(4, fun.getUsuario());
+			ps.setString(5, fun.getSenha());
+			ps.setString(6, fun.getCargo());
+			ps.setInt(7, fun.getId());
 			
 			retorno = ps.executeUpdate();
 			
