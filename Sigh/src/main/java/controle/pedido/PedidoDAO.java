@@ -49,7 +49,7 @@ public class PedidoDAO implements IPedidoDAO{
 					//ps.setDate(3, ped.getData());
 					//ps.setTime(4, ped.getHorario());
 					Setor setor = ped.getSetorResponsavel();
-					ps.setInt(5, ped.getId());
+					ps.setInt(5, setor.getId());
 					Quarto q = ped.getQuarto();
 					ps.setInt(6, q.getNumero());
 					ps.setString(7, ped.getDescricao());
@@ -112,7 +112,7 @@ public class PedidoDAO implements IPedidoDAO{
 				
 				//HOSPEDAGEM
 				Hospedagem hos = new Hospedagem();
-				//int id = rs.getInt("id_hospedagem");
+				id = rs.getInt("id_hospedagem");
 				LocalDate dataEntrada = LocalDate.parse(rs.getString("data_entrada"));
 				String dataSaidatxt = rs.getString("data_saida");
 				LocalDate dataSaida = null;
@@ -163,7 +163,7 @@ public class PedidoDAO implements IPedidoDAO{
 	@Override
 	public boolean atualizarPedido(Pedido ped) {
 		
-		String SQL = "UPDATE pedidos SET id = ? WHERE hospedagem = ? WHERE data = ? WHERE horario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?";
+		String SQL = "UPDATE pedidos SET hospedagem = ?, data = ?, horario = ?, setorResponsavel = ?, quarto = ?, descricao = ?, feito = ? WHERE id = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -179,7 +179,7 @@ public class PedidoDAO implements IPedidoDAO{
 			//ps.setDate(3, ped.getData());
 			//ps.setTime(4, ped.getHorario());
 			Setor setor = ped.getSetorResponsavel();
-			ps.setInt(5, ped.getId());
+			ps.setInt(5, setor.getId());
 			Quarto q = ped.getQuarto();
 			ps.setInt(6, q.getNumero());
 			ps.setString(7, ped.getDescricao());
@@ -200,7 +200,7 @@ public class PedidoDAO implements IPedidoDAO{
 	@Override
 	public boolean removerPedido(Pedido ped) {
 		
-		String SQL = "DELETE FROM pedidos WHERE id = ? WHERE hospedagem = ? WHERE data = ? WHERE horario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?";
+		String SQL = "DELETE FROM pedidos hospedagem = ?, data = ?, horario = ?, setorResponsavel = ?, quarto = ?, descricao = ?, feito = ? WHERE id = ?";
 		
 		Conexao con = Conexao.getInstancia(); // instanciando
 		Connection conBD = con.conectar(); // cria "ponte"
@@ -215,7 +215,7 @@ public class PedidoDAO implements IPedidoDAO{
 			//ps.setDate(3, ped.getData());
 			//ps.setTime(4, ped.getHorario());
 			Setor setor = ped.getSetorResponsavel();
-			ps.setInt(5, ped.getId());
+			ps.setInt(5, setor.getId());
 			Quarto q = ped.getQuarto();
 			ps.setInt(6, q.getNumero());
 			ps.setString(7, ped.getDescricao());
@@ -244,8 +244,6 @@ public class PedidoDAO implements IPedidoDAO{
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			
-			//ps.setInt(1, s.getId());
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -298,8 +296,6 @@ public class PedidoDAO implements IPedidoDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setBoolean(1, feito);
-			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -313,7 +309,7 @@ public class PedidoDAO implements IPedidoDAO{
 				String setorResponsavel = rs.getString("Setor");
 				String quarto = rs.getString("quarto");
 				String descricao = rs.getString("descricao");
-				//boolean feito = rs.getBoolean("feito");
+				feito = rs.getBoolean("feito");
 				
 				ped.setId(id);  
 				ped.setHospedagem(null);
@@ -325,7 +321,6 @@ public class PedidoDAO implements IPedidoDAO{
 				ped.setFeito(feito);
 				
 				pedidos.add(ped);
-				
 			}
 		
 		} catch (SQLException e) {
