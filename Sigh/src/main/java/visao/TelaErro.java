@@ -4,13 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
-import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaErro extends JFrame {
 
@@ -41,6 +41,7 @@ public class TelaErro extends JFrame {
 		setBounds(100, 100, 450, 250);
 		setUndecorated(true);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 253, 253));
 		contentPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.RED, Color.RED));
 
 		setContentPane(contentPane);
@@ -53,10 +54,26 @@ public class TelaErro extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("ERRO!");
-		lblNewLabel.setForeground(Color.RED);
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 32));
-		lblNewLabel.setBounds(94, 24, 106, 45);
-		panel.add(lblNewLabel);
+		JLabel lblErro = new JLabel("ERRO!");
+		lblErro.setForeground(Color.RED);
+		lblErro.setFont(new Font("Arial", Font.BOLD, 32));
+		lblErro.setBounds(108, 24, 106, 45);
+		panel.add(lblErro);
+		
+		JLabel lblAtencao = new JLabel("");
+		lblAtencao.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\AtençaoErro.png"));
+		lblAtencao.setBounds(22, 11, 89, 68);
+		panel.add(lblAtencao);
+		
+		JLabel lblBotaoSair = new JLabel("");
+		lblBotaoSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
+		lblBotaoSair.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoTelaErro.png"));
+		lblBotaoSair.setBounds(351, 11, 89, 31);
+		panel.add(lblBotaoSair);
 	}
 }
