@@ -46,8 +46,8 @@ public class PedidoDAO implements IPedidoDAO{
 					ps.setInt(1, ped.getId());
 					Hospedagem hosp = ped.getHospedagem();
 					ps.setInt(2, hosp.getId());
-					ps.setDate(3, ped.getData());
-					ps.setTime(4, ped.getHorario());
+					//ps.setDate(3, ped.getData());
+					//ps.setTime(4, ped.getHorario());
 					Setor setor = ped.getSetorResponsavel();
 					ps.setInt(5, ped.getId());
 					Quarto q = ped.getQuarto();
@@ -102,8 +102,8 @@ public class PedidoDAO implements IPedidoDAO{
 				
 				ped.setId(id);  
 				ped.setHospedagem(null);
-				ped.setData(null);
-				ped.setHorario(null);
+				//ped.setData(null);
+				//ped.setHorario(null);
 				ped.setSetorResponsavel(null);
 				ped.setQuarto(null);
 				ped.setDescricao(descricao);
@@ -112,7 +112,7 @@ public class PedidoDAO implements IPedidoDAO{
 				
 				//HOSPEDAGEM
 				Hospedagem hos = new Hospedagem();
-				int id = rs.getInt("id_hospedagem");
+				//int id = rs.getInt("id_hospedagem");
 				LocalDate dataEntrada = LocalDate.parse(rs.getString("data_entrada"));
 				String dataSaidatxt = rs.getString("data_saida");
 				LocalDate dataSaida = null;
@@ -146,7 +146,7 @@ public class PedidoDAO implements IPedidoDAO{
 				qua.setArCondicionado(arCondicionado);
 				qua.setFrigobar(frigobar);
 				qua.setBanheira(banheira);
-				qua.setAcessibilidade(acessibilidade);
+				//qua.setAcessibilidade(acessibilidade);
 				qua.setPreco(preco);
 				qua.setPrecisaLimpeza(precisaLimpeza);
 				qua.setPrecisaConserto(precisaConserto);
@@ -176,8 +176,8 @@ public class PedidoDAO implements IPedidoDAO{
 			ps.setInt(1, ped.getId());
 			Hospedagem hosp = ped.getHospedagem();
 			ps.setInt(2, hosp.getId());
-			ps.setDate(3, ped.getData());
-			ps.setTime(4, ped.getHorario());
+			//ps.setDate(3, ped.getData());
+			//ps.setTime(4, ped.getHorario());
 			Setor setor = ped.getSetorResponsavel();
 			ps.setInt(5, ped.getId());
 			Quarto q = ped.getQuarto();
@@ -212,8 +212,8 @@ public class PedidoDAO implements IPedidoDAO{
 			ps.setInt(1, ped.getId());
 			Hospedagem hosp = ped.getHospedagem();
 			ps.setInt(2, hosp.getId());
-			ps.setDate(3, ped.getData());
-			ps.setTime(4, ped.getHorario());
+			//ps.setDate(3, ped.getData());
+			//ps.setTime(4, ped.getHorario());
 			Setor setor = ped.getSetorResponsavel();
 			ps.setInt(5, ped.getId());
 			Quarto q = ped.getQuarto();
@@ -245,7 +245,7 @@ public class PedidoDAO implements IPedidoDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, s.getId());
+			//ps.setInt(1, s.getId());
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -264,8 +264,8 @@ public class PedidoDAO implements IPedidoDAO{
 				
 				ped.setId(id);  
 				ped.setHospedagem(null);
-				ped.setData(null);
-				ped.setHorario(null);
+				//ped.setData(null);
+				//ped.setHorario(null);
 				ped.setSetorResponsavel(s);
 				ped.setQuarto(null);
 				ped.setDescricao(descricao);
@@ -303,6 +303,7 @@ public class PedidoDAO implements IPedidoDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
+				
 				Pedido ped = new Pedido();
 				
 				int id = rs.getInt("id");   
@@ -312,12 +313,12 @@ public class PedidoDAO implements IPedidoDAO{
 				String setorResponsavel = rs.getString("Setor");
 				String quarto = rs.getString("quarto");
 				String descricao = rs.getString("descricao");
-				boolean feito = rs.getBoolean("feito");
+				//boolean feito = rs.getBoolean("feito");
 				
 				ped.setId(id);  
 				ped.setHospedagem(null);
-				ped.setData(null);
-				ped.setHorario(null);
+				//ped.setData(null);
+				//ped.setHorario(null);
 				ped.setSetorResponsavel(null);
 				ped.setQuarto(null);
 				ped.setDescricao(descricao);
