@@ -134,8 +134,13 @@ public class TelaLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+<<<<<<< HEAD
 	     		// Pega a string senha do TextField
 				String usuario = txtUsuario.getText();
+=======
+		/*		// Pega a string senha do TextField
+				String login = txtUsuario.getText();
+>>>>>>> main
 				
 				// Pega o vetor de senha do TextField
 				char[] pass = passwordField.getPassword();
@@ -148,28 +153,12 @@ public class TelaLogin extends JFrame {
 					
 					// Atribui o vetor pra uma variavel senha
 					senha = String.valueOf(pass);
-				} 
-				if(senha.isEmpty() && usuario.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
-					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
-					passwordField.setText(null);
-					txtUsuario.setText(null);
-				} else if(senha.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira uma senha!");
-					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
-					passwordField.setText(null);
-					txtUsuario.setText(null);
-				} else if(usuario.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira um usuário!");
-					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
-					passwordField.setText(null);
-					txtUsuario.setText(null);
 				
-				} else {
+				} else { 
+					
+					// Cria obj Funcionário para atribuir login e senha
 					Funcionario testelogin = new Funcionario();
+<<<<<<< HEAD
 					testelogin.setUsuario(usuario);
 			    	testelogin.setSenha(senha);
 			    	
@@ -193,6 +182,22 @@ public class TelaLogin extends JFrame {
 			    	}
 				}
 				
+=======
+					testelogin.setUsuario(login);
+					testelogin.setSenha(senha);
+					
+					// Cria uma variavel boolean login1 que verifica se há o usuário no banco
+					Funcionario funcTesteLogin = func.usuario(testelogin); 
+					
+					if(funcTestLogin != null) {
+						// Passa para a proxima tela
+						TelaListagemFuncionario listagemFuncionario = new TelaListagemFuncionario();
+						dispose();
+						listagemFuncionario.setExtendedState(MAXIMIZED_BOTH);
+						listagemFuncionario.setVisible(true);
+					}
+				} */
+>>>>>>> main
 			} 
 			@Override
 			public void mouseExited(MouseEvent e) {
