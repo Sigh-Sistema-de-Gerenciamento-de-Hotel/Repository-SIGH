@@ -182,8 +182,8 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 	public boolean atualizarHospede(Hospede hos) {
 	
 
-		String SQL = "UPDATE Hospede SET id  = ? WHERE genero = ?, WHERE cpf = ?, WHERE DataNascimento = ?, WHERE Nacionalidade = ?, WHERE Passaporte = ?, "
-				+ "WHERE Telefone = ?, WHERE Endereco = ?, WHERE Responsavel = ?";
+		String SQL = "UPDATE Hospede SET genero = ?, cpf = ?, DataNascimento = ?,  Nacionalidade = ?, Passaporte = ?, "
+				+ " Telefone = ?,  Endereco = ?,  Responsavel = ? WHERE id  = ? ";
 		
 		Conexao con = Conexao.getInstancia(); 
 		Connection conBD = con.conectar(); 

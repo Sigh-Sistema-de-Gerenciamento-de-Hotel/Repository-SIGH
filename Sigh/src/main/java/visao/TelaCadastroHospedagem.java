@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import controle.hospedagem.HospedagemDAO;
 import modelo.Hospedagem;
+import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
@@ -149,7 +150,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblDataCheckin.setBounds(502, 510, 145, 40);
 		contentPane.add(lblDataCheckin);
 
-		txtDataCheckin = new RoundJFormattedTextField(null);
+		txtDataCheckin = new DateTextField();
 		txtDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDataCheckin.setBounds(502, 548, 343, 48);
 		contentPane.add(txtDataCheckin);
@@ -170,7 +171,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblDataCheckout.setBounds(1010, 510, 145, 40);
 		contentPane.add(lblDataCheckout);
 
-		txtDataCheckout = new RoundJFormattedTextField(null);
+		txtDataCheckout = new DateTextField();
 		txtDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDataCheckout.setBounds(1010, 548, 343, 48);
 		contentPane.add(txtDataCheckout);
