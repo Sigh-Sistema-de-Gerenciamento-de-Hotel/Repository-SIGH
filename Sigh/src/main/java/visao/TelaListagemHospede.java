@@ -82,7 +82,7 @@ public class TelaListagemHospede extends JFrame {
 		
 		JLabel lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
-		lblNewLabel_4.setBounds(68, 407, 250, 40);
+		lblNewLabel_4.setBounds(51, 400, 340, 40);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
