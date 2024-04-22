@@ -61,6 +61,13 @@ public class CadastroFuncionario extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+		
+		
+		
+		
+		
+		
+		String bla;
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -79,12 +86,6 @@ public class CadastroFuncionario extends JFrame {
 		lblConta.setForeground(SystemColor.textInactiveText);
 		lblConta.setBounds(79, 760, 46, 14);
 		contentPane.add(lblConta);
-		
-		JLabel lblEscritaMenu = new JLabel("Menu");
-		lblEscritaMenu.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblEscritaMenu.setForeground(SystemColor.textInactiveText);
-		lblEscritaMenu.setBounds(67, 289, 46, 14);
-		contentPane.add(lblEscritaMenu);
 		
 		JLabel lblBotaoFuncionarios = new JLabel("");
 		 lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
@@ -140,11 +141,6 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoHospede.setBounds(68, 410, 335, 50);
 		contentPane.add(lblBotaoHospede);
 		
-		JLabel lblPretoNot = new JLabel("");
-		lblPretoNot.setIcon(new ImageIcon("src\\main\\resources\\fundinho preto n° notificação.png"));
-		lblPretoNot.setBounds(318, 350, 39, 27);
-		contentPane.add(lblPretoNot);
-		
 		JLabel lblBotaoPedido = new JLabel("");
 		 lblBotaoPedido.addMouseListener(new MouseAdapter() {
 	            @Override
@@ -163,16 +159,6 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoPedido.setBounds(68, 348, 335, 50);
 		contentPane.add(lblBotaoPedido);
 		
-		JLabel lblFuncionarioEscrita = new JLabel("Funcionários");
-		lblFuncionarioEscrita.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblFuncionarioEscrita.setBounds(476, 168, 160, 35);
-		contentPane.add(lblFuncionarioEscrita);
-		
-		JLabel lblCadastroDe = new JLabel("Cadastro de ");
-		lblCadastroDe.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCadastroDe.setBounds(477, 136, 100, 30);
-		contentPane.add(lblCadastroDe);
-		
 		JLabel lblBotaoSair = new JLabel("");
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
@@ -182,7 +168,7 @@ public class CadastroFuncionario extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza escuro.png"));
+				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -194,12 +180,12 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblBotaoSair);
 		
 		JLabel lblParteSuperior = new JLabel("");
-		lblParteSuperior.setIcon(new ImageIcon("src\\main\\resources\\parte superior pequena.png"));
+		lblParteSuperior.setIcon(new ImageIcon("src/main/resources/CaminhoCadsatrarFuncionario.png"));
 		lblParteSuperior.setBounds(421, 0, 1498, 60);
 		contentPane.add(lblParteSuperior);
 		
 		JLabel lblTituloSuperior = new JLabel("");
-		lblTituloSuperior.setIcon(new ImageIcon("src/main/resources/retangulo branco.png"));
+		lblTituloSuperior.setIcon(new ImageIcon("src/main/resources/TituloCadastrarFuncionario.png"));
 		lblTituloSuperior.setBounds(442, 108, 1445, 138);
 		contentPane.add(lblTituloSuperior);
 		
@@ -288,7 +274,7 @@ public class CadastroFuncionario extends JFrame {
 				if(nome.isEmpty()) {
 					// ERRO
 				} else {
-					func.setPrimeiroNome(nome);
+					func.setNome(nome);
 				}
 				
 				String sobrenome = txtSobrenomeText.getText();
@@ -309,7 +295,7 @@ public class CadastroFuncionario extends JFrame {
 				}
 				
 				
-				String usuario = txtCpfText.getText();
+				String usuario = txtUsuarioText.getText();
 				if(usuario.isEmpty()) {
 					// ERRO
 				} else {
@@ -318,14 +304,14 @@ public class CadastroFuncionario extends JFrame {
 				
 				char[] senhaChar = passwordField.getPassword();
 				
-				if(senhaChar != null) {
+				if(senhaChar == null) {
 					// ERRO
 				} else {
 					String senha = senhaChar.toString();
 					func.setSenha(senha);
 				}
 				
-				String idS = txtSobrenomeText.getText();
+				String idS = txtCpfText.getText();
 				
 				if(idS.isEmpty()) {
 					// ERRO
@@ -352,7 +338,7 @@ public class CadastroFuncionario extends JFrame {
 					TelaListagemFuncionario lf = new TelaListagemFuncionario();
 					lf.setVisible(true);
 					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(), func.getNomeSocial(), func.getUsuario(), func.getCargo());
+					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getNome(), func.getSobrenome(), func.getNomeSocial(), func.getUsuario(), func.getCargo());
 					telaConfirmacao.setVisible(true);
 					setVisible(false);
 				}

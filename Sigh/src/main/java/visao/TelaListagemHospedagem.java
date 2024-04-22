@@ -28,6 +28,7 @@ public class TelaListagemHospedagem extends JFrame {
 	private JTable table;
 	private HospedagemDAO dao;	
 	private ArrayList<Hospedagem> lista;
+	private JLabel caminho;
 
 	/**
 	 * Launch the application.
@@ -127,6 +128,16 @@ public class TelaListagemHospedagem extends JFrame {
 		menu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		menu.setBounds(0, 0, 420, 1080);
 		contentPane.add(menu);	
+		
+		caminho = new JLabel("Caminho");
+		caminho.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
+		caminho.setBounds(420, 0, 1500, 60);
+		contentPane.add(caminho);
+		
+		JLabel titulo = new JLabel("Titulo");
+		titulo.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
+		titulo.setBounds(439, 101, 1444, 119);
+		contentPane.add(titulo);
 	}
 	
 	protected void atualizarJTable() {
@@ -142,5 +153,4 @@ public class TelaListagemHospedagem extends JFrame {
 
 		table.setModel(modelo);
 	}
-	
 }
