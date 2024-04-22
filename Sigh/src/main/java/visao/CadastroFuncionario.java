@@ -325,25 +325,6 @@ public class CadastroFuncionario extends JFrame {
 					func.setSenha(senha);
 				}
 				
-				String idS = txtCpfText.getText();
-				
-				if(idS.isEmpty()) {
-					// ERRO
-				} else {
-					int id = 0;
-					Boolean erro= false;
-					try {
-						id = Integer.parseInt(idS);
-					} catch(Exception ex) {
-						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
-						erro = true;
-					}
-					if(erro==false && id!=0) {
-						func.setId(id);
-					}
-					
-				}
-				
 				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
 				
 				boolean validacao = dao.inserirFuncionario(func);

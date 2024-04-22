@@ -157,23 +157,23 @@ public class TelaLogin extends JFrame {
 				}
 				
 				if (senha.isEmpty() && login.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
+					/*TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
 					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
+					dadosIncorretos.setVisible(true);*/
 					passwordField.setText(null);
 					txtUsuario.setText(null);
 				} else if (senha.isEmpty()) {
 					// Exibe mensagem de erro
-					TelaErro dadosIncorretos = new TelaErro("Insira uma senha!");
+					/*TelaErro dadosIncorretos = new TelaErro("Insira uma senha!");
 					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
+					dadosIncorretos.setVisible(true);*/
 					passwordField.setText(null);
 					txtUsuario.setText(null);
 				} else if (login.isEmpty()) {
 					// Exibe mensagem de erro
-					TelaErro dadosIncorretos = new TelaErro("Insira um usuário!");
+					/*TelaErro dadosIncorretos = new TelaErro("Insira um usuário!");
 					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
+					dadosIncorretos.setVisible(true);*/
 					passwordField.setText(null);
 					txtUsuario.setText(null);
 
@@ -193,14 +193,14 @@ public class TelaLogin extends JFrame {
 						setVisible(false);
 						listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
 						listaFuncionario.setVisible(true);
-						TelaConfirmacao confirmacao = new TelaConfirmacao();
+						/*TelaConfirmacao confirmacao = new TelaConfirmacao();
 						confirmacao.setLocationRelativeTo(null);
-						confirmacao.setVisible(true);
+						confirmacao.setVisible(true);*/
 					} else {
 						// Exibe mensagem de erro
-						TelaErro dadosIncorretos = new TelaErro("Funcionário não encontrado!");
+						/*TelaErro dadosIncorretos = new TelaErro("Funcionário não encontrado!");
 						dadosIncorretos.setLocationRelativeTo(null);
-						dadosIncorretos.setVisible(true);
+						dadosIncorretos.setVisible(true);*/
 					}
 
 				}
