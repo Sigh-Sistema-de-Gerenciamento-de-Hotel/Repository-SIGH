@@ -35,7 +35,7 @@ public class FuncionariosJTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Funcionario f = lista.get(rowIndex);
 		
-		String nomeCompleto = f.getPrimeiroNome() + " " + f.getSobrenome();
+		String nomeCompleto = f.getNome() + " " + f.getSobrenome();
 		
 		System.out.println(nomeCompleto);
 		
