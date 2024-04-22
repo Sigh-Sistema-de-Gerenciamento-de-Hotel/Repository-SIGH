@@ -149,8 +149,30 @@ public class TelaLogin extends JFrame {
 					// Atribui o vetor pra uma variavel senha
 					senha = String.valueOf(pass);
 				
-				} else { 
-					
+				}
+				
+				if (senha.isEmpty() && login.isEmpty()) {
+					/*TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);*/
+					passwordField.setText(null);
+					txtUsuario.setText(null);
+				} else if (senha.isEmpty()) {
+					// Exibe mensagem de erro
+					/*TelaErro dadosIncorretos = new TelaErro("Insira uma senha!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);*/
+					passwordField.setText(null);
+					txtUsuario.setText(null);
+				} else if (login.isEmpty()) {
+					// Exibe mensagem de erro
+					/*TelaErro dadosIncorretos = new TelaErro("Insira um usuário!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);*/
+					passwordField.setText(null);
+					txtUsuario.setText(null);
+
+				} else {
 					// Cria obj Funcionário para atribuir login e senha
 					Funcionario testelogin = new Funcionario();
 					testelogin.setUsuario(login);
@@ -161,10 +183,18 @@ public class TelaLogin extends JFrame {
 					
 					if(funcTestLogin != null) {
 						// Passa para a proxima tela
-						TelaListagemFuncionario listagemFuncionario = new TelaListagemFuncionario();
-						dispose();
-						listagemFuncionario.setExtendedState(MAXIMIZED_BOTH);
-						listagemFuncionario.setVisible(true);
+						TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario();
+						setVisible(false);
+						listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+						listaFuncionario.setVisible(true);
+						/*TelaConfirmacao confirmacao = new TelaConfirmacao();
+						confirmacao.setLocationRelativeTo(null);
+						confirmacao.setVisible(true);*/
+					} else {
+						// Exibe mensagem de erro
+						/*TelaErro dadosIncorretos = new TelaErro("Funcionário não encontrado!");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);*/
 					}
 				} */
 			} 
