@@ -157,7 +157,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 				if(nome.isEmpty()) {
 					// ERRO
 				} else {
-					funcEditar.setPrimeiroNome(nome);
+					funcEditar.setNome(nome);
 				}
 				
 				String sobrenome = txtSobrenome.getText();

@@ -162,6 +162,7 @@ public class TelaListagemFuncionario extends JFrame {
 
 				if (confirmacao == JOptionPane.YES_OPTION) {
 					Boolean validacao = dao.removerFuncionarios(funcionarioSelecionado);
+					atualizarJTableModel();
 					if (validacao==true) {
 						JOptionPane.showMessageDialog(null,
 								"O funcionário " + funcionarioSelecionado.getNome() + " foi excluído");
@@ -174,10 +175,19 @@ public class TelaListagemFuncionario extends JFrame {
 		botaoExcluir.setBounds(1740, 164, 120, 34);
 		contentPane.add(botaoExcluir);
 
-		JLabel lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
-		lblNewLabel_10.setBounds(1400, 164, 120, 34);
-		contentPane.add(lblNewLabel_10);
+		JLabel botaoCadastrar = new JLabel("");
+		botaoCadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CadastroFuncionario cadFun = new CadastroFuncionario();
+				cadFun.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				cadFun.setVisible(true);
+				dispose();
+			}
+		});
+		botaoCadastrar.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
+		botaoCadastrar.setBounds(1400, 164, 120, 34);
+		contentPane.add(botaoCadastrar);
 
 		JLabel lblNewLabel_9 = new JLabel("");
 		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/TituloListagemFuncionario.png"));
@@ -196,7 +206,7 @@ public class TelaListagemFuncionario extends JFrame {
 			Funcionario fun = lista.get(i);
 			String nomeCompleto;
 			if (fun.getNomeSocial() == null) {
-				nomeCompleto = fun.getPrimeiroNome() + " " + fun.getSobrenome();
+				nomeCompleto = fun.getNome() + " " + fun.getSobrenome();
 				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo() });
 			} else {
 				nomeCompleto = fun.getNomeSocial() + " " + fun.getSobrenome();
