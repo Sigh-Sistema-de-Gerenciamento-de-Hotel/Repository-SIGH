@@ -163,10 +163,10 @@ public class TelaListagemFuncionario extends JFrame {
 				if (confirmacao == JOptionPane.YES_OPTION) {
 					Boolean validacao = dao.removerFuncionarios(funcionarioSelecionado);
 					atualizarJTableModel();
-					if (validacao==true) {
+					if (validacao == true) {
 						JOptionPane.showMessageDialog(null,
 								"O funcionário " + funcionarioSelecionado.getNome() + " foi excluído");
-						
+
 					}
 				}
 			}
@@ -202,10 +202,9 @@ public class TelaListagemFuncionario extends JFrame {
 		dao = FuncionarioDAO.getInstancia();
 		lista = dao.listarFuncionario();
 
-		for (int i = 0; i < lista.size(); i++) {
-			Funcionario fun = lista.get(i);
+		for (Funcionario fun : lista) {
 			String nomeCompleto;
-			if (fun.getNomeSocial() == null) {
+			if (fun.getNomeSocial() == null || fun.getNomeSocial().trim().isEmpty()) {
 				nomeCompleto = fun.getNome() + " " + fun.getSobrenome();
 				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo() });
 			} else {

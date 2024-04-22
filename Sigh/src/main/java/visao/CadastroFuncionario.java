@@ -61,12 +61,6 @@ public class CadastroFuncionario extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		
-		
-		
-		
-		
-		
 		String bla;
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -269,7 +263,27 @@ public class CadastroFuncionario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Funcionario func = new Funcionario();
-				
+
+				Boolean erro= false;
+
+				String idS = txtCpfText.getText();
+
+				if(idS.isEmpty()) {
+					// ERRO
+				} else {
+					int id = 0;
+					try {
+						id = Integer.parseInt(idS);
+					} catch(Exception ex) {
+						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
+						erro = true;
+					}
+					if(erro==false && id!=0) {
+						func.setId(id);
+					}
+
+				}
+
 				String nome = txtNomeText.getText();
 				if(nome.isEmpty()) {
 					// ERRO
