@@ -134,13 +134,8 @@ public class TelaLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-
-	     		// Pega a string senha do TextField
-				String usuario = txtUsuario.getText();
-
-			// Pega a string senha do TextField
+		/*		// Pega a string senha do TextField
 				String login = txtUsuario.getText();
-
 				
 				// Pega o vetor de senha do TextField
 				char[] pass = passwordField.getPassword();
@@ -180,14 +175,13 @@ public class TelaLogin extends JFrame {
 				} else {
 					// Cria obj Funcionário para atribuir login e senha
 					Funcionario testelogin = new Funcionario();
-					testelogin.setUsuario(usuario);
+					testelogin.setUsuario(login);
 					testelogin.setSenha(senha);
-
+					
 					// Cria uma variavel boolean login1 que verifica se há o usuário no banco
-					Funcionario funcTesteLogin = func.login(testelogin);
-
-					// Se o valor retornado pela função ser true
-					if (funcTesteLogin != null) {
+					Funcionario funcTesteLogin = func.usuario(testelogin); 
+					
+					if(funcTestLogin != null) {
 						// Passa para a proxima tela
 						TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario();
 						setVisible(false);
@@ -202,10 +196,7 @@ public class TelaLogin extends JFrame {
 						dadosIncorretos.setLocationRelativeTo(null);
 						dadosIncorretos.setVisible(true);*/
 					}
-
-				}
-
-
+				} */
 			} 
 			@Override
 			public void mouseExited(MouseEvent e) {
