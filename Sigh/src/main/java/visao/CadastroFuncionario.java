@@ -274,7 +274,7 @@ public class CadastroFuncionario extends JFrame {
 				if(nome.isEmpty()) {
 					// ERRO
 				} else {
-					func.setPrimeiroNome(nome);
+					func.setNome(nome);
 				}
 				
 				String sobrenome = txtSobrenomeText.getText();
@@ -338,7 +338,7 @@ public class CadastroFuncionario extends JFrame {
 					TelaListagemFuncionario lf = new TelaListagemFuncionario();
 					lf.setVisible(true);
 					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(), func.getNomeSocial(), func.getUsuario(), func.getCargo());
+					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getNome(), func.getSobrenome(), func.getNomeSocial(), func.getUsuario(), func.getCargo());
 					telaConfirmacao.setVisible(true);
 					setVisible(false);
 				}
