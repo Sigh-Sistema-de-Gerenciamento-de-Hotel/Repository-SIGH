@@ -148,7 +148,7 @@ public class TelaListagemHospede extends JFrame {
 		JLabel lblNewLabel_11 = new JLabel("");
 		lblNewLabel_11.setIcon(new ImageIcon("src/main/resources/caminhoListagemHospede.png"));
 		lblNewLabel_11.setBounds(420, 0, 1500, 62);
-		contentPane.add(lblNewLabel_11);
+		contentPane.add(lblNewLabel_11)
 	}
 
 protected void atualizarJTableModel() {
