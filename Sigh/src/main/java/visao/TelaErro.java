@@ -20,7 +20,7 @@ public class TelaErro extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -31,12 +31,12 @@ public class TelaErro extends JFrame {
 				}
 			}
 		});
-	}
+	} */
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaErro() {
+	public TelaErro(String msg) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 250);
 		setUndecorated(true);
@@ -75,5 +75,11 @@ public class TelaErro extends JFrame {
 		lblBotaoSair.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoTelaErro.png"));
 		lblBotaoSair.setBounds(351, 11, 89, 31);
 		panel.add(lblBotaoSair);
+		
+		JLabel lblMsg = new JLabel("");
+		lblMsg.setFont(new Font("Yu Gothic UI", Font.PLAIN, 21));
+		lblMsg.setBounds(43, 108, 366, 48);
+		contentPane.add(lblMsg);
+		lblMsg.setText(msg);
 	}
 }
