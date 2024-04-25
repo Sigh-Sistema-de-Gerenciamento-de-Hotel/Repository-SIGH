@@ -19,6 +19,8 @@ import controle.hospedagem.HospedagemDAO;
 import controle.hospede.HospedeDAO;
 import modelo.Funcionario;
 import modelo.Hospedagem;
+import modelo.Hospede;
+import visao.padrao.DateTextField;
 
 import javax.swing.JScrollPane;
 import java.awt.Component;
@@ -31,11 +33,16 @@ public class TelaListagemHospede extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table; 
+	private Hospede hospedeSelecionado;
+	private HospedeDAO dao = HospedeDAO.getInstancia();
+	private static Funcionario funcionarioLogado;
+	private DateTextField dtf = new DateTextField();
 	
+	ArrayList<Hospede> lista = dao.listarHospede();
 	
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,7 +60,8 @@ public class TelaListagemHospede extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaListagemHospede() {
+	public TelaListagemHospede(Funcionario funcLogado) {
+		funcionarioLogado = funcLogado;
 		setTitle("Listagem de Hospede");
 		TelaListagemHospede janela = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -152,8 +160,30 @@ public class TelaListagemHospede extends JFrame {
 	}
 
 protected void atualizarJTableModel() {
-	DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Nome Completo",  "Nacionalidade", "Data de Nascimento"});
+	DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Nome", "Nacionalidade",  "Telefone", "Email", "Data Nascimento", "Responsável"});
+	
+	dao = HospedeDAO.getInstancia();
+	lista = dao.listarHospede();
+	
+	for (int i = 0; i < lista.size(); i++) {
+		Hospede hos = lista.get(i);
+		String nomeCompleto;
+		if (hos.getNomeSocial() == null || hos.getNomeSocial().trim().isEmpty()) {
+			nomeCompleto = hos.getNome() + " " + hos.getSobrenome();
+		} else {
+			nomeCompleto = hos.getNomeSocial() + " " + hos.getSobrenome();
+		}
+		String nomeCompletoResp;
+		if(hos.getResponsavel().getNomeSocial() == null || hos.getResponsavel().getNomeSocial().trim().isEmpty()) {
+			nomeCompletoResp = hos.getResponsavel().getNome() + " " + hos.getResponsavel().getSobrenome();
+		} else {
+			nomeCompletoResp = hos.getResponsavel().getNomeSocial() + " " + hos.getResponsavel().getSobrenome();
+		}
+		modelo.addRow(new Object[] { nomeCompleto, hos.getNacionalidade(), hos.getTelefone(), hos.getEmail(), dtf.formatarData(hos.getDataNascimento()), nomeCompletoResp});
 
+	}
+
+	table.setModel(modelo);
 	
 }
 }
