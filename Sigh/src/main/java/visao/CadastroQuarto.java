@@ -138,12 +138,14 @@ public class CadastroQuarto extends JFrame {
 
 		txtpreco = new RoundJFormattedTextField(null);
 		txtpreco.setColumns(10);
-		txtpreco.setBounds(1506, 579, 343, 48);
+		txtpreco.setBounds(476, 145, 343, 48);
 		contentPane.add(txtpreco);
 
 		botaoSalvar = new JLabel("");
 		botaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
+			
+			//ARRUMAR TUDO ISSO 
 			public void mouseClicked(MouseEvent e) {
 
 				Quarto quarto = new Quarto();
@@ -324,6 +326,7 @@ public class CadastroQuarto extends JFrame {
 
 				QuartoDAO dao = QuartoDAO.getInstacia();
 				dao.inserirQuarto(quarto);
+				
 				/*
 				 * if(erro==false) { QuartoDAO dao = QuartoDAO.getInstacia();
 				 * 
@@ -340,7 +343,7 @@ public class CadastroQuarto extends JFrame {
 			}
 		});
 		botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
-		botaoSalvar.setBounds(1310, 928, 292, 54);
+		botaoSalvar.setBounds(680, 223, 292, 54);
 		contentPane.add(botaoSalvar);
 
 		lblNumeroQuarto = new JLabel("Número do Quarto ");

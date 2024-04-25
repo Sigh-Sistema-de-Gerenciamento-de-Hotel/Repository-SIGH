@@ -27,8 +27,8 @@ public class QuartoDAO implements IQuartoDAO {
 	}
 
 	@Override
-	public int inserirQuarto(Quarto qua) {
-		String SQL = "INSERT INTO quartos (id_quarto, numCamaCasal, numCamaSolteiro, numMaxHospedes, arCondicionado, frigobar, banheira, acessibilidade, preco, precisaLimpeza, precisaConserto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public int inserirQuarto(Quarto qua) { 
+		String SQL = "INSERT INTO quartos (id_quarto, conserto, limpeza, acessibilidade, banheira, frigobar, ar_condicionado, preco, nummax_hospedes, num_cama_solteiro, num_cama_casal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -37,16 +37,16 @@ public class QuartoDAO implements IQuartoDAO {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
 			ps.setInt(1, qua.getNumero());
-			ps.setInt(2, qua.getNumCamaCasal());
-			ps.setInt(3, qua.getNumCamaSolteiro());
-			ps.setInt(4, qua.getNumMaxHospedes());
-			ps.setBoolean(5, qua.isArCondicionado());
+			ps.setBoolean(2, qua.isPrecisaConserto());
+			ps.setBoolean(3, qua.isPrecisaLimpeza());
+			ps.setString(4, qua.isAcessibilidade());
+			ps.setBoolean(5, qua.isBanheira());
 			ps.setBoolean(6, qua.isFrigobar());
-			ps.setBoolean(7, qua.isBanheira());
-			ps.setString(8, qua.isAcessibilidade());
-			ps.setFloat(9, qua.getPreco());
-			ps.setBoolean(10, qua.isPrecisaLimpeza());
-			ps.setBoolean(11, qua.isPrecisaConserto());
+			ps.setBoolean(7, qua.isArCondicionado());
+			ps.setFloat(8, qua.getPreco());
+			ps.setInt(9, qua.getNumMaxHospedes());
+			ps.setInt(10, qua.getNumCamaSolteiro());
+			ps.setInt(11, qua.getNumCamaCasal());
 
 			ps.executeUpdate();
 
@@ -141,6 +141,7 @@ public class QuartoDAO implements IQuartoDAO {
 			ps.setFloat(9, qua.getPreco());
 			ps.setBoolean(10, qua.isPrecisaLimpeza());
 			ps.setBoolean(11, qua.isPrecisaConserto());
+			
 
 			retorno = ps.executeUpdate();
 
