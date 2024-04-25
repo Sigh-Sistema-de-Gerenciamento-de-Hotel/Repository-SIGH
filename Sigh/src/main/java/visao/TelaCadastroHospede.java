@@ -72,134 +72,126 @@ public class TelaCadastroHospede extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
-		lblNewLabel_1.setBounds(134, 44, 144, 176);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
+		lblLogo.setBounds(134, 44, 144, 176);
+		contentPane.add(lblLogo);
 		
 		
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblNewLabel_5.setBounds(68, 472, 150, 20);
-		contentPane.add(lblNewLabel_5);
+		JLabel lblHospedagem = new JLabel("");
+		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+		lblHospedagem.setBounds(68, 458, 400, 67);
+		contentPane.add(lblHospedagem);
 		
 		JLabel lblNewLabel_55 = new JLabel("");
-		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
 			}
 		});
 		
 		
 		
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
-		lblNewLabel_2.setBounds(84, 955, 263, 45);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblBotaoSair = new JLabel("");
+		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+		lblBotaoSair.setBounds(84, 955, 263, 45);
+		contentPane.add(lblBotaoSair);
 		
 		
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+		JLabel lblPedidos = new JLabel("");
+		lblPedidos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_3.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_3.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
 			}
 		});
-		lblNewLabel_3.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblNewLabel_3.setBounds(68, 346, 400, 60);
-		contentPane.add(lblNewLabel_3);
+		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+		lblPedidos.setBounds(68, 346, 400, 60);
+		contentPane.add(lblPedidos);
 		
 		
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		lblNewLabel_4.setBounds(68, 407, 400, 60);
-		contentPane.add(lblNewLabel_4);
+		JLabel lblHospede = new JLabel("");
+		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		lblHospede.setBounds(68, 407, 400, 60);
+		contentPane.add(lblHospede);
 		
 		JLabel lblNewLabel_44 = new JLabel("");
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 			}
 		});
 		
 		
 		
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblNewLabel_6.setBounds(68, 532, 150, 20);
-		contentPane.add(lblNewLabel_6);
+		JLabel lblFuncionario = new JLabel("");
+		lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+		lblFuncionario.setBounds(68, 515, 374, 52);
+		contentPane.add(lblFuncionario);
 		
 		
 		JLabel lblNewLabel_66 = new JLabel("");
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+				lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+				lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
 			}
 		});
 		
 		
 		
-		JLabel lblNewLabel_7 = new JLabel("");
-		lblNewLabel_7.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
-		lblNewLabel_7.setBounds(77, 897, 243, 14);
-		contentPane.add(lblNewLabel_7);
+		JLabel lblDivisoriaSair = new JLabel("");
+		lblDivisoriaSair.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
+		lblDivisoriaSair.setBounds(77, 897, 243, 14);
+		contentPane.add(lblDivisoriaSair);
 		
 		
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 420, 1083);
-		lblNewLabel.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
-		contentPane.add(lblNewLabel);
-		
-		
-		
-		JLabel lblMenu = new JLabel("Menu");
-		lblMenu.setForeground(new Color(128, 128, 128));
-		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMenu.setBounds(67, 289, 46, 14);
+		JLabel lblMenu = new JLabel("");
+		lblMenu.setBounds(0, 0, 420, 1083);
+		lblMenu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		contentPane.add(lblMenu);
 		
 		
 		
-		JLabel lblNewLabel_8 = new JLabel("");
-		lblNewLabel_8.setIcon(new ImageIcon("src/main/resources/Frame 675.png"));
-		lblNewLabel_8.setBounds(420, 0, 1500, 62);
-		contentPane.add(lblNewLabel_8);
+		JLabel lblCaminho = new JLabel("");
+		lblCaminho.setIcon(new ImageIcon("src/main/resources/Frame 675.png"));
+		lblCaminho.setBounds(420, 0, 1500, 62);
+		contentPane.add(lblCaminho);
 		
 		
 		
@@ -442,20 +434,20 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		
-		JLabel lblNewLabel_9 = new JLabel("");
-		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/Hero block.png"));
-		lblNewLabel_9.setBounds(446, 108, 1455, 119);
-		contentPane.add(lblNewLabel_9);
+		JLabel lblTitulo2 = new JLabel("");
+		lblTitulo2.setIcon(new ImageIcon("src/main/resources/Hero block.png"));
+		lblTitulo2.setBounds(446, 108, 1455, 119);
+		contentPane.add(lblTitulo2);
 		
-		JLabel lblNewLabel_28 = new JLabel("");
-		lblNewLabel_28.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
-		lblNewLabel_28.setBounds(1300, 915, 300, 60);
-		contentPane.add(lblNewLabel_28);
+		JLabel lblBotaoSalvar = new JLabel("");
+		lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+		lblBotaoSalvar.setBounds(1300, 915, 300, 60);
+		contentPane.add(lblBotaoSalvar);
 		
-		JLabel lblNewLabel_29 = new JLabel("");
-		lblNewLabel_29.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-		lblNewLabel_29.setBounds(1670, 930, 150, 40);
-		contentPane.add(lblNewLabel_29);
+		JLabel lblBotaoCancelar = new JLabel("");
+		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
+		contentPane.add(lblBotaoCancelar);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Feminino ", "Masculino"}));
@@ -485,15 +477,20 @@ public class TelaCadastroHospede extends JFrame {
 		comboBox_1.setBounds(554, 515, 343, 48);
 		contentPane.add(comboBox_1);
 		
-		JLabel lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoCadastrarHospede.png"));
-		lblNewLabel_10.setBounds(408, 0, 1512, 62);
-		contentPane.add(lblNewLabel_10);
+		JLabel lblCaminho2 = new JLabel("");
+		lblCaminho2.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoCadastrarHospede.png"));
+		lblCaminho2.setBounds(408, 0, 1512, 62);
+		contentPane.add(lblCaminho2);
 		
-		JLabel lblNewLabel_11 = new JLabel("");
-		lblNewLabel_11.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloCadastrarHospede.png"));
-		lblNewLabel_11.setBounds(446, 108, 1455, 126);
-		contentPane.add(lblNewLabel_11);
+		JLabel lblTitulo = new JLabel("");
+		lblTitulo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloCadastrarHospede.png"));
+		lblTitulo.setBounds(446, 108, 1455, 126);
+		contentPane.add(lblTitulo);
+		
+		JLabel lblQuarto = new JLabel("");
+		lblQuarto.setIcon(new ImageIcon(" "));
+		lblQuarto.setBounds(68, 598, 400, 52);
+		contentPane.add(lblQuarto);
 		
 	}
 }
