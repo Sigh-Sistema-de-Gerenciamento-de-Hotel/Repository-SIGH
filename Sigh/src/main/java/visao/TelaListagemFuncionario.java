@@ -1,32 +1,25 @@
 package visao;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.JList;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controle.funcionario.FuncionarioDAO;
-import controle.hospedagem.HospedagemDAO;
 import modelo.Funcionario;
-import modelo.Hospedagem;
-
-import javax.swing.JScrollPane;
-import java.awt.Component;
-import javax.swing.ScrollPaneConstants;
-import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class TelaListagemFuncionario extends JFrame {
 
@@ -35,30 +28,15 @@ public class TelaListagemFuncionario extends JFrame {
 	private JTable table;
 	private Funcionario funcionarioSelecionado;
 	private FuncionarioDAO dao = FuncionarioDAO.getInstancia();
+	private static Funcionario funcionarioLogado;
 
 	ArrayList<Funcionario> lista = dao.listarFuncionario();
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaListagemFuncionario frame = new TelaListagemFuncionario();
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public TelaListagemFuncionario() {
+	public TelaListagemFuncionario(Funcionario funcLogado) {
+		funcionarioLogado = funcLogado;
 		setTitle("Listagem de funcionário");
 		TelaListagemFuncionario janela = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,6 +79,16 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_6);
 
 		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+			}
+		});
 		lblNewLabel_8.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		lblNewLabel_8.setBounds(84, 955, 263, 45);
 		contentPane.add(lblNewLabel_8);
@@ -142,7 +130,7 @@ public class TelaListagemFuncionario extends JFrame {
 		botaoEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaEdicaoFuncionario telaEdFun = new TelaEdicaoFuncionario(funcionarioSelecionado);
+				TelaEdicaoFuncionario telaEdFun = new TelaEdicaoFuncionario(funcionarioLogado, funcionarioSelecionado);
 				telaEdFun.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				telaEdFun.setVisible(true);
 				dispose();
@@ -163,10 +151,10 @@ public class TelaListagemFuncionario extends JFrame {
 				if (confirmacao == JOptionPane.YES_OPTION) {
 					Boolean validacao = dao.removerFuncionarios(funcionarioSelecionado);
 					atualizarJTableModel();
-					if (validacao==true) {
+					if (validacao == true) {
 						JOptionPane.showMessageDialog(null,
 								"O funcionário " + funcionarioSelecionado.getNome() + " foi excluído");
-						
+
 					}
 				}
 			}
@@ -179,7 +167,7 @@ public class TelaListagemFuncionario extends JFrame {
 		botaoCadastrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CadastroFuncionario cadFun = new CadastroFuncionario();
+				TelaCadastroFuncionario cadFun = new TelaCadastroFuncionario(funcionarioLogado);
 				cadFun.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				cadFun.setVisible(true);
 				dispose();
