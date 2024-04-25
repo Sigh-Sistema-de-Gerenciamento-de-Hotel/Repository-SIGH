@@ -6,27 +6,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.quarto.QuartoDAO;
+import modelo.Quarto;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class CadastroQuarto extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNumeroQuarto;
-	private JTextField txtCamaCasal;
-	private JTextField txtCamaSolteiro;
-	private JTextField txtNumeroHospede;
-	private JTextField txtAr;
-	private JTextField txtFrigobar;
-	private JTextField txtBanheira;
-	private JTextField txtAcessibilidade;
-	private JTextField TxtLimpeza;
-	private JTextField txtConserto;
 	private JTextField txtpreco;
 	private JLabel BotaoCancelar;
 	private JLabel botaoSalvar;
@@ -47,6 +43,15 @@ public class CadastroQuarto extends JFrame {
 	private JLabel lblMenuFuncionarios;
 	private JLabel lblSair;
 	private JLabel lblDivisormenu;
+	private JComboBox comboCamaCasal;
+	private JComboBox comboCamaSolteiro;
+	private JComboBox comboNHospedes;
+	private JComboBox comboFrigobar;
+	private JComboBox comboBanheira;
+	private JComboBox comboAcessibilidade;
+	private JComboBox comboLimpeza;
+	private JComboBox comboConserto;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -119,57 +124,6 @@ public class CadastroQuarto extends JFrame {
 		lblCadastrarQuartos.setBounds(446, 108, 1455, 126);
 		contentPane.add(lblCadastrarQuartos);
 		
-		txtNumeroQuarto =  new RoundJFormattedTextField(null);
-		txtNumeroQuarto.setBounds(491, 313, 343, 48);
-		contentPane.add(txtNumeroQuarto);
-		txtNumeroQuarto.setColumns(10);
-	
-		
-		txtCamaCasal =  new RoundJFormattedTextField(null);
-		txtCamaCasal.setBounds(491, 442, 343, 48);
-		contentPane.add(txtCamaCasal);
-		txtCamaCasal.setColumns(10);
-		
-		txtCamaSolteiro =  new RoundJFormattedTextField(null);
-		txtCamaSolteiro.setBounds(491, 579, 343, 48);
-		contentPane.add(txtCamaSolteiro);
-		txtCamaSolteiro.setColumns(10);
-		
-		txtNumeroHospede =  new RoundJFormattedTextField(null);
-		txtNumeroHospede.setColumns(10);
-		txtNumeroHospede.setBounds(491, 705, 343, 48);
-		contentPane.add(txtNumeroHospede);
-		
-		txtAr =  new RoundJFormattedTextField(null);
-		txtAr.setColumns(10);
-		txtAr.setBounds(1017, 313, 343, 48);
-		contentPane.add(txtAr);
-		
-		txtFrigobar =  new RoundJFormattedTextField(null);
-		txtFrigobar.setColumns(10);
-		txtFrigobar.setBounds(1017, 442, 343, 48);
-		contentPane.add(txtFrigobar);
-		
-		txtBanheira =  new RoundJFormattedTextField(null);
-		txtBanheira.setColumns(10);
-		txtBanheira.setBounds(1017, 579, 343, 48);
-		contentPane.add(txtBanheira);
-		
-		txtAcessibilidade = new RoundJFormattedTextField(null);
-		txtAcessibilidade.setColumns(10);
-		txtAcessibilidade.setBounds(1017, 705, 343, 48);
-		contentPane.add(txtAcessibilidade);
-		
-		TxtLimpeza =  new RoundJFormattedTextField(null);
-		TxtLimpeza.setColumns(10);
-		TxtLimpeza.setBounds(1506, 313, 343, 48);
-		contentPane.add(TxtLimpeza);
-		
-		txtConserto =  new RoundJFormattedTextField(null);
-		txtConserto.setColumns(10);
-		txtConserto.setBounds(1506, 442, 343, 48);
-		contentPane.add(txtConserto);
-		
 		BotaoCancelar = new JLabel("");
 		BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
 		BotaoCancelar.setBounds(1682, 931, 140, 40);
@@ -181,6 +135,14 @@ public class CadastroQuarto extends JFrame {
 		contentPane.add(txtpreco);
 		
 		botaoSalvar = new JLabel("");
+		botaoSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+		
+				
+			}
+		});
 		botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
 		botaoSalvar.setBounds(1310, 928, 292, 54);
 		contentPane.add(botaoSalvar);
@@ -249,5 +211,55 @@ public class CadastroQuarto extends JFrame {
 		lblCaminho.setIcon(new ImageIcon("src/main/resources/superior pequeno quartos.png"));
 		lblCaminho.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblCaminho);
+		
+		JComboBox comboAr = new JComboBox();
+		comboAr.setModel(new DefaultComboBoxModel(new String[] {"", "sim", "não"}));
+		comboAr.setBounds(1017, 313, 343, 48);
+		contentPane.add(comboAr);
+		
+		comboCamaCasal = new JComboBox();
+		comboCamaCasal.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboCamaCasal.setBounds(491, 442, 343, 48);
+		contentPane.add(comboCamaCasal);
+		
+		comboCamaSolteiro = new JComboBox();
+		comboCamaSolteiro.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboCamaSolteiro.setBounds(491, 579, 343, 48);
+		contentPane.add(comboCamaSolteiro);
+		
+		comboNHospedes = new JComboBox();
+		comboNHospedes.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboNHospedes.setBounds(491, 705, 343, 48);
+		contentPane.add(comboNHospedes);
+		
+		comboFrigobar = new JComboBox();
+		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] {"", "sim", "não"}));
+		comboFrigobar.setBounds(1017, 442, 343, 48);
+		contentPane.add(comboFrigobar);
+		
+		comboBanheira = new JComboBox();
+		comboBanheira.setModel(new DefaultComboBoxModel(new String[] {"", "sim", "não"}));
+		comboBanheira.setBounds(1017, 579, 343, 48);
+		contentPane.add(comboBanheira);
+		
+		comboAcessibilidade = new JComboBox();
+		comboAcessibilidade.setModel(new DefaultComboBoxModel(new String[] {"", "sim", "não"}));
+		comboAcessibilidade.setBounds(1017, 705, 343, 48);
+		contentPane.add(comboAcessibilidade);
+		
+		comboLimpeza = new JComboBox();
+		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] {"", "sim", "não"}));
+		comboLimpeza.setBounds(1506, 313, 343, 48);
+		contentPane.add(comboLimpeza);
+		
+		comboConserto = new JComboBox();
+		comboConserto.setModel(new DefaultComboBoxModel(new String[] {"", "sim", " não"}));
+		comboConserto.setBounds(1506, 442, 343, 48);
+		contentPane.add(comboConserto);
+		
+		textField = new RoundJFormattedTextField(null);
+		textField.setBounds(491, 313, 343, 48);
+		contentPane.add(textField);
+		textField.setColumns(10);
 	}
 }
