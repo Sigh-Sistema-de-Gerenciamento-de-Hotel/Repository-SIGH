@@ -26,8 +26,6 @@ public class QuartoDAO implements IQuartoDAO {
 
 	}
 
-	public Quarto quaAchado = null;
-
 	@Override
 	public int inserirQuarto(Quarto qua) {
 		String SQL = "INSERT INTO quartos (numero, numCamaCasal, numCamaSolteiro, numMaxHospedes, arCondicionado, frigobar, banheira, acessibilidade, preco, precisaLimpeza, precisaConserto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
