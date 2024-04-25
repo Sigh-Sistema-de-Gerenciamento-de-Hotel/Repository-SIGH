@@ -23,6 +23,8 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 	    	return instancia;
 	    
 		}
+	    
+	    public Funcionario funcAchado = null;
 
 	@Override
 	public boolean inserirFuncionario(Funcionario fun) {
@@ -174,7 +176,6 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, s.getId());
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -209,6 +210,27 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		}
 		
 		return funcionarios;
+	}
+	
+	
+	public Funcionario login(Funcionario fun) {
+		for(Funcionario func : listarFuncionario()) {
+			if(func.getUsuario().equals(fun.getUsuario()) && func.getSenha().equals(fun.getSenha())) {
+				
+				funcAchado = func;
+				
+				return funcAchado;
+			}
+		}
+		return funcAchado;
+	}
+	
+	public Funcionario logoff() {
+		return funcAchado = null;
+	}
+	
+	public Funcionario passalogado() {
+		return funcAchado;
 	}
 
 	
