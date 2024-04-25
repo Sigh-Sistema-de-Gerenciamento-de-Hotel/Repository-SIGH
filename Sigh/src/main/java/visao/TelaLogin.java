@@ -193,9 +193,6 @@ public class TelaLogin extends JFrame {
 						setVisible(false);
 						listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
 						listaFuncionario.setVisible(true);
-						TelaConfirmacao confirmacao = new TelaConfirmacao();
-						confirmacao.setLocationRelativeTo(null);
-						confirmacao.setVisible(true);
 					} else {
 						// Exibe mensagem de erro
 						TelaErro dadosIncorretos = new TelaErro("Funcionário não encontrado!");
