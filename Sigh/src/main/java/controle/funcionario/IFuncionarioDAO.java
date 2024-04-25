@@ -17,5 +17,10 @@ public interface IFuncionarioDAO {
 	
 	public ArrayList<Funcionario> listarFuncionarioPorSetor(Setor s);
 	
+	public Funcionario login(Funcionario fun);
+	
+	public Funcionario logoff();
+	
+	public Funcionario passalogado();
 	
 }

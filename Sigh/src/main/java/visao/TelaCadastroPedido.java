@@ -322,7 +322,7 @@ public class TelaCadastroPedido extends JFrame {
 		contentPane.add(lblHospedag);
 		
 		comboBox2Departamento = new JComboBox();
-		comboBox2Departamento.setModel(new DefaultComboBoxModel(new String[] {" Camareira", " ", " Manutenção", " ", " Cozinha", " ", " Recepção", 
+		comboBox2Departamento.setModel(new DefaultComboBoxModel(new String[] {" Camareira", " ", " Manutenção", " ", " Recepção", 
 				" ", " Limpeza"}));
 		comboBox2Departamento.setBounds(1450, 326, 343, 48);
 		contentPane.add(comboBox2Departamento);

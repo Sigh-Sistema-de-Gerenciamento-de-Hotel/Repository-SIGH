@@ -3,7 +3,7 @@ package modelo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Hospede {
+public class Hospede extends Pessoa{
 	
 	private int id;
 	private Hospede responsavel;

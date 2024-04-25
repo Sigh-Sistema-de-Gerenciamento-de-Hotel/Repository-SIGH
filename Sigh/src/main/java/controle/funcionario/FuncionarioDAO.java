@@ -23,6 +23,8 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 	    	return instancia;
 	    
 		}
+	    
+	    public Funcionario funcAchado = null;
 
 	@Override
 	public boolean inserirFuncionario(Funcionario fun) {
@@ -35,7 +37,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			ps.setInt(1, fun.getId());
-			ps.setString(2, fun.getPrimeiroNome());
+			ps.setString(2, fun.getNome());
 			ps.setString(3, fun.getSobrenome());
 			ps.setString(4, fun.getNomeSocial());
 			ps.setString(5, fun.getUsuario());
@@ -82,7 +84,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 				String cargo = rs.getString("cargo");
 				
 				fun.setId(id);
-				fun.setPrimeiroNome(primeiroNome);
+				fun.setNome(primeiroNome);
 				fun.setSobrenome(sobrenome);
 				fun.setNomeSocial(nomeSocial);
 				fun.setUsuario(usuario);
@@ -115,7 +117,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setString(1, fun.getPrimeiroNome());
+			ps.setString(1, fun.getNome());
 			ps.setString(2, fun.getSobrenome());
 			ps.setString(3, fun.getNomeSocial());
 			ps.setString(4, fun.getUsuario());
@@ -174,7 +176,6 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, s.getId());
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -190,7 +191,7 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 				String cargo = rs.getString("cargo");
 				
 				fun.setId(id);
-				fun.setPrimeiroNome(primeiroNome);
+				fun.setNome(primeiroNome);
 				fun.setSobrenome(sobrenome);
 				fun.setNomeSocial(nomeSocial);
 				fun.setUsuario(usuario);
@@ -209,6 +210,27 @@ public  class FuncionarioDAO implements IFuncionarioDAO{
 		}
 		
 		return funcionarios;
+	}
+	
+	
+	public Funcionario login(Funcionario fun) {
+		for(Funcionario func : listarFuncionario()) {
+			if(func.getUsuario().equals(fun.getUsuario()) && func.getSenha().equals(fun.getSenha())) {
+				
+				funcAchado = func;
+				
+				return funcAchado;
+			}
+		}
+		return funcAchado;
+	}
+	
+	public Funcionario logoff() {
+		return funcAchado = null;
+	}
+	
+	public Funcionario passalogado() {
+		return funcAchado;
 	}
 
 	
