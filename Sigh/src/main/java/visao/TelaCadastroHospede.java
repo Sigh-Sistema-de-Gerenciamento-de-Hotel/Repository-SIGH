@@ -72,6 +72,11 @@ public class TelaCadastroHospede extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel lblQuarto = new JLabel("");
+		lblQuarto.setIcon(new ImageIcon("src\\main\\resources\\menu quartoss.png"));
+		lblQuarto.setBounds(68, 563, 400, 52);
+		contentPane.add(lblQuarto);
+		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
 		lblLogo.setBounds(134, 44, 144, 176);
@@ -478,19 +483,14 @@ public class TelaCadastroHospede extends JFrame {
 		contentPane.add(comboBox_1);
 		
 		JLabel lblCaminho2 = new JLabel("");
-		lblCaminho2.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoCadastrarHospede.png"));
+		lblCaminho2.setIcon(new ImageIcon("src\\main\\resources\\CaminhoCadastrarHospede.png"));
 		lblCaminho2.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblCaminho2);
 		
 		JLabel lblTitulo = new JLabel("");
-		lblTitulo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloCadastrarHospede.png"));
+		lblTitulo.setIcon(new ImageIcon("src\\main\\resources\\TituloCadastrarHospede.png"));
 		lblTitulo.setBounds(446, 108, 1455, 126);
 		contentPane.add(lblTitulo);
-		
-		JLabel lblQuarto = new JLabel("");
-		lblQuarto.setIcon(new ImageIcon(" "));
-		lblQuarto.setBounds(68, 598, 400, 52);
-		contentPane.add(lblQuarto);
 		
 	}
 }
