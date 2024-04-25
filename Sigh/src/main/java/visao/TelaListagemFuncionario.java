@@ -205,7 +205,7 @@ public class TelaListagemFuncionario extends JFrame {
 		for (int i = 0; i < lista.size(); i++) {
 			Funcionario fun = lista.get(i);
 			String nomeCompleto;
-			if (fun.getNomeSocial() == null) {
+			if (fun.getNomeSocial() == null || fun.getNomeSocial().trim().isEmpty()) {
 				nomeCompleto = fun.getNome() + " " + fun.getSobrenome();
 				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo() });
 			} else {
