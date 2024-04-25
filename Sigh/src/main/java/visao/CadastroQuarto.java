@@ -51,7 +51,7 @@ public class CadastroQuarto extends JFrame {
 	private JComboBox comboAcessibilidade;
 	private JComboBox comboLimpeza;
 	private JComboBox comboConserto;
-	private JTextField textField;
+	private JTextField txtNQuarto;
 
 	/**
 	 * Launch the application.
@@ -257,9 +257,9 @@ public class CadastroQuarto extends JFrame {
 		comboConserto.setBounds(1506, 442, 343, 48);
 		contentPane.add(comboConserto);
 		
-		textField = new RoundJFormattedTextField(null);
-		textField.setBounds(491, 313, 343, 48);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNQuarto = new RoundJFormattedTextField(null);
+		txtNQuarto.setBounds(491, 313, 343, 48);
+		contentPane.add(txtNQuarto);
+		txtNQuarto.setColumns(10);
 	}
 }
