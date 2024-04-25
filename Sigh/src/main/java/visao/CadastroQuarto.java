@@ -51,7 +51,8 @@ public class CadastroQuarto extends JFrame {
 	private JComboBox comboAcessibilidade;
 	private JComboBox comboLimpeza;
 	private JComboBox comboConserto;
-	private JTextField txtNQuarto;
+	private JTextField textField;
+	private JComboBox comboAr;
 
 	/**
 	 * Launch the application.
@@ -212,11 +213,6 @@ public class CadastroQuarto extends JFrame {
 		lblCaminho.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblCaminho);
 		
-		JComboBox comboAr = new JComboBox();
-		comboAr.setModel(new DefaultComboBoxModel(new String[] {"", "sim", "não"}));
-		comboAr.setBounds(1017, 313, 343, 48);
-		contentPane.add(comboAr);
-		
 		comboCamaCasal = new JComboBox();
 		comboCamaCasal.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		comboCamaCasal.setBounds(491, 442, 343, 48);
@@ -257,9 +253,14 @@ public class CadastroQuarto extends JFrame {
 		comboConserto.setBounds(1506, 442, 343, 48);
 		contentPane.add(comboConserto);
 		
-		txtNQuarto = new RoundJFormattedTextField(null);
-		txtNQuarto.setBounds(491, 313, 343, 48);
-		contentPane.add(txtNQuarto);
-		txtNQuarto.setColumns(10);
+		textField = new RoundJFormattedTextField(null);
+		textField.setBounds(491, 313, 343, 48);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		comboAr = new JComboBox();
+		comboAr.setModel(new DefaultComboBoxModel(new String[] {"", "sim", "não"}));
+		comboAr.setBounds(1017, 313, 343, 48);
+		contentPane.add(comboAr);
 	}
 }
