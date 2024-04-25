@@ -414,7 +414,7 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		
-		JLabel lblNecessidade = new JLabel("Necessidade Especial");
+		/*JLabel lblNecessidade = new JLabel("Necessidade Especial");
 		lblNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNecessidade.setBounds(554, 870, 200, 20);
 		contentPane.add(lblNecessidade);
@@ -423,7 +423,7 @@ public class TelaCadastroHospede extends JFrame {
 		txtNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNecessidade.setBounds(554, 915, 343, 48);
 		contentPane.add(txtNecessidade);
-		txtNecessidade.setColumns(16);
+		txtNecessidade.setColumns(16);*/
 		
 		
 		
@@ -455,7 +455,7 @@ public class TelaCadastroHospede extends JFrame {
 		contentPane.add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" afegão", " ", "albanês", " ", " angolano", " ", " argentino  ", 
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" Afegão", " ", "Albanês", " ", " Angolano", " ", " Argentino  ", 
 				" ", " australiano  ", " ", " austríaco ", " ", " bangladês ", " ", " barbadiano  ", " ", "bielorrusso  ", " ", 
 				" belizenho ", " ", "Belga  ", " ", "Boliviano  ", " ", "Brasileiro  ", " ", "Bbúlgaro  ", " ", "Butanês  ", " ", "Camaronês  ",
 				" ", "Canadense  ", " ", "Chileno  ", " ", "Chinês  ", " ", "Colombiano  ", " ", "Costa-riquenho  ",

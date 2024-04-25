@@ -17,7 +17,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 	
 	private static HospedeDAO instancia; 
 	
-	private HospedeDAO() { //evitar a criação de instâncias fora da classe.//
+	public HospedeDAO() { //evitar a criação de instâncias fora da classe.//
 	}
 		
 	
@@ -32,7 +32,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 	public int inserirHospede(Hospede hos) {
 		// TODO Auto-generated method stub
 		
-		String SQL = "INSERT INTO Hospede (id_hospede, genero, data_nascimento, nacionalidade, cpf, passaporte, telefone, id_endereco, id_responsável) VALUES (?,?,?,?,?,?,?,?,?)"; 
+		String SQL = "INSERT INTO Hospede (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsável) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 		
 		Conexao con = Conexao.getInstancia(); // conexão com o banco de dados.//
 		
@@ -44,17 +44,20 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 			
 			PreparedStatement ps = ConBD.prepareStatement(SQL);
 			
-			ps.setInt(1, hos.getId());
-			ps.setString(2, hos.getGenero()); 
-			ps.setString(3, String.valueOf(hos.getDataNascimento())); 
-			ps.setString(4, hos.getNacionalidade()); 
-			ps.setInt(5, hos.getCpf()); 
-			ps.setString(6, hos.getPassaporte()); 
-			ps.setInt(7, hos.getTelefone()); 
+			ps.setString(1, hos.getNome());
+			ps.setString(2, hos.getSobrenome());
+			ps.setString(3, hos.getNomeSocial());
+			ps.setString(4, hos.getGenero()); 
+			ps.setString(5, String.valueOf(hos.getDataNascimento())); 
+			ps.setString(6, hos.getNacionalidade()); 
+			ps.setInt(7, hos.getCpf()); 
+			ps.setString(8, hos.getPassaporte()); 
+			ps.setString(9, hos.getEmail());
+			ps.setInt(10, hos.getTelefone()); 
 			Endereco end = hos.getEndereco();
-			ps.setInt(8, end.getId()); 
+			ps.setInt(11, end.getId()); 
 			Hospede resp = hos.getResponsavel();
-			ps.setInt(9, resp.getId()); 
+			ps.setInt(12, resp.getId()); 
 			
 			ps.executeUpdate(); 
 			
@@ -106,6 +109,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 				Integer cpf = rs.getInt("cpf"); 
 				String passaporte = rs.getString("passaporte"); 
 				Integer telefone = rs.getInt("telefone"); 
+				String email = rs.getString("email");
 				
 				// Endereco
 				
@@ -158,6 +162,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 				hos.setNacionalidade(nacionalidade);
 				hos.setCpf(cpf);
 				hos.setPassaporte(passaporte);
+				hos.setEmail(email);
 				hos.setTelefone(telefone);
 				hos.setEndereco(end);
 				hos.setResponsavel(respon);
