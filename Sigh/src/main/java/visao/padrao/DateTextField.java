@@ -80,4 +80,14 @@ public class DateTextField extends RoundJFormattedTextField {
 		}
 	}
 
+	public String formatarData(LocalDate dataLD) {
+		String dataFormatada;
+		String data = dataLD.toString();
+		data.trim();
+		String ano = data.substring(0, 4);
+		String mes = data.substring(5, 7);
+		String dia = data.substring(8, 10);
+		dataFormatada = dia + "/" + mes + "/" + ano;
+		return dataFormatada;
+	}
 }
