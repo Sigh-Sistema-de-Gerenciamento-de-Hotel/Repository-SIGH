@@ -134,8 +134,8 @@ public class TelaLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-		/*		// Pega a string senha do TextField
-				String login = txtUsuario.getText();
+				// Pega a string senha do TextField
+				String usuario = txtUsuario.getText();
 				
 				// Pega o vetor de senha do TextField
 				char[] pass = passwordField.getPassword();
@@ -151,52 +151,49 @@ public class TelaLogin extends JFrame {
 				
 				}
 				
-				if (senha.isEmpty() && login.isEmpty()) {
-					/*TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
+				if (senha.isEmpty() && usuario.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
 					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);*/
+					dadosIncorretos.setVisible(true);
 					passwordField.setText(null);
 					txtUsuario.setText(null);
 				} else if (senha.isEmpty()) {
 					// Exibe mensagem de erro
-					/*TelaErro dadosIncorretos = new TelaErro("Insira uma senha!");
+					TelaErro dadosIncorretos = new TelaErro("Insira uma senha!");
 					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);*/
+					dadosIncorretos.setVisible(true);
 					passwordField.setText(null);
 					txtUsuario.setText(null);
-				} else if (login.isEmpty()) {
+				} else if (usuario.isEmpty()) {
 					// Exibe mensagem de erro
-					/*TelaErro dadosIncorretos = new TelaErro("Insira um usuário!");
+					TelaErro dadosIncorretos = new TelaErro("Insira um usuário!");
 					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);*/
+					dadosIncorretos.setVisible(true);
 					passwordField.setText(null);
 					txtUsuario.setText(null);
 
 				} else {
 					// Cria obj Funcionário para atribuir login e senha
 					Funcionario testelogin = new Funcionario();
-					testelogin.setUsuario(login);
+					testelogin.setUsuario(usuario);
 					testelogin.setSenha(senha);
 					
 					// Cria uma variavel boolean login1 que verifica se há o usuário no banco
-					Funcionario funcTesteLogin = func.usuario(testelogin); 
+					Funcionario funcTesteLogin = func.login(testelogin); 
 					
-					if(funcTestLogin != null) {
+					if(funcTesteLogin != null) {
 						// Passa para a proxima tela
 						TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario();
 						setVisible(false);
 						listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
 						listaFuncionario.setVisible(true);
-						/*TelaConfirmacao confirmacao = new TelaConfirmacao();
-						confirmacao.setLocationRelativeTo(null);
-						confirmacao.setVisible(true);*/
 					} else {
 						// Exibe mensagem de erro
-						/*TelaErro dadosIncorretos = new TelaErro("Funcionário não encontrado!");
+						TelaErro dadosIncorretos = new TelaErro("Funcionário não encontrado!");
 						dadosIncorretos.setLocationRelativeTo(null);
-						dadosIncorretos.setVisible(true);*/
+						dadosIncorretos.setVisible(true);
 					}
-				} */
+				} 
 			} 
 			@Override
 			public void mouseExited(MouseEvent e) {

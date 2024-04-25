@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controle.hospedagem.HospedagemDAO;
 import modelo.Hospedagem;
+import visao.padrao.DateTextField;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
@@ -29,6 +31,7 @@ public class TelaListagemHospedagem extends JFrame {
 	private HospedagemDAO dao;	
 	private ArrayList<Hospedagem> lista;
 	private JLabel caminho;
+	private DateTextField dtf = new DateTextField();
 
 	/**
 	 * Launch the application.
@@ -148,7 +151,7 @@ public class TelaListagemHospedagem extends JFrame {
 
 		for (int i = 0; i < lista.size(); i++) {
 			Hospedagem hosp = lista.get(i);
-			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getHospedes().size(), hosp.getDataEntrada(), hosp.getDataSaida()});
+			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getHospedes().size(), dtf.formatarData(hosp.getDataEntrada()), dtf.formatarData(hosp.getDataSaida())});
 		}
 
 		table.setModel(modelo);
