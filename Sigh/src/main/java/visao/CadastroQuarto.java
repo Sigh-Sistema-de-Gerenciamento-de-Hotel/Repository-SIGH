@@ -54,6 +54,7 @@ public class CadastroQuarto extends JFrame {
 	private JComboBox comboConserto;
 	private JTextField textField;
 	private JComboBox comboAr;
+	private JLabel menuQuartos;
 
 	/**
 	 * Launch the application.
@@ -86,6 +87,16 @@ public class CadastroQuarto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		menuQuartos = new JLabel("");
+		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartos.png"));
+		menuQuartos.setBounds(91, 595, 399, 33);
+		contentPane.add(menuQuartos);
+		
+		lblMenuFuncionarios = new JLabel("");
+		lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+		lblMenuFuncionarios.setBounds(91, 532, 145, 22);
+		contentPane.add(lblMenuFuncionarios);
+		
 		lblDivisormenu = new JLabel("");
 		lblDivisormenu.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
 		lblDivisormenu.setBounds(90, 897, 400, 30);
@@ -95,11 +106,6 @@ public class CadastroQuarto extends JFrame {
 		lblSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		lblSair.setBounds(84, 955, 263, 45);
 		contentPane.add(lblSair);
-		
-		lblMenuFuncionarios = new JLabel("");
-		lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblMenuFuncionarios.setBounds(91, 532, 145, 22);
-		contentPane.add(lblMenuFuncionarios);
 		
 		lblMenuHospedagem = new JLabel("");
 		lblMenuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
