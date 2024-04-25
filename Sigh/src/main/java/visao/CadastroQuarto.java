@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controle.quarto.QuartoDAO;
+import modelo.Funcionario;
 import modelo.Quarto;
 import visao.padrao.RoundJFormattedTextField;
 
@@ -140,9 +141,110 @@ public class CadastroQuarto extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-		
+				 QuartoDAO dao = QuartoDAO.getInstacia();
+	                
+	                Quarto quarto = new Quarto();
+	                quarto.setNumero(ABORT);
+	                quarto.setNumCamaCasal(ABORT);
+	                quarto.setNumCamaSolteiro(ABORT);
+	                quarto.setNumMaxHospedes(ABORT);
+	                quarto.setArCondicionado(rootPaneCheckingEnabled);
+	                quarto.setFrigobar(rootPaneCheckingEnabled);
+	                quarto.setBanheira(rootPaneCheckingEnabled);
+	                quarto.setAcessibilidade(getName());
+	                
+	               dao.inserirQuarto(null);
+					
+	                
+	            	Boolean erro= false;
+
+					String numeroQuarto = textField.getText();
+					if(numeroQuarto.isEmpty()) {
+						erro = true;
+						// ERRO
+					} else {
+						quarto.setNumero(ABORT);
+					}
+
+					String camaCasal = comboCamaCasal.getUIClassID();
+					if(camaCasal.isEmpty()){
+						erro = true;
+						// ERRO
+					} else {
+						quarto.setNumCamaCasal(ABORT);
+					}
+					
+					String camaSolteiro = comboCamaSolteiro.getUIClassID();
+					if(camaSolteiro.isEmpty()){
+						erro = true;
+						// ERRO
+					} else {
+						quarto.setNumCamaSolteiro(ABORT);
+					}
+
+					String numMaxHospedes = comboNHospedes.getUIClassID();
+					if(numMaxHospedes.isEmpty()) {
+						erro = true;
+						// ERRO
+					}  else {
+						quarto.setNumMaxHospedes(ABORT);
+					}
+
+					String ArCondicionado = comboAr.getUIClassID();
+					if(ArCondicionado.isEmpty()) {
+						erro = true;
+						// ERRO
+					} else {
+						quarto.setArCondicionado(rootPaneCheckingEnabled);
+					}
+					
+					String frigobar = comboFrigobar.getUIClassID();
+					if(frigobar.isEmpty()) {
+						erro = true;
+						//ERRO
+					} else {
+						quarto.setFrigobar(rootPaneCheckingEnabled);
+					}
+					
+					String banheira = comboBanheira.getUIClassID();
+					if(banheira.isEmpty()) {
+						erro = true;
+						//ERRO
+					} else {
+						quarto.setBanheira(rootPaneCheckingEnabled);
+					}
+					
+					String acessibilidade =comboAcessibilidade.getUIClassID();
+					if(acessibilidade.isEmpty()) {
+						erro = true;
+						//ERRO
+					} else {
+						quarto.setArCondicionado(rootPaneCheckingEnabled);
+					}
+					
+					
+					/*
+					 * if(erro==false) {
+						QuartoDAO dao = QuartoDAO.getInstacia();
+
+					      int validacao = dao.inserirQuarto(quarto);
+						
+						  if(validacao == true) {
+							TelaListagemHospede lf = new TelaListagemHospede();
+							lf.setVisible(true);
+							lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+							TelaConfirmacao telaConfirmacao = new TelaConfirmacao(quarto.getNumero(), quarto.getNumCamaCasal(), quarto.getNumCamaSolteiro(), quarto.getNumMaxHospedes());
+							telaConfirmacao.setVisible(true);
+							setVisible(false);
+						}
+						else {
+							//mensagem de ERRO
+						}
+					}		
+			    }
+					 */
 				
-			}
+			    }
 		});
 		botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
 		botaoSalvar.setBounds(1310, 928, 292, 54);
