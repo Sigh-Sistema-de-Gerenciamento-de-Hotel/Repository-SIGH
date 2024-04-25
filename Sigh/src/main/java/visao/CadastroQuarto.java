@@ -12,6 +12,7 @@ import modelo.Quarto;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -88,8 +89,8 @@ public class CadastroQuarto extends JFrame {
 		contentPane.setLayout(null);
 		
 		menuQuartos = new JLabel("");
-		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartos.png"));
-		menuQuartos.setBounds(91, 595, 399, 33);
+		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		menuQuartos.setBounds(91, 590, 399, 33);
 		contentPane.add(menuQuartos);
 		
 		lblMenuFuncionarios = new JLabel("");
@@ -150,16 +151,8 @@ public class CadastroQuarto extends JFrame {
 				 QuartoDAO dao = QuartoDAO.getInstacia();
 	                
 	                Quarto quarto = new Quarto();
-	                quarto.setNumero(ABORT);
-	                quarto.setNumCamaCasal(ABORT);
-	                quarto.setNumCamaSolteiro(ABORT);
-	                quarto.setNumMaxHospedes(ABORT);
-	                quarto.setArCondicionado(rootPaneCheckingEnabled);
-	                quarto.setFrigobar(rootPaneCheckingEnabled);
-	                quarto.setBanheira(rootPaneCheckingEnabled);
-	                quarto.setAcessibilidade(getName());
-	                
-	               dao.inserirQuarto(null);
+	               
+	               //dao.inserirQuarto(qua);
 					
 	                
 	            	Boolean erro= false;
@@ -169,7 +162,18 @@ public class CadastroQuarto extends JFrame {
 						erro = true;
 						// ERRO
 					} else {
-						quarto.setNumero(ABORT);
+						int numQuarto = 0;
+						try {
+							numQuarto = Integer.parseInt(numeroQuarto); 
+						} catch (Exception ex) {
+							JOptionPane.showMessageDialog(null,  "Numero do quarto precisa ser tipo numérico inteiro"); 
+							erro = true; 
+							
+						} 
+						if (erro == false && numQuarto != 0) {
+							quarto.setNumero(numQuarto);
+							
+						}
 					}
 
 					String camaCasal = comboCamaCasal.getUIClassID();
@@ -177,7 +181,16 @@ public class CadastroQuarto extends JFrame {
 						erro = true;
 						// ERRO
 					} else {
-						quarto.setNumCamaCasal(ABORT);
+						int camaCasall = 0;
+						try {
+							camaCasall = Integer.parseInt(camaCasal); 
+						} catch (Exception ex) {
+							erro = true; 
+							
+						} 
+						if (erro == false && camaCasall != 0) {
+							quarto.setNumCamaCasal(camaCasall);
+						}
 					}
 					
 					String camaSolteiro = comboCamaSolteiro.getUIClassID();
@@ -185,7 +198,18 @@ public class CadastroQuarto extends JFrame {
 						erro = true;
 						// ERRO
 					} else {
-						quarto.setNumCamaSolteiro(ABORT);
+						int camaSolteiroo = 0;
+						try {
+							camaSolteiroo = Integer.parseInt(camaSolteiro); 
+						} catch (Exception ex) {
+						
+							erro = true; 
+							
+						} 
+						if (erro == false && camaSolteiroo != 0) {
+							quarto.setNumCamaSolteiro(camaSolteiroo);
+							
+						}
 					}
 
 					String numMaxHospedes = comboNHospedes.getUIClassID();
@@ -193,7 +217,18 @@ public class CadastroQuarto extends JFrame {
 						erro = true;
 						// ERRO
 					}  else {
-						quarto.setNumMaxHospedes(ABORT);
+						int numMaxHospedee = 0;
+						try {
+							numMaxHospedee = Integer.parseInt(numMaxHospedes); 
+						} catch (Exception ex) {
+							
+							erro = true; 
+							
+						} 
+						if (erro == false && numMaxHospedee!= 0) {
+							quarto.setNumMaxHospedes(numMaxHospedee);
+							
+						}
 					}
 
 					String ArCondicionado = comboAr.getUIClassID();
@@ -201,7 +236,21 @@ public class CadastroQuarto extends JFrame {
 						erro = true;
 						// ERRO
 					} else {
-						quarto.setArCondicionado(rootPaneCheckingEnabled);
+
+						int Ar = 0;
+						try {
+							Ar = Integer.parseInt(ArCondicionado); 
+						} catch (Exception ex) {
+						
+							erro = true; 
+							
+						} 
+						if (erro == false && Ar!= 0) {
+							boolean arCond = false;
+							quarto.setArCondicionado(arCond); 
+							
+							
+						}
 					}
 					
 					String frigobar = comboFrigobar.getUIClassID();
@@ -209,7 +258,19 @@ public class CadastroQuarto extends JFrame {
 						erro = true;
 						//ERRO
 					} else {
-						quarto.setFrigobar(rootPaneCheckingEnabled);
+						int frigobarr = 0;
+						try {
+							frigobarr = Integer.parseInt(frigobar); 
+						} catch (Exception ex) {
+							
+							erro = true; 
+							
+						} 
+						if (erro == false && frigobarr!= 0) {
+							boolean frigo = false;
+							quarto.setFrigobar(frigo); 
+							
+						}
 					}
 					
 					String banheira = comboBanheira.getUIClassID();
@@ -217,7 +278,18 @@ public class CadastroQuarto extends JFrame {
 						erro = true;
 						//ERRO
 					} else {
-						quarto.setBanheira(rootPaneCheckingEnabled);
+						int banheiraa = 0;
+						try {
+							banheiraa = Integer.parseInt(banheira); 
+						} catch (Exception ex) {
+							
+							erro = true; 
+							
+						} 
+						if (erro == false && banheiraa!= 0) {
+							quarto.setBanheira(rootPaneCheckingEnabled);
+							
+						}
 					}
 					
 					String acessibilidade =comboAcessibilidade.getUIClassID();
@@ -225,10 +297,39 @@ public class CadastroQuarto extends JFrame {
 						erro = true;
 						//ERRO
 					} else {
-						quarto.setArCondicionado(rootPaneCheckingEnabled);
+						int acess = 0;
+						try {
+							acess = Integer.parseInt(acessibilidade); 
+						} catch (Exception ex) {
+							 
+							erro = true; 
+							
+						} 
+						if (erro == false && acess!= 0) {
+							quarto.setAcessibilidade(acessibilidade);
+							
+						}
 					}
 					
-					
+
+					String preco = txtpreco.getText();
+					if(preco.isEmpty()) {
+						erro = true;
+						//ERRO
+					} else {
+						int precoo = 0;
+						try {
+							precoo = Integer.parseInt(preco); 
+						} catch (Exception ex) {
+							JOptionPane.showMessageDialog(null,  "Preço precisa ser um tipo numérico inteiro"); 
+							erro = true; 
+							
+						} 
+						if (erro == false && precoo!= 0) {
+							quarto.getPreco();
+							
+						}
+					}
 					/*
 					 * if(erro==false) {
 						QuartoDAO dao = QuartoDAO.getInstacia();
