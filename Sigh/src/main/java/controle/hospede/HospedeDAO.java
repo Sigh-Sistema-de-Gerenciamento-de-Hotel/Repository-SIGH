@@ -182,8 +182,8 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 	public boolean atualizarHospede(Hospede hos) {
 	
 
-		String SQL = "UPDATE Hospede SET genero = ?, cpf = ?, DataNascimento = ?,  Nacionalidade = ?, Passaporte = ?, "
-				+ " Telefone = ?,  Endereco = ?,  Responsavel = ? WHERE id  = ? ";
+		String SQL = "UPDATE Hospede SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, genero = ?, data_nascimento = ?,  nacionalidade = ?, cpf = ?, passaporte = ?, "
+				+ "email = ?, telefone = ?,  id_endereco = ?,  id_responsavel = ? WHERE id_hospede = ? ";
 		
 		Conexao con = Conexao.getInstancia(); 
 		Connection conBD = con.conectar(); 
@@ -193,25 +193,20 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setString(1, hos.getGenero());
-			ps.setInt(2, hos.getCpf()); 
-			/*ps.setInt(3, hos.getDataNascimento()); */
-			ps.setString(4, hos.getNacionalidade());
-			ps.setString(5, hos.getPassaporte());
-			ps.setInt(6, hos.getTelefone());
-			/*ps.setString(7, hos.getEndereco());
-			ps.setString(8, hos.getResponsavel());*/
-			
-			
+			ps.setString(1, hos.getNome());
+			ps.setString(2, hos.getSobrenome());
+			ps.setString(3, hos.getNomeSocial());
+			ps.setString(4, hos.getGenero());
+			ps.setDate(5, Date.valueOf(hos.getDataNascimento()));
+			ps.setString(6, hos.getNacionalidade());
+			ps.setInt(7, hos.getCpf()); 
+			ps.setString(8, hos.getPassaporte());
+			ps.setInt(9, hos.getTelefone());
+			ps.setInt(10, hos.getEndereco().getId());
+			ps.setInt(8, hos.getResponsavel().getId());
 			
 			retorno = ps.executeUpdate(); 
-			
-			
-			
-			
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -219,7 +214,6 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 			con.fecharConexao();
 			
 		}
-		
 		
 		return (retorno == 0? false: true);
 	}
