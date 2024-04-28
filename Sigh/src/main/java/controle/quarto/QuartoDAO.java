@@ -118,9 +118,9 @@ public class QuartoDAO implements IQuartoDAO {
 	}
 
 	@Override
-	public boolean atualizarQuarto(Quarto qua) {
+	public boolean atualizarQuarto(Quarto qua) { 
 
-		String SQL = "UPDATE quartos SET numCamaCasal = ?, numCamaSolteiro = ?, numMaxHospedes = ?, arCondicionado = ?, frigobar = ?, banheira = ?, acessibilidade = ?, preco = ?, precisaLimpeza = ?, precisaConserto = ? WHERE numero = ?";
+		String SQL = "UPDATE quartos SET num_cama_casal = ?, num_cama_solteiro = ?, nummax_hospedes = ?, ar_condicionado = ?, frigobar = ?, banheira = ?, acessibilidade = ?, preco = ?, limpeza = ?, conserto = ? WHERE numero = ?";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
