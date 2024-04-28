@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Toolkit;
 
 public class CadastroQuarto extends JFrame {
 
@@ -53,7 +54,7 @@ public class CadastroQuarto extends JFrame {
 	private JComboBox comboAcessibilidade;
 	private JComboBox comboLimpeza;
 	private JComboBox comboConserto;
-	private JTextField textField;
+	private JTextField txtNumQuarto;
 	private JComboBox comboAr;
 	private JLabel menuQuartos;
 
@@ -78,6 +79,8 @@ public class CadastroQuarto extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroQuarto() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
+		setTitle("Cadastro de Quarto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 1080);
 		contentPane = new JPanel();
@@ -85,15 +88,274 @@ public class CadastroQuarto extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+				
+						botaoSalvar = new JLabel("");
+						botaoSalvar.addMouseListener(new MouseAdapter() {
+							@Override
+							
+							//ARRUMAR TUDO ISSO 
+							public void mouseClicked(MouseEvent e) {
+
+								Quarto quarto = new Quarto();
+
+								Boolean erro = false;
+
+								String numeroQuarto = txtNumQuarto.getText();
+								if (numeroQuarto.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									int numQuarto = 0;
+									try {
+										numQuarto = Integer.parseInt(numeroQuarto);
+									} catch (Exception ex) {
+										JOptionPane.showMessageDialog(null, "Numero do quarto precisa ser tipo numérico inteiro");
+										erro = true;
+
+									}
+									if (erro == false && numQuarto != 0) {
+										quarto.setNumero(numQuarto);
+
+									}
+								}
+
+								String camaCasal = comboCamaCasal.getUIClassID();
+								if (camaCasal.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									int camaCasall = 0;
+									try {
+										camaCasall = Integer.parseInt(camaCasal);
+									} catch (Exception ex) {
+										erro = true;
+
+									}
+									if (erro == false && camaCasall != 0) {
+										quarto.setNumCamaCasal(camaCasall);
+									}
+								}
+
+								String camaSolteiro = comboCamaSolteiro.getUIClassID();
+								if (camaSolteiro.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									int camaSolteiroo = 0;
+									try {
+										camaSolteiroo = Integer.parseInt(camaSolteiro);
+									} catch (Exception ex) {
+
+										erro = true;
+
+									}
+									if (erro == false && camaSolteiroo != 0) {
+										quarto.setNumCamaSolteiro(camaSolteiroo);
+
+									}
+								}
+
+								String numMaxHospedes = comboNHospedes.getUIClassID();
+								if (numMaxHospedes.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									int numMaxHospedee = 0;
+									try {
+										numMaxHospedee = Integer.parseInt(numMaxHospedes);
+									} catch (Exception ex) {
+
+										erro = true;
+
+									}
+									if (erro == false && numMaxHospedee != 0) {
+										quarto.setNumMaxHospedes(numMaxHospedee);
+
+									}
+								}
+
+								String ArCondicionado = comboAr.getUIClassID();
+								if (ArCondicionado.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+
+									int Ar = 0;
+									try {
+										Ar = Integer.parseInt(ArCondicionado);
+									} catch (Exception ex) {
+
+										erro = true;
+
+									}
+									if (erro == false && Ar != 0) {
+										boolean arCond = false;
+										quarto.setArCondicionado(arCond);
+
+									}
+								}
+
+								String frigobar = comboFrigobar.getUIClassID();
+								if (frigobar.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									int frigobarr = 0;
+									try {
+										frigobarr = Integer.parseInt(frigobar);
+									} catch (Exception ex) {
+
+										erro = true;
+
+									}
+									if (erro == false && frigobarr != 0) {
+										boolean frigo = false;
+										quarto.setFrigobar(frigo);
+
+									}
+								}
+
+								String banheira = comboBanheira.getUIClassID();
+								if (banheira.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									int banheiraa = 0;
+									try {
+										banheiraa = Integer.parseInt(banheira);
+									} catch (Exception ex) {
+
+										erro = true;
+
+									}
+									if (erro == false && banheiraa != 0) {
+										quarto.setBanheira(rootPaneCheckingEnabled);
+
+									}
+								}
+
+								String acessibilidade = comboAcessibilidade.getUIClassID();
+								if (acessibilidade.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									int acess = 0;
+									try {
+										acess = Integer.parseInt(acessibilidade);
+									} catch (Exception ex) {
+
+										erro = true;
+
+									}
+									if (erro == false && acess != 0) {
+										quarto.setAcessibilidade(acessibilidade);
+
+									}
+								}
+
+								String preco = txtpreco.getText();
+								if (preco.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									int precoo = 0;
+									try {
+										precoo = Integer.parseInt(preco);
+									} catch (Exception ex) {
+										JOptionPane.showMessageDialog(null, "Preço precisa ser um tipo numérico inteiro");
+										erro = true;
+
+									}
+									if (erro == false && precoo != 0) {
+										quarto.getPreco();
+
+									}
+								}
+
+								QuartoDAO dao = QuartoDAO.getInstacia();
+								dao.inserirQuarto(quarto);
+								
+								/*
+								 * if(erro==false) { QuartoDAO dao = QuartoDAO.getInstacia();
+								 * 
+								 * int validacao = dao.inserirQuarto(quarto);
+								 * 
+								 * if(validacao == true) { TelaListagemHospede lf = new TelaListagemHospede();
+								 * lf.setVisible(true); lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+								 * TelaConfirmacao telaConfirmacao = new TelaConfirmacao(quarto.getNumero(),
+								 * quarto.getNumCamaCasal(), quarto.getNumCamaSolteiro(),
+								 * quarto.getNumMaxHospedes()); telaConfirmacao.setVisible(true);
+								 * setVisible(false); } else { //mensagem de ERRO } } }
+								 */
+
+							}
+							@Override
+							public void mouseEntered(MouseEvent e) {
+								botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
+							}
+							@Override
+							public void mouseExited(MouseEvent e) {
+								botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+							}
+						});
+						botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+						botaoSalvar.setBounds(1310, 928, 292, 54);
+						contentPane.add(botaoSalvar);
+		
+				BotaoCancelar = new JLabel("");
+				BotaoCancelar.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						dispose();	
+					}
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+					}
+				});
+				BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+				BotaoCancelar.setBounds(1682, 931, 134, 24);
+				contentPane.add(BotaoCancelar);
 
 		menuQuartos = new JLabel("");
+		menuQuartos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				menuQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));//
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+			}
+		});
 		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-		menuQuartos.setBounds(91, 590, 399, 33);
+		menuQuartos.setBounds(91, 590, 335, 50);
 		contentPane.add(menuQuartos);
 
 		lblMenuFuncionarios = new JLabel("");
+		lblMenuFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+			}
+		});
 		lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblMenuFuncionarios.setBounds(91, 532, 145, 22);
+		lblMenuFuncionarios.setBounds(91, 532, 335, 50);
 		contentPane.add(lblMenuFuncionarios);
 
 		lblDivisormenu = new JLabel("");
@@ -102,23 +364,81 @@ public class CadastroQuarto extends JFrame {
 		contentPane.add(lblDivisormenu);
 
 		lblSair = new JLabel("");
+		lblSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+			}
+		});
 		lblSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		lblSair.setBounds(84, 955, 263, 45);
 		contentPane.add(lblSair);
 
 		lblMenuHospedagem = new JLabel("");
+		lblMenuHospedagem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblMenuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblMenuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+			}
+		});
 		lblMenuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblMenuHospedagem.setBounds(91, 468, 130, 22);
+		lblMenuHospedagem.setBounds(91, 468, 335, 50);
 		contentPane.add(lblMenuHospedagem);
 
 		lblMenuHospede = new JLabel("");
+		lblMenuHospede.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblMenuHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblMenuHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+			}
+		});
 		lblMenuHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		lblMenuHospede.setBounds(92, 404, 120, 22);
+		lblMenuHospede.setBounds(92, 404, 335, 50);
 		contentPane.add(lblMenuHospede);
 
 		lblMenuPedidos = new JLabel("");
+		lblMenuPedidos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblMenuPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblMenuPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+			}
+		});
+
 		lblMenuPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblMenuPedidos.setBounds(92, 345, 120, 22);
+		lblMenuPedidos.setBounds(92, 345, 335, 50);
 		contentPane.add(lblMenuPedidos);
 
 		lblLogo = new JLabel("");
@@ -131,220 +451,10 @@ public class CadastroQuarto extends JFrame {
 		lblCadastrarQuartos.setBounds(446, 108, 1455, 126);
 		contentPane.add(lblCadastrarQuartos);
 
-		BotaoCancelar = new JLabel("");
-		BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-		BotaoCancelar.setBounds(1682, 931, 140, 40);
-		contentPane.add(BotaoCancelar);
-
 		txtpreco = new RoundJFormattedTextField(null);
 		txtpreco.setColumns(10);
-		txtpreco.setBounds(476, 145, 343, 48);
+		txtpreco.setBounds(1506, 575, 343, 50);
 		contentPane.add(txtpreco);
-
-		botaoSalvar = new JLabel("");
-		botaoSalvar.addMouseListener(new MouseAdapter() {
-			@Override
-			
-			//ARRUMAR TUDO ISSO 
-			public void mouseClicked(MouseEvent e) {
-
-				Quarto quarto = new Quarto();
-
-				Boolean erro = false;
-
-				String numeroQuarto = textField.getText();
-				if (numeroQuarto.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					int numQuarto = 0;
-					try {
-						numQuarto = Integer.parseInt(numeroQuarto);
-					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "Numero do quarto precisa ser tipo numérico inteiro");
-						erro = true;
-
-					}
-					if (erro == false && numQuarto != 0) {
-						quarto.setNumero(numQuarto);
-
-					}
-				}
-
-				String camaCasal = comboCamaCasal.getUIClassID();
-				if (camaCasal.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					int camaCasall = 0;
-					try {
-						camaCasall = Integer.parseInt(camaCasal);
-					} catch (Exception ex) {
-						erro = true;
-
-					}
-					if (erro == false && camaCasall != 0) {
-						quarto.setNumCamaCasal(camaCasall);
-					}
-				}
-
-				String camaSolteiro = comboCamaSolteiro.getUIClassID();
-				if (camaSolteiro.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					int camaSolteiroo = 0;
-					try {
-						camaSolteiroo = Integer.parseInt(camaSolteiro);
-					} catch (Exception ex) {
-
-						erro = true;
-
-					}
-					if (erro == false && camaSolteiroo != 0) {
-						quarto.setNumCamaSolteiro(camaSolteiroo);
-
-					}
-				}
-
-				String numMaxHospedes = comboNHospedes.getUIClassID();
-				if (numMaxHospedes.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					int numMaxHospedee = 0;
-					try {
-						numMaxHospedee = Integer.parseInt(numMaxHospedes);
-					} catch (Exception ex) {
-
-						erro = true;
-
-					}
-					if (erro == false && numMaxHospedee != 0) {
-						quarto.setNumMaxHospedes(numMaxHospedee);
-
-					}
-				}
-
-				String ArCondicionado = comboAr.getUIClassID();
-				if (ArCondicionado.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-
-					int Ar = 0;
-					try {
-						Ar = Integer.parseInt(ArCondicionado);
-					} catch (Exception ex) {
-
-						erro = true;
-
-					}
-					if (erro == false && Ar != 0) {
-						boolean arCond = false;
-						quarto.setArCondicionado(arCond);
-
-					}
-				}
-
-				String frigobar = comboFrigobar.getUIClassID();
-				if (frigobar.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					int frigobarr = 0;
-					try {
-						frigobarr = Integer.parseInt(frigobar);
-					} catch (Exception ex) {
-
-						erro = true;
-
-					}
-					if (erro == false && frigobarr != 0) {
-						boolean frigo = false;
-						quarto.setFrigobar(frigo);
-
-					}
-				}
-
-				String banheira = comboBanheira.getUIClassID();
-				if (banheira.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					int banheiraa = 0;
-					try {
-						banheiraa = Integer.parseInt(banheira);
-					} catch (Exception ex) {
-
-						erro = true;
-
-					}
-					if (erro == false && banheiraa != 0) {
-						quarto.setBanheira(rootPaneCheckingEnabled);
-
-					}
-				}
-
-				String acessibilidade = comboAcessibilidade.getUIClassID();
-				if (acessibilidade.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					int acess = 0;
-					try {
-						acess = Integer.parseInt(acessibilidade);
-					} catch (Exception ex) {
-
-						erro = true;
-
-					}
-					if (erro == false && acess != 0) {
-						quarto.setAcessibilidade(acessibilidade);
-
-					}
-				}
-
-				String preco = txtpreco.getText();
-				if (preco.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					int precoo = 0;
-					try {
-						precoo = Integer.parseInt(preco);
-					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "Preço precisa ser um tipo numérico inteiro");
-						erro = true;
-
-					}
-					if (erro == false && precoo != 0) {
-						quarto.getPreco();
-
-					}
-				}
-
-				QuartoDAO dao = QuartoDAO.getInstacia();
-				dao.inserirQuarto(quarto);
-				
-				/*
-				 * if(erro==false) { QuartoDAO dao = QuartoDAO.getInstacia();
-				 * 
-				 * int validacao = dao.inserirQuarto(quarto);
-				 * 
-				 * if(validacao == true) { TelaListagemHospede lf = new TelaListagemHospede();
-				 * lf.setVisible(true); lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				 * TelaConfirmacao telaConfirmacao = new TelaConfirmacao(quarto.getNumero(),
-				 * quarto.getNumCamaCasal(), quarto.getNumCamaSolteiro(),
-				 * quarto.getNumMaxHospedes()); telaConfirmacao.setVisible(true);
-				 * setVisible(false); } else { //mensagem de ERRO } } }
-				 */
-
-			}
-		});
-		botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
-		botaoSalvar.setBounds(680, 223, 292, 54);
-		contentPane.add(botaoSalvar);
 
 		lblNumeroQuarto = new JLabel("Número do Quarto ");
 		lblNumeroQuarto.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -368,37 +478,37 @@ public class CadastroQuarto extends JFrame {
 
 		lblAr = new JLabel("Ar-Condicionado");
 		lblAr.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAr.setBounds(1017, 282, 120, 20);
+		lblAr.setBounds(985, 289, 120, 20);
 		contentPane.add(lblAr);
 
 		lblFrigobar = new JLabel("Frigobar");
 		lblFrigobar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFrigobar.setBounds(1017, 411, 120, 20);
+		lblFrigobar.setBounds(985, 421, 120, 20);
 		contentPane.add(lblFrigobar);
 
 		lblBanheira = new JLabel("Banheira");
 		lblBanheira.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBanheira.setBounds(1017, 548, 120, 20);
+		lblBanheira.setBounds(985, 560, 120, 20);
 		contentPane.add(lblBanheira);
 
 		lblAcessibilidade = new JLabel("Acessibilidade");
 		lblAcessibilidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAcessibilidade.setBounds(1017, 674, 120, 20);
+		lblAcessibilidade.setBounds(985, 685, 120, 20);
 		contentPane.add(lblAcessibilidade);
 
 		lblLimpeza = new JLabel("Limpeza");
 		lblLimpeza.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblLimpeza.setBounds(1506, 282, 120, 20);
+		lblLimpeza.setBounds(1506, 293, 120, 20);
 		contentPane.add(lblLimpeza);
 
 		lblConserto = new JLabel("Conserto");
 		lblConserto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblConserto.setBounds(1506, 411, 120, 20);
+		lblConserto.setBounds(1506, 420, 120, 20);
 		contentPane.add(lblConserto);
 
 		lblPreco = new JLabel("Preço");
 		lblPreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPreco.setBounds(1506, 548, 120, 20);
+		lblPreco.setBounds(1506, 560, 62, 22);
 		contentPane.add(lblPreco);
 
 		JLabel lblFundoMenu = new JLabel("");
@@ -414,54 +524,54 @@ public class CadastroQuarto extends JFrame {
 		comboCamaCasal = new JComboBox();
 		comboCamaCasal.setModel(
 				new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboCamaCasal.setBounds(491, 442, 343, 48);
+		comboCamaCasal.setBounds(491, 442, 343, 50);
 		contentPane.add(comboCamaCasal);
 
 		comboCamaSolteiro = new JComboBox();
 		comboCamaSolteiro.setModel(
 				new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboCamaSolteiro.setBounds(491, 579, 343, 48);
+		comboCamaSolteiro.setBounds(491, 579, 343, 50);
 		contentPane.add(comboCamaSolteiro);
 
 		comboNHospedes = new JComboBox();
 		comboNHospedes.setModel(
 				new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboNHospedes.setBounds(491, 705, 343, 48);
+		comboNHospedes.setBounds(491, 705, 343, 50);
 		contentPane.add(comboNHospedes);
 
 		comboFrigobar = new JComboBox();
-		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboFrigobar.setBounds(1017, 442, 343, 48);
+		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+		comboFrigobar.setBounds(985, 442, 343, 50);
 		contentPane.add(comboFrigobar);
 
 		comboBanheira = new JComboBox();
-		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboBanheira.setBounds(1017, 579, 343, 48);
+		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+		comboBanheira.setBounds(985, 580, 343, 50);
 		contentPane.add(comboBanheira);
 
 		comboAcessibilidade = new JComboBox();
 		comboAcessibilidade.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboAcessibilidade.setBounds(1017, 705, 343, 48);
+		comboAcessibilidade.setBounds(985, 706, 343, 50);
 		contentPane.add(comboAcessibilidade);
 
 		comboLimpeza = new JComboBox();
-		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboLimpeza.setBounds(1506, 313, 343, 48);
+		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+		comboLimpeza.setBounds(1506, 313, 343, 50);
 		contentPane.add(comboLimpeza);
 
 		comboConserto = new JComboBox();
-		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", " não" }));
-		comboConserto.setBounds(1506, 442, 343, 48);
+		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+		comboConserto.setBounds(1506, 440, 343, 50);
 		contentPane.add(comboConserto);
 
-		textField = new RoundJFormattedTextField(null);
-		textField.setBounds(491, 313, 343, 48);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNumQuarto = new RoundJFormattedTextField(null);
+		txtNumQuarto.setBounds(491, 313, 343, 50);
+		contentPane.add(txtNumQuarto);
+		txtNumQuarto.setColumns(10);
 
 		comboAr = new JComboBox();
-		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboAr.setBounds(1017, 313, 343, 48);
+		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+		comboAr.setBounds(984, 314, 343, 50);
 		contentPane.add(comboAr);
 	}
 }
