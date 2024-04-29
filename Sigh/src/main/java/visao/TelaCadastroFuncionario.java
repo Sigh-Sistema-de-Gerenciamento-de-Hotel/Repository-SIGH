@@ -20,9 +20,9 @@ import modelo.Funcionario;
 import modelo.Usuario;
 import visao.padrao.RoundJFormattedTextField;
 import javax.swing.JPasswordField;
-import java.awt.Color; 
+import java.awt.Color;
 
-public class CadastroFuncionario extends JFrame {
+public class TelaCadastroFuncionario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -34,39 +34,18 @@ public class CadastroFuncionario extends JFrame {
 	private JTextField txtSetorText;
 	private JTextField txtUsuarioText;
 	private JPasswordField passwordField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CadastroFuncionario frame = new CadastroFuncionario();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Funcionario funcionarioLogado;
 
 	/**
 	 * Create the frame.
 	 */
-	public CadastroFuncionario() {
+	public TelaCadastroFuncionario(Funcionario funcionarioLogado) {
+		this.funcionarioLogado = funcionarioLogado;
 		setTitle("Cadastro de Funcionário");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1404, 1050);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-
-
-
-
-
 
 		String bla;
 		setContentPane(contentPane);
@@ -93,10 +72,12 @@ public class CadastroFuncionario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblBotaoFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblBotaoFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
@@ -111,10 +92,12 @@ public class CadastroFuncionario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblBotaoHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblBotaoHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
@@ -129,10 +112,12 @@ public class CadastroFuncionario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblBotaoHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblBotaoHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
@@ -147,10 +132,12 @@ public class CadastroFuncionario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblBotaoPedido.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblBotaoPedido.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
@@ -164,13 +151,15 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				dispose();
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblBotaoSair.setIcon(new ImageIcon("src\\main\\resources\\botao sair.png"));
@@ -271,28 +260,28 @@ public class CadastroFuncionario extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Funcionario func = new Funcionario();
 
-				Boolean erro= false;
+				Boolean erro = false;
 
 				String idS = txtCpfText.getText();
 
-				if(idS.isEmpty()) {
+				if (idS.isEmpty()) {
 					// ERRO
 				} else {
 					int id = 0;
 					try {
 						id = Integer.parseInt(idS);
-					} catch(Exception ex) {
+					} catch (Exception ex) {
 						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
 						erro = true;
 					}
-					if(erro==false && id!=0) {
+					if (erro == false && id != 0) {
 						func.setId(id);
 					}
 
 				}
 
 				String nome = txtNomeText.getText();
-				if(nome.isEmpty()) {
+				if (nome.isEmpty()) {
 					erro = true;
 					// ERRO
 				} else {
@@ -300,7 +289,7 @@ public class CadastroFuncionario extends JFrame {
 				}
 
 				String sobrenome = txtSobrenomeText.getText();
-				if(sobrenome.isEmpty()){
+				if (sobrenome.isEmpty()) {
 					erro = true;
 					// ERRO
 				} else {
@@ -311,24 +300,23 @@ public class CadastroFuncionario extends JFrame {
 				func.setNomeSocial(nomeSocial);
 
 				String cargo = txtCargoText.getText();
-				if(cargo.isEmpty()) {
+				if (cargo.isEmpty()) {
 					erro = true;
 					// ERRO
-				}  else {
+				} else {
 					func.setCargo(cargo);
 				}
 
-
 				String usuario = txtUsuarioText.getText();
-				if(usuario.isEmpty()) {
+				if (usuario.isEmpty()) {
 					erro = true;
 					// ERRO
 				} else {
 					func.setUsuario(usuario);
 				}
 
-				char[] senhaChar = passwordField.getPassword();				
-				if(senhaChar == null) {
+				char[] senhaChar = passwordField.getPassword();
+				if (senhaChar == null) {
 					erro = true;
 					// ERRO
 				} else {
@@ -336,28 +324,30 @@ public class CadastroFuncionario extends JFrame {
 					func.setSenha(senha);
 				}
 
-				if(erro==false) {
+				if (erro == false) {
 					FuncionarioDAO dao = FuncionarioDAO.getInstancia();
 
 					boolean validacao = dao.inserirFuncionario(func);
 
-					if(validacao == true) {
-						TelaListagemFuncionario lf = new TelaListagemFuncionario();
+					if (validacao == true) {
+						TelaListagemFuncionario lf = new TelaListagemFuncionario(funcionarioLogado);
 						lf.setVisible(true);
 						lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getNome(), func.getSobrenome(), func.getNomeSocial(), func.getUsuario(), func.getCargo());
+						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getNome(), func.getSobrenome(),
+								func.getNomeSocial(), func.getUsuario(), func.getCargo());
 						telaConfirmacao.setVisible(true);
 						setVisible(false);
-					}
-					else {
-						//mensagem de ERRO
+					} else {
+						// mensagem de ERRO
 					}
 				}
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
@@ -372,13 +362,15 @@ public class CadastroFuncionario extends JFrame {
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaListagemFuncionario().setVisible(true);
+				new TelaListagemFuncionario(funcionarioLogado).setVisible(true);
 				dispose();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
