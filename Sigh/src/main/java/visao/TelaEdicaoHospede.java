@@ -8,15 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Endereco;
+import modelo.Funcionario;
+import modelo.Hospede;
 import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
@@ -33,11 +39,13 @@ public class TelaEdicaoHospede extends JFrame {
 	private JTextField txtCPF;
 	private JTextField txtEstado;
 	private JTextField txtComplemento;
+	private Hospede hosEditar;
+	private static Funcionario funcionarioLogado;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -49,12 +57,14 @@ public class TelaEdicaoHospede extends JFrame {
 				}
 			}
 		});
-	}
+	}   */
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaEdicaoHospede() {
+	public TelaEdicaoHospede(Funcionario hosLogado, Hospede hosEditar) {
+		funcionarioLogado = hosLogado;
+		this.hosEditar = hosEditar;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Edição de Hóspedes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,6 +115,104 @@ public class TelaEdicaoHospede extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Hospede hos = new Hospede();
+
+				Boolean erro = false;
+
+				String idS = txtCPF.getText();
+
+				if (idS.isEmpty()) {
+					// ERRO
+				} else {
+					int id = 0;
+					try {
+						id = Integer.parseInt(idS);
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
+						erro = true;
+					}
+					if (erro == false && id != 0) {
+						hos.setId(id);
+					}
+
+				}
+
+				String nome = txtNome.getText();
+				if (nome.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setNome(nome);
+				}
+
+				String sobrenome = txtSobrenome.getText();
+				if (sobrenome.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setSobrenome(sobrenome);
+				}
+
+
+		    /*	String responsavel = txtResponsavel.getText();
+			    hos.setResponsavel(responsavel);  */
+
+		   /*		String genero = comboBox();
+				if (genero.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setGenero(genero);
+				}  */
+
+			/*	String nacionalidade = comboBox_1();
+				if (nacionalidade == null) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setNacionalidade(nacionalidade);
+				}   */
+				
+				
+		/*		String idS = txtTelefone.getText();
+
+				if (idS.isEmpty()) {
+					// ERRO
+				} else {
+					int id = 0;
+					try {
+						id = Integer.parseInt(idS);
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
+						erro = true;
+					}
+					if (erro == false && id != 0) {
+						hos.setId(id);
+					}
+
+				}
+				
+				String email = txtEmail.getText();
+				if (email.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setEmail(email);
+				}
+
+				if (erro == false) {
+					FuncionarioDAO dao = FuncionarioDAO.getInstancia();
+
+					boolean validacao = dao.inserirHospede(hos);
+
+					if (validacao == true) {
+						TelaListagemHospede lh = new TelaListagemHospede(funcionarioLogado);
+						lh.setVisible(true);
+						lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					} else {
+						// mensagem de ERRO
+					}
+				}   */
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -190,19 +298,45 @@ public class TelaEdicaoHospede extends JFrame {
 		JLabel lblNomeUsuario = new JLabel("JULIA ALMEIDA");
 		lblNomeUsuario.setBounds(129, 798, 100, 14);
 		contentPane.add(lblNomeUsuario);
+		
 		lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
 		contentPane.add(lblFuncionarios);
+		
 		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
 		contentPane.add(lblHospedagem);
+		
 		lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 		contentPane.add(lblHospedes);
+		
 		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
 		contentPane.add(lblPedidos);
+		
 		lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
 		contentPane.add(lblBotaoSalvar);
+		
 		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
 		contentPane.add(lblBotaoCancelar);
+		
 		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede telaListHos = new TelaListagemHospede(hosLogado);
+				telaListHos.setVisible(true);
+				telaListHos.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+			}
+		});
 		contentPane.add(lblBotaoSair);
 		
 		JLabel lblMenu = new JLabel("Menu");
@@ -235,6 +369,8 @@ public class TelaEdicaoHospede extends JFrame {
 		lblNome.setBounds(554, 288, 55, 20);
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblNome);
+		
+		String nome = hosEditar.getNome();
 		
 		txtNome = new RoundJFormattedTextField(null);
 		txtNome.setBounds(554, 326, 343, 48);
@@ -283,6 +419,8 @@ public class TelaEdicaoHospede extends JFrame {
 		lblCep.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblCep);
 		
+	//	String cep = hosEditar.getCep();
+		
 		txtCep = new RoundJFormattedTextField(null);
 		txtCep.setBounds(554, 615, 343, 48);
 		txtCep.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -293,6 +431,8 @@ public class TelaEdicaoHospede extends JFrame {
 		lblEndereco.setBounds(554, 670, 100, 20);
 		lblEndereco.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblEndereco);
+		
+		Endereco endereco = hosEditar.getEndereco();
 		
 		txtEndereco = new RoundJFormattedTextField(null);
 		txtEndereco.setBounds(553, 703, 343, 48);
@@ -305,6 +445,8 @@ public class TelaEdicaoHospede extends JFrame {
 		lblSobrenome.setBounds(1000, 288, 100, 20);
 		contentPane.add(lblSobrenome);
 		
+		String sobrenome = hosEditar.getSobrenome();
+		
 		txtSobrenome = new RoundJFormattedTextField(null);
 		txtSobrenome.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSobrenome.setBounds(1001, 323, 343, 48);
@@ -315,6 +457,8 @@ public class TelaEdicaoHospede extends JFrame {
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblData.setBounds(1002, 394, 148, 20);
 		contentPane.add(lblData);
+		
+		LocalDate data = hosEditar.getDataNascimento();
 		
 		txtData = new DateTextField();
 		txtData.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -327,6 +471,8 @@ public class TelaEdicaoHospede extends JFrame {
 		lblCPF.setBounds(1003, 484, 100, 20);
 		contentPane.add(lblCPF);
 		
+		int cpf = hosEditar.getCpf();
+		
 		txtCPF = new RoundJFormattedTextField(null);
 		txtCPF.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtCPF.setBounds(1000, 515, 343, 48);
@@ -338,6 +484,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblEstado.setBounds(1000, 585, 100, 20);
 		contentPane.add(lblEstado);
 		
+		
 		txtEstado = new RoundJFormattedTextField(null);
 		txtEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtEstado.setBounds(1000, 615, 343, 48);
@@ -348,6 +495,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblComplemento.setBounds(1000, 670, 100, 20);
 		contentPane.add(lblComplemento);
+		
 		
 		txtComplemento = new RoundJFormattedTextField(null);
 		txtComplemento.setFont(new Font("Tahoma", Font.PLAIN, 14));

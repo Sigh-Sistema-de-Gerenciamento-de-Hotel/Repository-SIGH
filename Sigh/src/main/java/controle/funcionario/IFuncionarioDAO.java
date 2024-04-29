@@ -14,13 +14,13 @@ public interface IFuncionarioDAO {
 	public boolean atualizarFuncionario(Funcionario fun);
 
 	public boolean removerFuncionarios(Funcionario fun);
-	
+
 	public ArrayList<Funcionario> listarFuncionarioPorSetor(Setor s);
-	
-	public Funcionario login(Funcionario fun);
-	
+
+	public Funcionario login(String usuario, String senha);
+
 	public Funcionario logoff();
-	
+
 	public Funcionario passalogado();
-	
+
 }

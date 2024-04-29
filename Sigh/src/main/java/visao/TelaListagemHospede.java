@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JList;
@@ -19,6 +21,8 @@ import controle.hospedagem.HospedagemDAO;
 import controle.hospede.HospedeDAO;
 import modelo.Funcionario;
 import modelo.Hospedagem;
+import modelo.Hospede;
+import visao.padrao.DateTextField;
 
 import javax.swing.JScrollPane;
 import java.awt.Component;
@@ -31,11 +35,16 @@ public class TelaListagemHospede extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table; 
+	private Hospede hospedeSelecionado;
+	private HospedeDAO dao = HospedeDAO.getInstancia();
+	private static Funcionario funcionarioLogado;
+	private DateTextField dtf = new DateTextField();
 	
+	ArrayList<Hospede> lista = dao.listarHospede();
 	
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,7 +62,8 @@ public class TelaListagemHospede extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaListagemHospede() {
+	public TelaListagemHospede(Funcionario funcLogado) {
+		funcionarioLogado = funcLogado;
 		setTitle("Listagem de Hospede");
 		TelaListagemHospede janela = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,6 +106,16 @@ public class TelaListagemHospede extends JFrame {
 		contentPane.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+			}
+		});
 		lblNewLabel_8.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		lblNewLabel_8.setBounds(84, 955, 263, 45);
 		contentPane.add(lblNewLabel_8);
@@ -120,6 +140,15 @@ public class TelaListagemHospede extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int linhaSelecionada = table.getSelectedRow();
+				dao = HospedeDAO.getInstancia();
+				lista = dao.listarHospede();
+				hospedeSelecionado = lista.get(linhaSelecionada);
+			}
+		});
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -131,6 +160,14 @@ public class TelaListagemHospede extends JFrame {
 		atualizarJTableModel();
 		
 		JLabel botaoEditar = new JLabel("");
+		botaoEditar.addMouseListener(new MouseAdapter() {
+		/*	public void mouseClicked(MouseEvent e) {
+     			TelaEdicaoHospede telaEdHos = new TelaEdicaoHospede(funcionarioLogado, hospedeSelecionado);
+				telaEdHos.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				telaEdHos.setVisible(true);
+				dispose();
+			}   */
+		});   
 		botaoEditar.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
 		botaoEditar.setBounds(1570, 164, 120, 34);
 		contentPane.add(botaoEditar);
@@ -152,8 +189,30 @@ public class TelaListagemHospede extends JFrame {
 	}
 
 protected void atualizarJTableModel() {
-	DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Nome Completo",  "Nacionalidade", "Data de Nascimento"});
+	DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Nome", "Nacionalidade",  "Telefone", "Email", "Data Nascimento", "Responsável"});
+	
+	dao = HospedeDAO.getInstancia();
+	lista = dao.listarHospede();
+	
+	for (int i = 0; i < lista.size(); i++) {
+		Hospede hos = lista.get(i);
+		String nomeCompleto;
+		if (hos.getNomeSocial() == null || hos.getNomeSocial().trim().isEmpty()) {
+			nomeCompleto = hos.getNome() + " " + hos.getSobrenome();
+		} else {
+			nomeCompleto = hos.getNomeSocial() + " " + hos.getSobrenome();
+		}
+		String nomeCompletoResp;
+		if(hos.getResponsavel().getNomeSocial() == null || hos.getResponsavel().getNomeSocial().trim().isEmpty()) {
+			nomeCompletoResp = hos.getResponsavel().getNome() + " " + hos.getResponsavel().getSobrenome();
+		} else {
+			nomeCompletoResp = hos.getResponsavel().getNomeSocial() + " " + hos.getResponsavel().getSobrenome();
+		}
+		modelo.addRow(new Object[] { nomeCompleto, hos.getNacionalidade(), hos.getTelefone(), hos.getEmail(), dtf.formatarData(hos.getDataNascimento()), nomeCompletoResp});
 
+	}
+
+	table.setModel(modelo);
 	
 }
 }
