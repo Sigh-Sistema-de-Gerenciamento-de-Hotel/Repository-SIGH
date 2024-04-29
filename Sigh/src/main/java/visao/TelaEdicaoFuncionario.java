@@ -33,6 +33,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 	private JTextField txtUsuario;
 	private JTextField txtSobrenome;
 	private Funcionario funcEditar;
+	private static Funcionario funcionarioLogado;
 
 	/**
 	 * Launch the application.
@@ -46,8 +47,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 	 * 
 	 * /* Create the frame.
 	 */
-	public TelaEdicaoFuncionario(Funcionario func) {
-		this.funcEditar = func;
+	public TelaEdicaoFuncionario(Funcionario funcLogado, Funcionario funcEditar) {
+		funcionarioLogado = funcLogado;
+		this.funcEditar = funcEditar;
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Edição de Funcionario");
@@ -168,7 +170,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 				}
 				
 				String nomeSocial = txtNomeSocial.getText();
-				func.setNomeSocial(nomeSocial);
+				funcEditar.setNomeSocial(nomeSocial);
 				
 				String cargo = txtCargo.getText();
 				if(cargo.isEmpty()) {
@@ -190,14 +192,15 @@ public class TelaEdicaoFuncionario extends JFrame {
 				if(senhaChar == null) {
 					// ERRO
 				} else {
-					String senha = senhaChar.toString();
-					funcEditar.setSenha(senha);
+					//String senha = senhaChar.toString();
+					//String.valueOf(senhaChar);
+					funcEditar.setSenha(String.valueOf(senhaChar));
 				}
 				
 				
-				boolean validacao = dao.atualizarFuncionario(func);
+				boolean validacao = dao.atualizarFuncionario(funcEditar);
 				if (validacao == true) {
-					TelaListagemFuncionario lf = new TelaListagemFuncionario();
+					TelaListagemFuncionario lf = new TelaListagemFuncionario(funcLogado);
 					lf.setVisible(true);
 					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					/*TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(),
@@ -225,7 +228,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaListagemFuncionario telaListFunc = new TelaListagemFuncionario();
+				TelaListagemFuncionario telaListFunc = new TelaListagemFuncionario(funcLogado);
 				telaListFunc.setVisible(true);
 				telaListFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();				
