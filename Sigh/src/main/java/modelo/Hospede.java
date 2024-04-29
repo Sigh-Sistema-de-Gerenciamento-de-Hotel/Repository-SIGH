@@ -12,6 +12,7 @@ public class Hospede extends Pessoa{
 	private String passaporte;
 	private int cpf;
 	private int telefone;
+	private String email;
 	private Endereco endereco;
 	private LocalDate dataNascimento;
 
@@ -69,4 +70,11 @@ public class Hospede extends Pessoa{
 	public void setDataNascimento(LocalDate localDateTime) {
 		this.dataNascimento = localDateTime;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 }
