@@ -8,10 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.funcionario.FuncionarioDAO;
+import modelo.Funcionario;
+import modelo.Hospede;
 import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -40,30 +44,14 @@ public class TelaCadastroHospede extends JFrame {
 	private JTextField txtEndreco;
 	private JTextField txtCep;
 	private JTextField txtNome;
+	private Funcionario funcionarioLogado;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastroHospede frame = new TelaCadastroHospede();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-  
-	
 	
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroHospede() {
+	public TelaCadastroHospede(Funcionario funcionarioLogado) {
+		this.funcionarioLogado = funcionarioLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100,  1920, 1080);
 		contentPane = new JPanel();
@@ -445,11 +433,150 @@ public class TelaCadastroHospede extends JFrame {
 		contentPane.add(lblTitulo2);
 		
 		JLabel lblBotaoSalvar = new JLabel("");
+		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Hospede hos = new Hospede();
+
+				Boolean erro = false;
+
+				String idS = txtCpf.getText();
+
+				if (idS.isEmpty()) {
+					// ERRO
+				} else {
+					int id = 0;
+					try {
+						id = Integer.parseInt(idS);
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
+						erro = true;
+					}
+					if (erro == false && id != 0) {
+						hos.setId(id);
+					}
+
+				}
+
+				String nome = txtNome.getText();
+				if (nome.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setNome(nome);
+				}
+
+				String sobrenome = txtSobrenome.getText();
+				if (sobrenome.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setSobrenome(sobrenome);
+				}
+
+				String nomeSocial = txtNomeSocial.getText();
+				hos.setNomeSocial(nomeSocial);
+
+		    /*	String responsavel = txtResponsavel.getText();
+			    hos.setResponsavel(responsavel);  */
+
+		   /*		String genero = comboBox();
+				if (genero.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setGenero(genero);
+				}  */
+
+			/*	String nacionalidade = comboBox_1();
+				if (nacionalidade == null) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setNacionalidade(nacionalidade);
+				}   */
+				
+				String passaporte = txtPassaporte.getText();
+				if (passaporte.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setPassaporte(passaporte);
+				}
+				
+		/*		String idS = txtTelefone.getText();
+
+				if (idS.isEmpty()) {
+					// ERRO
+				} else {
+					int id = 0;
+					try {
+						id = Integer.parseInt(idS);
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
+						erro = true;
+					}
+					if (erro == false && id != 0) {
+						hos.setId(id);
+					}
+
+				}
+				
+				String email = txtEmail.getText();
+				if (email.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setEmail(email);
+				}
+
+				if (erro == false) {
+					FuncionarioDAO dao = FuncionarioDAO.getInstancia();
+
+					boolean validacao = dao.inserirHospede(hos);
+
+					if (validacao == true) {
+						TelaListagemHospede lh = new TelaListagemHospede(funcionarioLogado);
+						lh.setVisible(true);
+						lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					} else {
+						// mensagem de ERRO
+					}
+				}   */
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+			}
+		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
 		lblBotaoSalvar.setBounds(1300, 915, 300, 60);
 		contentPane.add(lblBotaoSalvar);
 		
 		JLabel lblBotaoCancelar = new JLabel("");
+		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaListagemHospede(funcionarioLogado).setVisible(true);
+				dispose();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+			}
+		});
 		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
 		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
 		contentPane.add(lblBotaoCancelar);

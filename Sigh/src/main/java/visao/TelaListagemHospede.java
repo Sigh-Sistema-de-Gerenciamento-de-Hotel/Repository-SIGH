@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JList;
@@ -104,6 +106,16 @@ public class TelaListagemHospede extends JFrame {
 		contentPane.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+			}
+		});
 		lblNewLabel_8.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		lblNewLabel_8.setBounds(84, 955, 263, 45);
 		contentPane.add(lblNewLabel_8);
@@ -128,6 +140,15 @@ public class TelaListagemHospede extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int linhaSelecionada = table.getSelectedRow();
+				dao = HospedeDAO.getInstancia();
+				lista = dao.listarHospede();
+				hospedeSelecionado = lista.get(linhaSelecionada);
+			}
+		});
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -139,6 +160,14 @@ public class TelaListagemHospede extends JFrame {
 		atualizarJTableModel();
 		
 		JLabel botaoEditar = new JLabel("");
+		botaoEditar.addMouseListener(new MouseAdapter() {
+		/*	public void mouseClicked(MouseEvent e) {
+     			TelaEdicaoHospede telaEdHos = new TelaEdicaoHospede(funcionarioLogado, hospedeSelecionado);
+				telaEdHos.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				telaEdHos.setVisible(true);
+				dispose();
+			}   */
+		});   
 		botaoEditar.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
 		botaoEditar.setBounds(1570, 164, 120, 34);
 		contentPane.add(botaoEditar);
