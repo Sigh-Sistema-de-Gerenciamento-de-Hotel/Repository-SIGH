@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controle.funcionario.FuncionarioDAO;
+import controle.hospede.HospedeDAO;
 import modelo.Funcionario;
 import modelo.Hospede;
 import visao.padrao.DateTextField;
@@ -22,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 
 public class TelaCadastroHospede extends JFrame {
 
@@ -39,7 +41,7 @@ public class TelaCadastroHospede extends JFrame {
 	private JTextField txtCpf;
 	private JTextField txtData;
 	private JTextField txtSobrenome;
-	private JTextField txtNecessidade;
+	//private JTextField txtNecessidade;
 	private JTextField txtTelefone;
 	private JTextField txtEndreco;
 	private JTextField txtCep;
@@ -123,11 +125,6 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		JLabel lblHospede = new JLabel("");
-		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		lblHospede.setBounds(68, 407, 400, 60);
-		contentPane.add(lblHospede);
-		
-		JLabel lblNewLabel_44 = new JLabel("");
 		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -141,16 +138,13 @@ public class TelaCadastroHospede extends JFrame {
 				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 			}
 		});
+		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		lblHospede.setBounds(68, 407, 400, 60);
+		contentPane.add(lblHospede);
 		
-		
+		JLabel lblNewLabel_44 = new JLabel("");
 		
 		JLabel lblFuncionario = new JLabel("");
-		lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblFuncionario.setBounds(68, 515, 374, 52);
-		contentPane.add(lblFuncionario);
-		
-		
-		JLabel lblNewLabel_66 = new JLabel("");
 		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -164,6 +158,12 @@ public class TelaCadastroHospede extends JFrame {
 				lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
 			}
 		});
+		lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+		lblFuncionario.setBounds(68, 515, 374, 52);
+		contentPane.add(lblFuncionario);
+		
+		
+		JLabel lblNewLabel_66 = new JLabel("");
 		
 		
 		
@@ -428,7 +428,7 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		JLabel lblTitulo2 = new JLabel("");
-		lblTitulo2.setIcon(new ImageIcon("src/main/resources/Hero block.png"));
+		lblTitulo2.setIcon(new ImageIcon("src/main/resources/TituloCadastrarHospede.png"));
 		lblTitulo2.setBounds(446, 108, 1455, 119);
 		contentPane.add(lblTitulo2);
 		
@@ -476,24 +476,31 @@ public class TelaCadastroHospede extends JFrame {
 
 				String nomeSocial = txtNomeSocial.getText();
 				hos.setNomeSocial(nomeSocial);
+				
+			//	int telefone = txtTelefone.getText(); -- (NAO SEI QUAL SET USAR)
+			//	hos.setTelefone(telefone);
 
-		    /*	String responsavel = txtResponsavel.getText();
-			    hos.setResponsavel(responsavel);  */
+		 //   	String responsavel = txtResponsavel.getText();
+		//	    hos.setResponsavel(responsavel);  -- (ERRO NA HORA DE SETAR), NAO SEI COMO MUDAR)
+				
+			//	LocaDate dataNascimento = txtData.getText(); -- (NAO SEI QUAL SET USAR)
+			//	hos.setDataNascimento(dataNascimento);
 
-		   /*		String genero = comboBox();
+		/*        String genero = comboBox.getSelectedItem();
 				if (genero.isEmpty()) {
 					erro = true;
 					// ERRO
-				} else {
-					hos.setGenero(genero);
-				}  */
+				} else {                                                
+					hos.setSelectedItem(genero);
+				}  */                                              // ESSES DOIS SAO DE COMBOBOX(ENTENDI +/-), NAO ESTA RECONHECENDO
+				                                                   // OS COMBOBOX, TALVEZ SEJA PQ ELES ESTAO ABAIXO DO BOTAO SALVAR
 
-			/*	String nacionalidade = comboBox_1();
+			/*	String nacionalidade = comboBox_1.getSelectedItem();
 				if (nacionalidade == null) {
 					erro = true;
 					// ERRO
 				} else {
-					hos.setNacionalidade(nacionalidade);
+					hos.setSelectedItem(nacionalidade);
 				}   */
 				
 				String passaporte = txtPassaporte.getText();
@@ -504,23 +511,6 @@ public class TelaCadastroHospede extends JFrame {
 					hos.setPassaporte(passaporte);
 				}
 				
-		/*		String idS = txtTelefone.getText();
-
-				if (idS.isEmpty()) {
-					// ERRO
-				} else {
-					int id = 0;
-					try {
-						id = Integer.parseInt(idS);
-					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
-						erro = true;
-					}
-					if (erro == false && id != 0) {
-						hos.setId(id);
-					}
-
-				}
 				
 				String email = txtEmail.getText();
 				if (email.isEmpty()) {
@@ -530,10 +520,11 @@ public class TelaCadastroHospede extends JFrame {
 					hos.setEmail(email);
 				}
 
-				if (erro == false) {
-					FuncionarioDAO dao = FuncionarioDAO.getInstancia();
+		/*		if (erro == false) {
+					HospedeDAO dao = HospedeDAO.getInstancia();
 
-					boolean validacao = dao.inserirHospede(hos);
+					boolean validacao = dao.inserirHospede(hos);   -- AQUI DIZ Q O INSERIR PRECISA SER INTEIRO E NAO BOOLEAN, 
+					                                               -- MAS NAO ENTENDI COMO FAZER
 
 					if (validacao == true) {
 						TelaListagemHospede lh = new TelaListagemHospede(funcionarioLogado);
@@ -543,7 +534,7 @@ public class TelaCadastroHospede extends JFrame {
 						// mensagem de ERRO
 					}
 				}   */
-			}
+			}    
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
