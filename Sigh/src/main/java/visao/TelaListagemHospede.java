@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -161,21 +162,54 @@ public class TelaListagemHospede extends JFrame {
 		
 		JLabel botaoEditar = new JLabel("");
 		botaoEditar.addMouseListener(new MouseAdapter() {
-		/*	public void mouseClicked(MouseEvent e) {
-     			TelaEdicaoHospede telaEdHos = new TelaEdicaoHospede(funcionarioLogado, hospedeSelecionado);
-				telaEdHos.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				telaEdHos.setVisible(true);
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaEdicaoHospede telaEdFun = new TelaEdicaoHospede(funcionarioLogado, hospedeSelecionado);
+				telaEdFun.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				telaEdFun.setVisible(true);
 				dispose();
-			}   */
-		});   
+			}
+		});  
 		botaoEditar.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
 		botaoEditar.setBounds(1570, 164, 120, 34);
 		contentPane.add(botaoEditar);
 		
-		JLabel lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
-		lblNewLabel_10.setBounds(1400, 164, 120, 34);
-		contentPane.add(lblNewLabel_10);
+		JLabel botaoExcluir = new JLabel("");
+		botaoExcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				HospedeDAO dao = HospedeDAO.getInstancia();
+				int confirmacao = JOptionPane.showConfirmDialog(null,
+						"Excluir o hóspede " + hospedeSelecionado.getNome() + "?");
+
+				if (confirmacao == JOptionPane.YES_OPTION) {
+					Boolean validacao = dao.removerHospede(hospedeSelecionado);
+					atualizarJTableModel();
+					if (validacao == true) {
+						JOptionPane.showMessageDialog(null,
+								"O hóspede " + hospedeSelecionado.getNome() + " foi excluído");
+
+					}
+				}
+			}
+		});
+		botaoExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
+		botaoExcluir.setBounds(1740, 164, 120, 34);
+		contentPane.add(botaoExcluir);
+		
+		JLabel lblBotaoCadastrar = new JLabel("");
+		lblBotaoCadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaCadastroHospede cadHos = new TelaCadastroHospede(funcionarioLogado);
+				cadHos.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				cadHos.setVisible(true);
+				dispose();
+			}
+		});
+	    lblBotaoCadastrar.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
+	    lblBotaoCadastrar.setBounds(1400, 164, 120, 34);
+		contentPane.add(lblBotaoCadastrar);
 		
 		JLabel lblNewLabel_9 = new JLabel("");
 		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/TituloListarHospede.png"));

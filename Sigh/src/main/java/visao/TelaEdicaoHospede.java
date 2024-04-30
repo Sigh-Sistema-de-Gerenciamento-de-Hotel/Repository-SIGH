@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.funcionario.FuncionarioDAO;
+import controle.hospede.HospedeDAO;
 import modelo.Endereco;
 import modelo.Funcionario;
 import modelo.Hospede;
@@ -113,106 +115,75 @@ public class TelaEdicaoHospede extends JFrame {
 		JLabel lblBotaoSalvar = new JLabel("");
 		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
-				Hospede hos = new Hospede();
 
-				Boolean erro = false;
-
-				String idS = txtCPF.getText();
-
-				if (idS.isEmpty()) {
-					// ERRO
-				} else {
-					int id = 0;
-					try {
-						id = Integer.parseInt(idS);
-					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
-						erro = true;
-					}
-					if (erro == false && id != 0) {
-						hos.setId(id);
-					}
-
-				}
-
+				HospedeDAO dao = HospedeDAO.getInstancia();
+				
 				String nome = txtNome.getText();
-				if (nome.isEmpty()) {
-					erro = true;
+				if(nome.isEmpty()) {
 					// ERRO
 				} else {
-					hos.setNome(nome);
+					hosEditar.setNome(nome);
 				}
-
+				
 				String sobrenome = txtSobrenome.getText();
-				if (sobrenome.isEmpty()) {
-					erro = true;
+				if(sobrenome.isEmpty()){
 					// ERRO
 				} else {
-					hos.setSobrenome(sobrenome);
+					hosEditar.setSobrenome(sobrenome);
 				}
-
-
-		    /*	String responsavel = txtResponsavel.getText();
-			    hos.setResponsavel(responsavel);  */
-
-		   /*		String genero = comboBox();
-				if (genero.isEmpty()) {
-					erro = true;
+				
+		//		String nomeSocial = txtNomeSocial.getText();
+		//		funcEditar.setNomeSocial(nomeSocial);
+				
+		/*		String genero = comboBox.getSelectedItem();
+				if(genero.isEmpty()) {
 					// ERRO
-				} else {
-					hos.setGenero(genero);
-				}  */
-
-			/*	String nacionalidade = comboBox_1();
-				if (nacionalidade == null) {
-					erro = true;
-					// ERRO
-				} else {
-					hos.setNacionalidade(nacionalidade);
+				}  else {
+					hosEditar.setSelectedItem(genero);
 				}   */
 				
 				
-		/*		String idS = txtTelefone.getText();
-
-				if (idS.isEmpty()) {
+		/*		String nacionalidade = comboBox_1.getSelectedItem();
+				if(nacionalidade.isEmpty()) {
 					// ERRO
 				} else {
-					int id = 0;
-					try {
-						id = Integer.parseInt(idS);
-					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
-						erro = true;
-					}
-					if (erro == false && id != 0) {
-						hos.setId(id);
-					}
-
-				}
+					hosEditar.setSelectedItem(nacionalidade);
+				}    */
 				
-				String email = txtEmail.getText();
+		/*		String passaporte = txtPassaporte.getText();
+				if (passaporte.isEmpty()) {
+					// ERRO
+				} else {
+					hosEditar.setPassaporte(passaporte);
+				}   */
+				
+		/*		String email = txtEmail.getText();
 				if (email.isEmpty()) {
-					erro = true;
 					// ERRO
 				} else {
-					hos.setEmail(email);
+					hosEditar.setEmail(email);
+				}  */
+				
+			//	LocaDate dataNascimento = txtData.getText(); 
+			//	hosEditar.setDataNascimento(dataNascimento);
+				
+			//  Endereco endereco = txtEndereco.getText();
+			//  hosEditar.setEndereco(endereco);
+				
+				boolean validacao = dao.atualizarHospede(hosEditar);
+				if (validacao == true) {
+					TelaListagemHospede lh = new TelaListagemHospede(hosLogado);
+					lh.setVisible(true);
+					lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					/*TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(),
+							func.getNomeSocial(), func.getUsuario(), func.getCargo());
+					telaConfirmacao.setVisible(true);*/
+					dispose();
+				} else {
+					// mensagem de ERRO
 				}
 
-				if (erro == false) {
-					FuncionarioDAO dao = FuncionarioDAO.getInstancia();
-
-					boolean validacao = dao.inserirHospede(hos);
-
-					if (validacao == true) {
-						TelaListagemHospede lh = new TelaListagemHospede(funcionarioLogado);
-						lh.setVisible(true);
-						lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					} else {
-						// mensagem de ERRO
-					}
-				}   */
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -484,6 +455,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblEstado.setBounds(1000, 585, 100, 20);
 		contentPane.add(lblEstado);
 		
+	//	String estado = hosEditar.getEstado();
 		
 		txtEstado = new RoundJFormattedTextField(null);
 		txtEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
