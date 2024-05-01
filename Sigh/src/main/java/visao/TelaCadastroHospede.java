@@ -8,15 +8,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.funcionario.FuncionarioDAO;
+import controle.hospede.HospedeDAO;
+import modelo.Funcionario;
+import modelo.Hospede;
+import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 
 public class TelaCadastroHospede extends JFrame {
 
@@ -34,35 +41,19 @@ public class TelaCadastroHospede extends JFrame {
 	private JTextField txtCpf;
 	private JTextField txtData;
 	private JTextField txtSobrenome;
-	private JTextField txtNecessidade;
+	//private JTextField txtNecessidade;
 	private JTextField txtTelefone;
 	private JTextField txtEndreco;
 	private JTextField txtCep;
 	private JTextField txtNome;
+	private Funcionario funcionarioLogado;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastroHospede frame = new TelaCadastroHospede();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-  
-	
 	
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroHospede() {
+	public TelaCadastroHospede(Funcionario funcionarioLogado) {
+		this.funcionarioLogado = funcionarioLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100,  1920, 1080);
 		contentPane = new JPanel();
@@ -71,134 +62,129 @@ public class TelaCadastroHospede extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
-		lblNewLabel_1.setBounds(134, 44, 144, 176);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblQuarto = new JLabel("");
+		lblQuarto.setIcon(new ImageIcon("src\\main\\resources\\menu quartoss.png"));
+		lblQuarto.setBounds(68, 563, 400, 52);
+		contentPane.add(lblQuarto);
+		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
+		lblLogo.setBounds(134, 44, 144, 176);
+		contentPane.add(lblLogo);
 		
 		
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblNewLabel_5.setBounds(68, 472, 150, 20);
-		contentPane.add(lblNewLabel_5);
+		JLabel lblHospedagem = new JLabel("");
+		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+		lblHospedagem.setBounds(68, 458, 400, 67);
+		contentPane.add(lblHospedagem);
 		
 		JLabel lblNewLabel_55 = new JLabel("");
-		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
 			}
 		});
 		
 		
 		
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
-		lblNewLabel_2.setBounds(84, 955, 263, 45);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblBotaoSair = new JLabel("");
+		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+		lblBotaoSair.setBounds(84, 955, 263, 45);
+		contentPane.add(lblBotaoSair);
 		
 		
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+		JLabel lblPedidos = new JLabel("");
+		lblPedidos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_3.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_3.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
 			}
 		});
-		lblNewLabel_3.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblNewLabel_3.setBounds(68, 346, 400, 60);
-		contentPane.add(lblNewLabel_3);
+		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+		lblPedidos.setBounds(68, 346, 400, 60);
+		contentPane.add(lblPedidos);
 		
 		
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		lblNewLabel_4.setBounds(68, 407, 400, 60);
-		contentPane.add(lblNewLabel_4);
+		JLabel lblHospede = new JLabel("");
+		lblHospede.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+			}
+		});
+		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		lblHospede.setBounds(68, 407, 400, 60);
+		contentPane.add(lblHospede);
 		
 		JLabel lblNewLabel_44 = new JLabel("");
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+		
+		JLabel lblFuncionario = new JLabel("");
+		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+				lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+				lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
 			}
 		});
-		
-		
-		
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblNewLabel_6.setBounds(68, 532, 150, 20);
-		contentPane.add(lblNewLabel_6);
+		lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+		lblFuncionario.setBounds(68, 515, 374, 52);
+		contentPane.add(lblFuncionario);
 		
 		
 		JLabel lblNewLabel_66 = new JLabel("");
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-			}
-		});
 		
 		
 		
-		JLabel lblNewLabel_7 = new JLabel("");
-		lblNewLabel_7.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
-		lblNewLabel_7.setBounds(77, 897, 243, 14);
-		contentPane.add(lblNewLabel_7);
+		JLabel lblDivisoriaSair = new JLabel("");
+		lblDivisoriaSair.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
+		lblDivisoriaSair.setBounds(77, 897, 243, 14);
+		contentPane.add(lblDivisoriaSair);
 		
 		
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 420, 1083);
-		lblNewLabel.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
-		contentPane.add(lblNewLabel);
-		
-		
-		
-		JLabel lblMenu = new JLabel("Menu");
-		lblMenu.setForeground(new Color(128, 128, 128));
-		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMenu.setBounds(67, 289, 46, 14);
+		JLabel lblMenu = new JLabel("");
+		lblMenu.setBounds(0, 0, 420, 1083);
+		lblMenu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		contentPane.add(lblMenu);
 		
 		
 		
-		JLabel lblNewLabel_8 = new JLabel("");
-		lblNewLabel_8.setIcon(new ImageIcon("src/main/resources/Frame 675.png"));
-		lblNewLabel_8.setBounds(420, 0, 1500, 62);
-		contentPane.add(lblNewLabel_8);
+		JLabel lblCaminho = new JLabel("");
+		lblCaminho.setIcon(new ImageIcon("src/main/resources/Frame 675.png"));
+		lblCaminho.setBounds(420, 0, 1500, 62);
+		contentPane.add(lblCaminho);
 		
 		
 		
@@ -253,7 +239,7 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		
-		txtData = new RoundJFormattedTextField(null);
+		txtData = new DateTextField();
 		txtData.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtData.setBounds(1000, 415, 343, 48);
 		contentPane.add(txtData);
@@ -421,7 +407,7 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		
-		JLabel lblNecessidade = new JLabel("Necessidade Especial");
+		/*JLabel lblNecessidade = new JLabel("Necessidade Especial");
 		lblNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNecessidade.setBounds(554, 870, 200, 20);
 		contentPane.add(lblNecessidade);
@@ -430,7 +416,7 @@ public class TelaCadastroHospede extends JFrame {
 		txtNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNecessidade.setBounds(554, 915, 343, 48);
 		contentPane.add(txtNecessidade);
-		txtNecessidade.setColumns(16);
+		txtNecessidade.setColumns(16);*/
 		
 		
 		
@@ -441,20 +427,150 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		
-		JLabel lblNewLabel_9 = new JLabel("");
-		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/Hero block.png"));
-		lblNewLabel_9.setBounds(446, 108, 1455, 119);
-		contentPane.add(lblNewLabel_9);
+		JLabel lblTitulo2 = new JLabel("");
+		lblTitulo2.setIcon(new ImageIcon("src/main/resources/TituloCadastrarHospede.png"));
+		lblTitulo2.setBounds(446, 108, 1455, 119);
+		contentPane.add(lblTitulo2);
 		
-		JLabel lblNewLabel_28 = new JLabel("");
-		lblNewLabel_28.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
-		lblNewLabel_28.setBounds(1300, 915, 300, 60);
-		contentPane.add(lblNewLabel_28);
+		JLabel lblBotaoSalvar = new JLabel("");
+		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Hospede hos = new Hospede();
+
+				Boolean erro = false;
+
+				String idS = txtCpf.getText();
+
+				if (idS.isEmpty()) {
+					// ERRO
+				} else {
+					int id = 0;
+					try {
+						id = Integer.parseInt(idS);
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
+						erro = true;
+					}
+					if (erro == false && id != 0) {
+						hos.setId(id);
+					}
+
+				}
+
+				String nome = txtNome.getText();
+				if (nome.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setNome(nome);
+				}
+
+				String sobrenome = txtSobrenome.getText();
+				if (sobrenome.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setSobrenome(sobrenome);
+				}
+
+				String nomeSocial = txtNomeSocial.getText();
+				hos.setNomeSocial(nomeSocial);
+				
+			//	int telefone = txtTelefone.getText(); -- (NAO SEI QUAL SET USAR)
+			//	hos.setTelefone(telefone);
+
+		 //   	String responsavel = txtResponsavel.getText();
+		//	    hos.setResponsavel(responsavel);  -- (ERRO NA HORA DE SETAR), NAO SEI COMO MUDAR)
+				
+			//	LocaDate dataNascimento = txtData.getText(); -- (NAO SEI QUAL SET USAR)
+			//	hos.setDataNascimento(dataNascimento);
+
+		/*        String genero = comboBox.getSelectedItem();
+				if (genero.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {                                                
+					hos.setSelectedItem(genero);
+				}  */                                              // ESSES DOIS SAO DE COMBOBOX(ENTENDI +/-), NAO ESTA RECONHECENDO
+				                                                   // OS COMBOBOX, TALVEZ SEJA PQ ELES ESTAO ABAIXO DO BOTAO SALVAR
+
+			/*	String nacionalidade = comboBox_1.getSelectedItem();
+				if (nacionalidade == null) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setSelectedItem(nacionalidade);
+				}   */
+				
+				String passaporte = txtPassaporte.getText();
+				if (passaporte.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setPassaporte(passaporte);
+				}
+				
+				
+				String email = txtEmail.getText();
+				if (email.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					hos.setEmail(email);
+				}
+
+		/*		if (erro == false) {
+					HospedeDAO dao = HospedeDAO.getInstancia();
+
+					boolean validacao = dao.inserirHospede(hos);   -- AQUI DIZ Q O INSERIR PRECISA SER INTEIRO E NAO BOOLEAN, 
+					                                               -- MAS NAO ENTENDI COMO FAZER
+
+					if (validacao == true) {
+						TelaListagemHospede lh = new TelaListagemHospede(funcionarioLogado);
+						lh.setVisible(true);
+						lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					} else {
+						// mensagem de ERRO
+					}
+				}   */
+			}    
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+			}
+		});
+		lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+		lblBotaoSalvar.setBounds(1300, 915, 300, 60);
+		contentPane.add(lblBotaoSalvar);
 		
-		JLabel lblNewLabel_29 = new JLabel("");
-		lblNewLabel_29.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-		lblNewLabel_29.setBounds(1670, 930, 150, 40);
-		contentPane.add(lblNewLabel_29);
+		JLabel lblBotaoCancelar = new JLabel("");
+		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaListagemHospede(funcionarioLogado).setVisible(true);
+				dispose();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+			}
+		});
+		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
+		contentPane.add(lblBotaoCancelar);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Feminino ", "Masculino"}));
@@ -462,7 +578,7 @@ public class TelaCadastroHospede extends JFrame {
 		contentPane.add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" afegão", " ", "albanês", " ", " angolano", " ", " argentino  ", 
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" Afegão", " ", "Albanês", " ", " Angolano", " ", " Argentino  ", 
 				" ", " australiano  ", " ", " austríaco ", " ", " bangladês ", " ", " barbadiano  ", " ", "bielorrusso  ", " ", 
 				" belizenho ", " ", "Belga  ", " ", "Boliviano  ", " ", "Brasileiro  ", " ", "Bbúlgaro  ", " ", "Butanês  ", " ", "Camaronês  ",
 				" ", "Canadense  ", " ", "Chileno  ", " ", "Chinês  ", " ", "Colombiano  ", " ", "Costa-riquenho  ",
@@ -483,6 +599,16 @@ public class TelaCadastroHospede extends JFrame {
 		
 		comboBox_1.setBounds(554, 515, 343, 48);
 		contentPane.add(comboBox_1);
+		
+		JLabel lblCaminho2 = new JLabel("");
+		lblCaminho2.setIcon(new ImageIcon("src\\main\\resources\\CaminhoCadastrarHospede.png"));
+		lblCaminho2.setBounds(408, 0, 1512, 62);
+		contentPane.add(lblCaminho2);
+		
+		JLabel lblTitulo = new JLabel("");
+		lblTitulo.setIcon(new ImageIcon("src\\main\\resources\\TituloCadastrarHospede.png"));
+		lblTitulo.setBounds(446, 108, 1455, 126);
+		contentPane.add(lblTitulo);
 		
 	}
 }

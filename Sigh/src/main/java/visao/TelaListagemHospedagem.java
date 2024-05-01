@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controle.hospedagem.HospedagemDAO;
 import modelo.Hospedagem;
+import visao.padrao.DateTextField;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
@@ -28,6 +30,8 @@ public class TelaListagemHospedagem extends JFrame {
 	private JTable table;
 	private HospedagemDAO dao;	
 	private ArrayList<Hospedagem> lista;
+	private JLabel caminho;
+	private DateTextField dtf = new DateTextField();
 
 	/**
 	 * Launch the application.
@@ -127,6 +131,16 @@ public class TelaListagemHospedagem extends JFrame {
 		menu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		menu.setBounds(0, 0, 420, 1080);
 		contentPane.add(menu);	
+		
+		caminho = new JLabel("Caminho");
+		caminho.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
+		caminho.setBounds(420, 0, 1500, 60);
+		contentPane.add(caminho);
+		
+		JLabel titulo = new JLabel("Titulo");
+		titulo.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
+		titulo.setBounds(439, 101, 1444, 119);
+		contentPane.add(titulo);
 	}
 	
 	protected void atualizarJTable() {
@@ -137,10 +151,9 @@ public class TelaListagemHospedagem extends JFrame {
 
 		for (int i = 0; i < lista.size(); i++) {
 			Hospedagem hosp = lista.get(i);
-			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getHospedes().size(), hosp.getDataEntrada(), hosp.getDataSaida()});
+			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getHospedes().size(), dtf.formatarData(hosp.getDataEntrada()), dtf.formatarData(hosp.getDataSaida())});
 		}
 
 		table.setModel(modelo);
 	}
-	
 }

@@ -13,15 +13,15 @@ import controle.Conexao;
 import modelo.Endereco;
 import modelo.Hospede;
 
-public class HospedeDAO implements IHospedeDAO{
+public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a interface IHospedeDAO.//
 	
 	private static HospedeDAO instancia; 
 	
-	private HospedeDAO() {
-		
+	public HospedeDAO() { //evitar a criação de instâncias fora da classe.//
 	}
+		
 	
-	public static HospedeDAO getInstancia () { 
+	public static HospedeDAO getInstancia () { //retorna a instância única da classe HospedeDAO. Implementa o padrão Singleton.//
 		if (instancia == null) {
 			instancia = new HospedeDAO();
 			}
@@ -32,9 +32,9 @@ public class HospedeDAO implements IHospedeDAO{
 	public int inserirHospede(Hospede hos) {
 		// TODO Auto-generated method stub
 		
-		String SQL = "INSERT INTO Hospede (id_hospede, genero, data_nascimento, nacionalidade, cpf, passaporte, telefone, id_endereco, id_responsável) VALUES (?,?,?,?,?,?,?,?,?)"; 
+		String SQL = "INSERT INTO Hospede (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsável) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 		
-		Conexao con = Conexao.getInstancia(); 
+		Conexao con = Conexao.getInstancia(); // conexão com o banco de dados.//
 		
 		Connection ConBD = con.conectar(); 
 		
@@ -44,17 +44,20 @@ public class HospedeDAO implements IHospedeDAO{
 			
 			PreparedStatement ps = ConBD.prepareStatement(SQL);
 			
-			ps.setInt(1, hos.getId());
-			ps.setString(2, hos.getGenero()); 
-			ps.setString(3, String.valueOf(hos.getDataNascimento())); 
-			ps.setString(4, hos.getNacionalidade()); 
-			ps.setInt(5, hos.getCpf()); 
-			ps.setString(6, hos.getPassaporte()); 
-			ps.setInt(7, hos.getTelefone()); 
+			ps.setString(1, hos.getNome());
+			ps.setString(2, hos.getSobrenome());
+			ps.setString(3, hos.getNomeSocial());
+			ps.setString(4, hos.getGenero()); 
+			ps.setString(5, String.valueOf(hos.getDataNascimento())); 
+			ps.setString(6, hos.getNacionalidade()); 
+			ps.setInt(7, hos.getCpf()); 
+			ps.setString(8, hos.getPassaporte()); 
+			ps.setString(9, hos.getEmail());
+			ps.setInt(10, hos.getTelefone()); 
 			Endereco end = hos.getEndereco();
-			ps.setInt(8, end.getId()); 
+			ps.setInt(11, end.getId()); 
 			Hospede resp = hos.getResponsavel();
-			ps.setInt(9, resp.getId()); 
+			ps.setInt(12, resp.getId()); 
 			
 			ps.executeUpdate(); 
 			
@@ -106,6 +109,7 @@ public class HospedeDAO implements IHospedeDAO{
 				Integer cpf = rs.getInt("cpf"); 
 				String passaporte = rs.getString("passaporte"); 
 				Integer telefone = rs.getInt("telefone"); 
+				String email = rs.getString("email");
 				
 				// Endereco
 				
@@ -158,6 +162,7 @@ public class HospedeDAO implements IHospedeDAO{
 				hos.setNacionalidade(nacionalidade);
 				hos.setCpf(cpf);
 				hos.setPassaporte(passaporte);
+				hos.setEmail(email);
 				hos.setTelefone(telefone);
 				hos.setEndereco(end);
 				hos.setResponsavel(respon);
@@ -182,8 +187,8 @@ public class HospedeDAO implements IHospedeDAO{
 	public boolean atualizarHospede(Hospede hos) {
 	
 
-		String SQL = "UPDATE Hospede SET id  = ? WHERE genero = ?, WHERE cpf = ?, WHERE DataNascimento = ?, WHERE Nacionalidade = ?, WHERE Passaporte = ?, "
-				+ "WHERE Telefone = ?, WHERE Endereco = ?, WHERE Responsavel = ?";
+		String SQL = "UPDATE Hospede SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, genero = ?, data_nascimento = ?,  nacionalidade = ?, cpf = ?, passaporte = ?, "
+				+ "email = ?, telefone = ?,  id_endereco = ?,  id_responsavel = ? WHERE id_hospede = ? ";
 		
 		Conexao con = Conexao.getInstancia(); 
 		Connection conBD = con.conectar(); 
@@ -193,25 +198,20 @@ public class HospedeDAO implements IHospedeDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setString(1, hos.getGenero());
-			ps.setInt(2, hos.getCpf()); 
-			/*ps.setInt(3, hos.getDataNascimento()); */
-			ps.setString(4, hos.getNacionalidade());
-			ps.setString(5, hos.getPassaporte());
-			ps.setInt(6, hos.getTelefone());
-			/*ps.setString(7, hos.getEndereco());
-			ps.setString(8, hos.getResponsavel());*/
-			
-			
+			ps.setString(1, hos.getNome());
+			ps.setString(2, hos.getSobrenome());
+			ps.setString(3, hos.getNomeSocial());
+			ps.setString(4, hos.getGenero());
+			ps.setDate(5, Date.valueOf(hos.getDataNascimento()));
+			ps.setString(6, hos.getNacionalidade());
+			ps.setInt(7, hos.getCpf()); 
+			ps.setString(8, hos.getPassaporte());
+			ps.setInt(9, hos.getTelefone());
+			ps.setInt(10, hos.getEndereco().getId());
+			ps.setInt(8, hos.getResponsavel().getId());
 			
 			retorno = ps.executeUpdate(); 
-			
-			
-			
-			
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -220,14 +220,36 @@ public class HospedeDAO implements IHospedeDAO{
 			
 		}
 		
-		
 		return (retorno == 0? false: true);
 	}
 
 	@Override
 	public boolean removerHospede(Hospede hos) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+		String SQL = "DELETE FROM Hospede WHERE id_Hospede = ?";
+		
+		Conexao con = Conexao.getInstancia(); // instanciando
+		Connection conBD = con.conectar(); // cria "ponte"
+		
+		int retorno = 0;
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, hos.getId());
+			
+			retorno = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+return (retorno == 0? false : true);}
 }
+
+			
+
+	
+
+
