@@ -439,6 +439,8 @@ public class TelaCadastroHospede extends JFrame {
 				Hospede hos = new Hospede();
 
 				Boolean erro = false;
+				
+				// Só fazer o if isEmpty() se o campo for obrigatório
 
 				String idS = txtCpf.getText();
 
@@ -481,7 +483,7 @@ public class TelaCadastroHospede extends JFrame {
 			//	hos.setTelefone(telefone);
 
 		 //   	String responsavel = txtResponsavel.getText();
-		//	    hos.setResponsavel(responsavel);  -- (ERRO NA HORA DE SETAR), NAO SEI COMO MUDAR)
+		//	    hos.setResponsavel(responsavel);  -- (ERRO NA HORA DE SETAR), NAO SEI COMO MUDAR) - Esquece o responsável por enquanto
 				
 			//	LocaDate dataNascimento = txtData.getText(); -- (NAO SEI QUAL SET USAR)
 			//	hos.setDataNascimento(dataNascimento);
@@ -503,6 +505,20 @@ public class TelaCadastroHospede extends JFrame {
 					hos.setSelectedItem(nacionalidade);
 				}   */
 				
+				// No caso de CPF e Passaporte a verificação vai ser diferente
+				/*
+				 * TENTA FAZER ASSIM:
+				 * 
+				 * if(passaporte.isEmpty() && cpf.isEmpty()){
+				 * 		ERRO
+				 * } else if(passaporte.isEmpty || passaporte.trim.isEmpty()){
+				 * 		hos.setCPF(cpf);
+				 * } else{
+				 * 		hos.setPassaporte(passaporte);
+				 * }
+				 * 
+				 * */
+				
 				String passaporte = txtPassaporte.getText();
 				if (passaporte.isEmpty()) {
 					erro = true;
@@ -519,6 +535,8 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					hos.setEmail(email);
 				}
+				
+				// Quando fazer o INSERT tem que pegar a chave gerada, por isso o método inserirHospede retorna um int
 
 		/*		if (erro == false) {
 					HospedeDAO dao = HospedeDAO.getInstancia();
