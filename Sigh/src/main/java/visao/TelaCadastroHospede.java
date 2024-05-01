@@ -30,22 +30,24 @@ public class TelaCadastroHospede extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField txtNumero;
-	private JTextField txtCidade;
+	//private JTextField txtNumero;
+	//private JTextField txtCidade;
 	private JTextField txtPassaporte;
-	private JTextField txtResponsavel;
+	//private JTextField txtResponsavel;
 	private JTextField txtNomeSocial;
 	private JTextField txtEmail;
-	private JTextField txtComplemento;
-	private JTextField txtEstado;
+	//private JTextField txtComplemento;
+	//private JTextField txtEstado;
 	private JTextField txtCpf;
 	private JTextField txtData;
 	private JTextField txtSobrenome;
 	//private JTextField txtNecessidade;
 	private JTextField txtTelefone;
-	private JTextField txtEndreco;
-	private JTextField txtCep;
+	//private JTextField txtEndreco;
+	//private JTextField txtCep;
 	private JTextField txtNome;
+	private JComboBox<String> comboBoxGenero;
+	private JComboBox<String> comboBox_1;
 	private Funcionario funcionarioLogado;
 
 	
@@ -98,6 +100,13 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		JLabel lblBotaoSair = new JLabel("");
+		lblBotaoSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}
+		});
 		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		lblBotaoSair.setBounds(84, 955, 263, 45);
 		contentPane.add(lblBotaoSair);
@@ -245,19 +254,19 @@ public class TelaCadastroHospede extends JFrame {
 		contentPane.add(txtData);
 		txtData.setColumns(18);
 		
-		JLabel lblResponsável = new JLabel("Responsável ");
+	/*	JLabel lblResponsável = new JLabel("Responsável ");
 		lblResponsável.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblResponsável.setBounds(1460, 390, 100, 20);
 		contentPane.add(lblResponsável);
+	*/	
 		
 		
-		
-		txtResponsavel = new RoundJFormattedTextField(null);
-		txtResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	/*	txtResponsavel = new RoundJFormattedTextField(null);
+	 	txtResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtResponsavel.setBounds(1460, 415, 343, 48);
 		contentPane.add(txtResponsavel);
 		txtResponsavel.setColumns(24);
-		
+	*/	
 		
 		
 		JLabel lblNacionalidade = new JLabel("Nacionalidade *");
@@ -293,89 +302,89 @@ public class TelaCadastroHospede extends JFrame {
 		
 		
 		
-		JLabel lblCep = new JLabel("Cep *");
+	/*	JLabel lblCep = new JLabel("Cep *");
 		lblCep.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCep.setBounds(554, 570, 100, 20);
 		contentPane.add(lblCep);
+	*/	
 		
 		
-		
-		txtCep = new RoundJFormattedTextField(null);
+	/*	txtCep = new RoundJFormattedTextField(null);
 		txtCep.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtCep.setBounds(554, 615, 343, 48);
 		contentPane.add(txtCep);
 		txtCep.setColumns(13);
-		
+	*/	
 
-		JLabel lblEstado = new JLabel("Estado *");
+	/*	JLabel lblEstado = new JLabel("Estado *");
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEstado.setBounds(1000, 570, 100, 20);
 		contentPane.add(lblEstado);
+	*/	
 		
 		
-		
-		txtEstado = new RoundJFormattedTextField(null);
+	/*	txtEstado = new RoundJFormattedTextField(null);
 		txtEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtEstado.setBounds(1000, 615, 343, 48);
 		contentPane.add(txtEstado);
 		txtEstado.setColumns(20);
+	*/	
 		
-		
-		JLabel lblCidade = new JLabel("Cidade *");
+	/*	JLabel lblCidade = new JLabel("Cidade *");
 		lblCidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCidade.setBounds(1460, 570, 100, 20);
 		contentPane.add(lblCidade);
+	*/	
 		
 		
-		
-		txtCidade = new RoundJFormattedTextField(null);
+	/*	txtCidade = new RoundJFormattedTextField(null);
 		txtCidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtCidade.setBounds(1460, 615, 343, 48);
 		contentPane.add(txtCidade);
 		txtCidade.setColumns(26);
+	*/	
 		
-		
-		JLabel lblEndereco = new JLabel("Endereço *");
+	/*	JLabel lblEndereco = new JLabel("Endereço *");
 		lblEndereco.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEndereco.setBounds(554, 670, 100, 20);
 		contentPane.add(lblEndereco);
+	*/	
 		
 		
-		
-		txtEndreco = new RoundJFormattedTextField(null);
+	/*	txtEndreco = new RoundJFormattedTextField(null);
 		txtEndreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtEndreco.setBounds(554, 715, 343, 48);
 		contentPane.add(txtEndreco);
 		txtEndreco.setColumns(14);
-		
+	*/	
 
-		JLabel lblComplemento = new JLabel("Complemento ");
+	/*	JLabel lblComplemento = new JLabel("Complemento ");
 		lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblComplemento.setBounds(1000, 670, 100, 20);
 		contentPane.add(lblComplemento);
+	*/	
 		
 		
-		
-		txtComplemento = new RoundJFormattedTextField(null);
+	/*	txtComplemento = new RoundJFormattedTextField(null);
 		txtComplemento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtComplemento.setBounds(1000, 715, 343, 48);
 		contentPane.add(txtComplemento);
 		txtComplemento.setColumns(21);
-		
+	*/	
 
-		JLabel lblNumero = new JLabel("Número *");
+	/*	JLabel lblNumero = new JLabel("Número *");
 		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNumero.setBounds(1460, 670, 100, 20);
 		contentPane.add(lblNumero);
+	*/	
 		
 		
-		
-		txtNumero = new RoundJFormattedTextField(null);
+	/*	txtNumero = new RoundJFormattedTextField(null);
 		txtNumero.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNumero.setBounds(1460, 715, 343, 48);
 		contentPane.add(txtNumero);
 		txtNumero.setColumns(27);
-		
+	*/	
 		
 		
 		JLabel lblTelefone = new JLabel("Telefone *");
@@ -439,24 +448,8 @@ public class TelaCadastroHospede extends JFrame {
 				Hospede hos = new Hospede();
 
 				Boolean erro = false;
-
-				String idS = txtCpf.getText();
-
-				if (idS.isEmpty()) {
-					// ERRO
-				} else {
-					int id = 0;
-					try {
-						id = Integer.parseInt(idS);
-					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
-						erro = true;
-					}
-					if (erro == false && id != 0) {
-						hos.setId(id);
-					}
-
-				}
+				
+				// Só fazer o if isEmpty() se o campo for obrigatório
 
 				String nome = txtNome.getText();
 				if (nome.isEmpty()) {
@@ -477,63 +470,77 @@ public class TelaCadastroHospede extends JFrame {
 				String nomeSocial = txtNomeSocial.getText();
 				hos.setNomeSocial(nomeSocial);
 				
-			//	int telefone = txtTelefone.getText(); -- (NAO SEI QUAL SET USAR)
-			//	hos.setTelefone(telefone);
+				String telefone = txtTelefone.getText(); 
+				if (telefone.isEmpty()) {
+					erro = true;
+					//ERRO
+				} else {
+					hos.setTelefone(Integer.parseInt(telefone));
+				}  
 
 		 //   	String responsavel = txtResponsavel.getText();
-		//	    hos.setResponsavel(responsavel);  -- (ERRO NA HORA DE SETAR), NAO SEI COMO MUDAR)
+		//	    hos.setResponsavel(responsavel);   - Esquece o responsável por enquanto
 				
-			//	LocaDate dataNascimento = txtData.getText(); -- (NAO SEI QUAL SET USAR)
-			//	hos.setDataNascimento(dataNascimento);
+				String dataNascimento = txtData.getText(); 
+			    if(dataNascimento.isEmpty()) {
+					erro = true;
+					//ERRO
+				} else {
+					hos.setDataNascimento(LocalDate.parse(dataNascimento));
+				}  
 
-		/*        String genero = comboBox.getSelectedItem();
+		        String genero = (String) comboBoxGenero.getSelectedItem();
 				if (genero.isEmpty()) {
 					erro = true;
 					// ERRO
 				} else {                                                
-					hos.setSelectedItem(genero);
-				}  */                                              // ESSES DOIS SAO DE COMBOBOX(ENTENDI +/-), NAO ESTA RECONHECENDO
-				                                                   // OS COMBOBOX, TALVEZ SEJA PQ ELES ESTAO ABAIXO DO BOTAO SALVAR
+					hos.setGenero(genero);
+				}                                                
+				                                                   
 
-			/*	String nacionalidade = comboBox_1.getSelectedItem();
+				String nacionalidade = (String) comboBox_1.getSelectedItem();
 				if (nacionalidade == null) {
 					erro = true;
 					// ERRO
 				} else {
-					hos.setSelectedItem(nacionalidade);
-				}   */
+					hos.setNacionalidade(nacionalidade);
+				}   
 				
-				String passaporte = txtPassaporte.getText();
-				if (passaporte.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					hos.setPassaporte(passaporte);
-				}
+				// No caso de CPF e Passaporte a verificação vai ser diferente
 				
+				 // TENTA FAZER ASSIM:
+				  
+				  String cpf = txtCpf.getText();			
+				  String passaporte = txtPassaporte.getText();
+				  
+				  if(passaporte.isEmpty() && cpf.isEmpty()){
+				  		//ERRO
+				  } else if(passaporte.isEmpty() || passaporte.trim().isEmpty()){
+				  		hos.setCpf(Integer.parseInt(cpf));
+				  } else{
+				  		hos.setPassaporte(passaporte);
+				  }
+				  
+				 
 				
 				String email = txtEmail.getText();
-				if (email.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					hos.setEmail(email);
-				}
+				hos.setEmail(email);
+				
 
-		/*		if (erro == false) {
+				if (erro == false) {
 					HospedeDAO dao = HospedeDAO.getInstancia();
 
-					boolean validacao = dao.inserirHospede(hos);   -- AQUI DIZ Q O INSERIR PRECISA SER INTEIRO E NAO BOOLEAN, 
-					                                               -- MAS NAO ENTENDI COMO FAZER
+					int validacao = dao.inserirHospede(hos);   
 
-					if (validacao == true) {
+					if (validacao != 0) {
 						TelaListagemHospede lh = new TelaListagemHospede(funcionarioLogado);
 						lh.setVisible(true);
 						lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						hos.setId(validacao);
 					} else {
 						// mensagem de ERRO
 					}
-				}   */
+				}   
 			}    
 
 			@Override
@@ -572,10 +579,10 @@ public class TelaCadastroHospede extends JFrame {
 		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
 		contentPane.add(lblBotaoCancelar);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Feminino ", "Masculino"}));
-		comboBox.setBounds(554, 415, 343, 48);
-		contentPane.add(comboBox);
+		JComboBox comboBoxGenero = new JComboBox();
+		comboBoxGenero.setModel(new DefaultComboBoxModel(new String[] {"Feminino ", "Masculino"}));
+		comboBoxGenero.setBounds(554, 415, 343, 48);
+		contentPane.add(comboBoxGenero);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" Afegão", " ", "Albanês", " ", " Angolano", " ", " Argentino  ", 
