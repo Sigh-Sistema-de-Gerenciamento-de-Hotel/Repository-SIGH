@@ -218,7 +218,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblSobrenome.setBounds(1000, 288, 90, 20);
 		contentPane.add(lblSobrenome);
 		
-		String sobrenome = hosEditar.getNome();
+		String sobrenome = hosEditar.getSobrenome();
 		
 		txtSobrenome = new RoundJFormattedTextField(null);
 		txtSobrenome.setText(sobrenome);
@@ -232,7 +232,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblNomeSocial.setBounds(1460, 288, 100, 20);
 		contentPane.add(lblNomeSocial);
 		
-		String nomeSocial = hosEditar.getNome();
+		String nomeSocial = hosEditar.getNomeSocial();
 		
 		txtNomeSocial = new RoundJFormattedTextField(null);
 		txtNomeSocial.setText(nomeSocial);
@@ -252,10 +252,10 @@ public class TelaEdicaoHospede extends JFrame {
 		lblData.setBounds(1000, 390, 200, 20);
 		contentPane.add(lblData);
 		
-		String dataNascimento = hosEditar.getNome();
+		LocalDate dataNascimento = hosEditar.getDataNascimento();
 		
 		txtData = new DateTextField();
-		txtData.setText(dataNascimento);
+	//	txtData.setText(dataNascimento);
 		txtData.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtData.setBounds(1000, 415, 343, 48);
 		contentPane.add(txtData);
@@ -286,10 +286,10 @@ public class TelaEdicaoHospede extends JFrame {
 		lblCpf.setBounds(1000, 480, 100, 20);
 		contentPane.add(lblCpf);
 		
-		String cpf = hosEditar.getNome();
+		int cpf = hosEditar.getCpf();
 		
 		txtCpf = new RoundJFormattedTextField(null);
-		txtCpf.setText(cpf);
+		txtCpf.setText(String.valueOf(cpf));
 		txtCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtCpf.setBounds(1000, 515, 343, 48);
 		contentPane.add(txtCpf);
@@ -300,7 +300,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblPassaporte.setBounds(1460, 480, 100, 20);
 		contentPane.add(lblPassaporte);
 		
-		String passaporte = hosEditar.getNome();
+		String passaporte = hosEditar.getPassaporte();
 		
 		txtPassaporte = new RoundJFormattedTextField(null);
 		txtPassaporte.setText(passaporte);
@@ -401,10 +401,10 @@ public class TelaEdicaoHospede extends JFrame {
 		lblTelefone.setBounds(554, 780, 100, 20);
 		contentPane.add(lblTelefone);
 		
-		String telefone = hosEditar.getNome();
+		int telefone = hosEditar.getTelefone();
 		
 		txtTelefone = new RoundJFormattedTextField(null);
-		txtTelefone.setText(telefone);
+		txtTelefone.setText(String.valueOf(telefone));
 		txtTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtTelefone.setBounds(554, 815, 343, 48);
 		contentPane.add(txtTelefone);
@@ -416,7 +416,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblEmail.setBounds(1000, 780, 100, 20);
 		contentPane.add(lblEmail);
 		
-		String email = hosEditar.getNome();
+		String email = hosEditar.getEmail();
 		
 		txtEmail = new RoundJFormattedTextField(null);
 		txtEmail.setText(email);
@@ -581,7 +581,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
 		contentPane.add(lblBotaoCancelar);
 		
-		String genero = hosEditar.getNome();
+		String genero = hosEditar.getGenero();
 		
 		JComboBox comboBoxGenero = new JComboBox();
 		comboBoxGenero.setModel(new DefaultComboBoxModel(new String[] {"Feminino ", "Masculino"}));
@@ -589,7 +589,7 @@ public class TelaEdicaoHospede extends JFrame {
 		comboBoxGenero.setBounds(554, 415, 343, 48);
 		contentPane.add(comboBoxGenero);
 		
-		String nacionalidade = hosEditar.getNome();
+		String nacionalidade = hosEditar.getNacionalidade();
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" Afegão", " ", "Albanês", " ", " Angolano", " ", " Argentino  ", 
