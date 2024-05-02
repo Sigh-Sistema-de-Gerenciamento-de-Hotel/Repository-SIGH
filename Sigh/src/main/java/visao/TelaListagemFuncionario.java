@@ -64,6 +64,15 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
+			}
+		});
 		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 		lblNewLabel_4.setBounds(68, 407, 150, 20);
 		contentPane.add(lblNewLabel_4);

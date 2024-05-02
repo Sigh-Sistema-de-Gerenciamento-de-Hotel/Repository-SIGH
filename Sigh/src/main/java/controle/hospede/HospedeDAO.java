@@ -32,7 +32,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 	public int inserirHospede(Hospede hos) {
 		// TODO Auto-generated method stub
 		
-		String SQL = "INSERT INTO Hospede (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsável) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+		String SQL = "INSERT INTO hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsável) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 		
 		Conexao con = Conexao.getInstancia(); // conexão com o banco de dados.//
 		
@@ -156,7 +156,9 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 				 * break; } }
 				 */
 				
-				hos.setId(id_hospede);			
+				hos.setId(id_hospede);	
+				hos.setNome(nome);
+				hos.setSobrenome(sobrenome);
 				hos.setGenero(genero);
 				hos.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
 				hos.setNacionalidade(nacionalidade);
@@ -187,7 +189,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 	public boolean atualizarHospede(Hospede hos) {
 	
 
-		String SQL = "UPDATE Hospede SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, genero = ?, data_nascimento = ?,  nacionalidade = ?, cpf = ?, passaporte = ?, "
+		String SQL = "UPDATE hospedes SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, genero = ?, data_nascimento = ?,  nacionalidade = ?, cpf = ?, passaporte = ?, "
 				+ "email = ?, telefone = ?,  id_endereco = ?,  id_responsavel = ? WHERE id_hospede = ? ";
 		
 		Conexao con = Conexao.getInstancia(); 
@@ -225,7 +227,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 
 	@Override
 	public boolean removerHospede(Hospede hos) {
-		String SQL = "DELETE FROM Hospede WHERE id_Hospede = ?";
+		String SQL = "DELETE FROM hospedes WHERE id_hospede = ?";
 		
 		Conexao con = Conexao.getInstancia(); // instanciando
 		Connection conBD = con.conectar(); // cria "ponte"
