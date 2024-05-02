@@ -57,6 +57,7 @@ public class TelaEdicaoHospede extends JFrame {
 	 */
 	public TelaEdicaoHospede(Funcionario funcLogado, Hospede hosEditar) {
 		funcionarioLogado = funcLogado;
+		DateTextField dateTf = new DateTextField();
 		this.hosEditar = hosEditar;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100,  1920, 1080);
@@ -253,9 +254,9 @@ public class TelaEdicaoHospede extends JFrame {
 		contentPane.add(lblData);
 		
 		LocalDate dataNascimento = hosEditar.getDataNascimento();
-		
+		String data = dateTf.formatarData(dataNascimento);
 		txtData = new DateTextField();
-	//	txtData.setText(dataNascimento);
+		txtData.setText(data);
 		txtData.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtData.setBounds(1000, 415, 343, 48);
 		contentPane.add(txtData);
@@ -486,11 +487,12 @@ public class TelaEdicaoHospede extends JFrame {
 		 //   	String responsavel = txtResponsavel.getText();
 		//	    hos.setResponsavel(responsavel);   - Esquece o responsável por enquanto
 				
-				String dataNascimento = txtData.getText(); 
-			    if(dataNascimento.isEmpty()) {
+				DateTextField dtf = new DateTextField();
+				LocalDate data = dtf.stringParaData(txtData.getText());
+			    if(txtData.getText().isEmpty()) {
 					//ERRO
 				} else {
-					hosEditar.setDataNascimento(LocalDate.parse(dataNascimento));
+					hosEditar.setDataNascimento(dataNascimento);
 				}  
 
 		        String genero = (String) comboBoxGenero.getSelectedItem();
