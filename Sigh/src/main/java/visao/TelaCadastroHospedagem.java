@@ -6,12 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
+import modelo.Funcionario;
 import modelo.Hospedagem;
 import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -178,10 +181,19 @@ public class TelaCadastroHospedagem extends JFrame {
 		txtDataCheckout.setColumns(10);
 
 		JLabel lblBotaoSalvar = new JLabel("");
+		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+			}
+		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		contentPane.add(lblBotaoSalvar);
 		
+	
+	
+				
 		JLabel lblBotaoCancelar = new JLabel("");
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override

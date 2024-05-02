@@ -13,7 +13,9 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
+import modelo.Funcionario;
 import modelo.Hospedagem;
 import visao.padrao.DateTextField;
 
@@ -28,11 +30,14 @@ public class TelaListagemHospedagem extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private HospedagemDAO dao;	
-	private ArrayList<Hospedagem> lista;
+	private HospedagemDAO dao =  HospedagemDAO.getInstancia(); 
+	private ArrayList<Hospedagem> listar;
 	private JLabel caminho;
+
 	private DateTextField dtf = new DateTextField();
 
+	ArrayList<Hospedagem> lista = dao.listarHospedagem();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -132,13 +137,28 @@ public class TelaListagemHospedagem extends JFrame {
 		menu.setBounds(0, 0, 420, 1080);
 		contentPane.add(menu);	
 		
-		caminho = new JLabel("Caminho");
-		caminho.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
+		caminho = new JLabel("");
+		caminho.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
 		caminho.setBounds(420, 0, 1500, 60);
 		contentPane.add(caminho);
 		
-		JLabel titulo = new JLabel("Titulo");
-		titulo.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoEditar.png"));
+		lblNewLabel.setBounds(1570, 164, 120, 34);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoExcluir.png"));
+		lblNewLabel_1.setBounds(1740, 164, 120, 34);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cadastrar.png"));
+		lblNewLabel_2.setBounds(1400, 164, 120, 34);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel titulo = new JLabel("");
+		titulo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
 		titulo.setBounds(439, 101, 1444, 119);
 		contentPane.add(titulo);
 	}
