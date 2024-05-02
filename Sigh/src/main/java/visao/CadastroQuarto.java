@@ -46,17 +46,18 @@ public class CadastroQuarto extends JFrame {
 	private JLabel lblMenuFuncionarios;
 	private JLabel lblSair;
 	private JLabel lblDivisormenu;
-	private JComboBox comboCamaCasal;
-	private JComboBox comboCamaSolteiro;
-	private JComboBox comboNHospedes;
+	private JComboBox<Integer>comboCamaCasal;
+	private JComboBox<Integer>comboCamaSolteiro;
+	private JComboBox<Integer>comboNHospedes;
 	private JComboBox comboFrigobar;
 	private JComboBox comboBanheira;
-	private JComboBox comboAcessibilidade;
 	private JComboBox comboLimpeza;
 	private JComboBox comboConserto;
 	private JTextField txtNumQuarto;
 	private JComboBox comboAr;
 	private JLabel menuQuartos;
+	private JTextField txtAcessibilidade;
+	Funcionario funcionarioLogado = new Funcionario();
 
 	/**
 	 * Launch the application.
@@ -85,15 +86,66 @@ public class CadastroQuarto extends JFrame {
 		setBounds(100, 100, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		comboCamaCasal = new JComboBox<Integer>();
+		comboCamaCasal.setModel(
+				new DefaultComboBoxModel(new Integer[] {  0, 1, 2 }));
+		comboCamaCasal.setBounds(491, 442, 343, 50);
+		contentPane.add(comboCamaCasal);
 
+		comboCamaSolteiro = new JComboBox<Integer>();
+		comboCamaSolteiro.setModel(
+				new DefaultComboBoxModel(new Integer[] {  0, 1, 2}));
+		comboCamaSolteiro.setBounds(491, 579, 343, 50);
+		contentPane.add(comboCamaSolteiro);
+
+		comboNHospedes = new JComboBox<Integer>();
+		comboNHospedes.setModel(
+				new DefaultComboBoxModel(new Integer[] { 0, 1, 2, 3, 4}));
+		comboNHospedes.setBounds(491, 705, 343, 50);
+		contentPane.add(comboNHospedes);
+
+		comboFrigobar = new JComboBox();
+		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboFrigobar.setBounds(985, 442, 343, 50);
+		contentPane.add(comboFrigobar);
+
+		comboBanheira = new JComboBox();
+		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboBanheira.setBounds(985, 580, 343, 50);
+		contentPane.add(comboBanheira);
+
+		comboLimpeza = new JComboBox();
+		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboLimpeza.setBounds(1506, 313, 343, 50);
+		contentPane.add(comboLimpeza);
+
+		comboConserto = new JComboBox();
+		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboConserto.setBounds(1506, 440, 343, 50);
+		contentPane.add(comboConserto);
+
+		txtNumQuarto = new RoundJFormattedTextField(null);
+		txtNumQuarto.setBounds(491, 313, 343, 50);
+		contentPane.add(txtNumQuarto);
+		txtNumQuarto.setColumns(10);
+		
+		txtAcessibilidade = new JTextField();
+		txtAcessibilidade.setBounds(985, 705, 343, 50);
+		contentPane.add(txtAcessibilidade);
+		txtAcessibilidade.setColumns(10);
+
+		comboAr = new JComboBox();
+		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboAr.setBounds(984, 314, 343, 50);
+		contentPane.add(comboAr);
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 				
-						botaoSalvar = new JLabel("");
-						botaoSalvar.addMouseListener(new MouseAdapter() {
+		botaoSalvar = new JLabel("");
+		botaoSalvar.addMouseListener(new MouseAdapter() {
 							@Override
-							
-							//ARRUMAR TUDO ISSO 
 							public void mouseClicked(MouseEvent e) {
 
 								Quarto quarto = new Quarto();
@@ -101,225 +153,134 @@ public class CadastroQuarto extends JFrame {
 								Boolean erro = false;
 
 								String numeroQuarto = txtNumQuarto.getText();
+								int numQuarto = 0; 
 								if (numeroQuarto.isEmpty()) {
 									erro = true;
 									// ERRO
 								} else {
-									int numQuarto = 0;
 									try {
 										numQuarto = Integer.parseInt(numeroQuarto);
 									} catch (Exception ex) {
-										JOptionPane.showMessageDialog(null, "Numero do quarto precisa ser tipo numérico inteiro");
+										JOptionPane.showMessageDialog(null, "Número do Quarto precisa ser um tipo numérico inteiro");
 										erro = true;
-
-									}
-									if (erro == false && numQuarto != 0) {
-										quarto.setNumero(numQuarto);
-
 									}
 								}
 
-								String camaCasal = comboCamaCasal.getUIClassID();
-								if (camaCasal.isEmpty()) {
+								int camaCasal = (Integer) comboCamaCasal.getSelectedItem();
+								int camaSolteiro = (Integer) comboCamaSolteiro.getSelectedItem();
+								int numMaxHospedes = (Integer) comboNHospedes.getSelectedItem();
+
+								String arCondicionado = (String) comboAr.getSelectedItem();
+								Boolean ar = null;
+								if (arCondicionado.isEmpty()) {
 									erro = true;
 									// ERRO
 								} else {
-									int camaCasall = 0;
-									try {
-										camaCasall = Integer.parseInt(camaCasal);
-									} catch (Exception ex) {
-										erro = true;
-
-									}
-									if (erro == false && camaCasall != 0) {
-										quarto.setNumCamaCasal(camaCasall);
+									if(arCondicionado == "sim") {
+										ar = true;
+									} else {
+										ar = false;
 									}
 								}
 
-								String camaSolteiro = comboCamaSolteiro.getUIClassID();
-								if (camaSolteiro.isEmpty()) {
-									erro = true;
-									// ERRO
-								} else {
-									int camaSolteiroo = 0;
-									try {
-										camaSolteiroo = Integer.parseInt(camaSolteiro);
-									} catch (Exception ex) {
-
-										erro = true;
-
-									}
-									if (erro == false && camaSolteiroo != 0) {
-										quarto.setNumCamaSolteiro(camaSolteiroo);
-
-									}
-								}
-
-								String numMaxHospedes = comboNHospedes.getUIClassID();
-								if (numMaxHospedes.isEmpty()) {
-									erro = true;
-									// ERRO
-								} else {
-									int numMaxHospedee = 0;
-									try {
-										numMaxHospedee = Integer.parseInt(numMaxHospedes);
-									} catch (Exception ex) {
-
-										erro = true;
-
-									}
-									if (erro == false && numMaxHospedee != 0) {
-										quarto.setNumMaxHospedes(numMaxHospedee);
-
-									}
-								}
-
-								String ArCondicionado = comboAr.getUIClassID();
-								if (ArCondicionado.isEmpty()) {
-									erro = true;
-									// ERRO
-								} else {
-
-									int Ar = 0;
-									try {
-										Ar = Integer.parseInt(ArCondicionado);
-									} catch (Exception ex) {
-
-										erro = true;
-
-									}
-									if (erro == false && Ar != 0) {
-										boolean arCond = false;
-										quarto.setArCondicionado(arCond);
-
-									}
-								}
-
-								String frigobar = comboFrigobar.getUIClassID();
+								String frigobar = (String) comboFrigobar.getSelectedItem();
+							    Boolean frigo = null; 	
 								if (frigobar.isEmpty()) {
 									erro = true;
 									// ERRO
 								} else {
-									int frigobarr = 0;
-									try {
-										frigobarr = Integer.parseInt(frigobar);
-									} catch (Exception ex) {
-
-										erro = true;
-
-									}
-									if (erro == false && frigobarr != 0) {
-										boolean frigo = false;
-										quarto.setFrigobar(frigo);
-
+									if(frigobar == "sim") {
+										frigo = true;
+									} else {
+										frigo = false;
 									}
 								}
 
-								String banheira = comboBanheira.getUIClassID();
+								String banheira = (String) comboBanheira.getSelectedItem();
+								Boolean ban = null; 
 								if (banheira.isEmpty()) {
 									erro = true;
 									// ERRO
 								} else {
-									int banheiraa = 0;
-									try {
-										banheiraa = Integer.parseInt(banheira);
-									} catch (Exception ex) {
-
-										erro = true;
-
-									}
-									if (erro == false && banheiraa != 0) {
-										quarto.setBanheira(rootPaneCheckingEnabled);
-
+									if(banheira == "sim") {
+										ban = true;
+									} else {
+										ban = false;
 									}
 								}
 
-								String acessibilidade = comboAcessibilidade.getUIClassID();
+								String acessibilidade = txtAcessibilidade.getText();
 								if (acessibilidade.isEmpty()) {
 									erro = true;
 									// ERRO
-								} else {
-									int acess = 0;
-									try {
-										acess = Integer.parseInt(acessibilidade);
-									} catch (Exception ex) {
-
-										erro = true;
-
-									}
-									if (erro == false && acess != 0) {
-										quarto.setAcessibilidade(acessibilidade);
-
-									}
-								}
+								} 
 
 								String preco = txtpreco.getText();
+								float precoo = 0;
 								if (preco.isEmpty()) {
 									erro = true;
 									// ERRO
 								} else {
-									int precoo = 0;
 									try {
-										precoo = Integer.parseInt(preco);
+										precoo = Float.valueOf(preco);
 									} catch (Exception ex) {
-										JOptionPane.showMessageDialog(null, "Preço precisa ser um tipo numérico inteiro");
+										JOptionPane.showMessageDialog(null, "Preço precisa ser um tipo numérico");
 										erro = true;
-
-									}
-									if (erro == false && precoo != 0) {
-										quarto.getPreco();
 
 									}
 								}
 
-								QuartoDAO dao = QuartoDAO.getInstacia();
-								dao.inserirQuarto(quarto);
-								
-								/*
-								 * if(erro==false) { QuartoDAO dao = QuartoDAO.getInstacia();
-								 * 
-								 * int validacao = dao.inserirQuarto(quarto);
-								 * 
-								 * if(validacao == true) { TelaListagemHospede lf = new TelaListagemHospede();
-								 * lf.setVisible(true); lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-								 * TelaConfirmacao telaConfirmacao = new TelaConfirmacao(quarto.getNumero(),
-								 * quarto.getNumCamaCasal(), quarto.getNumCamaSolteiro(),
-								 * quarto.getNumMaxHospedes()); telaConfirmacao.setVisible(true);
-								 * setVisible(false); } else { //mensagem de ERRO } } }
-								 */
-
-							}
-							@Override
-							public void mouseEntered(MouseEvent e) {
-								botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
-							}
-							@Override
-							public void mouseExited(MouseEvent e) {
-								botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
-							}
-						});
-						botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
-						botaoSalvar.setBounds(1310, 928, 292, 54);
-						contentPane.add(botaoSalvar);
+								if(erro==false) {
+									quarto.setNumero(numQuarto);
+									quarto.setNumCamaCasal(camaCasal);
+									quarto.setNumCamaSolteiro(camaSolteiro);
+									quarto.setArCondicionado(ar);
+									quarto.setFrigobar(frigo);
+									quarto.setBanheira(ban);
+									quarto.setAcessibilidade(acessibilidade);
+									quarto.setPreco(precoo);
+									
+									QuartoDAO dao = QuartoDAO.getInstacia();
+									dao.inserirQuarto(quarto);
+									
+									TelaListagemFuncionario lf = new TelaListagemFuncionario(funcionarioLogado);
+									lf.setVisible(true);
+									lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+									dispose();
+								}		
+							
+			 }
+			 @Override
+			 public void mouseEntered(MouseEvent e) {
+					 botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
+			 }
+			 @Override
+		     public void mouseExited(MouseEvent e) {
+					 botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+			 }
+		});
+		 botaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar.png"));
+		 botaoSalvar.setBounds(1310, 928, 292, 54);
+		 contentPane.add(botaoSalvar);
 		
-				BotaoCancelar = new JLabel("");
-				BotaoCancelar.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						dispose();	
-					}
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
-					}
-					@Override
-					public void mouseExited(MouseEvent e) {
-						BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-					}
-				});
-				BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-				BotaoCancelar.setBounds(1682, 931, 134, 24);
-				contentPane.add(BotaoCancelar);
+		BotaoCancelar = new JLabel("");
+		BotaoCancelar.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		         dispose();	
+		    }
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+		         BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
+		    }
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		         BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+			}
+		});
+		BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+		BotaoCancelar.setBounds(1682, 931, 134, 24);
+		contentPane.add(BotaoCancelar);
 
 		menuQuartos = new JLabel("");
 		menuQuartos.addMouseListener(new MouseAdapter() {
@@ -508,7 +469,7 @@ public class CadastroQuarto extends JFrame {
 
 		lblPreco = new JLabel("Preço");
 		lblPreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPreco.setBounds(1506, 560, 62, 22);
+		lblPreco.setBounds(1506, 545, 62, 22);
 		contentPane.add(lblPreco);
 
 		JLabel lblFundoMenu = new JLabel("");
@@ -520,58 +481,6 @@ public class CadastroQuarto extends JFrame {
 		lblCaminho.setIcon(new ImageIcon("src/main/resources/superior pequeno quartos.png"));
 		lblCaminho.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblCaminho);
-
-		comboCamaCasal = new JComboBox();
-		comboCamaCasal.setModel(
-				new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboCamaCasal.setBounds(491, 442, 343, 50);
-		contentPane.add(comboCamaCasal);
-
-		comboCamaSolteiro = new JComboBox();
-		comboCamaSolteiro.setModel(
-				new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboCamaSolteiro.setBounds(491, 579, 343, 50);
-		contentPane.add(comboCamaSolteiro);
-
-		comboNHospedes = new JComboBox();
-		comboNHospedes.setModel(
-				new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboNHospedes.setBounds(491, 705, 343, 50);
-		contentPane.add(comboNHospedes);
-
-		comboFrigobar = new JComboBox();
-		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboFrigobar.setBounds(985, 442, 343, 50);
-		contentPane.add(comboFrigobar);
-
-		comboBanheira = new JComboBox();
-		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboBanheira.setBounds(985, 580, 343, 50);
-		contentPane.add(comboBanheira);
-
-		comboAcessibilidade = new JComboBox();
-		comboAcessibilidade.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboAcessibilidade.setBounds(985, 706, 343, 50);
-		contentPane.add(comboAcessibilidade);
-
-		comboLimpeza = new JComboBox();
-		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboLimpeza.setBounds(1506, 313, 343, 50);
-		contentPane.add(comboLimpeza);
-
-		comboConserto = new JComboBox();
-		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboConserto.setBounds(1506, 440, 343, 50);
-		contentPane.add(comboConserto);
-
-		txtNumQuarto = new RoundJFormattedTextField(null);
-		txtNumQuarto.setBounds(491, 313, 343, 50);
-		contentPane.add(txtNumQuarto);
-		txtNumQuarto.setColumns(10);
-
-		comboAr = new JComboBox();
-		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-		comboAr.setBounds(984, 314, 343, 50);
-		contentPane.add(comboAr);
+		
 	}
 }
