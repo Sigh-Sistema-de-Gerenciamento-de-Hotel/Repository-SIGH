@@ -13,13 +13,18 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
+import modelo.Funcionario;
 import modelo.Hospedagem;
 import visao.padrao.DateTextField;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 
@@ -28,15 +33,19 @@ public class TelaListagemHospedagem extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private HospedagemDAO dao;	
-	private ArrayList<Hospedagem> lista;
+	private HospedagemDAO dao =  HospedagemDAO.getInstancia(); 
 	private JLabel caminho;
+	private Hospedagem hospedagemSelecionada; 
+	private Funcionario funcionarioLogado; 
+
 	private DateTextField dtf = new DateTextField();
 
+	ArrayList<Hospedagem> lista = dao.listarHospedagem();
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,13 +57,14 @@ public class TelaListagemHospedagem extends JFrame {
 				}
 			}
 		});
-	}
+	}   */
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaListagemHospedagem() {
-		
+	public TelaListagemHospedagem(Funcionario funcLogado) {
+		funcionarioLogado = funcLogado;
+		TelaListagemHospedagem janela = this;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Listagem Hospedagem");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,13 +142,72 @@ public class TelaListagemHospedagem extends JFrame {
 		menu.setBounds(0, 0, 420, 1080);
 		contentPane.add(menu);	
 		
-		caminho = new JLabel("Caminho");
-		caminho.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
+		caminho = new JLabel("");
+		caminho.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
 		caminho.setBounds(420, 0, 1500, 60);
 		contentPane.add(caminho);
 		
-		JLabel titulo = new JLabel("Titulo");
-		titulo.setIcon(new ImageIcon("C:\\Users\\Jaqueline\\Amanda\\IFSC\\Sigh\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
+		/*BOTÃO EDITAR*/
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+	//		TelaEdicaoHospedagem telaEdhosp = new TelaEdicaoHospedagem(funcionarioLogado, hospedagemSelecionada);
+	//			telaEdhosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	//			telaEdhosp.setVisible(true);
+	//			dispose();
+	//		}
+	//	});
+			
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoEditar.png"));
+		lblNewLabel.setBounds(1570, 164, 120, 34);
+		contentPane.add(lblNewLabel);
+		
+		/*BOTÃO EXCLUIR*/
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				HospedagemDAO dao = HospedagemDAO.getInstancia();
+				int confirmacao = JOptionPane.showConfirmDialog(null,
+						"Excluir a hospedagem " + hospedagemSelecionada.getQuarto() + "?");
+
+				if (confirmacao == JOptionPane.YES_OPTION) {
+					Boolean validacao = dao.removerHospedagem(hospedagemSelecionada);
+					atualizarJTable();
+					if (validacao == true) {
+						JOptionPane.showMessageDialog(null,
+								"A hospedagem " + hospedagemSelecionada.getQuarto() + " foi excluída");
+
+					}
+				}
+			}
+		});
+			
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoExcluir.png"));
+		lblNewLabel_1.setBounds(1740, 164, 120, 34);
+		contentPane.add(lblNewLabel_1);
+		
+		/*BOTÃO CADASTRAR*/
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaCadastroHospedagem cadhosp = new TelaCadastroHospedagem(funcionarioLogado);
+				cadhosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				cadhosp.setVisible(true);
+				dispose();
+			}
+		});
+			
+		
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cadastrar.png"));
+		lblNewLabel_2.setBounds(1400, 164, 120, 34);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel titulo = new JLabel("");
+		titulo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
 		titulo.setBounds(439, 101, 1444, 119);
 		contentPane.add(titulo);
 	}

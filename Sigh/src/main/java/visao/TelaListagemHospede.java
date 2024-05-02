@@ -222,7 +222,7 @@ public class TelaListagemHospede extends JFrame {
 		contentPane.add(lblNewLabel_11);
 	}
 
-protected void atualizarJTableModel() {
+	protected void atualizarJTableModel() {
 	DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Nome", "Nacionalidade",  "Telefone", "Email", "Data Nascimento", "Responsável"});
 	
 	dao = HospedeDAO.getInstancia();
