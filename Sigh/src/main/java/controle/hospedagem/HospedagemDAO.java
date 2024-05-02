@@ -21,8 +21,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 
 	}
 
-	public static HospedagemDAO getInstancia() {
-
+	public static HospedagemDAO getInstancia() {;
 		if(instancia==null) {
 			instancia=new HospedagemDAO();
 		}
