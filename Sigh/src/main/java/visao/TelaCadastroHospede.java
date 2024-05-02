@@ -481,12 +481,14 @@ public class TelaCadastroHospede extends JFrame {
 		 //   	String responsavel = txtResponsavel.getText();
 		//	    hos.setResponsavel(responsavel);   - Esquece o responsável por enquanto
 				
-				String dataNascimento = txtData.getText(); 
-			    if(dataNascimento.isEmpty()) {
+				DateTextField dtf = new DateTextField();
+				LocalDate data = dtf.stringParaData(txtData.getText());
+				//String dataNascimento = txtData.getText(); 
+			    if(txtData.getText().isEmpty()) {
 					erro = true;
 					//ERRO
 				} else {
-					hos.setDataNascimento(LocalDate.parse(dataNascimento));
+					hos.setDataNascimento(data);
 				}  
 
 		        String genero = (String) comboBoxGenero.getSelectedItem();
