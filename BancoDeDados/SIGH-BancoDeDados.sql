@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS   `hospedes` (
   `cpf` INT NULL,
   `passaporte` VARCHAR(8) NULL,
   `email` VARCHAR(45) NOT NULL,
-  `telefone` INT NOT NULL,
+  `telefone` VARCHAR(20) NOT NULL,
   `id_endereco` INT NOT NULL,
   `id_responsavel` INT NULL,
   PRIMARY KEY (`id_hospede`),

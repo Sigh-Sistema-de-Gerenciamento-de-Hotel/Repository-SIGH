@@ -402,7 +402,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblTelefone.setBounds(554, 780, 100, 20);
 		contentPane.add(lblTelefone);
 		
-		int telefone = hosEditar.getTelefone();
+		String telefone = hosEditar.getTelefone();
 		
 		txtTelefone = new RoundJFormattedTextField(null);
 		txtTelefone.setText(String.valueOf(telefone));
@@ -481,7 +481,7 @@ public class TelaEdicaoHospede extends JFrame {
 				if (telefone.isEmpty()) {
 					//ERRO
 				} else {
-					hosEditar.setTelefone(Integer.parseInt(telefone));
+					hosEditar.setTelefone(telefone);
 				}  
 
 		 //   	String responsavel = txtResponsavel.getText();
