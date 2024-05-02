@@ -80,7 +80,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 	public ArrayList<Hospede> listarHospede() {
 		// TODO Auto-generated method stub
 		
-		ArrayList <Hospede> Hospede = new ArrayList<Hospede>(); 
+		ArrayList <Hospede> hospede = new ArrayList<Hospede>(); 
 		
 		
 		String SQL = "SELECT * FROM hospedes INNER JOIN enderecos ON hospedes.id_endereco = enderecos.id_endereco";
@@ -100,11 +100,11 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 				Hospede hos = new Hospede(); 
 				
 				Integer id_hospede = rs.getInt("id_hospede"); 
-				String nome = rs.getString("nome");
+				String nome = rs.getString("primeiro_nome");
 				String sobrenome = rs.getString("sobrenome");
 				String nomeSocial = rs.getString("nome_social");
 				String genero = rs.getString("genero");
-				Date dataNascimento = rs.getDate("dataNascimento");
+				Date dataNascimento = rs.getDate("data_nascimento");
 				String nacionalidade = rs.getString("nacionalidade"); 
 				Integer cpf = rs.getInt("cpf"); 
 				String passaporte = rs.getString("passaporte"); 
@@ -133,11 +133,11 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 				Hospede respon  = new Hospede();
 				
 				Integer id_hospedeR = rs.getInt("id_hospede"); 
-				String nomeR = rs.getString("nome");
+				String nomeR = rs.getString("primeiro_nome");
 				String sobrenomeR = rs.getString("sobrenome");
 				String nomeSocialR = rs.getString("nome_social");
 				String generoR = rs.getString("genero");
-				Date dataNascimentoR = rs.getDate("dataNascimento");
+				Date dataNascimentoR = rs.getDate("data_nascimento");
 				String nacionalidadeR = rs.getString("nacionalidade"); 
 				Integer cpfR = rs.getInt("cpf"); 
 				String passaporteR = rs.getString("passaporte"); 
@@ -167,7 +167,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 				hos.setEndereco(end);
 				hos.setResponsavel(respon);
 				
-				Hospede.add(hos);
+				hospede.add(hos);
 				
 			}
 			
@@ -180,7 +180,7 @@ public class HospedeDAO implements IHospedeDAO{ //HospedeDAO  implementa a inter
 		}
 		
 		
-		return null;
+		return hospede;
 	}
 
 	@Override
