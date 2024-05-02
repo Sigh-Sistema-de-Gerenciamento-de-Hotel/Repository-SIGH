@@ -152,12 +152,12 @@ public class TelaListagemHospedagem extends JFrame {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaEdicaoHospedagem telaEdhosp = new TelaEdicaoHospedagem(funcionarioLogado, hospedagemSelecionada);
-				telaEdhosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				telaEdhosp.setVisible(true);
-				dispose();
-			}
-		});
+	//		TelaEdicaoHospedagem telaEdhosp = new TelaEdicaoHospedagem(funcionarioLogado, hospedagemSelecionada);
+	//			telaEdhosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	//			telaEdhosp.setVisible(true);
+	//			dispose();
+	//		}
+	//	});
 			
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoEditar.png"));
 		lblNewLabel.setBounds(1570, 164, 120, 34);
