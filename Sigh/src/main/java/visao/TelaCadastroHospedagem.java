@@ -84,6 +84,15 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(lblBotaoHospedes);
 
 		JLabel lblBotaoHospedagemSelecionado = new JLabel("");
+		lblBotaoHospedagemSelecionado.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
 		lblBotaoHospedagemSelecionado.setIcon(new ImageIcon("src\\main\\resources\\menu hospedagem selecionado.png"));
 		lblBotaoHospedagemSelecionado.setBounds(43, 457, 342, 45);
 		contentPane.add(lblBotaoHospedagemSelecionado);

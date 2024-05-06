@@ -48,8 +48,8 @@ public class TelaCadastroHospede extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroHospede(Funcionario funcionarioLogado) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaCadastroHospede(Funcionario funcLogado) {
+		funcionarioLogado = funcLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 1080);
 		contentPane = new JPanel();
@@ -77,6 +77,10 @@ public class TelaCadastroHospede extends JFrame {
 		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 
 			@Override
@@ -94,8 +98,12 @@ public class TelaCadastroHospede extends JFrame {
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Logoff
 				dispose();
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 		});
 		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));

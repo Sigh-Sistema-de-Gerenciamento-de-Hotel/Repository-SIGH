@@ -93,6 +93,17 @@ public class TelaListagemHospedagem extends JFrame {
 		// Menu
 		
 		JLabel botaoSair = new JLabel("Sair");
+		botaoSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			}
+		});
 		botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		botaoSair.setBounds(69, 955, 263, 45);
 		contentPane.add(botaoSair);
@@ -119,6 +130,15 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(funcionarios);
 		
 		JLabel hospedagem = new JLabel("Hospedagem");
+		hospedagem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
 		hospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
 		hospedagem.setBounds(68, 472, 150, 20);
 		contentPane.add(hospedagem);

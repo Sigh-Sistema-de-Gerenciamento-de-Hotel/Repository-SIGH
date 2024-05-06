@@ -78,6 +78,15 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_4);
 
 		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
 		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
 		lblNewLabel_5.setBounds(68, 472, 150, 20);
 		contentPane.add(lblNewLabel_5);
@@ -96,6 +105,7 @@ public class TelaListagemFuncionario extends JFrame {
 				funcionarioLogado = null;
 				TelaLogin tela = new TelaLogin();
 				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 		});
 		lblNewLabel_8.setIcon(new ImageIcon("src/main/resources/botao sair.png"));

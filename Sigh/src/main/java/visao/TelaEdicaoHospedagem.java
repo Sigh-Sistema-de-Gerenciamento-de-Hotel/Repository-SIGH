@@ -53,8 +53,8 @@ public class TelaEdicaoHospedagem extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaEdicaoHospedagem(Funcionario funcionarioLogado, Hospedagem hospSelecionada) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaEdicaoHospedagem(Funcionario funcLogado, Hospedagem hospSelecionada) {
+		funcionarioLogado = funcLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1179, 912);
 		contentPane = new JPanel();
@@ -84,6 +84,15 @@ public class TelaEdicaoHospedagem extends JFrame {
 		contentPane.add(lblBotaoHospedes);
 
 		JLabel lblBotaoHospedagemSelecionado = new JLabel("");
+		lblBotaoHospedagemSelecionado.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
 		lblBotaoHospedagemSelecionado.setIcon(new ImageIcon("src\\main\\resources\\menu hospedagem selecionado.png"));
 		lblBotaoHospedagemSelecionado.setBounds(43, 457, 342, 45);
 		contentPane.add(lblBotaoHospedagemSelecionado);
@@ -108,8 +117,12 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
