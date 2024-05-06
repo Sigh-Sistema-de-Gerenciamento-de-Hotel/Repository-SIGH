@@ -104,7 +104,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();
 			}
-
+			
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));

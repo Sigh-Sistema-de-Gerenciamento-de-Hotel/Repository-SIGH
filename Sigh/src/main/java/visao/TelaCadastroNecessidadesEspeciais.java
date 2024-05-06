@@ -83,6 +83,7 @@ public class TelaCadastroNecessidadesEspeciais extends JFrame {
 		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

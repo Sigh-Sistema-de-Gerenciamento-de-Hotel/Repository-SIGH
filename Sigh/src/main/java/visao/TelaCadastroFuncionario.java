@@ -71,6 +71,10 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcLogado);
+				setVisible(false);
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				listaFuncionario.setVisible(true);
 			}
 
 			@Override
