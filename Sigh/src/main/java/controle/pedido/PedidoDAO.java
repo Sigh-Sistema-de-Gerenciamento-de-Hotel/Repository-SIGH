@@ -1,14 +1,19 @@
 package controle.pedido;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.*;
 import java.util.ArrayList;
-import java.util.Date;
 
 import controle.Conexao;
+import modelo.Endereco;
+import modelo.Funcionario;
 import modelo.Hospedagem;
+import modelo.Hospede;
 import modelo.Pedido;
 import modelo.Quarto;
 import modelo.Setor;
@@ -30,19 +35,19 @@ public class PedidoDAO implements IPedidoDAO{
 	@Override
 	public int inserirPedido(Pedido ped) {
 		
-		String SQL = "INSERT INTO inserirPedido (id, hospedagem, data, horario, setorResponsavel, quarto, descricao, feito) VALUES (?,?,?,?,?,?,?,?,?)";
+		String SQL = "INSERT INTO pedidos (id, hospedagem, data, horario, setorResponsavel, quarto, descricao, feito) VALUES (?,?,?,?,?,?,?,?,?)";
 		
 				Conexao con = Conexao.getInstancia();
 				Connection conBD = con.conectar(); 
-				
+					
 				try {
 					PreparedStatement ps = conBD.prepareStatement(SQL);
 					
 					ps.setInt(1, ped.getId());
 					Hospedagem hosp = ped.getHospedagem();
 					ps.setInt(2, hosp.getId());
-					ps.setDate(3,  ped.getData());
-					ps.setTime(4, ped.getHorario());
+					//ps.setDate(3, ped.getData());
+					//ps.setTime(4, ped.getHorario());
 					Setor setor = ped.getSetorResponsavel();
 					ps.setInt(5, setor.getId());
 					Quarto q = ped.getQuarto();
@@ -64,73 +69,101 @@ public class PedidoDAO implements IPedidoDAO{
 	@Override
 	public ArrayList<Pedido> listarPedido() {
 		
-		// ArrayList para armazenar resultado de select
-		ArrayList<Pedido> pedido = new ArrayList<Pedido>();
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();  // ArrayList para armazenar resultado de select
 		
-		// Comando de SQL a ser executado
-		String SQL = "SELECT * FROM pedido";
+		String SQL = "SELECT * FROM pedidos"
+				+ "INNER JOIN hospedagens ON pedidos.id_hospedagem = hospedagens.id_hospedagem"
+				+ "INNER JOIN quartos ON quartos.id_quarto = pedidos.id_quarto"
+				+ "INNER JOIN departamentos ON departamentos.id_departamento = pedidos.id_departamento";  // Comando de SQL a ser executado
 		
-		
-		// Cria a ponte de conexao com MYSQL
-		Conexao con = Conexao.getInstancia();
+		Conexao con = Conexao.getInstancia(); 	// Cria a ponte de conexao com MYSQL
 		Connection conBD = con.conectar(); 
 		
 		
-		// try catch server para tratar problemas que podem surgir, umas forma de preocaucao
-		try {
+		try { 
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();  	// try catch server para tratar problemas que podem surgir, umas forma de preocaucao
 			
 			while(rs.next()) {
 				
-				//String SQL =" SELECT Quarto, Hospedagem, LocalDateTime, SetorResponsavel"
-				//		+ "FROM Pedido\n"
-				//		+ "INNER JOIN Categories ON Pedido.Quarto = Pedido.Hospedagem = Pedido.LocalDateTime = Pedido.SetorResponsavel";
+				rs.getDate("data");
 				
-						
-				// Criar Objeto
-				Pedido ped = new Pedido();
+				Pedido ped = new Pedido(); // Criar Objeto
 				
-				// Pega os valores de cada coluna do registro
-				int id = rs.getInt("id");
-				String Hospedagem = rs.getString("Hospedagem");
-				String LocalDateTime = rs.getString("DataHorario");
-				String Setor = rs.getString("SetorResponsavel");
-				String Quarto = rs.getString("Quarto");
+				int id = rs.getInt("id");   
+				String hospedagem = rs.getString("hospedagem");
+				LocalDate data = LocalDate.parse(rs.getString("data"));
+			    LocalTime horario = LocalTime.parse(rs.getString("horario"));
+				String setorResponsavel = rs.getString("setor");
+				String quarto = rs.getString("quarto");
 				String descricao = rs.getString("descricao");
-				boolean feito = rs.getBoolean("Feito");
+				boolean feito = rs.getBoolean("feito");
 				
-				// Set os valores no obj java
-				ped.setId(id);
+				ped.setId(id);  
 				ped.setHospedagem(null);
-				ped.setData(null);
-				ped.setHorario(null);
+				//ped.setData(null);
+				//ped.setHorario(null);
 				ped.setSetorResponsavel(null);
 				ped.setQuarto(null);
 				ped.setDescricao(descricao);
 				ped.setFeito(feito);
 				
-				Date dt = rs.getDate("data nascimento");
 				
-				// Adicona obj no ArrayList
-				pedido.add(ped);
+				//HOSPEDAGEM
+				Hospedagem hos = new Hospedagem();
+				id = rs.getInt("id_hospedagem");
+				LocalDate dataEntrada = LocalDate.parse(rs.getString("data_entrada"));
+				String dataSaidatxt = rs.getString("data_saida");
+				LocalDate dataSaida = null;
+				if(dataSaidatxt!=null) {
+					dataSaida = LocalDate.parse(dataSaidatxt);
+				}
+				
+				hos.setId(id);
+				hos.setDataEntrada(dataEntrada);
+				hos.setDataSaida(dataSaida);
+				
+				
+				// QUARTO
+                Quarto qua = new Quarto();
+				int numero = rs.getInt("numero");
+				int numCamaCasal = rs.getInt("numCamaCasal");
+				int numCamaSolteiro = rs.getInt("numCamaSolteiro");
+				int numMaxHospedes = rs.getInt("numMaxHospedes");
+				boolean arCondicionado = rs.getBoolean("arCondicionado");
+				boolean frigobar = rs.getBoolean("frigobar");
+				boolean banheira = rs.getBoolean("banheira");
+				String acessibilidade = rs.getString("acessibilidade");
+				float preco = rs.getFloat("preco");
+				boolean precisaLimpeza = rs.getBoolean("precisaLimpexa");
+				boolean precisaConserto = rs.getBoolean("precisaConserto");
+				
+				qua.setNumero(numero);
+				qua.setNumCamaCasal(numCamaCasal);
+				qua.setNumCamaSolteiro(numCamaSolteiro);
+				qua.setNumMaxHospedes(numMaxHospedes);
+				qua.setArCondicionado(arCondicionado);
+				qua.setFrigobar(frigobar);
+				qua.setBanheira(banheira);
+				//qua.setAcessibilidade(acessibilidade);
+				qua.setPreco(preco);
+				qua.setPrecisaLimpeza(precisaLimpeza);
+				qua.setPrecisaConserto(precisaConserto);
+				
+				pedidos.add(ped);  
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	
 	public boolean atualizarPedido(Pedido ped) {
 		
-		String SQL = "UPDATE atualizarPedido SET id = ? WHERE hospedagem = ? WHERE dataHorario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?";
+		String SQL = "UPDATE pedidos SET hospedagem = ?, data = ?, horario = ?, setorResponsavel = ?, quarto = ?, descricao = ?, feito = ? WHERE id = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -141,11 +174,15 @@ public class PedidoDAO implements IPedidoDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			ps.setInt(1, ped.getId());
-			//ps.setString(3, ped.getHospedagem());
-			//ps.setString(4,  ped.getDataHorario());
-			//ps.setString(5, ped.getSetorResponsavel());
-			//ps.setString(7, ped.getQuarto());
-			//ps.setString(6, ped.getDescricao());
+			Hospedagem hosp = ped.getHospedagem();
+			ps.setInt(2, hosp.getId());
+			//ps.setDate(3, ped.getData());
+			//ps.setTime(4, ped.getHorario());
+			Setor setor = ped.getSetorResponsavel();
+			ps.setInt(5, setor.getId());
+			Quarto q = ped.getQuarto();
+			ps.setInt(6, q.getNumero());
+			ps.setString(7, ped.getDescricao());
 			ps.setBoolean(8, ped.isFeito());
 			
 			retorno = ps.executeUpdate();
@@ -157,15 +194,14 @@ public class PedidoDAO implements IPedidoDAO{
 			con.fecharConexao();
 		}
 		
-		//if Ternario (operador condicional ternario)
-		return (retorno == 0 ? false : true);
+		return (retorno == 0 ? false : true); 	//if Ternario (operador condicional ternario)
 	}
 
 	@Override
 	public boolean removerPedido(Pedido ped) {
 		
-		String SQL = "DELETE FROM removerPedido WHERE id = ? WHERE hospedagem = ? WHERE dataHorario = ? WHERE setorResponsavel = ? WHERE quarto = ? WHERE descricao = ? WHERE feito = ?\";";
-
+		String SQL = "DELETE FROM pedidos hospedagem = ?, data = ?, horario = ?, setorResponsavel = ?, quarto = ?, descricao = ?, feito = ? WHERE id = ?";
+		
 		Conexao con = Conexao.getInstancia(); // instanciando
 		Connection conBD = con.conectar(); // cria "ponte"
 
@@ -174,11 +210,15 @@ public class PedidoDAO implements IPedidoDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			ps.setInt(1, ped.getId());
-			//ps.setString(3, ped.getHospedagem());
-			//ps.setString(4,  ped.getDataHorario());
-			//ps.setString(5, ped.getSetorResponsavel());
-			//ps.setString(7, ped.getQuarto());
-			//ps.setString(6, ped.getDescricao());
+			Hospedagem hosp = ped.getHospedagem();
+			ps.setInt(2, hosp.getId());
+			//ps.setDate(3, ped.getData());
+			//ps.setTime(4, ped.getHorario());
+			Setor setor = ped.getSetorResponsavel();
+			ps.setInt(5, setor.getId());
+			Quarto q = ped.getQuarto();
+			ps.setInt(6, q.getNumero());
+			ps.setString(7, ped.getDescricao());
 			ps.setBoolean(8, ped.isFeito());
 
 			retorno = ps.executeUpdate();
@@ -194,13 +234,102 @@ public class PedidoDAO implements IPedidoDAO{
 
 	@Override
 	public ArrayList<Pedido> listarPedidoPorSetor(Setor s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+		
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+		
+		String SQL = "SELECT * FROM pedidos WHERE id = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Pedido ped = new Pedido();
+				
+				int id = rs.getInt("id");   
+				String hospedagem = rs.getString("hospedagem");
+				LocalDate data = LocalDate.parse(rs.getString("data"));
+			    LocalTime horario = LocalTime.parse(rs.getString("horario"));
+				String setorResponsavel = rs.getString("setor");
+				String quarto = rs.getString("quarto");
+				String descricao = rs.getString("descricao");
+				boolean feito = rs.getBoolean("feito");
+				
+				ped.setId(id);  
+				ped.setHospedagem(null);
+				//ped.setData(null);
+				//ped.setHorario(null);
+				ped.setSetorResponsavel(s);
+				ped.setQuarto(null);
+				ped.setDescricao(descricao);
+				ped.setFeito(feito);
+				
+				pedidos.add(ped);
+				
+			}
+		
+		} catch (SQLException e) {
+		
+		} finally {
+			con.fecharConexao();
+		}
+		
+		return pedidos;
+		
+		}
+	
 	@Override
 	public ArrayList<Pedido> listarPedidoPorFeitos(boolean feito) {
-		// TODO Auto-generated method stub
-		return null;
+		
+         ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+		
+		String SQL = "SELECT * FROM pedidos WHERE feito = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Pedido ped = new Pedido();
+				
+				int id = rs.getInt("id");   
+				String hospedagem = rs.getString("hospedagem");
+				LocalDate data = LocalDate.parse(rs.getString("data"));
+			    LocalTime horario = LocalTime.parse(rs.getString("horario"));
+				String setorResponsavel = rs.getString("Setor");
+				String quarto = rs.getString("quarto");
+				String descricao = rs.getString("descricao");
+				feito = rs.getBoolean("feito");
+				
+				ped.setId(id);  
+				ped.setHospedagem(null);
+				//ped.setData(null);
+				//ped.setHorario(null);
+				ped.setSetorResponsavel(null);
+				ped.setQuarto(null);
+				ped.setDescricao(descricao);
+				ped.setFeito(feito);
+				
+				pedidos.add(ped);
+			}
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		return pedidos;
 	}
 }
