@@ -163,6 +163,8 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(lblNumHospedes);
 
 		
+		
+		
 
 		JLabel lblDataCheckin = new JLabel("Data check-in *");
 		lblDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
