@@ -157,7 +157,7 @@ public class QuartoDAO implements IQuartoDAO {
 
 	@Override
 	public boolean removerQuarto(Quarto qua) {
-		String SQL = "DELETE FROM quartos WHERE numero = ?";
+		String SQL = "DELETE FROM quartos WHERE id_quarto = ?";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();

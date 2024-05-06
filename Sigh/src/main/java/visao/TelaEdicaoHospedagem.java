@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class TelaCadastroHospedagem extends JFrame {
+public class TelaEdicaoHospedagem extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -40,7 +40,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaCadastroHospedagem frame = new TelaCadastroHospedagem();
+					TelaEdicaoHospedagem frame = new TelaEdicaoHospedagem();
 					frame.setVisible(true);
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 				} catch (Exception e) {
@@ -48,13 +48,13 @@ public class TelaCadastroHospedagem extends JFrame {
 				}
 			}
 		});
-	}   */
+	}  */
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroHospedagem(Funcionario funcionarioLogado) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaEdicaoHospedagem(Funcionario funcLogado, Hospedagem hospSelecionada) {
+		funcionarioLogado = funcLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1179, 912);
 		contentPane = new JPanel();
@@ -64,15 +64,6 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
-		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcionarioLogado);
-				setVisible(false);
-				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
-				listaFuncionario.setVisible(true);
-			}
-		});
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
 		lblBotaoFuncionarios.setBounds(67, 523, 295, 38);
 		contentPane.add(lblBotaoFuncionarios);
@@ -126,8 +117,12 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -204,14 +199,16 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
 				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
 				dispose();
 				tlh.setExtendedState(MAXIMIZED_BOTH);
 				tlh.setVisible(true);
 				
 			
-			
+				
+				
+				
+	
 			}
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
@@ -231,4 +228,3 @@ public class TelaCadastroHospedagem extends JFrame {
 		});
 	}
 }
-

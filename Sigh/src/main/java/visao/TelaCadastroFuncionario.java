@@ -39,8 +39,8 @@ public class TelaCadastroFuncionario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroFuncionario(Funcionario funcionarioLogado) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaCadastroFuncionario(Funcionario funcLogado) {
+		this.funcionarioLogado = funcLogado;
 		setTitle("Cadastro de Funcionário");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1404, 1050);
@@ -71,6 +71,10 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcLogado);
+				setVisible(false);
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				listaFuncionario.setVisible(true);
 			}
 
 			@Override
@@ -91,6 +95,10 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 
 			@Override
@@ -151,8 +159,12 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Logoff
 				dispose();
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);;
 			}
 
 			@Override
