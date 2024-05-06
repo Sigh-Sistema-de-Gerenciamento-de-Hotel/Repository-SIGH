@@ -164,7 +164,7 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(menu);	
 		
 		caminho = new JLabel("");
-		caminho.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
+		caminho.setIcon(new ImageIcon("src/main/resources/CaminhoListagemHospedagem.png"));
 		caminho.setBounds(420, 0, 1500, 60);
 		contentPane.add(caminho);
 		
@@ -180,7 +180,7 @@ public class TelaListagemHospedagem extends JFrame {
 	 		}
 		});
 			
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoEditar.png"));
+		lblNewLabel.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
 		lblNewLabel.setBounds(1570, 164, 120, 34);
 		contentPane.add(lblNewLabel);
 		
@@ -206,7 +206,7 @@ public class TelaListagemHospedagem extends JFrame {
 			}
 		});
 			
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoExcluir.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
 		lblNewLabel_1.setBounds(1740, 164, 120, 34);
 		contentPane.add(lblNewLabel_1);
 		
@@ -223,12 +223,12 @@ public class TelaListagemHospedagem extends JFrame {
 		});
 			
 		
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cadastrar.png"));
+		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
 		lblNewLabel_2.setBounds(1400, 164, 120, 34);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel titulo = new JLabel("");
-		titulo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
+		titulo.setIcon(new ImageIcon("src/main/resources/TituloListagemHospedagem.png"));
 		titulo.setBounds(439, 101, 1444, 119);
 		contentPane.add(titulo);
 	}

@@ -195,6 +195,13 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
+				
+			
 			
 			}
 		});

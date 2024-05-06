@@ -82,9 +82,16 @@ public class TelaListagemFuncionario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+<<<<<<< Updated upstream
 				tlh.setVisible(true);
 				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();
+=======
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
+				
+>>>>>>> Stashed changes
 			}
 		});
 		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
