@@ -86,35 +86,43 @@ public class TelaListagemHospede extends JFrame {
 		lblNewLabel_2.setBounds(67, 286, 244, 20);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblNewLabel_3.setBounds(68, 346, 150, 20);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblPedidos = new JLabel("");
+		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+		lblPedidos.setBounds(68, 346, 150, 20);
+		contentPane.add(lblPedidos);
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
-		lblNewLabel_4.setBounds(51, 400, 340, 40);
-		contentPane.add(lblNewLabel_4);
+		JLabel lblHospede = new JLabel("");
+		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+		lblHospede.setBounds(51, 400, 340, 40);
+		contentPane.add(lblHospede);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+		JLabel lblHospedagem = new JLabel("");
+		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				TelaListagemHospedagem tlhp = new TelaListagemHospedagem(funcionarioLogado);
 				dispose();
-				tlh.setExtendedState(MAXIMIZED_BOTH);
-				tlh.setVisible(true);
-				
+				tlhp.setExtendedState(MAXIMIZED_BOTH);
+				tlhp.setVisible(true);
 			}
 		});
-		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblNewLabel_5.setBounds(68, 472, 150, 20);
-		contentPane.add(lblNewLabel_5);
+		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+		lblHospedagem.setBounds(68, 472, 150, 20);
+		contentPane.add(lblHospedagem);
 		
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblNewLabel_6.setBounds(68, 530, 150, 20);
-		contentPane.add(lblNewLabel_6);
+		JLabel lblFuncionario = new JLabel("");
+		lblFuncionario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				dispose();
+				tlf.setExtendedState(MAXIMIZED_BOTH);
+				tlf.setVisible(true);
+			}
+		});
+		lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+		lblFuncionario.setBounds(68, 530, 150, 20);
+		contentPane.add(lblFuncionario);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.addMouseListener(new MouseAdapter() {
