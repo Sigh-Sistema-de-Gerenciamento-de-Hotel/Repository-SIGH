@@ -440,12 +440,37 @@ public class TelaEdicaoHospede extends JFrame {
 		txtNecessidade.setColumns(16);*/
 		
 		
+String genero = hosEditar.getGenero();
 		
+		JComboBox comboBoxGenero = new JComboBox();
+		comboBoxGenero.setModel(new DefaultComboBoxModel(new String[] {"Feminino ", "Masculino"}));
+		comboBoxGenero.setSelectedItem(genero);
+		comboBoxGenero.setBounds(554, 415, 343, 48);
+		contentPane.add(comboBoxGenero);
 		
+		String nacionalidade = hosEditar.getNacionalidade();
 		
-		
-		
-		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" Afegão", " ", "Albanês", " ", " Angolano", " ", " Argentino  ", 
+				" ", " australiano  ", " ", " austríaco ", " ", " bangladês ", " ", " barbadiano  ", " ", "bielorrusso  ", " ", 
+				" belizenho ", " ", "Belga  ", " ", "Boliviano  ", " ", "Brasileiro  ", " ", "Bbúlgaro  ", " ", "Butanês  ", " ", "Camaronês  ",
+				" ", "Canadense  ", " ", "Chileno  ", " ", "Chinês  ", " ", "Colombiano  ", " ", "Costa-riquenho  ",
+				" ", "Croata  ", " ", "Cubano  ", " ", "Dinamarquês  ", " ", "Dominicano  ", " ",
+				"Equatoriano  ", " ", "Egípcio  ", " ", "Salvadorenho  ", " ", "Inglês  ", " ",
+				"Etíope  ", " ", "Finlandês  ", " ", "Francês  ", " ", "Ganese/ganês  ", " ", "Alemão  ",
+				" ", "Grego  ", " ", "Guatemalteco  ", " ", "Guianês  ", " ", "Haitiano  ", " ", "Húngaro  ", 
+				" ", "Iindiano  ", " ", "Iraniano  ", " ", "Irraquiano  ", " ", "Irlandês  ", " ", "Israelita  ", " ",
+				"Iitaliano  ", " ", "Costa-marfinense  ", " ", "Japonês  ", " ", "Jordaniana  ", " ", "Queniano  ", " ", "Kuwaitiano  ", 
+				" ", "Libanês  ", " ", "Líbio  ", " ", "Llituano  ", " ", "Luxemburguês  ", " ", "Madagascarense/ malgaxe  ", " ", "Malaio  ",
+				" ", "Mexicano  ", " ", "Marroquino  ", " ", "Moçambiquenho ", " ", "Nepalês", "  ", "Holandês  ", " ", "Neozelandês  ", 
+				" ", "Nicaraguense  ", " ", "Nigeriano  ", " ", "Norueguês  ", " ", "Norte-coreano  ", " ", "Panamenho  ", " ", "Paraguaio  ", " ",
+				"Peruano  ", " ", "Filipino  ", " ", "Polonês  ", " ", "Português  ", " ", "Romeno  ", " ", "Russo  ", " ", "Senegalês  ", " ", "Sérvio  ", " ", "Singapuriano  ", " ", "Sírio  ", " ", "Sslovaco  ", " ", "Esloveno  ", " ", "Sul-africano  ", " ", "Sul-coreano  ", "", "Espanhol  ", " ", "Surimanês  ",
+				" ", "Sueco  ", " ", "Suíço  ", " ", "Tailandês  ", " ", "Togolês  ", " ", "Tunisino  ", " ", "Tuurco ", " ", "Ucraniano  ", 
+				" ", "Ugandês  ", " ", "Árabe  ", "", "Britânico  ", " ", "Americano", " ",
+				"Uruguaio  ", " ", "Venezuelano  ", " ", "Vietnamita  "}));
+		comboBox_1.setSelectedItem(nacionalidade);
+		comboBox_1.setBounds(554, 515, 343, 48);
+		contentPane.add(comboBox_1);
 		
 		
 		JLabel lblTitulo2 = new JLabel("");
@@ -583,37 +608,6 @@ public class TelaEdicaoHospede extends JFrame {
 		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
 		contentPane.add(lblBotaoCancelar);
 		
-		String genero = hosEditar.getGenero();
-		
-		JComboBox comboBoxGenero = new JComboBox();
-		comboBoxGenero.setModel(new DefaultComboBoxModel(new String[] {"Feminino ", "Masculino"}));
-		comboBoxGenero.setSelectedItem(genero);
-		comboBoxGenero.setBounds(554, 415, 343, 48);
-		contentPane.add(comboBoxGenero);
-		
-		String nacionalidade = hosEditar.getNacionalidade();
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" Afegão", " ", "Albanês", " ", " Angolano", " ", " Argentino  ", 
-				" ", " australiano  ", " ", " austríaco ", " ", " bangladês ", " ", " barbadiano  ", " ", "bielorrusso  ", " ", 
-				" belizenho ", " ", "Belga  ", " ", "Boliviano  ", " ", "Brasileiro  ", " ", "Bbúlgaro  ", " ", "Butanês  ", " ", "Camaronês  ",
-				" ", "Canadense  ", " ", "Chileno  ", " ", "Chinês  ", " ", "Colombiano  ", " ", "Costa-riquenho  ",
-				" ", "Croata  ", " ", "Cubano  ", " ", "Dinamarquês  ", " ", "Dominicano  ", " ",
-				"Equatoriano  ", " ", "Egípcio  ", " ", "Salvadorenho  ", " ", "Inglês  ", " ",
-				"Etíope  ", " ", "Finlandês  ", " ", "Francês  ", " ", "Ganese/ganês  ", " ", "Alemão  ",
-				" ", "Grego  ", " ", "Guatemalteco  ", " ", "Guianês  ", " ", "Haitiano  ", " ", "Húngaro  ", 
-				" ", "Iindiano  ", " ", "Iraniano  ", " ", "Irraquiano  ", " ", "Irlandês  ", " ", "Israelita  ", " ",
-				"Iitaliano  ", " ", "Costa-marfinense  ", " ", "Japonês  ", " ", "Jordaniana  ", " ", "Queniano  ", " ", "Kuwaitiano  ", 
-				" ", "Libanês  ", " ", "Líbio  ", " ", "Llituano  ", " ", "Luxemburguês  ", " ", "Madagascarense/ malgaxe  ", " ", "Malaio  ",
-				" ", "Mexicano  ", " ", "Marroquino  ", " ", "Moçambiquenho ", " ", "Nepalês", "  ", "Holandês  ", " ", "Neozelandês  ", 
-				" ", "Nicaraguense  ", " ", "Nigeriano  ", " ", "Norueguês  ", " ", "Norte-coreano  ", " ", "Panamenho  ", " ", "Paraguaio  ", " ",
-				"Peruano  ", " ", "Filipino  ", " ", "Polonês  ", " ", "Português  ", " ", "Romeno  ", " ", "Russo  ", " ", "Senegalês  ", " ", "Sérvio  ", " ", "Singapuriano  ", " ", "Sírio  ", " ", "Sslovaco  ", " ", "Esloveno  ", " ", "Sul-africano  ", " ", "Sul-coreano  ", "", "Espanhol  ", " ", "Surimanês  ",
-				" ", "Sueco  ", " ", "Suíço  ", " ", "Tailandês  ", " ", "Togolês  ", " ", "Tunisino  ", " ", "Tuurco ", " ", "Ucraniano  ", 
-				" ", "Ugandês  ", " ", "Árabe  ", "", "Britânico  ", " ", "Americano", " ",
-				"Uruguaio  ", " ", "Venezuelano  ", " ", "Vietnamita  "}));
-		comboBox_1.setSelectedItem(nacionalidade);
-		comboBox_1.setBounds(554, 515, 343, 48);
-		contentPane.add(comboBox_1);
 		
 		JLabel lblCaminho2 = new JLabel("");
 		lblCaminho2.setIcon(new ImageIcon("src\\main\\resources\\CaminhoCadastrarHospede.png"));
