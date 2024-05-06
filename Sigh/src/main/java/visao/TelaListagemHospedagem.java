@@ -39,13 +39,14 @@ public class TelaListagemHospedagem extends JFrame {
 	private Funcionario funcionarioLogado; 
 
 	private DateTextField dtf = new DateTextField();
-
 	ArrayList<Hospedagem> lista = dao.listarHospedagem();
+	
+
 	
 	/**
 	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
+	 
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,9 +58,9 @@ public class TelaListagemHospedagem extends JFrame {
 				}
 			}
 		});
-	}   */
+	}   
 
-	/**
+	
 	 * Create the frame.
 	 */
 	public TelaListagemHospedagem(Funcionario funcLogado) {
@@ -152,12 +153,12 @@ public class TelaListagemHospedagem extends JFrame {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-	//		TelaEdicaoHospedagem telaEdhosp = new TelaEdicaoHospedagem(funcionarioLogado, hospedagemSelecionada);
-	//			telaEdhosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	//			telaEdhosp.setVisible(true);
-	//			dispose();
-	//		}
-	//	});
+		TelaEdicaoHospedagem telaEdhosp = new TelaEdicaoHospedagem(funcionarioLogado, hospedagemSelecionada);
+			telaEdhosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		telaEdhosp.setVisible(true);
+			dispose();
+	 		}
+		});
 			
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoEditar.png"));
 		lblNewLabel.setBounds(1570, 164, 120, 34);
@@ -212,7 +213,7 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(titulo);
 	}
 	
-	protected void atualizarJTable() {
+	public void atualizarJTable() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"});
 
 		dao = HospedagemDAO.getInstancia();
@@ -226,3 +227,4 @@ public class TelaListagemHospedagem extends JFrame {
 		table.setModel(modelo);
 	}
 }
+		

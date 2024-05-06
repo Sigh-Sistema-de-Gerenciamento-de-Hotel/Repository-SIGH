@@ -53,7 +53,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaEdicaoHospedagem(Funcionario funcionarioLogado) {
+	public TelaEdicaoHospedagem(Funcionario funcionarioLogado, Hospedagem hospSelecionada) {
 		this.funcionarioLogado = funcionarioLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1179, 912);
