@@ -67,10 +67,10 @@ public class TelaEdicaoHospede extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblQuarto = new JLabel("");
+		/*JLabel lblQuarto = new JLabel("");
 		lblQuarto.setIcon(new ImageIcon("src\\main\\resources\\menu quartoss.png"));
 		lblQuarto.setBounds(68, 563, 400, 52);
-		contentPane.add(lblQuarto);
+		contentPane.add(lblQuarto);*/
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
@@ -88,6 +88,10 @@ public class TelaEdicaoHospede extends JFrame {
 		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -106,8 +110,12 @@ public class TelaEdicaoHospede extends JFrame {
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 		});
 		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
@@ -402,7 +410,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblTelefone.setBounds(554, 780, 100, 20);
 		contentPane.add(lblTelefone);
 		
-		int telefone = hosEditar.getTelefone();
+		String telefone = hosEditar.getTelefone();
 		
 		txtTelefone = new RoundJFormattedTextField(null);
 		txtTelefone.setText(String.valueOf(telefone));
@@ -506,7 +514,7 @@ String genero = hosEditar.getGenero();
 				if (telefone.isEmpty()) {
 					//ERRO
 				} else {
-					hosEditar.setTelefone(Integer.parseInt(telefone));
+					hosEditar.setTelefone(telefone);
 				}  
 
 		 //   	String responsavel = txtResponsavel.getText();

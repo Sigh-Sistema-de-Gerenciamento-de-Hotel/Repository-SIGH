@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class TelaCadastroHospedagem extends JFrame {
+public class TelaEdicaoHospedagem extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -40,7 +40,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaCadastroHospedagem frame = new TelaCadastroHospedagem();
+					TelaEdicaoHospedagem frame = new TelaEdicaoHospedagem();
 					frame.setVisible(true);
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 				} catch (Exception e) {
@@ -48,13 +48,13 @@ public class TelaCadastroHospedagem extends JFrame {
 				}
 			}
 		});
-	}   */
+	}  */
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroHospedagem(Funcionario funcionarioLogado) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaEdicaoHospedagem(Funcionario funcLogado, Hospedagem hospSelecionada) {
+		funcionarioLogado = funcLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1179, 912);
 		contentPane = new JPanel();
@@ -117,8 +117,12 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -215,4 +219,3 @@ public class TelaCadastroHospedagem extends JFrame {
 		});
 	}
 }
-
