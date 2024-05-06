@@ -125,6 +125,15 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(conta);
 		
 		JLabel funcionarios = new JLabel("Funciários");
+		funcionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				tlf.setVisible(true);
+				tlf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
 		funcionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
 		funcionarios.setBounds(68, 523, 295, 38);
 		contentPane.add(funcionarios);
@@ -149,6 +158,15 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(pedidos);
 		
 		JLabel hospedes = new JLabel("Hóspedes");
+		hospedes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
+			}
+		});
 		hospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 		hospedes.setBounds(68, 407, 150, 20);
 		contentPane.add(hospedes);

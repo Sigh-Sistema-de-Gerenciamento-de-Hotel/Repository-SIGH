@@ -82,6 +82,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblHospedes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 
 			@Override
@@ -120,6 +124,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				tlf.setVisible(true);
+				tlf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 
 			@Override
