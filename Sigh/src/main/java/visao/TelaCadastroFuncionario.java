@@ -119,6 +119,10 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 
 			@Override
@@ -278,12 +282,17 @@ public class TelaCadastroFuncionario extends JFrame {
 
 				if (idS.isEmpty()) {
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu CPF!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					int id = 0;
 					try {
 						id = Integer.parseInt(idS);
 					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
+						TelaErro dadosIncorretos = new TelaErro("CPF precisa ser tipo inteiro!");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);
 						erro = true;
 					}
 					if (erro == false && id != 0) {
@@ -296,6 +305,9 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (nome.isEmpty()) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu nome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					func.setNome(nome);
 				}
@@ -304,6 +316,9 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (sobrenome.isEmpty()) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu sobrenome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					func.setSobrenome(sobrenome);
 				}
@@ -315,6 +330,9 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (cargo.isEmpty()) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu cargo!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					func.setCargo(cargo);
 				}
@@ -323,6 +341,9 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (usuario.isEmpty()) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu usuário!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					func.setUsuario(usuario);
 				}
@@ -331,6 +352,9 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (senhaChar == null) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira sua senha!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					String senha = senhaChar.toString();
 					func.setSenha(senha);
@@ -351,6 +375,9 @@ public class TelaCadastroFuncionario extends JFrame {
 						setVisible(false);
 					} else {
 						// mensagem de ERRO
+						TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);
 					}
 				}
 			}

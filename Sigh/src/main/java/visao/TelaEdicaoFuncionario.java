@@ -82,6 +82,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblHospedes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 
 			@Override
@@ -120,6 +124,10 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				tlf.setVisible(true);
+				tlf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 
 			@Override
@@ -166,6 +174,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 				String nome = txtNome.getText();
 				if(nome.isEmpty()) {
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu nome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					funcEditar.setNome(nome);
 				}
@@ -173,6 +184,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 				String sobrenome = txtSobrenome.getText();
 				if(sobrenome.isEmpty()){
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu sobrenome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					funcEditar.setSobrenome(sobrenome);
 				}
@@ -183,6 +197,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 				String cargo = txtCargo.getText();
 				if(cargo.isEmpty()) {
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu cargo!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				}  else {
 					funcEditar.setCargo(cargo);
 				}
@@ -191,6 +208,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 				String usuario = txtUsuario.getText();
 				if(usuario.isEmpty()) {
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu usuário!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					funcEditar.setUsuario(usuario);
 				}
@@ -199,6 +219,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 				
 				if(senhaChar == null) {
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira sua senha!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					//String senha = senhaChar.toString();
 					//String.valueOf(senhaChar);
@@ -217,6 +240,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 					dispose();
 				} else {
 					// mensagem de ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				}
 
 			}

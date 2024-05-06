@@ -148,6 +148,10 @@ public class TelaEdicaoHospede extends JFrame {
 		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -168,6 +172,10 @@ public class TelaEdicaoHospede extends JFrame {
 		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				tlf.setVisible(true);
+				tlf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -525,7 +533,7 @@ String genero = hosEditar.getGenero();
 			    if(txtData.getText().isEmpty()) {
 					//ERRO
 				} else {
-					hosEditar.setDataNascimento(dataNascimento);
+					hosEditar.setDataNascimento(data);
 				}  
 
 		        String genero = (String) comboBoxGenero.getSelectedItem();

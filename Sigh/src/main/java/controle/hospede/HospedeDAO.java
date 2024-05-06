@@ -187,7 +187,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 	public boolean atualizarHospede(Hospede hos) {
 
 		String SQL = "UPDATE hospedes SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, genero = ?, data_nascimento = ?,  nacionalidade = ?, cpf = ?, passaporte = ?, "
-				+ "email = ?, telefone = ?,  id_endereco = ?,  id_responsavel = ? WHERE id_hospede = ? ";
+				+ "email = ?, telefone = ?,  id_endereco = ? WHERE id_hospede = ? ";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -205,9 +205,10 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			ps.setString(6, hos.getNacionalidade());
 			ps.setInt(7, hos.getCpf());
 			ps.setString(8, hos.getPassaporte());
-			ps.setString(9, hos.getTelefone());
-			ps.setInt(10, hos.getEndereco().getId());
-			ps.setInt(8, hos.getResponsavel().getId());
+			ps.setString(9, hos.getEmail());
+			ps.setString(10, hos.getTelefone());
+			ps.setInt(11, 1);
+			ps.setInt(12, hos.getId());
 
 			retorno = ps.executeUpdate();
 
