@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -473,7 +474,10 @@ public class TelaCadastroHospede extends JFrame {
 				String nome = txtNome.getText();
 				if (nome.isEmpty()) {
 					erro = true;
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu Nome");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+					
 				} else {
 					hos.setNome(nome);
 				}
@@ -481,7 +485,10 @@ public class TelaCadastroHospede extends JFrame {
 				String sobrenome = txtSobrenome.getText();
 				if (sobrenome.isEmpty()) {
 					erro = true;
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu Sobrenome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+					
 				} else {
 					hos.setSobrenome(sobrenome);
 				}
@@ -492,7 +499,9 @@ public class TelaCadastroHospede extends JFrame {
 				String telefone = txtTelefone.getText();
 				if (telefone.isEmpty()) {
 					erro = true;
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu Telefone!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					hos.setTelefone(telefone);
 				}
@@ -505,7 +514,9 @@ public class TelaCadastroHospede extends JFrame {
 				// String dataNascimento = txtData.getText();
 				if (txtData.getText().isEmpty()) {
 					erro = true;
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					hos.setDataNascimento(data);
 				}
@@ -513,7 +524,9 @@ public class TelaCadastroHospede extends JFrame {
 				String genero = (String) comboBoxGenero.getSelectedItem();
 				if (genero.isEmpty()) {
 					erro = true;
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu Gênero!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					hos.setGenero(genero);
 				}
@@ -521,24 +534,50 @@ public class TelaCadastroHospede extends JFrame {
 				String nacionalidade = (String) comboBox_1.getSelectedItem();
 				if (nacionalidade == null) {
 					erro = true;
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira sua Nacionalidade!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					hos.setNacionalidade(nacionalidade);
 				}
 
 				// No caso de CPF e Passaporte a verificação vai ser diferente
-
-				// TENTA FAZER ASSIM:
-
 				String cpf = txtCpf.getText();
 				String passaporte = txtPassaporte.getText();
-
-				if (passaporte.isEmpty() && cpf.isEmpty()) {
-					// ERRO
-				} else if (passaporte.isEmpty() || passaporte.trim().isEmpty()) {
-					hos.setCpf(Integer.valueOf(cpf));
+				
+				// Verifica se ambos os campos estão vazios
+				if (cpf.isEmpty() && passaporte.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+					
+				    //JOptionPane.showMessageDialog(null, "CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
 				} else {
-					hos.setPassaporte(passaporte);
+				   
+				    if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
+				        
+				        if (!validarCPF(cpf)) {
+				            // Exibir mensagem de erro 
+				        	TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
+							dadosIncorretos.setLocationRelativeTo(null);
+							dadosIncorretos.setVisible(true);
+							
+				            //JOptionPane.showMessageDialog(null, "CPF inválido. Por favor, insira um CPF válido.");
+				        } else {
+				        	hos.setCpf(Integer.valueOf(cpf));				        }
+				    }
+				    if (!passaporte.isEmpty() && !passaporte.trim().isEmpty()) {
+				        if (!validarPassaporte(passaporte)) {
+				            // Exibir mensagem de erro
+				        	TelaErro dadosIncorretos = new TelaErro("Passaporte inválido. Por favor, insira um passaporte válido.");
+							dadosIncorretos.setLocationRelativeTo(null);
+							dadosIncorretos.setVisible(true);
+							
+				           //JOptionPane.showMessageDialog(null, "Passaporte inválido. Por favor, insira um passaporte válido.");
+				        } else {
+				            hos.setPassaporte(passaporte);
+				        }
+				    }
 				}
 
 				String email = txtEmail.getText();
@@ -568,6 +607,16 @@ public class TelaCadastroHospede extends JFrame {
 						// mensagem de ERRO
 					}
 				}
+			}
+
+			private boolean validarPassaporte(String passaporte) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			private boolean validarCPF(String cpf) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 
 			@Override

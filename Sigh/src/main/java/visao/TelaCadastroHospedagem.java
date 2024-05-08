@@ -209,14 +209,18 @@ public class TelaCadastroHospedagem extends JFrame {
 				String dataEntrada = txtDataCheckin.getText();
 				if (dataEntrada.isEmpty()) {
 					erro = true;
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} 
 
 
 				String dataSaida = txtDataCheckout.getText();
 				if (dataSaida.isEmpty()) {
 					erro = true;
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} 
 
 				/*String preco = txtpreco.getText();
