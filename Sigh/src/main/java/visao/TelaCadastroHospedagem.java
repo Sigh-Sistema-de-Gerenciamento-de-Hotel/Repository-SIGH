@@ -262,6 +262,8 @@ public class TelaCadastroHospedagem extends JFrame {
 					lf.setVisible(true);
 					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					dispose();
+					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(hospedagem);
+					telaConfirmacao.setVisible(true);
 				}	
 
 				}			
