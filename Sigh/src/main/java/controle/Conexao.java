@@ -70,9 +70,9 @@ public class Conexao {
 			if(file!=null) {
 				BufferedReader reader = new BufferedReader(file);
 		
-				USERNAME = reader.readLine();
-				SENHA = reader.readLine();
-				BD = reader.readLine();
+				USERNAME = "root";
+				SENHA = "aluno";
+				BD = "sigh";
 				
 				reader.close();  
 				
