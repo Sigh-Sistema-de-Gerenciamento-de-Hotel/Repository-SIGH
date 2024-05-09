@@ -57,8 +57,8 @@ public class TelaCadastroHospedagem extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroHospedagem(Funcionario funcionarioLogado) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaCadastroHospedagem(Funcionario funcLogado) {
+		this.funcionarioLogado = funcLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1179, 912);
 		contentPane = new JPanel();
@@ -83,6 +83,16 @@ public class TelaCadastroHospedagem extends JFrame {
 
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
+		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcionarioLogado);
+				setVisible(false);
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				listaFuncionario.setVisible(true);
+			
+			}
+		});
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
 		lblBotaoFuncionarios.setBounds(67, 523, 295, 38);
 		contentPane.add(lblBotaoFuncionarios);

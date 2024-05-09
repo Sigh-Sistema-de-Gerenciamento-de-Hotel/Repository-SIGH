@@ -168,7 +168,7 @@ public class TelaCadastroFuncionario extends JFrame {
 				funcionarioLogado = null;
 				TelaLogin tela = new TelaLogin();
 				tela.setVisible(true);
-				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);;
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 
 			@Override
