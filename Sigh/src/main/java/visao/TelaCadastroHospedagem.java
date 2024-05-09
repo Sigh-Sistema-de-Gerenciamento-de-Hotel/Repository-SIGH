@@ -72,7 +72,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(comboBoxHospedes);
 		
 		comboBoxQuartos = new JComboBox<Integer>();
-		comboBoxQuartos.setModel(new DefaultComboBoxModel(new Integer[] {1, 2, 3, 4}));
+		comboBoxQuartos.setModel(new DefaultComboBoxModel(new String[] {"129", "178", "183", "278", "301", "378", "533", "554", "606", "609", "610", "681", "685", "857", "864", "869", "894", "924", "978", "980"}));
 		comboBoxQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxQuartos.setBounds(1010, 355, 343, 48);
 		contentPane.add(comboBoxQuartos);
@@ -256,9 +256,16 @@ public class TelaCadastroHospedagem extends JFrame {
 					
 					HospedagemDAO dao = HospedagemDAO.getInstancia();
 					dao.inserirHospedagem(hospedagem);
+				
+					
+					TelaListagemHospedagem lf = new TelaListagemHospedagem(funcionarioLogado);
+					lf.setVisible(true);
+					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					dispose();
+				}	
 
 				}			
-			}
+			
 
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
