@@ -57,8 +57,8 @@ public class TelaCadastroHospedagem extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroHospedagem(Funcionario funcionarioLogado) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaCadastroHospedagem(Funcionario funcLogado) {
+		this.funcionarioLogado = funcLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1179, 912);
 		contentPane = new JPanel();
@@ -72,7 +72,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(comboBoxHospedes);
 		
 		comboBoxQuartos = new JComboBox<Integer>();
-		comboBoxQuartos.setModel(new DefaultComboBoxModel(new Integer[] {1, 2, 3, 4}));
+		comboBoxQuartos.setModel(new DefaultComboBoxModel(new String[] {"129", "178", "183", "278", "301", "378", "533", "554", "606", "609", "610", "681", "685", "857", "864", "869", "894", "924", "978", "980"}));
 		comboBoxQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxQuartos.setBounds(1010, 355, 343, 48);
 		contentPane.add(comboBoxQuartos);
@@ -83,6 +83,16 @@ public class TelaCadastroHospedagem extends JFrame {
 
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
+		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcionarioLogado);
+				setVisible(false);
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				listaFuncionario.setVisible(true);
+			
+			}
+		});
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
 		lblBotaoFuncionarios.setBounds(67, 523, 295, 38);
 		contentPane.add(lblBotaoFuncionarios);
@@ -246,9 +256,16 @@ public class TelaCadastroHospedagem extends JFrame {
 					
 					HospedagemDAO dao = HospedagemDAO.getInstancia();
 					dao.inserirHospedagem(hospedagem);
+				
+					
+					TelaListagemHospedagem lf = new TelaListagemHospedagem(funcionarioLogado);
+					lf.setVisible(true);
+					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					dispose();
+				}	
 
 				}			
-			}
+			
 
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
