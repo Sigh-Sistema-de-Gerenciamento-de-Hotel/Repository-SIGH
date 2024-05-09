@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -72,7 +73,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(comboBoxHospedes);
 		
 		comboBoxQuartos = new JComboBox<Integer>();
-		comboBoxQuartos.setModel(new DefaultComboBoxModel(new String[] {"129", "178", "183", "278", "301", "378", "533", "554", "606", "609", "610", "681", "685", "857", "864", "869", "894", "924", "978", "980"}));
+		comboBoxQuartos.setModel(new DefaultComboBoxModel(new Integer[] {129, 178, 183, 278, 301, 378, 533, 554, 606, 609, 610, 681, 685}));
 		comboBoxQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxQuartos.setBounds(1010, 355, 343, 48);
 		contentPane.add(comboBoxQuartos);
@@ -215,18 +216,21 @@ public class TelaCadastroHospedagem extends JFrame {
 
 				int numQuartos = (Integer) comboBoxQuartos.getSelectedItem();
 				int numHospedes = (Integer) comboBoxHospedes.getSelectedItem();
+				
+				
+				DateTextField dtf = new DateTextField();
+				LocalDate dataEntrada = dtf.stringParaData(txtDataCheckin.getText());
 
-				String dataEntrada = txtDataCheckin.getText();
-				if (dataEntrada.isEmpty()) {
+				if (txtDataCheckin.getText().isEmpty()) {
 					erro = true;
 					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
-				} 
+				}
+				
+				LocalDate dataSaida = dtf.stringParaData(txtDataCheckout.getText());
 
-
-				String dataSaida = txtDataCheckout.getText();
-				if (dataSaida.isEmpty()) {
+				if (txtDataCheckout.getText().isEmpty()) {
 					erro = true;
 					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
 					dadosIncorretos.setLocationRelativeTo(null);
@@ -251,8 +255,8 @@ public class TelaCadastroHospedagem extends JFrame {
 				if(erro==false) {
 					hospedagem.setQuarto(null);
 					hospedagem.setNumHospedes(numHospedes);
-					hospedagem.setDataEntrada(null);
-					hospedagem.setDataSaida(null);
+					hospedagem.setDataEntrada(dataEntrada);
+					hospedagem.setDataSaida(dataSaida);
 					
 					HospedagemDAO dao = HospedagemDAO.getInstancia();
 					dao.inserirHospedagem(hospedagem);
