@@ -163,21 +163,9 @@ public class TelaListagemFuncionario extends JFrame {
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
-				int confirmacao = JOptionPane.showConfirmDialog(null,
-						"Excluir o funcionário " + funcionarioSelecionado.getNome() + "?");
-
-				if (confirmacao == JOptionPane.YES_OPTION) {
-					Boolean validacao = dao.removerFuncionarios(funcionarioSelecionado);
-					atualizarJTableModel();
-					if (validacao == true) {
-						JOptionPane.showMessageDialog(null,
-								"O funcionário " + funcionarioSelecionado.getNome() + " foi excluído");
-
-					}
-				}
+				TelaConfirmacaoExclusao excluir = new TelaConfirmacaoExclusao("Excluir o funcionário" + funcionarioSelecionado.getNome() + "?");
 			}
-		});
+		});   
 		botaoExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
 		botaoExcluir.setBounds(1740, 164, 120, 34);
 		contentPane.add(botaoExcluir);
