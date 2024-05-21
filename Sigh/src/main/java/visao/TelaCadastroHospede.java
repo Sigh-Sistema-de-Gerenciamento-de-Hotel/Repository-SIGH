@@ -602,6 +602,9 @@ public class TelaCadastroHospede extends JFrame {
 						lh.setVisible(true);
 						lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
 						hos.setId(validacao);
+						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(hos);
+						telaConfirmacao.setVisible(true);
+						dispose();
 
 					} else {
 						// mensagem de ERRO

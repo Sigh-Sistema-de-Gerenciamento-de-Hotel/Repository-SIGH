@@ -369,8 +369,7 @@ public class TelaCadastroFuncionario extends JFrame {
 						TelaListagemFuncionario lf = new TelaListagemFuncionario(funcionarioLogado);
 						lf.setVisible(true);
 						lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getNome(), func.getSobrenome(),
-								func.getNomeSocial(), func.getUsuario(), func.getCargo());
+						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func);
 						telaConfirmacao.setVisible(true);
 						setVisible(false);
 					} else {
