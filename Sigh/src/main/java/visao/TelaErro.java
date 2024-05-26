@@ -61,7 +61,7 @@ public class TelaErro extends JFrame {
 		panel.add(lblErro);
 		
 		JLabel lblAtencao = new JLabel("");
-		lblAtencao.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\AtençaoErro.png"));
+		lblAtencao.setIcon(new ImageIcon("src\\main\\resources\\AtençaoErro.png"));
 		lblAtencao.setBounds(22, 11, 89, 68);
 		panel.add(lblAtencao);
 		
@@ -72,7 +72,7 @@ public class TelaErro extends JFrame {
 				setVisible(false);
 			}
 		});
-		lblBotaoSair.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoTelaErro.png"));
+		lblBotaoSair.setIcon(new ImageIcon("src\\main\\resources\\botaoTelaErro.png"));
 		lblBotaoSair.setBounds(351, 11, 89, 31);
 		panel.add(lblBotaoSair);
 		
