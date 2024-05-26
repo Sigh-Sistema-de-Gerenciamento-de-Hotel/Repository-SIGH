@@ -20,6 +20,8 @@ import modelo.Funcionario;
 import modelo.Hospede;
 import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TelaCadastroHospede extends JFrame {
 
