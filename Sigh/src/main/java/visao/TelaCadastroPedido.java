@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
@@ -116,6 +117,7 @@ public class TelaCadastroPedido extends JFrame {
 		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -321,7 +323,7 @@ public class TelaCadastroPedido extends JFrame {
 		contentPane.add(lblHospedag);
 		
 		comboBox2Departamento = new JComboBox();
-		comboBox2Departamento.setModel(new DefaultComboBoxModel(new String[] {" Camareira", " ", " Manutenção", " ", " Cozinha", " ", " Recepção", 
+		comboBox2Departamento.setModel(new DefaultComboBoxModel(new String[] {" Camareira", " ", " Manutenção", " ", " Recepção", 
 				" ", " Limpeza"}));
 		comboBox2Departamento.setBounds(1450, 326, 343, 48);
 		contentPane.add(comboBox2Departamento);
@@ -347,7 +349,7 @@ public class TelaCadastroPedido extends JFrame {
 		comboBox1Quarto.setBounds(1450, 425, 343, 48);
 		contentPane.add(comboBox1Quarto);
 		
-		txtData = new RoundJFormattedTextField(null);
+		txtData = new DateTextField();
 		txtData.setBounds(1001, 523, 343, 48);
 		contentPane.add(txtData);
 		txtData.setColumns(10);
