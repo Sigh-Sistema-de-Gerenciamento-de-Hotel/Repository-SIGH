@@ -1,6 +1,5 @@
 package visao;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
@@ -9,18 +8,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
-import modelo.Usuario;
 import visao.padrao.RoundJFormattedTextField;
 import javax.swing.JPasswordField;
-import java.awt.Color;
 
 public class TelaCadastroFuncionario extends JFrame {
 

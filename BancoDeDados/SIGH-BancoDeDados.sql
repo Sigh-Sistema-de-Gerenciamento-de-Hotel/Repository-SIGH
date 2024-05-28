@@ -117,10 +117,10 @@ CREATE TABLE IF NOT EXISTS   `hospede_hospedagem` (
 -- -----------------------------------------------------
 -- Table   `departamentos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS   `departamentos` (
-  `id_departamento` INT NOT NULL,
-  `nome_departamento` VARCHAR(45) NOT NULL, 
-  PRIMARY KEY (`id_departamento`));
+CREATE TABLE IF NOT EXISTS   `setores` (
+  `id_setor` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL, 
+  PRIMARY KEY (`id_setor`));
 
 -- -----------------------------------------------------
 -- Table   `pedidos`
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS   `pedidos` (
   `feito` TINYINT NULL,
   `id_hospedagem` INT NOT NULL,
   `id_quarto` INT NOT NULL,
-  `id_departamento` INT NOT NULL,
+  `id_setor` INT NOT NULL,
   PRIMARY KEY (`id_pedidos`),
   CONSTRAINT `fk_pedidos_hospedagens1`
     FOREIGN KEY (`id_hospedagem`)
@@ -143,9 +143,9 @@ CREATE TABLE IF NOT EXISTS   `pedidos` (
     FOREIGN KEY (`id_quarto`)
     REFERENCES   `quartos` (`id_quarto`)
     ON DELETE CASCADE,
-  CONSTRAINT `fk_pedidos_departamentos1`
-    FOREIGN KEY (`id_departamento`)
-    REFERENCES `departamentos` (`id_departamento`)
+  CONSTRAINT `fk_pedidos_setores1`
+    FOREIGN KEY (`id_setor`)
+    REFERENCES `setores` (`id_setor`)
     ON DELETE CASCADE);
 
 
@@ -165,30 +165,6 @@ CREATE TABLE IF NOT EXISTS   `necessidades_hospede` (
     FOREIGN KEY (`id_necessidade`)
     REFERENCES   `necessidades_especiais` (`id_necessidade`)
     ON DELETE CASCADE);
-
-
-
-
--- -----------------------------------------------------
--- Table   `cargos`
--- -----------------------------------------------------
-/*CREATE TABLE IF NOT EXISTS   `cargos` (
-  `id_cargo` INT NOT NULL,
-  `nome_cargo` VARCHAR(45) NOT NULL,
-  `id_departamento` INT NOT NULL,
-  PRIMARY KEY (`id_cargo`),
-  CONSTRAINT `fk_cargos_departamentos1`
-    FOREIGN KEY (`id_departamento`)
-    REFERENCES   `departamentos` (`id_departamento`));*/
-
--- -----------------------------------------------------
--- Table   `usuarios_senhas`
--- -----------------------------------------------------
-/*CREATE TABLE IF NOT EXISTS   `usuarios_senhas` (
-  `usuario` VARCHAR(45) NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`usuario`),
-  UNIQUE KEY unique_usuario(usuario));*/
   
 -- -----------------------------------------------------
 -- Table   `funcionarios`
@@ -198,10 +174,15 @@ CREATE TABLE IF NOT EXISTS   `funcionarios` (
   `primeiro_nome` VARCHAR(45) NOT NULL,
   `sobrenome` VARCHAR(45) NOT NULL,
   `nome_social` VARCHAR(45) NULL,
+  `id_setor` VARCHAR(45) NOT NULL,
   `cargo` VARCHAR(45) NOT NULL,
   `usuario` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_funcionario`));
+  PRIMARY KEY (`id_funcionario`),
+  CONSTRAINT `fk_funcionarios_setores1`
+    FOREIGN KEY (`id_setor`)
+    REFERENCES `setores` (`id_setor`)
+    ON DELETE CASCADE);
 
 -- inserts enderecos 
 insert into enderecos (cep, estado, cidade, endereco, complemento, numero) values (12345, 'Geórgia', 'San Jose', 'PO Box 40575', null, 7253);
@@ -397,42 +378,45 @@ insert into usuarios_senhas (usuario, senha) values ('s', 'jC6,$jI%t+&');*/
 
 --------------------------------------------------------------------------------------------------------------------
 
--- inserts departamentos 
-insert into departamentos (id_departamento, nome_departamento) values (12, 'Limpeza');
-insert into departamentos (id_departamento, nome_departamento) values (13, 'Manutenção');
-insert into departamentos (id_departamento, nome_departamento) values (14, 'Recepção');
+-- inserts setores 
+insert into setores (id_setor, nome) values (10, 'adm');
+insert into setores (id_setor, nome) values (11, 'RH');
+insert into setores (id_setor, nome) values (12, 'Limpeza');
+insert into setores (id_setor, nome) values (13, 'Manutenção');
+insert into setores (id_setor, nome) values (14, 'Recepção');
 
 --------------------------------------------------------------------------------------------------------------------
 
 -- inserts funcionarios
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, cargo, usuario, senha) values (1, 'adm', 'adm', null, 'ADM', 'adm', 'adm');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, cargo, usuario, senha) values (2, 'Halimeda', 'Rase', null, "Faxineira", 'a', 'bL6.?8O6"4/');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, cargo, usuario, senha) values (3, 'Faina', 'Hullins', null, "Eletricista", 'b', 'kQ4>5ILf');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, cargo, usuario, senha) values (4, 'Ruthann', 'Housbie', 'Carla', "Recepcionista", 'c', 'lO0"ISW/ild');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (1, 'adm', 'adm', null, 10, 'ADM', 'adm', 'adm');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (2, 'Halimeda', 'Rase', null, 12, "Faxineira", 'a', 'bL6.?8O6"4/');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (3, 'Faina', 'Hullins', null, 13, "Eletricista", 'b', 'kQ4>5ILf');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (4, 'Ruthann', 'Housbie', 'Carla', 14, "Recepcionista", 'c', 'lO0"ISW/ild');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (5, 'RH', 'RH', null, 11, "RH", 'rh', 'rh');
 
 --------------------------------------------------------------------------------------------------------------------
 
 -- inser pedidos
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-04-21', '11:10:14', 'Limpeza', 0, 1, 980, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-03-09', '04:07:43', 'Trocar lampada', 1, 1, 980, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-09-28', '13:53:43', 'Limpeza completa', 1, 20, 533, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-04-27', '14:48:22', 'Toalhas extras', 0, 12, 857, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-10-28', '04:02:59', 'Trocar lampadas', 1, 2, 378, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-29', '02:53:02', 'Trocar roupa de cama', 1, 9, 609, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-03-17', '02:22:44', 'Arrumar chuveiro', 1, 20, 533, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-08-25', '12:01:25', 'Vazamento na pia do baheiro', 0, 13, 610, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-09-15', '13:26:43', 'Limpeza', 0, 16, 129, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-31', '13:09:37', 'Trocar roupa de cama', 1, 4, 178, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-10-24', '13:29:23', 'Arrumar cama quebrada', 1, 14, 301, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-07-18', '18:30:17', 'Trocas lampadas', 1, 6, 924, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-14', '13:36:52', 'Problema no alarme de incendio', 1, 14, 301, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-09-06', '14:25:35', 'Chuveiro não esquenta', 0, 4, 178, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-03', '03:02:27', 'Limpeza', 1, 10, 606, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-10-18', '11:47:07', 'Limpeza', 0, 6, 924, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-05-06', '13:34:38', 'Limpeza completa', 1, 6, 924, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-07-07', '13:01:37', 'Trocar toalhas e roupa de cama', 1, 18, 685, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-09-23', '16:18:08', 'Porta emperrada', 1, 17, 864, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-30', '22:43:12', 'Janela quebrada', 0, 3, 554, 13);
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-04-21', '11:10:14', 'Limpeza', 0, 1, 980, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-03-09', '04:07:43', 'Trocar lampada', 1, 1, 980, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-09-28', '13:53:43', 'Limpeza completa', 1, 20, 533, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-04-27', '14:48:22', 'Toalhas extras', 0, 12, 857, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-10-28', '04:02:59', 'Trocar lampadas', 1, 2, 378, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-29', '02:53:02', 'Trocar roupa de cama', 1, 9, 609, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-03-17', '02:22:44', 'Arrumar chuveiro', 1, 20, 533, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-08-25', '12:01:25', 'Vazamento na pia do baheiro', 0, 13, 610, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-09-15', '13:26:43', 'Limpeza', 0, 16, 129, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-31', '13:09:37', 'Trocar roupa de cama', 1, 4, 178, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-10-24', '13:29:23', 'Arrumar cama quebrada', 1, 14, 301, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-07-18', '18:30:17', 'Trocas lampadas', 1, 6, 924, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-14', '13:36:52', 'Problema no alarme de incendio', 1, 14, 301, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-09-06', '14:25:35', 'Chuveiro não esquenta', 0, 4, 178, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-03', '03:02:27', 'Limpeza', 1, 10, 606, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-10-18', '11:47:07', 'Limpeza', 0, 6, 924, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-05-06', '13:34:38', 'Limpeza completa', 1, 6, 924, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-07-07', '13:01:37', 'Trocar toalhas e roupa de cama', 1, 18, 685, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-09-23', '16:18:08', 'Porta emperrada', 1, 17, 864, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-30', '22:43:12', 'Janela quebrada', 0, 3, 554, 13);
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -452,11 +436,7 @@ SELECT COUNT(*) FROM hospedagens ;
 
 SELECT COUNT(*) FROM necessidades_hospede; 
 
-/*SELECT COUNT(*) FROM usuarios_senhas;*/
-
-SELECT COUNT(*) FROM departamentos;
-
-/*SELECT COUNT(*) FROM cargos;*/
+SELECT COUNT(*) FROM setores;
 
 SELECT COUNT(*) FROM funcionarios;
 
@@ -480,15 +460,12 @@ SELECT * FROM hospedagens ORDER BY id_hospedagem;
 
 SELECT * FROM necessidades_hospede ORDER BY id_necessidade_hospede; 
 
--- SELECT * FROM usuarios_senhas ORDER BY usuario;
-
-SELECT * FROM departamentos ORDER BY id_departamento;
+SELECT * FROM setores ORDER BY id_setor;
 
 SELECT * FROM funcionarios ORDER BY id_funcionario;
 
 SELECT * FROM pedidos ORDER BY id_pedidos;
 
--- select join para toda a tabelas com chave estrangeira 
 
 SELECT 
     necessidades_hospede.id_necessidade_hospede,
@@ -513,22 +490,11 @@ INNER JOIN quartos ON hospede_hospedagem.id_quarto = quartos.id_quarto;
 
 --------------------------------------------------------------------------------------------------------------------
 
-/*SELECT 
-       funcionarios.primeiro_nome,
-       funcionarios.id_cargo,
-       funcionarios.usuario
-FROM 
-       funcionarios
-INNER JOIN cargos ON funcionarios.id_cargo = cargos.id_cargo
-INNER JOIN usuarios_senhas ON funcionarios.usuario = usuarios_senhas.usuario;*/
-
---------------------------------------------------------------------------------------------------------------------
-
 -- select join pedidos
 SELECT * FROM pedidos 
 INNER JOIN hospedagens ON pedidos.id_hospedagem = hospedagens.id_hospedagem
 INNER JOIN quartos ON quartos.id_quarto = pedidos.id_quarto
-INNER JOIN departamentos ON departamentos.id_departamento = pedidos.id_departamento;
+INNER JOIN setores ON setores.id_setor = pedidos.id_setor;
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -572,7 +538,7 @@ UPDATE quartos SET preco = 200.00 WHERE id_quarto = 894;
 UPDATE quartos SET nummax_hospedes = 3 WHERE id_quarto = 610;
 UPDATE quartos SET num_cama_casal = 1 WHERE id_quarto = 129;
 UPDATE quartos SET nummax_hospedes  = 1 WHERE id_quarto = 378;
-UPDATE quartos SET num_cama_casal = 2 WHERE 278;
+UPDATE quartos SET num_cama_casal = 2 WHERE id_quarto = 278;
 UPDATE quartos SET num_cama_casal = 4 WHERE id_quarto = 301;
 UPDATE quartos SET num_cama_solteiro = 2 WHERE id_quarto = 178; 
 SET SQL_SAFE_UPDATES = 1;
@@ -645,27 +611,10 @@ SET SQL_SAFE_UPDATES = 1;
 
 -- updates departamentos
 SET SQL_SAFE_UPDATES = 0;
-UPDATE departamentos SET nome_departamento = 'Cozinha' WHERE id_departamento = 11;
-UPDATE departamentos SET nome_departamento = 'Limpeza' WHERE id_departamento = 12;
-UPDATE departamentos SET nome_departamento = 'Manutenção' WHERE id_departamento = 13;
-UPDATE departamentos SET nome_departamento = 'Recepção' WHERE id_departamento = 14;
+UPDATE setores SET nome = 'Limpeza' WHERE id_setor = 12;
+UPDATE setores SET nome = 'Manutenção' WHERE id_setor = 13;
+UPDATE setores SET nome = 'Recepção' WHERE id_setor = 14;
 SET SQL_SAFE_UPDATES = 1;
-
---------------------------------------------------------------------------------------------------------------------
-
-/*-- updates usuarios_senhas
-SET SQL_SAFE_UPDATES = 0;
-UPDATE usuarios_senhas SET senha = 'jdl/M<jf' WHERE usuario = 'a';
-UPDATE usuarios_senhas SET senha = 'h46fjhwk' WHERE usuario = 'b';
-UPDATE usuarios_senhas SET senha = 'gdhvnetr' WHERE usuario = 'c';
-UPDATE usuarios_senhas SET senha = 'aj534dtr' WHERE usuario = 'd';
-UPDATE usuarios_senhas SET senha = 'oetdgqje' WHERE usuario = 'e';
-UPDATE usuarios_senhas SET senha = 'shdncgft' WHERE usuario = 'f';
-UPDATE usuarios_senhas SET senha = 'afdnvjgç' WHERE usuario = 'g';
-UPDATE usuarios_senhas SET senha = 'mcg45wge' WHERE usuario = 'h';
-UPDATE usuarios_senhas SET senha = 'yhwelkft' WHERE usuario = 'i';
-UPDATE usuarios_senhas SET senha = 'msnch39t' WHERE usuario = 'j'; 
-SET SQL_SAFE_UPDATES = 1;*/
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -681,7 +630,7 @@ SET SQL_SAFE_UPDATES = 1;
 
 -- updates pedidos
 SET SQL_SAFE_UPDATES = 0;
-UPDATE pedidos SET id_departamento = 13 WHERE id_pedidos = 11;
+UPDATE pedidos SET id_setor = 13 WHERE id_pedidos = 11;
 UPDATE pedidos SET data = '2023-02-25' WHERE id_pedidos = 20;
 UPDATE pedidos SET feito = 1 WHERE id_pedidos = 12;
 UPDATE pedidos SET descricao = 'Limpeza' WHERE id_pedidos = 1;
