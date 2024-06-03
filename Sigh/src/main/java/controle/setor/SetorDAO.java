@@ -1,4 +1,4 @@
-package controle.setor;
+/*package controle.setor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,4 +62,4 @@ public class SetorDAO implements ISetorDAO {
 		return setores;
 	}
 
-}
+}*/
