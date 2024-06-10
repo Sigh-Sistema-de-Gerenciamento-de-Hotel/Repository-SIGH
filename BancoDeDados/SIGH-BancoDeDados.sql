@@ -47,10 +47,12 @@ CREATE TABLE IF NOT EXISTS   `hospedes` (
   PRIMARY KEY (`id_hospede`),
   CONSTRAINT `fk_hospedes_enderecos`
     FOREIGN KEY (`id_endereco`)
-    REFERENCES   `enderecos` (`id_endereco`),
+    REFERENCES   `enderecos` (`id_endereco`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_hospedes_hospedes1`
     FOREIGN KEY (`id_responsavel`)
-    REFERENCES   `hospedes` (`id_hospede`));
+    REFERENCES   `hospedes` (`id_hospede`)
+    ON DELETE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -101,13 +103,16 @@ CREATE TABLE IF NOT EXISTS   `hospede_hospedagem` (
   PRIMARY KEY (`id_hospede_hospedagem`),
   CONSTRAINT `fk_hospede_hospedagem_hospedagens1`
     FOREIGN KEY (`id_hospedagem`)
-    REFERENCES   `hospedagens` (`id_hospedagem`),
+    REFERENCES   `hospedagens` (`id_hospedagem`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_hospede_hospedagem_hospedes1`
     FOREIGN KEY (`id_hospede`)
-    REFERENCES   `hospedes` (`id_hospede`),
+    REFERENCES   `hospedes` (`id_hospede`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_hospede_hospedagem_quartos1`
     FOREIGN KEY (`id_quarto`)
-    REFERENCES   `quartos` (`id_quarto`));
+    REFERENCES   `quartos` (`id_quarto`)
+    ON DELETE CASCADE);
 
 -- -----------------------------------------------------
 -- Table   `departamentos`
@@ -132,13 +137,16 @@ CREATE TABLE IF NOT EXISTS   `pedidos` (
   PRIMARY KEY (`id_pedidos`),
   CONSTRAINT `fk_pedidos_hospedagens1`
     FOREIGN KEY (`id_hospedagem`)
-    REFERENCES   `hospedagens` (`id_hospedagem`),
+    REFERENCES   `hospedagens` (`id_hospedagem`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_pedidos_quartos1`
     FOREIGN KEY (`id_quarto`)
-    REFERENCES   `quartos` (`id_quarto`),
+    REFERENCES   `quartos` (`id_quarto`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_pedidos_departamentos1`
     FOREIGN KEY (`id_departamento`)
-    REFERENCES `departamentos` (`id_departamento`));
+    REFERENCES `departamentos` (`id_departamento`)
+    ON DELETE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -151,10 +159,12 @@ CREATE TABLE IF NOT EXISTS   `necessidades_hospede` (
   PRIMARY KEY (`id_necessidade_hospede`),
   CONSTRAINT `fk_hospedes_has_necessidades_especiais_hospedes1`
     FOREIGN KEY (`id_hospede`)
-    REFERENCES   `hospedes` (`id_hospede`),
+    REFERENCES   `hospedes` (`id_hospede`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_hospedes_has_necessidades_especiais_necessidades_especiais1`
     FOREIGN KEY (`id_necessidade`)
-    REFERENCES   `necessidades_especiais` (`id_necessidade`));
+    REFERENCES   `necessidades_especiais` (`id_necessidade`)
+    ON DELETE CASCADE);
 
 
 

@@ -148,6 +148,10 @@ public class TelaEdicaoHospede extends JFrame {
 		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -168,6 +172,10 @@ public class TelaEdicaoHospede extends JFrame {
 		lblHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				tlf.setVisible(true);
+				tlf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -495,14 +503,18 @@ String genero = hosEditar.getGenero();
 
 				String nome = txtNome.getText();
 				if (nome.isEmpty()) {
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu Nome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					hosEditar.setNome(nome);
 				}
 
 				String sobrenome = txtSobrenome.getText();
 				if (sobrenome.isEmpty()) {
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira sua Sobrenome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					hosEditar.setSobrenome(sobrenome);
 				}
@@ -512,7 +524,9 @@ String genero = hosEditar.getGenero();
 				
 				String telefone = txtTelefone.getText(); 
 				if (telefone.isEmpty()) {
-					//ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu Telefone!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					hosEditar.setTelefone(telefone);
 				}  
@@ -523,14 +537,18 @@ String genero = hosEditar.getGenero();
 				DateTextField dtf = new DateTextField();
 				LocalDate data = dtf.stringParaData(txtData.getText());
 			    if(txtData.getText().isEmpty()) {
-					//ERRO
+			    	TelaErro dadosIncorretos = new TelaErro("Insira uma Data válida!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
-					hosEditar.setDataNascimento(dataNascimento);
+					hosEditar.setDataNascimento(data);
 				}  
 
 		        String genero = (String) comboBoxGenero.getSelectedItem();
 				if (genero.isEmpty()) {;
-					// ERRO
+				TelaErro dadosIncorretos = new TelaErro("Insira seu Gênero!");
+				dadosIncorretos.setLocationRelativeTo(null);
+				dadosIncorretos.setVisible(true);
 				} else {                                                
 					hosEditar.setGenero(genero);
 				}                                                
@@ -538,7 +556,9 @@ String genero = hosEditar.getGenero();
 
 				String nacionalidade = (String) comboBox_1.getSelectedItem();
 				if (nacionalidade == null) {
-					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira sua Nacionalidade!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					hosEditar.setNacionalidade(nacionalidade);
 				}   
@@ -547,19 +567,44 @@ String genero = hosEditar.getGenero();
 				
 				 // TENTA FAZER ASSIM:
 				  
-				  String cpf = txtCpf.getText();			
-				  String passaporte = txtPassaporte.getText();
-				  
-				  if(passaporte.isEmpty() && cpf.isEmpty()){
-				  		//ERRO
-				  } else if(passaporte.isEmpty() || passaporte.trim().isEmpty()){
-				  		hosEditar.setCpf(Integer.parseInt(cpf));
-				  } else{
-				  		hosEditar.setPassaporte(passaporte);
-				  }
-				  
-				 
-				
+				String cpf = txtCpf.getText();
+				String passaporte = txtPassaporte.getText();
+					
+					// Verifica se ambos os campos estão vazios
+				if (cpf.isEmpty() && passaporte.isEmpty()) {
+						TelaErro dadosIncorretos = new TelaErro("CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);
+						
+					    //JOptionPane.showMessageDialog(null, "CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
+				} else {
+					   
+					if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
+					        
+					        if (!validarCPF(cpf)) {
+					            // Exibir mensagem de erro 
+					        	TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
+								dadosIncorretos.setLocationRelativeTo(null);
+								dadosIncorretos.setVisible(true);
+								
+					            //JOptionPane.showMessageDialog(null, "CPF inválido. Por favor, insira um CPF válido.");
+					        } else {
+					        	hosEditar.setCpf(Integer.valueOf(cpf));				        }
+					    }
+					    if (!passaporte.isEmpty() && !passaporte.trim().isEmpty()) {
+					        if (!validarPassaporte(passaporte)) {
+					            // Exibir mensagem de erro
+					        	TelaErro dadosIncorretos = new TelaErro("Passaporte inválido. Por favor, insira um passaporte válido.");
+								dadosIncorretos.setLocationRelativeTo(null);
+								dadosIncorretos.setVisible(true);
+								
+					           //JOptionPane.showMessageDialog(null, "Passaporte inválido. Por favor, insira um passaporte válido.");
+					        } else {
+					        	hosEditar.setPassaporte(passaporte);
+					        }
+					    }
+					}
+
 				String email = txtEmail.getText();
 				hosEditar.setEmail(email);
 				
@@ -577,6 +622,16 @@ String genero = hosEditar.getGenero();
 					// mensagem de ERRO
 				}
 			}    
+
+			private boolean validarPassaporte(String passaporte) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			private boolean validarCPF(String cpf) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {

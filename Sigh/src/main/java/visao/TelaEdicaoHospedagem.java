@@ -64,6 +64,15 @@ public class TelaEdicaoHospedagem extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
+		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				tlf.setVisible(true);
+				tlf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
 		lblBotaoFuncionarios.setBounds(67, 523, 295, 38);
 		contentPane.add(lblBotaoFuncionarios);
@@ -79,6 +88,15 @@ public class TelaEdicaoHospedagem extends JFrame {
 		contentPane.add(lblBotaoPedidos);
 
 		JLabel lblBotaoHospedes = new JLabel("");
+		lblBotaoHospedes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
+			}
+		});
 		lblBotaoHospedes.setIcon(new ImageIcon("src\\main\\resources\\menu - hospede.png"));
 		lblBotaoHospedes.setBounds(67, 407, 295, 38);
 		contentPane.add(lblBotaoHospedes);
@@ -203,11 +221,6 @@ public class TelaEdicaoHospedagem extends JFrame {
 				dispose();
 				tlh.setExtendedState(MAXIMIZED_BOTH);
 				tlh.setVisible(true);
-				
-			
-				
-				
-				
 	
 			}
 		});
@@ -215,8 +228,6 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		contentPane.add(lblBotaoSalvar);
 		
-	
-	
 				
 		JLabel lblBotaoCancelar = new JLabel("");
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
