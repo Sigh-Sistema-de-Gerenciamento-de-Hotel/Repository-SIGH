@@ -19,5 +19,4 @@ public enum Setor {
 	public String getNome() {
 		return nome;
 	}
-		
 }

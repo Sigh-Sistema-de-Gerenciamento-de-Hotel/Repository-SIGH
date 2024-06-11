@@ -10,14 +10,19 @@ import javax.swing.border.EmptyBorder;
 
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
+import modelo.Setor;
 import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 public class TelaEdicaoFuncionario extends JFrame {
 
@@ -29,6 +34,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 	private JPasswordField txtSenha;
 	private JTextField txtUsuario;
 	private JTextField txtSobrenome;
+	private JComboBox<Setor> txtSetor;
 	private Funcionario funcionarioEditar;
 	private static Funcionario funcionarioLogado;
 
@@ -190,6 +196,15 @@ public class TelaEdicaoFuncionario extends JFrame {
 					funcionarioEditar.setCargo(cargo);
 				}
 				
+				Setor setor = (Setor) txtSetor.getSelectedItem();
+				if (setor == null) {
+					TelaErro dadosIncorretos = new TelaErro("Insira o setor!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					funcionarioEditar.setSetor(setor);
+				}
+
 				
 				String usuario = txtUsuario.getText();
 				if(usuario.isEmpty()) {
@@ -399,7 +414,19 @@ public class TelaEdicaoFuncionario extends JFrame {
 		txtSobrenome.setBounds(1001, 326, 343, 48);
 		contentPane.add(txtSobrenome);
 		txtSobrenome.setColumns(10);
+		
+		Setor setor = funcionarioEditar.getSetor();
+		
+		JComboBox<Setor> txtSetor = new JComboBox<Setor>();
+		txtSetor.setBounds(554, 592, 343, 48);
+		txtSetor.setModel(new DefaultComboBoxModel<>(Setor.values()));
+		txtSetor.setSelectedItem(setor);
+		contentPane.add(txtSetor);
+		
+		JLabel lblSetor = new JLabel("Setor*");
+		lblSetor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSetor.setBounds(554, 567, 139, 22);
+		contentPane.add(lblSetor);
 
 	}
-
 }

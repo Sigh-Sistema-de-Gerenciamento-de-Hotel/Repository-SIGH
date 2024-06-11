@@ -82,6 +82,14 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				String usuario = rs.getString("usuario");
 				String senha = rs.getString("senha");
 				String cargo = rs.getString("cargo");
+				int idSetor = rs.getInt("id_setor");
+				Setor setor = null;
+				
+				for (Setor setorS : Setor.values()) {
+					if(setorS.getId() == idSetor) {
+						setor = setorS;
+					}
+				}			
 
 				fun.setId(id);
 				fun.setNome(primeiroNome);
@@ -90,6 +98,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				fun.setUsuario(usuario);
 				fun.setSenha(senha);
 				fun.setCargo(cargo);
+				fun.setSetor(setor);
 
 				funcionarios.add(fun);
 
@@ -175,6 +184,8 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, s.getId());
 
 			ResultSet rs = ps.executeQuery();
 
@@ -188,6 +199,15 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				String usuario = rs.getString("usuario");
 				String senha = rs.getString("senha");
 				String cargo = rs.getString("cargo");
+				int idSetor = rs.getInt("id_setor");
+				
+				Setor setor = null;
+				
+				for (Setor setorS : Setor.values()) {
+					if(setorS.getId() == idSetor) {
+						setor = setorS;
+					}
+				}			
 
 				fun.setId(id);
 				fun.setNome(primeiroNome);
@@ -196,6 +216,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				fun.setUsuario(usuario);
 				fun.setSenha(senha);
 				fun.setCargo(cargo);
+				fun.setSetor(setor);
 
 				funcionarios.add(fun);
 
@@ -236,6 +257,14 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				String sobrenome = rs.getString("sobrenome");
 				String nomeSocial = rs.getString("nome_social");
 				String cargo = rs.getString("cargo");
+				int idSetor = rs.getInt("id_setor");				
+				Setor setor = null;
+				
+				for (Setor setorS : Setor.values()) {
+					if(setorS.getId() == idSetor) {
+						setor = setorS;
+					}
+				}			
 
 				fun.setId(id);
 				fun.setNome(primeiroNome);
@@ -244,6 +273,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				fun.setUsuario(usuario);
 				fun.setSenha(senha);
 				fun.setCargo(cargo);
+				fun.setSetor(setor);
 
 			}
 		} catch (SQLException e) {

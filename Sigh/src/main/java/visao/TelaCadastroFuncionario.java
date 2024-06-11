@@ -5,6 +5,7 @@ import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -433,6 +434,7 @@ public class TelaCadastroFuncionario extends JFrame {
 		JComboBox<Setor> txtSetorText = new JComboBox<Setor>();
 		txtSetorText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSetorText.setBounds(650, 850, 343, 48);
+		txtSetorText.setModel(new DefaultComboBoxModel<>(Setor.values()));
 		contentPane.add(txtSetorText);
 		//txtSetorText.setColumns(10);
 
