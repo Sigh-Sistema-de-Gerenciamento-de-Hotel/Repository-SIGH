@@ -142,7 +142,7 @@ public class TelaListagemFuncionario extends JFrame {
 		});
 		scrollPane.setViewportView(table);
 		table.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome Completo", "Usuario", "Cargo" }));
+				new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome Completo", "Usuario", "Cargo", "Setor" }));
 		atualizarJTableModel();
 
 		JLabel botaoEditar = new JLabel("");
@@ -192,7 +192,7 @@ public class TelaListagemFuncionario extends JFrame {
 
 	protected void atualizarJTableModel() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "CPF", "Nome Completo", "Usuario", "Cargo" });
+				new String[] { "CPF", "Nome Completo", "Usuario", "Cargo", "Setor" });
 
 		dao = FuncionarioDAO.getInstancia();
 		lista = dao.listarFuncionario();
@@ -202,10 +202,10 @@ public class TelaListagemFuncionario extends JFrame {
 			String nomeCompleto;
 			if (fun.getNomeSocial() == null || fun.getNomeSocial().trim().isEmpty()) {
 				nomeCompleto = fun.getNome() + " " + fun.getSobrenome();
-				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo() });
+				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo(), fun.getSetor().getNome() });
 			} else {
 				nomeCompleto = fun.getNomeSocial() + " " + fun.getSobrenome();
-				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo() });
+				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo(), fun.getSetor().getNome() });
 			}
 
 		}
