@@ -38,26 +38,6 @@ public class TelaCadastroHospedagem extends JFrame {
 	private JComboBox <Integer> comboBoxHospedes; 
 	private Funcionario funcionarioLogado;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastroHospedagem frame = new TelaCadastroHospedagem();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}   */
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaCadastroHospedagem(Funcionario funcLogado) {
 		this.funcionarioLogado = funcLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -173,10 +153,6 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblNumHospedes.setBounds(502, 315, 145, 40);
 		contentPane.add(lblNumHospedes);
 
-		
-		
-		
-
 		JLabel lblDataCheckin = new JLabel("Data check-in *");
 		lblDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDataCheckin.setBounds(502, 510, 145, 40);
@@ -192,7 +168,6 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblQuartos.setBounds(1010, 315, 145, 40);
 		contentPane.add(lblQuartos);
-
 	
 		JLabel lblDataCheckout = new JLabel("Data check-out");
 		lblDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -261,7 +236,6 @@ public class TelaCadastroHospedagem extends JFrame {
 					HospedagemDAO dao = HospedagemDAO.getInstancia();
 					dao.inserirHospedagem(hospedagem);
 				
-					
 					TelaListagemHospedagem lf = new TelaListagemHospedagem(funcionarioLogado);
 					lf.setVisible(true);
 					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);

@@ -30,6 +30,8 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 	@Override
 	public int inserirHospedagem(Hospedagem hosp) {
+		
+		// Inserindo hospedagem na tabela Hospedagens
 		String SQL = "INSERT INTO hospedagens (data_entrada, data_saida) VALUES (?, ?)";
 
 		Conexao con = Conexao.getInstancia();
@@ -56,8 +58,44 @@ public class HospedagemDAO implements IHospedagemDAO {
 		} finally {
 			con.fecharConexao();
 		}
+		
+		hosp.setId(chaveGerada);
+		
+		boolean erro = false;
+		// Inserindo dados na tabela Hospede_hopedagem
+		
+		for (Hospede h : hosp.getHospedes()) {
+			String SQLh = "INSERT INTO hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) VALUES (?, ?, ?)";
 
-		return chaveGerada;
+			Connection conBDh = con.conectar();
+
+			try {
+				PreparedStatement ps = conBD.prepareStatement(SQLh);
+
+				ps.setInt(1, chaveGerada);
+				ps.setInt(2, h.getId());
+				ps.setInt(3, hosp.getQuarto().getNumero());
+
+				ps.executeUpdate();
+
+				ResultSet rs = ps.executeQuery();
+
+				if (rs == null) {
+					erro = true;
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				con.fecharConexao();
+			}
+		}
+
+		if(erro == false) {
+			return chaveGerada = 0;
+		} else {
+			return chaveGerada;
+		}
 	}
 
 	@Override
@@ -194,6 +232,29 @@ public class HospedagemDAO implements IHospedagemDAO {
 			e.printStackTrace();
 		} finally {
 			con.fecharConexao();
+		}
+		
+		// Atualizando dados na tabela Hospede_hopedagem
+		
+		for (Hospede h : hosp.getHospedes()) {
+			String SQLh = "UPDATE hospede_hospedagem SET id_hospedagem = ?, id_hospede = ?, id_quarto = ?";
+
+			Connection conBDh = con.conectar();
+
+			try {
+				PreparedStatement ps = conBD.prepareStatement(SQLh);
+
+				ps.setInt(1, hosp.getId());
+				ps.setInt(2, h.getId());
+				ps.setInt(3, hosp.getQuarto().getNumero());
+
+				retorno = ps.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				con.fecharConexao();
+			}
 		}
 
 		return (retorno == 0 ? false : true);
