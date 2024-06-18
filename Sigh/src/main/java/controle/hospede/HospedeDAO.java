@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import controle.Conexao;
 import modelo.Endereco;
@@ -30,10 +32,47 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 
 	@Override
 	public int inserirHospede(Hospede hos) {
-		// TODO Auto-generated method stub
+		
+		// Montando query SQL
 
-		String SQL = "INSERT INTO hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+		String SQL = "INSERT INTO hospedes (primeiro_nome, sobrenome";
+		int n = 2;
+		
+		if(!hos.getNomeSocial().isEmpty() && hos.getNomeSocial() != null) {
+			SQL = SQL + ", nome_social";
+			n ++;
+		}
+		
+		SQL = SQL + ", genero, data_nascimento, nacionalidade";
+		n += 3;
+		
+		if(hos.getCpf() >= 0) {
+			SQL = SQL + ", cpf";
+			n ++;
+		}
+		
+		if(hos.getPassaporte().isEmpty() || hos.getPassaporte() == null) {
+			SQL = SQL + ", passaporte";
+			n ++;
+		}
+		
+		SQL = SQL + ", email, telefone, id_endereco";
+		n += 3;
+		
+		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) >= 18 && hos.getDataNascimento().getMonthValue() <= LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
+			SQL = SQL + ", id_responsavel";
+			n ++;
+		}
+		
+		SQL = SQL + ") VALUES (?";
+		
+		for(int i=0; i<n; i++) {
+			SQL = SQL + ", ?";
+		}
+		
+		SQL = SQL + ")";
+		n = 3;
+		
 		Conexao con = Conexao.getInstancia(); // conexão com o banco de dados.//
 
 		Connection ConBD = con.conectar();
@@ -46,20 +85,31 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 
 			ps.setString(1, hos.getNome());
 			ps.setString(2, hos.getSobrenome());
-			ps.setString(3, hos.getNomeSocial());
-			ps.setString(4, hos.getGenero());
-			ps.setString(5, String.valueOf(hos.getDataNascimento()));
-			ps.setString(6, hos.getNacionalidade());
-			ps.setInt(7, hos.getCpf());
-			ps.setString(8, hos.getPassaporte());
+			
+			if(!hos.getNomeSocial().isEmpty() && hos.getNomeSocial() != null) {
+				ps.setString(n++, hos.getNomeSocial());
+			}
+			
+			ps.setString(n++, hos.getGenero());
+			ps.setString(n++, String.valueOf(hos.getDataNascimento()));
+			ps.setString(n++, hos.getNacionalidade());
+			
+			if(hos.getCpf() >= 0) {
+				ps.setInt(n++, hos.getCpf());
+			}
+			
+			if(hos.getPassaporte().isEmpty() || hos.getPassaporte() == null) {
+				ps.setString(n++, hos.getPassaporte());
+			}
+			
 			ps.setString(9, hos.getEmail());
 			ps.setString(10, hos.getTelefone());
 			Endereco end = hos.getEndereco();
 			ps.setInt(11, end.getId());
 			Hospede resp = hos.getResponsavel();
-
-			if (resp.getId() > 0) {
-				ps.setInt(12, resp.getId());
+			
+			if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) >= 18 && hos.getDataNascimento().getMonthValue() <= LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
+				ps.setInt(n++, resp.getId());
 			}
 
 			ps.executeUpdate();
@@ -143,7 +193,10 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				String telefoneR = rs.getString("telefone");
 
 				respon.setId(id_hospedeR);
-				respon.setGenero(genero);
+				respon.setNome(nomeR);
+				respon.setSobrenome(sobrenomeR);
+				respon.setNomeSocial(nomeSocialR);
+				respon.setGenero(generoR);
 				respon.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimentoR)));
 				respon.setNacionalidade(nacionalidadeR);
 				respon.setCpf(cpfR);
@@ -158,6 +211,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				hos.setId(id_hospede);
 				hos.setNome(nome);
 				hos.setSobrenome(sobrenome);
+				hos.setNomeSocial(nomeSocial);
 				hos.setGenero(genero);
 				hos.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
 				hos.setNacionalidade(nacionalidade);
