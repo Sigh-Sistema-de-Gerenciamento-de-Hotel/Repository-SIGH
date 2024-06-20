@@ -182,7 +182,7 @@ public class TelaConfirmacaoEdicao extends JFrame {
 		lblCodigo.setBounds(50, 163, 62, 22);
 		contentPane.add(lblCodigo);
 
-		String nomeCompleto = hospede.getNome() + hospede.getSobrenome();
+		String nomeCompleto = hospede.getNome() + " " + hospede.getSobrenome();
 
 		JLabel nome = new JLabel(nomeCompleto);
 		nome.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
