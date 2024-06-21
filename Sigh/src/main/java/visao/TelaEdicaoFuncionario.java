@@ -155,6 +155,97 @@ public class TelaEdicaoFuncionario extends JFrame {
 				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 			}
 		});
+		
+		JLabel lblNome = new JLabel("Nome*");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNome.setBounds(554, 306, 139, 14);
+		contentPane.add(lblNome);
+
+		String nome = funcionarioEditar.getNome();
+
+		txtNome = new RoundJFormattedTextField(null);
+		txtNome.setText(nome);
+		txtNome.setBounds(554, 326, 343, 48);
+		contentPane.add(txtNome);
+		txtNome.setColumns(10);
+
+		JLabel lblNomeSocial = new JLabel("Nome Social");
+		lblNomeSocial.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNomeSocial.setBounds(554, 385, 139, 14);
+		contentPane.add(lblNomeSocial);
+
+		String nomeSocial = funcionarioEditar.getNomeSocial();
+
+		txtNomeSocial = new RoundJFormattedTextField(null);
+		txtNomeSocial.setText(nomeSocial);
+		txtNomeSocial.setBounds(554, 410, 343, 48);
+		contentPane.add(txtNomeSocial);
+		txtNomeSocial.setColumns(10);
+
+		JLabel lblCargo = new JLabel("Cargo*");
+		lblCargo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCargo.setBounds(554, 472, 139, 22);
+		contentPane.add(lblCargo);
+
+		String cargo = funcionarioEditar.getCargo();
+
+		txtCargo = new RoundJFormattedTextField(null);
+		txtCargo.setText(cargo);
+		txtCargo.setBounds(554, 497, 343, 48);
+		contentPane.add(txtCargo);
+		txtCargo.setColumns(10);
+
+		JLabel lblSenha = new JLabel("Senha*");
+		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSenha.setBounds(1001, 476, 139, 14);
+		contentPane.add(lblSenha);
+
+		String senha = funcionarioEditar.getSenha();
+
+		txtSenha = new JPasswordField(null);
+		txtSenha.setText(senha);
+		txtSenha.setBounds(1001, 497, 343, 48);
+		contentPane.add(txtSenha);
+		txtSenha.setColumns(10);
+
+		JLabel lblUsuario = new JLabel("Usuário*");
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUsuario.setBounds(1001, 384, 139, 14);
+		contentPane.add(lblUsuario);
+
+		String usuario = funcionarioEditar.getUsuario();
+
+		txtUsuario = new RoundJFormattedTextField(null);
+		txtUsuario.setText(usuario);
+		txtUsuario.setBounds(1001, 412, 343, 48);
+		contentPane.add(txtUsuario);
+		txtUsuario.setColumns(10);
+
+		JLabel lblSobrenome = new JLabel("Sobrenome*");
+		lblSobrenome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSobrenome.setBounds(1001, 306, 139, 14);
+		contentPane.add(lblSobrenome);
+
+		String sobrenome = funcionarioEditar.getSobrenome();
+
+		txtSobrenome = new RoundJFormattedTextField(null);
+		txtSobrenome.setText(sobrenome);
+		txtSobrenome.setBounds(1001, 326, 343, 48);
+		contentPane.add(txtSobrenome);
+		txtSobrenome.setColumns(10);
+		
+		Setor setor = funcionarioEditar.getSetor();
+		
+		JComboBox<Setor> txtSetor = new JComboBox<Setor>();
+		txtSetor.setBounds(554, 592, 343, 48);
+		txtSetor.setModel(new DefaultComboBoxModel<>(Setor.values()));
+		txtSetor.setSelectedItem(setor);
+		contentPane.add(txtSetor);
+		
+		JLabel lblSetor = new JLabel("Setor*");
+		lblSetor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSetor.setBounds(554, 567, 139, 22);
+		contentPane.add(lblSetor);
 
 		JLabel lblBotaoSalvar = new JLabel("");
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
@@ -335,97 +426,6 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblTitulo.setIcon(new ImageIcon("src/main/resources/TituloEditarFuncionario.png"));
 		lblTitulo.setBounds(443, 119, 1455, 126);
 		contentPane.add(lblTitulo);
-
-		JLabel lblNome = new JLabel("Nome*");
-		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNome.setBounds(554, 306, 139, 14);
-		contentPane.add(lblNome);
-
-		String nome = funcionarioEditar.getNome();
-
-		txtNome = new RoundJFormattedTextField(null);
-		txtNome.setText(nome);
-		txtNome.setBounds(554, 326, 343, 48);
-		contentPane.add(txtNome);
-		txtNome.setColumns(10);
-
-		JLabel lblNomeSocial = new JLabel("Nome Social");
-		lblNomeSocial.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNomeSocial.setBounds(554, 385, 139, 14);
-		contentPane.add(lblNomeSocial);
-
-		String nomeSocial = funcionarioEditar.getNomeSocial();
-
-		txtNomeSocial = new RoundJFormattedTextField(null);
-		txtNomeSocial.setText(nomeSocial);
-		txtNomeSocial.setBounds(554, 410, 343, 48);
-		contentPane.add(txtNomeSocial);
-		txtNomeSocial.setColumns(10);
-
-		JLabel lblCargo = new JLabel("Cargo*");
-		lblCargo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCargo.setBounds(554, 472, 139, 22);
-		contentPane.add(lblCargo);
-
-		String cargo = funcionarioEditar.getCargo();
-
-		txtCargo = new RoundJFormattedTextField(null);
-		txtCargo.setText(cargo);
-		txtCargo.setBounds(554, 497, 343, 48);
-		contentPane.add(txtCargo);
-		txtCargo.setColumns(10);
-
-		JLabel lblSenha = new JLabel("Senha*");
-		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSenha.setBounds(1001, 476, 139, 14);
-		contentPane.add(lblSenha);
-
-		String senha = funcionarioEditar.getSenha();
-
-		txtSenha = new JPasswordField(null);
-		txtSenha.setText(senha);
-		txtSenha.setBounds(1001, 497, 343, 48);
-		contentPane.add(txtSenha);
-		txtSenha.setColumns(10);
-
-		JLabel lblUsuario = new JLabel("Usuário*");
-		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUsuario.setBounds(1001, 384, 139, 14);
-		contentPane.add(lblUsuario);
-
-		String usuario = funcionarioEditar.getUsuario();
-
-		txtUsuario = new RoundJFormattedTextField(null);
-		txtUsuario.setText(usuario);
-		txtUsuario.setBounds(1001, 412, 343, 48);
-		contentPane.add(txtUsuario);
-		txtUsuario.setColumns(10);
-
-		JLabel lblSobrenome = new JLabel("Sobrenome*");
-		lblSobrenome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSobrenome.setBounds(1001, 306, 139, 14);
-		contentPane.add(lblSobrenome);
-
-		String sobrenome = funcionarioEditar.getSobrenome();
-
-		txtSobrenome = new RoundJFormattedTextField(null);
-		txtSobrenome.setText(sobrenome);
-		txtSobrenome.setBounds(1001, 326, 343, 48);
-		contentPane.add(txtSobrenome);
-		txtSobrenome.setColumns(10);
-		
-		Setor setor = funcionarioEditar.getSetor();
-		
-		JComboBox<Setor> txtSetor = new JComboBox<Setor>();
-		txtSetor.setBounds(554, 592, 343, 48);
-		txtSetor.setModel(new DefaultComboBoxModel<>(Setor.values()));
-		txtSetor.setSelectedItem(setor);
-		contentPane.add(txtSetor);
-		
-		JLabel lblSetor = new JLabel("Setor*");
-		lblSetor.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSetor.setBounds(554, 567, 139, 22);
-		contentPane.add(lblSetor);
 
 	}
 }
