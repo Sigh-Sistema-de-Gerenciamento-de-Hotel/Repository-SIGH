@@ -1,7 +1,6 @@
 package visao;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -11,16 +10,19 @@ import javax.swing.border.EmptyBorder;
 
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
-import modelo.Hospede;
+import modelo.Setor;
 import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 public class TelaEdicaoFuncionario extends JFrame {
 
@@ -32,24 +34,14 @@ public class TelaEdicaoFuncionario extends JFrame {
 	private JPasswordField txtSenha;
 	private JTextField txtUsuario;
 	private JTextField txtSobrenome;
-	private Funcionario funcEditar;
+	private JComboBox<Setor> txtSetor;
+	private Funcionario funcionarioEditar;
 	private static Funcionario funcionarioLogado;
 
-	/**
-	 * Launch the application.
-	 * 
-	 * 
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { TelaEdicaoFuncionario frame = new
-	 * TelaEdicaoFuncionario(); frame.setVisible(true);
-	 * frame.setExtendedState(JFrame.MAXIMIZED_BOTH); } catch (Exception e) {
-	 * e.printStackTrace(); } } }); }
-	 * 
-	 * /* Create the frame.
-	 */
+	
 	public TelaEdicaoFuncionario(Funcionario funcLogado, Funcionario funcEditar) {
 		funcionarioLogado = funcLogado;
-		this.funcEditar = funcEditar;
+		funcionarioEditar = funcEditar;
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Edição de Funcionario");
@@ -178,7 +170,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					funcEditar.setNome(nome);
+					funcionarioEditar.setNome(nome);
 				}
 				
 				String sobrenome = txtSobrenome.getText();
@@ -188,11 +180,11 @@ public class TelaEdicaoFuncionario extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					funcEditar.setSobrenome(sobrenome);
+					funcionarioEditar.setSobrenome(sobrenome);
 				}
 				
 				String nomeSocial = txtNomeSocial.getText();
-				funcEditar.setNomeSocial(nomeSocial);
+				funcionarioEditar.setNomeSocial(nomeSocial);
 				
 				String cargo = txtCargo.getText();
 				if(cargo.isEmpty()) {
@@ -201,9 +193,18 @@ public class TelaEdicaoFuncionario extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				}  else {
-					funcEditar.setCargo(cargo);
+					funcionarioEditar.setCargo(cargo);
 				}
 				
+				Setor setor = (Setor) txtSetor.getSelectedItem();
+				if (setor == null) {
+					TelaErro dadosIncorretos = new TelaErro("Insira o setor!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					funcionarioEditar.setSetor(setor);
+				}
+
 				
 				String usuario = txtUsuario.getText();
 				if(usuario.isEmpty()) {
@@ -212,7 +213,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					funcEditar.setUsuario(usuario);
+					funcionarioEditar.setUsuario(usuario);
 				}
 				
 				char[] senhaChar = txtSenha.getPassword();
@@ -225,18 +226,17 @@ public class TelaEdicaoFuncionario extends JFrame {
 				} else {
 					//String senha = senhaChar.toString();
 					//String.valueOf(senhaChar);
-					funcEditar.setSenha(String.valueOf(senhaChar));
+					funcionarioEditar.setSenha(String.valueOf(senhaChar));
 				}
 				
 				
-				boolean validacao = dao.atualizarFuncionario(funcEditar);
+				boolean validacao = dao.atualizarFuncionario(funcionarioEditar);
 				if (validacao == true) {
-					TelaListagemFuncionario lf = new TelaListagemFuncionario(funcLogado);
+					TelaListagemFuncionario lf = new TelaListagemFuncionario(funcionarioLogado);
 					lf.setVisible(true);
 					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					/*TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(),
-							func.getNomeSocial(), func.getUsuario(), func.getCargo());
-					telaConfirmacao.setVisible(true);*/
+					TelaConfirmacaoEdicao telaConfirmacaoEdicao = new TelaConfirmacaoEdicao(funcEditar);
+					telaConfirmacaoEdicao.setVisible(true);
 					dispose();
 				} else {
 					// mensagem de ERRO
@@ -262,7 +262,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaListagemFuncionario telaListFunc = new TelaListagemFuncionario(funcLogado);
+				TelaListagemFuncionario telaListFunc = new TelaListagemFuncionario(funcionarioLogado);
 				telaListFunc.setVisible(true);
 				telaListFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();				
@@ -341,7 +341,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblNome.setBounds(554, 306, 139, 14);
 		contentPane.add(lblNome);
 
-		String nome = funcEditar.getNome();
+		String nome = funcionarioEditar.getNome();
 
 		txtNome = new RoundJFormattedTextField(null);
 		txtNome.setText(nome);
@@ -354,7 +354,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblNomeSocial.setBounds(554, 385, 139, 14);
 		contentPane.add(lblNomeSocial);
 
-		String nomeSocial = funcEditar.getNomeSocial();
+		String nomeSocial = funcionarioEditar.getNomeSocial();
 
 		txtNomeSocial = new RoundJFormattedTextField(null);
 		txtNomeSocial.setText(nomeSocial);
@@ -367,7 +367,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblCargo.setBounds(554, 472, 139, 22);
 		contentPane.add(lblCargo);
 
-		String cargo = funcEditar.getCargo();
+		String cargo = funcionarioEditar.getCargo();
 
 		txtCargo = new RoundJFormattedTextField(null);
 		txtCargo.setText(cargo);
@@ -380,7 +380,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblSenha.setBounds(1001, 476, 139, 14);
 		contentPane.add(lblSenha);
 
-		String senha = funcEditar.getSenha();
+		String senha = funcionarioEditar.getSenha();
 
 		txtSenha = new JPasswordField(null);
 		txtSenha.setText(senha);
@@ -393,7 +393,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblUsuario.setBounds(1001, 384, 139, 14);
 		contentPane.add(lblUsuario);
 
-		String usuario = funcEditar.getUsuario();
+		String usuario = funcionarioEditar.getUsuario();
 
 		txtUsuario = new RoundJFormattedTextField(null);
 		txtUsuario.setText(usuario);
@@ -406,14 +406,26 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblSobrenome.setBounds(1001, 306, 139, 14);
 		contentPane.add(lblSobrenome);
 
-		String sobrenome = funcEditar.getSobrenome();
+		String sobrenome = funcionarioEditar.getSobrenome();
 
 		txtSobrenome = new RoundJFormattedTextField(null);
 		txtSobrenome.setText(sobrenome);
 		txtSobrenome.setBounds(1001, 326, 343, 48);
 		contentPane.add(txtSobrenome);
 		txtSobrenome.setColumns(10);
+		
+		Setor setor = funcionarioEditar.getSetor();
+		
+		JComboBox<Setor> txtSetor = new JComboBox<Setor>();
+		txtSetor.setBounds(554, 592, 343, 48);
+		txtSetor.setModel(new DefaultComboBoxModel<>(Setor.values()));
+		txtSetor.setSelectedItem(setor);
+		contentPane.add(txtSetor);
+		
+		JLabel lblSetor = new JLabel("Setor*");
+		lblSetor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSetor.setBounds(554, 567, 139, 22);
+		contentPane.add(lblSetor);
 
 	}
-
 }

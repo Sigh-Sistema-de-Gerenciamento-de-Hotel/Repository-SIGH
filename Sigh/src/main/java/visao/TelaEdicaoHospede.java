@@ -614,9 +614,8 @@ String genero = hosEditar.getGenero();
 					TelaListagemHospede lh = new TelaListagemHospede(funcLogado);
 					lh.setVisible(true);
 					lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					/*TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(),
-							func.getNomeSocial(), func.getUsuario(), func.getCargo());
-					telaConfirmacao.setVisible(true);*/
+					TelaConfirmacaoEdicao telaConfirmacaoEd = new TelaConfirmacaoEdicao(hosEditar);
+					telaConfirmacaoEd.setVisible(true);
 					dispose();
 				} else {
 					// mensagem de ERRO
