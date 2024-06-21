@@ -235,9 +235,8 @@ public class TelaEdicaoFuncionario extends JFrame {
 					TelaListagemFuncionario lf = new TelaListagemFuncionario(funcionarioLogado);
 					lf.setVisible(true);
 					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					/*TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getPrimeiroNome(), func.getSobrenome(),
-							func.getNomeSocial(), func.getUsuario(), func.getCargo());
-					telaConfirmacao.setVisible(true);*/
+					TelaConfirmacaoEdicao telaConfirmacaoEdicao = new TelaConfirmacaoEdicao(funcEditar);
+					telaConfirmacaoEdicao.setVisible(true);
 					dispose();
 				} else {
 					// mensagem de ERRO
