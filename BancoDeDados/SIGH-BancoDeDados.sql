@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS   `funcionarios` (
   `primeiro_nome` VARCHAR(45) NOT NULL,
   `sobrenome` VARCHAR(45) NOT NULL,
   `nome_social` VARCHAR(45) NULL,
-  `id_setor` VARCHAR(45) NOT NULL,
+  `id_setor` INT NOT NULL,
   `cargo` VARCHAR(45) NOT NULL,
   `usuario` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
