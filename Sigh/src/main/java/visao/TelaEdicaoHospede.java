@@ -578,6 +578,14 @@ String genero = hosEditar.getGenero();
 						
 					    //JOptionPane.showMessageDialog(null, "CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
 				} else {
+					if (!cpf.isEmpty()) {
+						hosEditar.setCpf(Integer.valueOf(cpf));
+					}
+					if (!passaporte.isEmpty()) {
+						hosEditar.setPassaporte(passaporte);
+					}
+				} 
+				/*else {
 					   
 					if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
 					        
@@ -603,7 +611,7 @@ String genero = hosEditar.getGenero();
 					        	hosEditar.setPassaporte(passaporte);
 					        }
 					    }
-					}
+					}*/
 
 				String email = txtEmail.getText();
 				hosEditar.setEmail(email);
