@@ -51,7 +51,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			n ++;
 		}
 		
-		if(hos.getPassaporte().isEmpty() || hos.getPassaporte() == null) {
+		if(hos.getPassaporte() != null || !hos.getPassaporte().isEmpty()) {
 			SQL = SQL + ", passaporte";
 			n ++;
 		}
@@ -59,14 +59,14 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 		SQL = SQL + ", email, telefone, id_endereco";
 		n += 3;
 		
-		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) >= 18 && hos.getDataNascimento().getMonthValue() <= LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
+		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) < 18 && hos.getDataNascimento().getMonthValue() > LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() > LocalDate.now().getDayOfMonth()) {
 			SQL = SQL + ", id_responsavel";
 			n ++;
 		}
 		
 		SQL = SQL + ") VALUES (?";
 		
-		for(int i=0; i<n; i++) {
+		for(int i=1; i<n; i++) {
 			SQL = SQL + ", ?";
 		}
 		
