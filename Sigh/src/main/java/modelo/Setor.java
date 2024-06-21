@@ -1,21 +1,22 @@
 package modelo;
 
-public class Setor {
+public enum Setor {
+	
+	ADM(10, "ADM"), RH(11, "RH"), LIMPEZA(12, "Limpeza"), MANUTENCAO(13, "Manutenção"), RECEPCAO(14, "Recepção");
 
 	private int id;
 	private String nome;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
+	Setor(int id, String nome){
 		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
 }
