@@ -135,6 +135,7 @@ public class EnderecoDAO implements IEnderecoDAO {
 			ps.setString(4, end.getEndereco());
 			ps.setString(5, end.getComplemento());
 			ps.setInt(6, end.getNumero());
+			ps.setInt(7, end.getId());
 			
 			retorno = ps.executeUpdate();
 			

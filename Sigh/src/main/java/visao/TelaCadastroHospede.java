@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -270,7 +271,10 @@ public class TelaCadastroHospede extends JFrame {
 		JComboBox<String> comboBoxPaises = new JComboBox<>();
 		String[] paises = java.util.Locale.getISOCountries();
 		for (String pais : paises) {
-			comboBoxPaises.addItem(pais);
+
+			Locale obj = new Locale("", pais);
+			String nomePais =  obj.getDisplayCountry();
+			comboBoxPaises.addItem(nomePais);
 		}
 		comboBoxPaises.setBounds(554, 515, 343, 48);
 		contentPane.add(comboBoxPaises);
@@ -296,7 +300,7 @@ public class TelaCadastroHospede extends JFrame {
 		txtPassaporte.setBounds(1460, 515, 343, 48);
 		contentPane.add(txtPassaporte);
 		txtPassaporte.setColumns(25);
-		
+
 		JLabel lblCep = new JLabel("Cep *"); 
 		lblCep.setFont(new Font("Tahoma", Font.PLAIN, 14)); 
 		lblCep.setBounds(554, 570, 100, 20);
@@ -307,17 +311,21 @@ public class TelaCadastroHospede extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				String cep = txtCep.getText();
-				ViaCepService vcs = new ViaCepService();
-				try {
-					EnderecoViaCep endvp = vcs.getEndereco(cep);
-					
-					txtCidade.setText(endvp.getLocalidade());
-					txtEstado.setText(endvp.getUf());
-					txtEndereco.setText(endvp.getLogradouro());
-					txtComplemento.setText(endvp.getComplemento());
-					
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				if(!cep.isBlank() && !cep.isEmpty()) {
+					ViaCepService vcs = new ViaCepService();
+					try {
+						EnderecoViaCep endvp = vcs.getEndereco(cep);
+
+						txtCidade.setText(endvp.getLocalidade());
+						txtEstado.setText(endvp.getUf());
+						txtEndereco.setText(endvp.getLogradouro());
+						txtComplemento.setText(endvp.getComplemento());
+
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					} catch (IllegalStateException e2) {
+						e2.printStackTrace();
+					}
 				}
 			}
 		});
@@ -438,7 +446,7 @@ public class TelaCadastroHospede extends JFrame {
 				Boolean erro = false;
 
 				Endereco end = new Endereco();
-				
+
 				String cep = txtCep.getText();
 				if (cep.isEmpty()) {
 					erro = true;
@@ -448,7 +456,7 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					end.setCep(Integer.valueOf(cep));
 				}
-				
+
 				String rua = txtEndereco.getText();
 				if(rua.isEmpty()) {
 					erro = true;
@@ -458,7 +466,7 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					end.setEndereco(rua);
 				}
-				
+
 				String cidade = txtCidade.getText();
 				if (cidade.isEmpty()) {
 					erro = true;
@@ -468,7 +476,7 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					end.setCidade(cidade);
 				}
-				
+
 				String estado = txtEstado.getText();
 				if (estado.isEmpty()) {
 					erro = true;
@@ -478,7 +486,7 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					end.setEstado(estado);
 				}
-				
+
 				String numero = txtNumero.getText();
 				if (numero.isEmpty()) {
 					erro = true;
@@ -488,19 +496,19 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					end.setNumero(Integer.valueOf(numero));
 				}
-				
+
 				String complemento = txtComplemento.getText();
 				if (!complemento.isEmpty()) {
 					end.setComplemento(complemento);
 				}
-				
+
 				EnderecoDAO endDao = EnderecoDAO.getInstancia();
 				int idEnd = endDao.inserirEndereco(end);
 				end.setId(idEnd);
-				
+
 				Hospede hos = new Hospede();
 				hos.setEndereco(end);
-				
+
 				// Só fazer o if isEmpty() se o campo for obrigatório
 
 				String nome = txtNome.getText();
@@ -625,9 +633,9 @@ public class TelaCadastroHospede extends JFrame {
 				hos.setEmail(email);
 
 				// TESTE / ALTERAR
-//				Endereco ende = new Endereco();
-//				ende.setId(1);
-//				hos.setEndereco(ende);
+				//				Endereco ende = new Endereco();
+				//				ende.setId(1);
+				//				hos.setEndereco(ende);
 				Hospede resp = new Hospede();
 				resp.setId(6);
 				hos.setResponsavel(resp);
