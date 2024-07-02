@@ -1,6 +1,73 @@
 package visao.padrao;
 
-import javax.swing.text.DefaultFormatterFactory;
+import visao.TelaErro;
+
+public class CPF {
+
+    // Método estático para validar o CPF
+    public static boolean validarCPF(String cpf) {
+        // Remover caracteres não numéricos
+        cpf = cpf.replaceAll("[^\\d]", "");
+        
+        // Verificar se o CPF tem 11 dígitos
+        if (cpf.length() != 11) {
+            return false;
+        }
+        
+        // Verificar se todos os dígitos são iguais
+        if (cpf.matches("(\\d)\\1{10}")) {
+            return false;
+        }
+
+        // Cálculo do primeiro dígito verificador
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+        int primeiroDigitoVerificador = 11 - (soma % 11);
+        if (primeiroDigitoVerificador > 9) {
+            primeiroDigitoVerificador = 0;
+        }
+
+        // Cálculo do segundo dígito verificador
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+        int segundoDigitoVerificador = 11 - (soma % 11);
+        if (segundoDigitoVerificador > 9) {
+            segundoDigitoVerificador = 0;
+        }
+
+        // Verificar os dígitos calculados com os dígitos informados
+        return cpf.charAt(9) == Character.forDigit(primeiroDigitoVerificador, 10)
+            && cpf.charAt(10) == Character.forDigit(segundoDigitoVerificador, 10);
+    }
+
+    // Exibir mensagem de erro
+    public static void exibirMensagemErro(String mensagem) {
+        TelaErro dadosIncorretos = new TelaErro(mensagem);
+        dadosIncorretos.setLocationRelativeTo(null);
+        dadosIncorretos.setVisible(true);
+    }
+
+    // Classe principal para testes
+    public static void main(String[] args) {
+        String cpf = "123.456.789-09"; // Exemplo de CPF inválido
+        
+        if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
+            if (!validarCPF(cpf)) {
+                exibirMensagemErro("CPF inválido. Por favor, insira um CPF válido.");
+            } else {
+                // Setar CPF na classe de hospedagem
+                // hos.setCpf(Integer.valueOf(cpf)); 
+            }
+        }
+    }
+}
+
+
+/*import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
 public class CPF {
@@ -90,4 +157,4 @@ public class CPF {
             return null;
         }
     }
-}
+}*/
