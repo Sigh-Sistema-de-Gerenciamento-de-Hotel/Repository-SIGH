@@ -242,6 +242,7 @@ public class HospedagemDAO implements IHospedagemDAO {
 			ps.setInt(1, (hosp.getId()));
 			ps.setInt(2, (hos.getId()));
 			ps.setInt(3, (hosp.getQuarto().getNumero()));
+			System.out.println(ps); 
 
 			ps.executeUpdate();
 

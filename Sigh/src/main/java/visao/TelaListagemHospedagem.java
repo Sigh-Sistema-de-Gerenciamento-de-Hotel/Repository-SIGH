@@ -33,13 +33,13 @@ public class TelaListagemHospedagem extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private HospedagemDAO dao =  HospedagemDAO.getInstancia(); 
+	private HospedagemDAO daohs =  HospedagemDAO.getInstancia(); 
 	private JLabel caminho;
 	private Hospedagem hospedagemSelecionada; 
 	private Funcionario funcionarioLogado; 
 
 	private DateTextField dtf = new DateTextField();
-	ArrayList<Hospedagem> lista = dao.listarHospedagem();
+	ArrayList<Hospedagem> lista = daohs.listarHospedagem();
 	
 
 	
@@ -207,21 +207,9 @@ public class TelaListagemHospedagem extends JFrame {
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				HospedagemDAO dao = HospedagemDAO.getInstancia();
-				int confirmacao = JOptionPane.showConfirmDialog(null,
-						"Excluir a hospedagem " + hospedagemSelecionada.getQuarto() + "?");
-
-				if (confirmacao == JOptionPane.YES_OPTION) {
-					Boolean validacao = dao.removerHospedagem(hospedagemSelecionada);
-					atualizarJTable();
-					if (validacao == true) {
-						JOptionPane.showMessageDialog(null,
-								"A hospedagem " + hospedagemSelecionada.getQuarto() + " foi excluída");
-						
-
-					}
-				}
+	/*			TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir a hospedagem?");
+				telaExclusao.setLocationRelativeTo(null);
+				telaExclusao.setVisible(true);   */
 			}
 		});
 			
