@@ -11,6 +11,7 @@ import controle.hospedagem.HospedagemDAO;
 import controle.quarto.QuartoDAO;
 import modelo.Funcionario;
 import modelo.Hospedagem;
+import modelo.Hospede;
 import modelo.Quarto;
 import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
@@ -253,13 +254,22 @@ public class TelaCadastroHospedagem extends JFrame {
 				}*/
 
 				if(erro==false) {
-					hospedagem.setQuarto(null);
+					Quarto q = new Quarto();
+					q.setNumero(numQuartos);
+					hospedagem.setQuarto(q);
 					hospedagem.setNumHospedes(numHospedes);
 					hospedagem.setDataEntrada(dataEntrada);
 					hospedagem.setDataSaida(dataSaida);
 					
 					HospedagemDAO dao = HospedagemDAO.getInstancia();
-					dao.inserirHospedagem(hospedagem);
+					int id_hosp = dao.inserirHospedagem(hospedagem);
+					hospedagem.setId(id_hosp);
+					
+					Hospede hospede = new Hospede();
+					hospede.setId(numHospedes);
+					
+					
+					dao.inserirHospedeHospedagem(hospede, hospedagem);
 				
 					
 					TelaListagemHospedagem lf = new TelaListagemHospedagem(funcionarioLogado);

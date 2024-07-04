@@ -218,6 +218,7 @@ public class TelaListagemHospedagem extends JFrame {
 					if (validacao == true) {
 						JOptionPane.showMessageDialog(null,
 								"A hospedagem " + hospedagemSelecionada.getQuarto() + " foi excluída");
+						
 
 					}
 				}
