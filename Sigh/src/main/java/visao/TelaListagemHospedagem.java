@@ -33,19 +33,20 @@ public class TelaListagemHospedagem extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private HospedagemDAO dao =  HospedagemDAO.getInstancia(); 
+	private HospedagemDAO daohs =  HospedagemDAO.getInstancia(); 
 	private JLabel caminho;
 	private Hospedagem hospedagemSelecionada; 
 	private Funcionario funcionarioLogado; 
 
 	private DateTextField dtf = new DateTextField();
+	ArrayList<Hospedagem> lista = daohs.listarHospedagem();
+	
 
-	ArrayList<Hospedagem> lista = dao.listarHospedagem();
 	
 	/**
 	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
+	 
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,9 +58,9 @@ public class TelaListagemHospedagem extends JFrame {
 				}
 			}
 		});
-	}   */
+	}   
 
-	/**
+	
 	 * Create the frame.
 	 */
 	public TelaListagemHospedagem(Funcionario funcLogado) {
@@ -92,6 +93,17 @@ public class TelaListagemHospedagem extends JFrame {
 		// Menu
 		
 		JLabel botaoSair = new JLabel("Sair");
+		botaoSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			}
+		});
 		botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		botaoSair.setBounds(69, 955, 263, 45);
 		contentPane.add(botaoSair);
@@ -113,11 +125,29 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(conta);
 		
 		JLabel funcionarios = new JLabel("Funciários");
+		funcionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				tlf.setVisible(true);
+				tlf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
 		funcionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
 		funcionarios.setBounds(68, 523, 295, 38);
 		contentPane.add(funcionarios);
 		
 		JLabel hospedagem = new JLabel("Hospedagem");
+		hospedagem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
 		hospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
 		hospedagem.setBounds(68, 472, 150, 20);
 		contentPane.add(hospedagem);
@@ -128,6 +158,15 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(pedidos);
 		
 		JLabel hospedes = new JLabel("Hóspedes");
+		hospedes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
+			}
+		});
 		hospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 		hospedes.setBounds(68, 407, 150, 20);
 		contentPane.add(hospedes);
@@ -143,7 +182,7 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(menu);	
 		
 		caminho = new JLabel("");
-		caminho.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\CaminhoListagemHospedagem.png"));
+		caminho.setIcon(new ImageIcon("src/main/resources/CaminhoListagemHospedagem.png"));
 		caminho.setBounds(420, 0, 1500, 60);
 		contentPane.add(caminho);
 		
@@ -152,14 +191,14 @@ public class TelaListagemHospedagem extends JFrame {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-	//		TelaEdicaoHospedagem telaEdhosp = new TelaEdicaoHospedagem(funcionarioLogado, hospedagemSelecionada);
-	//			telaEdhosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	//			telaEdhosp.setVisible(true);
-	//			dispose();
-	//		}
-	//	});
+		TelaEdicaoHospedagem telaEdhosp = new TelaEdicaoHospedagem(funcionarioLogado, hospedagemSelecionada);
+			telaEdhosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		telaEdhosp.setVisible(true);
+			dispose();
+	 		}
+		});
 			
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoEditar.png"));
+		lblNewLabel.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
 		lblNewLabel.setBounds(1570, 164, 120, 34);
 		contentPane.add(lblNewLabel);
 		
@@ -168,24 +207,13 @@ public class TelaListagemHospedagem extends JFrame {
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				HospedagemDAO dao = HospedagemDAO.getInstancia();
-				int confirmacao = JOptionPane.showConfirmDialog(null,
-						"Excluir a hospedagem " + hospedagemSelecionada.getQuarto() + "?");
-
-				if (confirmacao == JOptionPane.YES_OPTION) {
-					Boolean validacao = dao.removerHospedagem(hospedagemSelecionada);
-					atualizarJTable();
-					if (validacao == true) {
-						JOptionPane.showMessageDialog(null,
-								"A hospedagem " + hospedagemSelecionada.getQuarto() + " foi excluída");
-
-					}
-				}
+	/*			TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir a hospedagem?");
+				telaExclusao.setLocationRelativeTo(null);
+				telaExclusao.setVisible(true);   */
 			}
 		});
 			
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botaoExcluir.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
 		lblNewLabel_1.setBounds(1740, 164, 120, 34);
 		contentPane.add(lblNewLabel_1);
 		
@@ -202,17 +230,17 @@ public class TelaListagemHospedagem extends JFrame {
 		});
 			
 		
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cadastrar.png"));
+		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
 		lblNewLabel_2.setBounds(1400, 164, 120, 34);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel titulo = new JLabel("");
-		titulo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\TituloListagemHospedagem.png"));
+		titulo.setIcon(new ImageIcon("src/main/resources/TituloListagemHospedagem.png"));
 		titulo.setBounds(439, 101, 1444, 119);
 		contentPane.add(titulo);
 	}
 	
-	protected void atualizarJTable() {
+	public void atualizarJTable() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"});
 
 		dao = HospedagemDAO.getInstancia();
@@ -226,3 +254,4 @@ public class TelaListagemHospedagem extends JFrame {
 		table.setModel(modelo);
 	}
 }
+		

@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controle.funcionario.FuncionarioDAO;
+import controle.hospedagem.HospedagemDAO;
 import modelo.Funcionario;
 
 public class TelaListagemFuncionario extends JFrame {
@@ -48,23 +49,23 @@ public class TelaListagemFuncionario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
-		lblNewLabel_1.setBounds(135, 46, 144, 176);
-		contentPane.add(lblNewLabel_1);
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
+		logo.setBounds(135, 46, 144, 176);
+		contentPane.add(logo);
 
-		JLabel lblNewLabel_2 = new JLabel("Menu");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(67, 286, 244, 20);
-		contentPane.add(lblNewLabel_2);
+		JLabel menu = new JLabel("Menu");
+		menu.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		menu.setBounds(67, 286, 244, 20);
+		contentPane.add(menu);
 
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblNewLabel_3.setBounds(68, 346, 150, 20);
-		contentPane.add(lblNewLabel_3);
+		JLabel menuPedidos = new JLabel("");
+		menuPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+		menuPedidos.setBounds(68, 346, 150, 20);
+		contentPane.add(menuPedidos);
 
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+		JLabel menuHospedes = new JLabel("");
+		menuHospedes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
@@ -73,22 +74,31 @@ public class TelaListagemFuncionario extends JFrame {
 				tlh.setVisible(true);
 			}
 		});
-		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		lblNewLabel_4.setBounds(68, 407, 150, 20);
-		contentPane.add(lblNewLabel_4);
+		menuHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		menuHospedes.setBounds(68, 407, 150, 20);
+		contentPane.add(menuHospedes);
 
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblNewLabel_5.setBounds(68, 472, 150, 20);
-		contentPane.add(lblNewLabel_5);
+		JLabel menuHospedagem = new JLabel("");
+		menuHospedagem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+		});
+		menuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+		menuHospedagem.setBounds(68, 472, 150, 20);
+		contentPane.add(menuHospedagem);
 
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
-		lblNewLabel_6.setBounds(48, 520, 335, 45);
-		contentPane.add(lblNewLabel_6);
+		JLabel menuFuncionario = new JLabel("");
+		menuFuncionario.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+		menuFuncionario.setBounds(48, 520, 335, 45);
+		contentPane.add(menuFuncionario);
 
-		JLabel lblNewLabel_8 = new JLabel("");
-		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+		JLabel botaoSair = new JLabel("");
+		botaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Logoff
@@ -96,22 +106,23 @@ public class TelaListagemFuncionario extends JFrame {
 				funcionarioLogado = null;
 				TelaLogin tela = new TelaLogin();
 				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 		});
-		lblNewLabel_8.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
-		lblNewLabel_8.setBounds(84, 955, 263, 45);
-		contentPane.add(lblNewLabel_8);
+		botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+		botaoSair.setBounds(84, 955, 263, 45);
+		contentPane.add(botaoSair);
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setForeground(new Color(0, 128, 0));
-		lblNewLabel.setBounds(0, 0, 420, 1080);
-		lblNewLabel.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
-		contentPane.add(lblNewLabel);
+		JLabel fundoCinza = new JLabel("");
+		fundoCinza.setForeground(new Color(0, 128, 0));
+		fundoCinza.setBounds(0, 0, 420, 1080);
+		fundoCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
+		contentPane.add(fundoCinza);
 
-		JLabel lblNewLabel_7 = new JLabel("");
-		lblNewLabel_7.setIcon(new ImageIcon("src/main/resources/barra funcionários.png"));
-		lblNewLabel_7.setBounds(408, 0, 1512, 62);
-		contentPane.add(lblNewLabel_7);
+		JLabel barra = new JLabel("");
+		barra.setIcon(new ImageIcon("src/main/resources/barra funcionários.png"));
+		barra.setBounds(408, 0, 1512, 62);
+		contentPane.add(barra);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(null);
@@ -132,7 +143,7 @@ public class TelaListagemFuncionario extends JFrame {
 		});
 		scrollPane.setViewportView(table);
 		table.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome Completo", "Usuario", "Cargo" }));
+				new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome Completo", "Usuario", "Cargo", "Setor" }));
 		atualizarJTableModel();
 
 		JLabel botaoEditar = new JLabel("");
@@ -153,21 +164,11 @@ public class TelaListagemFuncionario extends JFrame {
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
-				int confirmacao = JOptionPane.showConfirmDialog(null,
-						"Excluir o funcionário " + funcionarioSelecionado.getNome() + "?");
-
-				if (confirmacao == JOptionPane.YES_OPTION) {
-					Boolean validacao = dao.removerFuncionarios(funcionarioSelecionado);
-					atualizarJTableModel();
-					if (validacao == true) {
-						JOptionPane.showMessageDialog(null,
-								"O funcionário " + funcionarioSelecionado.getNome() + " foi excluído");
-
-					}
-				}
+				/*			TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) funcionário(a)?");
+				telaExclusao.setLocationRelativeTo(null);
+				telaExclusao.setVisible(true);   */
 			}
-		});
+		});   
 		botaoExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
 		botaoExcluir.setBounds(1740, 164, 120, 34);
 		contentPane.add(botaoExcluir);
@@ -194,7 +195,7 @@ public class TelaListagemFuncionario extends JFrame {
 
 	protected void atualizarJTableModel() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "CPF", "Nome Completo", "Usuario", "Cargo" });
+				new String[] { "CPF", "Nome Completo", "Usuario", "Cargo", "Setor" });
 
 		dao = FuncionarioDAO.getInstancia();
 		lista = dao.listarFuncionario();
@@ -204,10 +205,10 @@ public class TelaListagemFuncionario extends JFrame {
 			String nomeCompleto;
 			if (fun.getNomeSocial() == null || fun.getNomeSocial().trim().isEmpty()) {
 				nomeCompleto = fun.getNome() + " " + fun.getSobrenome();
-				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo() });
+				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo(), fun.getSetor().getNome() });
 			} else {
 				nomeCompleto = fun.getNomeSocial() + " " + fun.getSobrenome();
-				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo() });
+				modelo.addRow(new Object[] { fun.getId(), nomeCompleto, fun.getUsuario(), fun.getCargo(), fun.getSetor().getNome() });
 			}
 
 		}

@@ -247,6 +247,9 @@ public class CadastroQuarto extends JFrame {
 									lf.setVisible(true);
 									lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
 									dispose();
+								
+									TelaConfirmacao telaConfirmacao = new TelaConfirmacao(quarto);
+									telaConfirmacao.setVisible(true);
 								}		
 							
 			 }
@@ -282,7 +285,7 @@ public class CadastroQuarto extends JFrame {
 		BotaoCancelar.setBounds(1682, 931, 134, 24);
 		contentPane.add(BotaoCancelar);
 
-		menuQuartos = new JLabel("");
+		/*menuQuartos = new JLabel("");
 		menuQuartos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -298,12 +301,16 @@ public class CadastroQuarto extends JFrame {
 		});
 		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 		menuQuartos.setBounds(91, 590, 335, 50);
-		contentPane.add(menuQuartos);
+		contentPane.add(menuQuartos);*/
 
 		lblMenuFuncionarios = new JLabel("");
 		lblMenuFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcionarioLogado);
+				setVisible(false);
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				listaFuncionario.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -328,8 +335,12 @@ public class CadastroQuarto extends JFrame {
 		lblSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -348,6 +359,10 @@ public class CadastroQuarto extends JFrame {
 		lblMenuHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -367,6 +382,10 @@ public class CadastroQuarto extends JFrame {
 		lblMenuHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

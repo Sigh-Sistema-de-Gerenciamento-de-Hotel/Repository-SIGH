@@ -1,26 +1,23 @@
 package visao;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
-import modelo.Usuario;
+import modelo.Setor;
 import visao.padrao.RoundJFormattedTextField;
 import javax.swing.JPasswordField;
-import java.awt.Color;
 
 public class TelaCadastroFuncionario extends JFrame {
 
@@ -31,7 +28,7 @@ public class TelaCadastroFuncionario extends JFrame {
 	private JTextField txtCargoText;
 	private JTextField txtCpfText;
 	private JTextField txtSobrenomeText;
-	private JTextField txtSetorText;
+	private JComboBox<Setor> txtSetorText;
 	private JTextField txtUsuarioText;
 	private JPasswordField passwordField;
 	private Funcionario funcionarioLogado;
@@ -39,8 +36,8 @@ public class TelaCadastroFuncionario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroFuncionario(Funcionario funcionarioLogado) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaCadastroFuncionario(Funcionario funcLogado) {
+		this.funcionarioLogado = funcLogado;
 		setTitle("Cadastro de Funcionário");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1404, 1050);
@@ -71,6 +68,10 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcLogado);
+				setVisible(false);
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				listaFuncionario.setVisible(true);
 			}
 
 			@Override
@@ -91,6 +92,10 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
+				tlh.setVisible(true);
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 
 			@Override
@@ -111,6 +116,10 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoHospede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 
 			@Override
@@ -151,8 +160,12 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Logoff
 				dispose();
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 
 			@Override
@@ -266,12 +279,17 @@ public class TelaCadastroFuncionario extends JFrame {
 
 				if (idS.isEmpty()) {
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu CPF!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					int id = 0;
 					try {
 						id = Integer.parseInt(idS);
 					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "CPF precisa ser tipo numérico inteiro");
+						TelaErro dadosIncorretos = new TelaErro("CPF precisa ser tipo inteiro!");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);
 						erro = true;
 					}
 					if (erro == false && id != 0) {
@@ -284,6 +302,9 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (nome.isEmpty()) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu nome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					func.setNome(nome);
 				}
@@ -292,6 +313,9 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (sobrenome.isEmpty()) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu sobrenome!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					func.setSobrenome(sobrenome);
 				}
@@ -303,14 +327,30 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (cargo.isEmpty()) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu cargo!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					func.setCargo(cargo);
+				}
+				
+				Setor setor = (Setor) txtSetorText.getSelectedItem();
+				if (setor == null) {
+					erro = true;
+					TelaErro dadosIncorretos = new TelaErro("Insira o setor!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					func.setSetor(setor);
 				}
 
 				String usuario = txtUsuarioText.getText();
 				if (usuario.isEmpty()) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira seu usuário!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					func.setUsuario(usuario);
 				}
@@ -319,6 +359,9 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (senhaChar == null) {
 					erro = true;
 					// ERRO
+					TelaErro dadosIncorretos = new TelaErro("Insira sua senha!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
 				} else {
 					String senha = senhaChar.toString();
 					func.setSenha(senha);
@@ -333,12 +376,14 @@ public class TelaCadastroFuncionario extends JFrame {
 						TelaListagemFuncionario lf = new TelaListagemFuncionario(funcionarioLogado);
 						lf.setVisible(true);
 						lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getNome(), func.getSobrenome(),
-								func.getNomeSocial(), func.getUsuario(), func.getCargo());
+						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func);
 						telaConfirmacao.setVisible(true);
 						setVisible(false);
 					} else {
 						// mensagem de ERRO
+						TelaErro dadosIncorretos = new TelaErro("Insira seus dados!");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);
 					}
 				}
 			}
@@ -386,11 +431,12 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblSetorLabel.setBounds(650, 824, 46, 14);
 		contentPane.add(lblSetorLabel);
 
-		txtSetorText = new RoundJFormattedTextField(null);
+		JComboBox<Setor> txtSetorText = new JComboBox<Setor>();
 		txtSetorText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSetorText.setBounds(650, 850, 343, 48);
+		txtSetorText.setModel(new DefaultComboBoxModel<>(Setor.values()));
 		contentPane.add(txtSetorText);
-		txtSetorText.setColumns(10);
+		//txtSetorText.setColumns(10);
 
 		txtUsuarioText = new RoundJFormattedTextField(null);
 		txtUsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 14));

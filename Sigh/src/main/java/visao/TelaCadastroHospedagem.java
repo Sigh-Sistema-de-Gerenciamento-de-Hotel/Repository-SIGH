@@ -8,8 +8,11 @@ import javax.swing.border.EmptyBorder;
 
 import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
+import controle.quarto.QuartoDAO;
 import modelo.Funcionario;
 import modelo.Hospedagem;
+import modelo.Hospede;
+import modelo.Quarto;
 import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
@@ -19,6 +22,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -31,6 +35,9 @@ public class TelaCadastroHospedagem extends JFrame {
 	private final JLabel lblMenu = new JLabel("");
 	private JTextField txtDataCheckin;
 	private JTextField txtDataCheckout;
+	private JComboBox <Integer>comboBoxQuartos;
+	private JComboBox <Integer> comboBoxHospedes; 
+	private JComboBox <Integer> comboBoxHospedes_1;
 	private Funcionario funcionarioLogado;
 
 	/**
@@ -53,17 +60,42 @@ public class TelaCadastroHospedagem extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroHospedagem(Funcionario funcionarioLogado) {
-		this.funcionarioLogado = funcionarioLogado;
+	public TelaCadastroHospedagem(Funcionario funcLogado) {
+		this.funcionarioLogado = funcLogado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1179, 912);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+		comboBoxHospedes = new JComboBox<Integer>();
+		comboBoxHospedes.setModel(new DefaultComboBoxModel(new String[] {"1", "3", "4", "6", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"}));
+		comboBoxHospedes.setForeground(Color.BLACK);
+		comboBoxHospedes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboBoxHospedes.setBounds(502, 355, 343, 48);
+		contentPane.add(comboBoxHospedes);
+		
+		comboBoxQuartos = new JComboBox<Integer>();
+		comboBoxQuartos.setModel(new DefaultComboBoxModel(new Integer[] {129, 178, 183, 278, 301, 378, 533, 554, 606, 609, 610, 681, 685}));
+		comboBoxQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboBoxQuartos.setBounds(1010, 355, 343, 48);
+		contentPane.add(comboBoxQuartos);
+		
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+
 		JLabel lblBotaoFuncionarios = new JLabel("");
+		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcionarioLogado);
+				setVisible(false);
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				listaFuncionario.setVisible(true);
+			
+			}
+		});
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
 		lblBotaoFuncionarios.setBounds(67, 523, 295, 38);
 		contentPane.add(lblBotaoFuncionarios);
@@ -138,17 +170,14 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblRetanguloBranco.setBounds(440, 100, 1455, 119);
 		contentPane.add(lblRetanguloBranco);
 
-		JLabel lblNumHospedes = new JLabel("Número de Hóspedes *");
-		lblNumHospedes.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNumHospedes.setBounds(502, 315, 145, 40);
-		contentPane.add(lblNumHospedes);
+		JLabel lblHospede = new JLabel("Hóspedes *");
+		lblHospede.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblHospede.setBounds(502, 315, 145, 40);
+		contentPane.add(lblHospede);
 
-		JComboBox comboBoxHospedes = new JComboBox();
-		comboBoxHospedes.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
-		comboBoxHospedes.setForeground(Color.BLACK);
-		comboBoxHospedes.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBoxHospedes.setBounds(502, 355, 343, 48);
-		contentPane.add(comboBoxHospedes);
+		
+		
+		
 
 		JLabel lblDataCheckin = new JLabel("Data check-in *");
 		lblDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -166,11 +195,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblQuartos.setBounds(1010, 315, 145, 40);
 		contentPane.add(lblQuartos);
 
-		JComboBox comboBoxQuartos = new JComboBox();
-		comboBoxQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBoxQuartos.setBounds(1010, 355, 343, 48);
-		contentPane.add(comboBoxQuartos);
-
+	
 		JLabel lblDataCheckout = new JLabel("Data check-out");
 		lblDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDataCheckout.setBounds(1010, 510, 145, 40);
@@ -186,12 +211,96 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				Hospedagem hospedagem = new Hospedagem();
+
+				Boolean erro = false;
+
+				int numQuartos = (Integer) comboBoxQuartos.getSelectedItem();
+				int numHospedes = (Integer) comboBoxHospedes.getSelectedItem();
+				int numHospede = (Integer) comboBoxHospedes_1.getSelectedItem();
+				
+				
+				DateTextField dtf = new DateTextField();
+				LocalDate dataEntrada = dtf.stringParaData(txtDataCheckin.getText());
+
+				if (txtDataCheckin.getText().isEmpty()) {
+					erro = true;
+					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				}
+				
+				LocalDate dataSaida = dtf.stringParaData(txtDataCheckout.getText());
+
+				if (txtDataCheckout.getText().isEmpty()) {
+					erro = true;
+					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} 
+
+				/*String preco = txtpreco.getText();
+				float precoo = 0;
+				if (preco.isEmpty()) {
+					erro = true;
+					// ERRO
+				} else {
+					try {
+						precoo = Float.valueOf(preco);
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "Preço precisa ser um tipo numérico");
+						erro = true;
+
+					}
+				}*/
+
+				if(erro==false) {
+					Quarto q = new Quarto();
+					q.setNumero(numQuartos);
+					hospedagem.setQuarto(q);
+					hospedagem.setNumHospedes(numHospedes);
+					hospedagem.setDataEntrada(dataEntrada);
+					hospedagem.setDataSaida(dataSaida);
+					hospedagem.setNumHospede(numHospede);
+					
+					HospedagemDAO dao = HospedagemDAO.getInstancia();
+					int id_hosp = dao.inserirHospedagem(hospedagem);
+					hospedagem.setId(id_hosp);
+					
+					Hospede hospede = new Hospede();
+					hospede.setId(numHospedes);
+					
+					
+					dao.inserirHospedeHospedagem(hospede, hospedagem);
+				
+					
+					TelaListagemHospedagem lf = new TelaListagemHospedagem(funcionarioLogado);
+					lf.setVisible(true);
+					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					dispose();
+					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(hospedagem);
+					telaConfirmacao.setVisible(true);
+				}	
+
+				}			
 			
-			}
+
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
 		contentPane.add(lblBotaoSalvar);
+		
+		JLabel lblNumHoespede = new JLabel("número de hospede ");
+		lblNumHoespede.setBounds(527, 723, 343, 40);
+		contentPane.add(lblNumHoespede);
+		
+		JComboBox<Integer> comboBoxHospedes_1 = new JComboBox<Integer>();
+		comboBoxHospedes_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
+		comboBoxHospedes_1.setForeground(Color.BLACK);
+		comboBoxHospedes_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboBoxHospedes_1.setBounds(502, 758, 343, 48);
+		contentPane.add(comboBoxHospedes_1);
 		
 	
 	

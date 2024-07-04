@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.*;
 import java.util.ArrayList;
 
@@ -38,16 +39,16 @@ public class HospedagemDAO implements IHospedagemDAO {
 		int chaveGerada = 0;
 
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
+			PreparedStatement ps = conBD.prepareStatement(SQL , Statement.RETURN_GENERATED_KEYS);
 
 			ps.setDate(1, Date.valueOf(hosp.getDataEntrada()));
 			ps.setDate(2, Date.valueOf(hosp.getDataSaida()));
 
 			ps.executeUpdate();
 
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.getGeneratedKeys();
 
-			if (rs != null) {
+			if (rs.next()) {
 				chaveGerada = rs.getInt(1);
 			}
 
@@ -223,6 +224,41 @@ public class HospedagemDAO implements IHospedagemDAO {
 		}
 
 		return (retorno == 0 ? false : true);
+	}
+
+	@Override
+	
+	public int inserirHospedeHospedagem(Hospede hos, Hospedagem hosp) {
+		String SQL = "INSERT INTO hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) VALUES (?, ?, ?)";
+
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+
+		int chaveGerada = 0;
+
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL , Statement.RETURN_GENERATED_KEYS);
+
+			ps.setInt(1, (hosp.getId()));
+			ps.setInt(2, (hos.getId()));
+			ps.setInt(3, (hosp.getQuarto().getNumero()));
+			System.out.println(ps); 
+
+			ps.executeUpdate();
+
+			ResultSet rs = ps.getGeneratedKeys();
+
+			if (rs.next()) {
+				chaveGerada = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+
+		return chaveGerada;
 	}
 
 }
