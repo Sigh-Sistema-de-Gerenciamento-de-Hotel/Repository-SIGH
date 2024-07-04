@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
+//import javax.swing.text.MaskFormatter;
 
 import controle.endereco.EnderecoDAO;
 import controle.hospede.HospedeDAO;
@@ -42,7 +42,7 @@ public class TelaCadastroHospede extends JFrame {
 	private JTextField txtData;
 	private JTextField txtSobrenome;
 	// private JTextField txtNecessidade;
-	private JTextField txtTelefone;
+	private JTextField txtTelefone; /* private JTextField txtTelefone = new JFormattedTextField(new MaskFormatter("(##) #####-####"));  */
 	private JTextField txtEndereco;
 	private JTextField txtCep;
 	private JTextField txtNome;
