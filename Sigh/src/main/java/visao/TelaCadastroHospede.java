@@ -4,17 +4,20 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 //import javax.swing.text.MaskFormatter;
+import javax.swing.text.MaskFormatter;
 
 import controle.endereco.EnderecoDAO;
 import controle.hospede.HospedeDAO;
@@ -42,7 +45,7 @@ public class TelaCadastroHospede extends JFrame {
 	private JTextField txtData;
 	private JTextField txtSobrenome;
 	// private JTextField txtNecessidade;
-	private JTextField txtTelefone; /* private JTextField txtTelefone = new JFormattedTextField(new MaskFormatter("(##) #####-####"));  */
+	private JTextField txtTelefone; 
 	private JTextField txtEndereco;
 	private JTextField txtCep;
 	private JTextField txtNome;
@@ -395,7 +398,13 @@ public class TelaCadastroHospede extends JFrame {
 		lblTelefone.setBounds(554, 780, 100, 20);
 		contentPane.add(lblTelefone);
 
-		txtTelefone = new RoundJFormattedTextField(null);
+
+		try {
+			MaskFormatter mascara = new MaskFormatter("(##) #####-####");
+			txtTelefone = new JFormattedTextField(mascara);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		txtTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtTelefone.setBounds(554, 815, 343, 48);
 		contentPane.add(txtTelefone);
