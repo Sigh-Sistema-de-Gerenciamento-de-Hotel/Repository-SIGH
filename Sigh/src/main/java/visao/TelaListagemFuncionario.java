@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controle.funcionario.FuncionarioDAO;
+import controle.hospedagem.HospedagemDAO;
 import modelo.Funcionario;
 
 public class TelaListagemFuncionario extends JFrame {
@@ -163,8 +164,9 @@ public class TelaListagemFuncionario extends JFrame {
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaConfirmacaoExclusao excluir = new TelaConfirmacaoExclusao("Excluir o funcionário" + funcionarioSelecionado.getNome() + "?");
-				excluir.setVisible(true);
+				/*			TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) funcionário(a)?");
+				telaExclusao.setLocationRelativeTo(null);
+				telaExclusao.setVisible(true);   */
 			}
 		});   
 		botaoExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
