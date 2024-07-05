@@ -33,13 +33,13 @@ public class TelaListagemHospedagem extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private HospedagemDAO daohs =  HospedagemDAO.getInstancia(); 
+	private HospedagemDAO dao =  HospedagemDAO.getInstancia(); 
 	private JLabel caminho;
 	private Hospedagem hospedagemSelecionada; 
 	private Funcionario funcionarioLogado; 
 
 	private DateTextField dtf = new DateTextField();
-	ArrayList<Hospedagem> lista = daohs.listarHospedagem();
+	ArrayList<Hospedagem> lista = dao.listarHospedagem();
 	
 
 	
