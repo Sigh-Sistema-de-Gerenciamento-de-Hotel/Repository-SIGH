@@ -53,8 +53,11 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @wbp.parser.constructor
 	 */
+	// FUNCIONARIO
 	public TelaConfirmacaoExclusao(String mensagem, Funcionario func) {
+		funcionarioSelecionado = func;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 144);
 		setUndecorated(true);
@@ -84,9 +87,25 @@ public class TelaConfirmacaoExclusao extends JFrame {
 		});
 		lblBotaoConfirmar.setIcon(new ImageIcon("src/main/resources/BotaoConfirmarPequeno.png"));
 		lblBotaoConfirmar.setBounds(86, 102, 58, 31);
-		contentPane.add(lblBotaoConfirmar);}
+		contentPane.add(lblBotaoConfirmar);
 		
+		JLabel lblBotaoCancelar = new JLabel("");
+		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}
+		});
+		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/BotaoCancelarPequeno.png"));
+		lblBotaoCancelar.setBounds(165, 102, 58, 31);
+		contentPane.add(lblBotaoCancelar);
+		
+		}
+		
+	    //HOSPEDE
 		public TelaConfirmacaoExclusao(String mensagem, Hospede hospede) {
+			hospedeSelecionado = hospede;
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 300, 144);
 			setUndecorated(true);
@@ -116,9 +135,25 @@ public class TelaConfirmacaoExclusao extends JFrame {
 			});
 			lblBotaoConfirmar.setIcon(new ImageIcon("src/main/resources/BotaoConfirmarPequeno.png"));
 			lblBotaoConfirmar.setBounds(86, 102, 58, 31);
-			contentPane.add(lblBotaoConfirmar);}
+			contentPane.add(lblBotaoConfirmar);
 			
+			JLabel lblBotaoCancelar = new JLabel("");
+			lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					dispose();
+					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				}
+			});
+			lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/BotaoCancelarPequeno.png"));
+			lblBotaoCancelar.setBounds(165, 102, 58, 31);
+			contentPane.add(lblBotaoCancelar);
+			
+			}
+			
+		    //HOSPEDAGEM
 			public TelaConfirmacaoExclusao(String mensagem, Hospedagem hospedagem) {
+				hospedagemSelecionada = hospedagem;
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				setBounds(100, 100, 300, 144);
 				setUndecorated(true);
@@ -148,9 +183,25 @@ public class TelaConfirmacaoExclusao extends JFrame {
 				});
 				lblBotaoConfirmar.setIcon(new ImageIcon("src/main/resources/BotaoConfirmarPequeno.png"));
 				lblBotaoConfirmar.setBounds(86, 102, 58, 31);
-				contentPane.add(lblBotaoConfirmar);}
+				contentPane.add(lblBotaoConfirmar);
 				
+				JLabel lblBotaoCancelar = new JLabel("");
+				lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						dispose();
+						setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					}
+				});
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/BotaoCancelarPequeno.png"));
+				lblBotaoCancelar.setBounds(165, 102, 58, 31);
+				contentPane.add(lblBotaoCancelar);
+				
+				}
+				
+			    //QUARTO
 				public TelaConfirmacaoExclusao(String mensagem, Quarto quarto) {
+					quartoSelecionado = quarto;
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					setBounds(100, 100, 300, 144);
 					setUndecorated(true);
