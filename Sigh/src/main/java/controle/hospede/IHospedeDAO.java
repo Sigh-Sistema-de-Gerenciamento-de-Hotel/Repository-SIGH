@@ -7,7 +7,6 @@ import modelo.Hospede;
 public interface IHospedeDAO {
 
 	public int inserirHospede(Hospede hos);
-	
 
 	public ArrayList<Hospede> listarHospede();
 
@@ -15,7 +14,5 @@ public interface IHospedeDAO {
 
 	public boolean removerHospede(Hospede hos);
 	
-	
-	
-	
+	public ArrayList<Hospede> listarHospedeResp();
 }

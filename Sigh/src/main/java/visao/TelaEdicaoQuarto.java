@@ -45,7 +45,7 @@ public class TelaEdicaoQuarto extends JFrame {
 	private JTextField txtLimpeza;
 	private JTextField txtConserto;
 	private JTextField txtPreco;
-	private Funcionario funcionarioLogado;
+	private static Funcionario funcionarioLogado;
 	
 
 	/**
