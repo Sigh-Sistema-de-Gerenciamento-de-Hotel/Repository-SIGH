@@ -57,6 +57,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 	 */
 	// FUNCIONARIO
 	public TelaConfirmacaoExclusao(String mensagem, Funcionario func) {
+		funcionarioSelecionado = func;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 144);
 		setUndecorated(true);
@@ -104,6 +105,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 		
 	    //HOSPEDE
 		public TelaConfirmacaoExclusao(String mensagem, Hospede hospede) {
+			hospedeSelecionado = hospede;
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 300, 144);
 			setUndecorated(true);
@@ -151,6 +153,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 			
 		    //HOSPEDAGEM
 			public TelaConfirmacaoExclusao(String mensagem, Hospedagem hospedagem) {
+				hospedagemSelecionada = hospedagem;
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				setBounds(100, 100, 300, 144);
 				setUndecorated(true);
@@ -198,6 +201,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 				
 			    //QUARTO
 				public TelaConfirmacaoExclusao(String mensagem, Quarto quarto) {
+					quartoSelecionado = quarto;
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					setBounds(100, 100, 300, 144);
 					setUndecorated(true);
