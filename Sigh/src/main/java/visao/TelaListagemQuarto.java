@@ -10,11 +10,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controle.funcionario.FuncionarioDAO;
+import controle.quarto.QuartoDAO;
+import modelo.Funcionario;
+import modelo.Quarto;
+
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -23,11 +30,16 @@ public class TelaListagemQuarto extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private Quarto quartoSelecionado;
+	private QuartoDAO dao = QuartoDAO.getInstacia();
+	private static Funcionario funcionarioLogado;
+	
+	ArrayList<Quarto> lista = dao.listarQuarto();
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -39,14 +51,16 @@ public class TelaListagemQuarto extends JFrame {
 				}
 			}
 		});
-	}
+	} */
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaListagemQuarto() {
+	public TelaListagemQuarto(Funcionario funcLogado) {
+		funcionarioLogado = funcLogado;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Listagem de Quarto");
+		TelaListagemQuarto janela = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100,  1920, 1080);
 		contentPane = new JPanel();
@@ -56,6 +70,15 @@ public class TelaListagemQuarto extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblCadastrar = new JLabel("");
+		lblCadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CadastroQuarto cadQua = new CadastroQuarto(funcionarioLogado);
+				cadQua.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				cadQua.setVisible(true);	
+				dispose();
+			}
+		});
 		lblCadastrar.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
 		lblCadastrar.setBounds(1293, 252, 120, 34);
 		contentPane.add(lblCadastrar);
@@ -75,16 +98,6 @@ public class TelaListagemQuarto extends JFrame {
 		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblMenu.setBounds(67, 289, 46, 14);
 		contentPane.add(lblMenu);
-		
-		JLabel lblConta = new JLabel("Conta");
-		lblConta.setForeground(new Color(128, 128, 128));
-		lblConta.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblConta.setBounds(79, 760, 46, 14);
-		contentPane.add(lblConta);
-		
-		JLabel lblNomeUsuario = new JLabel("JULIA ALMEIDA");
-		lblNomeUsuario.setBounds(129, 798, 100, 14);
-		contentPane.add(lblNomeUsuario);
 		
 		JLabel lblCaminhoListagemQuarto = new JLabel("");
 		lblCaminhoListagemQuarto.setIcon(new ImageIcon("src/main/resources/CaminhoListagemQuarto.png"));
@@ -118,6 +131,10 @@ public class TelaListagemQuarto extends JFrame {
 		lblHospedes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -136,6 +153,10 @@ public class TelaListagemQuarto extends JFrame {
 		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlhp = new TelaListagemHospedagem(funcionarioLogado);
+				dispose();
+				tlhp.setExtendedState(MAXIMIZED_BOTH);
+				tlhp.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -154,6 +175,10 @@ public class TelaListagemQuarto extends JFrame {
 		lblFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemFuncionario tlf = new TelaListagemFuncionario(funcionarioLogado);
+				dispose();
+				tlf.setExtendedState(MAXIMIZED_BOTH);
+				tlf.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -169,20 +194,7 @@ public class TelaListagemQuarto extends JFrame {
 		contentPane.add(lblFuncionarios);
 		
 		JLabel lblQuarto = new JLabel("");
-		lblQuarto.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));//
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-			}
-		});
-		lblQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		lblQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
 		lblQuarto.setBounds(91, 590, 335, 50);
 		contentPane.add(lblQuarto);
 		
@@ -194,23 +206,28 @@ public class TelaListagemQuarto extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int linhaSelecionada = table.getSelectedRow();
+				dao = QuartoDAO.getInstacia();
+				lista = dao.listarQuarto();
+				quartoSelecionado = lista.get(linhaSelecionada);
+			}
+		});
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"Número do Quarto", "Cama Casal", "Cama Solteiro", "Máx. Hóspedes",  "Ar Condicionado", "Frigobar", "Banheira", "Acessibilidade", "Limpeza", "Conserto", "Preço"}));
+		table.setModel(
+				new DefaultTableModel(new Object[][] {}, new String[] {"Número do Quarto", "Cama Casal", "Cama Solteiro", "Máx. Hóspedes",  "Ar Condicionado", "Frigobar", "Banheira", "Acessibilidade", "Limpeza", "Conserto", "Preço"}));
 		
 		JLabel lblBotaoSair = new JLabel("");
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+				// Logoff
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
 			}
 		});
 		
@@ -219,14 +236,45 @@ public class TelaListagemQuarto extends JFrame {
 		contentPane.add(lblBotaoSair);
 		
 		JLabel lblEditar = new JLabel("");
+		lblEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaEdicaoQuarto telaEdQua = new TelaEdicaoQuarto(funcionarioLogado, quartoSelecionado);
+				telaEdQua.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				telaEdQua.setVisible(true);
+				dispose();
+			}
+		});  
 		lblEditar.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
 		lblEditar.setBounds(1478, 252, 120, 34);
 		contentPane.add(lblEditar);
 		
 		JLabel lblExcluir = new JLabel("");
+		lblExcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o quarto?", quartoSelecionado);
+				telaExclusao.setLocationRelativeTo(null);
+				telaExclusao.setVisible(true);
+			}
+		}); 
 		lblExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
 		lblExcluir.setBounds(1675, 252, 120, 34);
 		contentPane.add(lblExcluir);
 
+	}
+
+	protected void atualizarJTableModel() {
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, 
+				new String[] {"Número do Quarto", "Cama Casal", "Cama Solteiro", "Máx. Hóspedes",  "Ar Condicionado", "Frigobar", "Banheira", "Acessibilidade", "Limpeza", "Conserto", "Preço"});
+		
+		dao = QuartoDAO.getInstacia();
+		lista = dao.listarQuarto();
+		
+		for (int i = 0; i < lista.size(); i++) {
+			Quarto qua = lista.get(i);
+			modelo.addRow(new Object[] {qua.getNumero(), qua.getNumCamaCasal(), qua.getNumCamaSolteiro(), qua.getNumMaxHospedes(), qua.isArCondicionado(), qua.isFrigobar(), qua.isBanheira(), qua.isAcessibilidade(), qua.isPrecisaLimpeza(), qua.isPrecisaConserto(), qua.getPreco()});
+		}
+		table.setModel(modelo);
 	}
 }
