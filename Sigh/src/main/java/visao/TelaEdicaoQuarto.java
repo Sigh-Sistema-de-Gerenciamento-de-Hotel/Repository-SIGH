@@ -7,19 +7,32 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.endereco.EnderecoDAO;
+import controle.hospede.HospedeDAO;
+import controle.quarto.QuartoDAO;
+import modelo.Endereco;
+import modelo.Funcionario;
+import modelo.Hospedagem;
+import modelo.Hospede;
+import modelo.Quarto;
+import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.GraphicsConfiguration;
+
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 
 public class TelaEdicaoQuarto extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	protected static final GraphicsConfiguration QuartLogado = null;
 	private JPanel contentPane;
 	private JTextField txtNumQuarto;
 	private JTextField txtCamaCasal;
@@ -32,28 +45,14 @@ public class TelaEdicaoQuarto extends JFrame {
 	private JTextField txtLimpeza;
 	private JTextField txtConserto;
 	private JTextField txtPreco;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaEdicaoQuarto frame = new TelaEdicaoQuarto();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Funcionario funcionarioLogado;
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaEdicaoQuarto() {
+	public TelaEdicaoQuarto(Funcionario funcLogado, Quarto quaEditar) {
+		funcionarioLogado = funcLogado;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Edição Quarto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +62,29 @@ public class TelaEdicaoQuarto extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		
+		JLabel lblQuartos = new JLabel("");
+		lblQuartos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				tlq.setVisible(true);
+				tlq.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));//
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+			}
+		});
+		lblQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		lblQuartos.setBounds(91, 590, 335, 50);
+		contentPane.add(lblQuartos);
 		
 		JLabel lblFundoCinza = new JLabel("");
 		lblFundoCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
@@ -79,10 +101,13 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblTituloEditarQuarto.setBounds(446, 108, 1455, 126);
 		contentPane.add(lblTituloEditarQuarto);
 		
+		
 		JLabel lblNumQuarto = new JLabel("Número do Quarto*");
 		lblNumQuarto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNumQuarto.setBounds(514, 344, 134, 22);
 		contentPane.add(lblNumQuarto);
+		
+		int numero = quaEditar.getNumero();
 		
 		txtNumQuarto = new RoundJFormattedTextField(null);
 		txtNumQuarto.setBounds(514, 372, 334, 48);
@@ -94,6 +119,8 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblCamaCasal.setBounds(514, 448, 112, 22);
 		contentPane.add(lblCamaCasal);
 		
+		int numCamaCasal = quaEditar.getNumCamaCasal();
+		
 		txtCamaCasal = new RoundJFormattedTextField(null);
 		txtCamaCasal.setBounds(514, 481, 334, 48);
 		contentPane.add(txtCamaCasal);
@@ -104,6 +131,8 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblCamaSolteiro.setBounds(514, 565, 112, 22);
 		contentPane.add(lblCamaSolteiro);
 		
+		int numCamaSolteiro = quaEditar.getNumCamaSolteiro();
+		
 		txtCamaSolteiro = new RoundJFormattedTextField(null);
 		txtCamaSolteiro.setBounds(514, 598, 334, 48);
 		contentPane.add(txtCamaSolteiro);
@@ -113,6 +142,8 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblMaxDeHospedes.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblMaxDeHospedes.setBounds(514, 693, 134, 22);
 		contentPane.add(lblMaxDeHospedes);
+		
+		int numMaxHospedes = quaEditar.getNumMaxHospedes();
 		
 		txtMaxDeHospedes = new RoundJFormattedTextField(null);
 		txtMaxDeHospedes.setBounds(514, 731, 334, 48);
@@ -154,6 +185,8 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblAcessibilidade.setBounds(1002, 699, 121, 22);
 		contentPane.add(lblAcessibilidade);
 		
+		Srting acessibilidade = quaEditar.get
+		
 		txtAcessibilidade = new RoundJFormattedTextField(null);
 		txtAcessibilidade.setBounds(1002, 731, 334, 48);
 		contentPane.add(txtAcessibilidade);
@@ -192,7 +225,120 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			}
+				Quarto dao = Quarto.getInstacia();
+				
+				String NumeroDoQuarto = txtNumQuarto.getText();
+				if (NumeroDoQuarto.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira o Número do Quarto");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setNumero(Integer.valueOf(NumeroDoQuarto));
+				}
+
+				String CamaCasal = txtCamaCasal.getText();
+				if(CamaCasal.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira a quantidade de camas para Casal");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setNumCamaCasal(Integer.valueOf(CamaCasal));
+				}
+
+				String CamaSolteiro = txtCamaSolteiro.getText();
+				if (CamaSolteiro.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira a quantidade de camas para Solteiro");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setNumCamaSolteiro(Integer.valueOf(CamaSolteiro));
+				}
+
+				String MaxDeHospedes = txtMaxDeHospedes.getText();
+				if (MaxDeHospedes.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira o Máximo de Hóspedes");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setNumMaxHospedes(Integer.valueOf(MaxDeHospedes));
+				}
+
+				String ArCondicionado = txtArCondicionado.getText();
+				if (ArCondicionado.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de ar condicionado");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setArCondicionado(Boolean.valueOf(ArCondicionado));
+				}
+
+				String Frigobar = txtFrigobar.getText();
+				if (Frigobar.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de frigobar");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setFrigobar(Boolean.valueOf(Frigobar));
+				}
+				
+				String Banheira = txtBanheira.getText();
+				if (Banheira.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de banheira");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setBanheira(Boolean.valueOf(Banheira));
+				}
+				
+				String Acessibilidade = txtAcessibilidade.getText();
+				if (Acessibilidade.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de Acessibilidade");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setAcessibilidade(Acessibilidade);
+				}
+				
+				String Limpeza = txtLimpeza.getText();
+				if (Limpeza.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de Limpeza");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setPrecisaLimpeza(Boolean.valueOf(Limpeza));
+				}
+				
+				String Conserto = txtConserto.getText();
+				if (Conserto.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de Conserto");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setPrecisaConserto(Boolean.valueOf(Conserto));
+				}
+				
+				String Preco = txtPreco.getText();
+				if (Preco.isEmpty()) {
+					TelaErro dadosIncorretos = new TelaErro("Insira o preço");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					dao.setPreco(Float.valueOf(Preco));
+				}
+				
+				
+				boolean validacao = dao.atualizarQuarto(quaEditar);
+				if (validacao == true) {
+					TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+					tlq.setVisible(true);
+					tlq.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					TelaConfirmacaoEdicao telaConfirmacaoEd = new TelaConfirmacaoEdicao(quaEditar);
+					telaConfirmacaoEd.setVisible(true);
+					dispose();
+				} else {
+					// mensagem de ERRO
+				}
+			}   
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
@@ -210,7 +356,10 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				tlq.setVisible(true);
+				tlq.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -308,24 +457,6 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblFuncionarios.setBounds(68, 523, 335, 50);
 		contentPane.add(lblFuncionarios);
 		
-		JLabel lblQuartos = new JLabel("");
-		lblQuartos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));//
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-			}
-		});
-		lblQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-		lblQuartos.setBounds(91, 590, 335, 50);
-		contentPane.add(lblQuartos);
-		
 		JLabel lblConta = new JLabel("Conta");
 		lblConta.setForeground(new Color(128, 128, 128));
 		lblConta.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -355,8 +486,6 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		lblBotaoSair.setBounds(84, 958, 270, 40);
 		contentPane.add(lblBotaoSair);
-		
-		//ASDASFASDFG
 		
 	}
 
