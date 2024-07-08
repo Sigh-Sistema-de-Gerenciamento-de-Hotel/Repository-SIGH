@@ -185,7 +185,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblAcessibilidade.setBounds(1002, 699, 121, 22);
 		contentPane.add(lblAcessibilidade);
 		
-		Srting acessibilidade = quaEditar.get
+		String acessibilidade = quaEditar.isAcessibilidade();
 		
 		txtAcessibilidade = new RoundJFormattedTextField(null);
 		txtAcessibilidade.setBounds(1002, 731, 334, 48);
@@ -215,6 +215,8 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblPreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPreco.setBounds(1472, 577, 121, 22);
 		contentPane.add(lblPreco);
+		
+		float preco = quaEditar.getPreco();
 		
 		txtPreco = new RoundJFormattedTextField(null);
 		txtPreco.setBounds(1472, 598, 334, 48);
