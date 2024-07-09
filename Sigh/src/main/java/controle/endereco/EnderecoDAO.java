@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import controle.Conexao;
 import modelo.Endereco;
+import modelo.EnderecoViaCep;
 
 public class EnderecoDAO implements IEnderecoDAO {
 
@@ -36,7 +38,7 @@ public class EnderecoDAO implements IEnderecoDAO {
 		int chaveGerada = 0;
 		
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
+			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setInt(1, end.getCep());
 			ps.setString(2, end.getEstado());
@@ -47,9 +49,9 @@ public class EnderecoDAO implements IEnderecoDAO {
 			
 			ps.executeUpdate();
 			
-			ResultSet rs = ps.executeQuery();
-			
-			if (rs != null) {
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
 				chaveGerada = rs.getInt(1);
 			}
 
@@ -133,6 +135,7 @@ public class EnderecoDAO implements IEnderecoDAO {
 			ps.setString(4, end.getEndereco());
 			ps.setString(5, end.getComplemento());
 			ps.setInt(6, end.getNumero());
+			ps.setInt(7, end.getId());
 			
 			retorno = ps.executeUpdate();
 			
@@ -221,6 +224,25 @@ public class EnderecoDAO implements IEnderecoDAO {
 		}
 		
 		return enderecos;
+	}
+
+	@Override
+	public Endereco converterEnderecoViaCep(EnderecoViaCep evc) {
+		Endereco end = new Endereco();
+		
+		int cep = Integer.valueOf(evc.getCep());
+		String estado = evc.getUf();
+		String cidade = evc.getLocalidade();
+		String rua = evc.getLogradouro();
+		String complemento = evc.getComplemento();
+		
+		end.setCep(cep);
+		end.setCidade(cidade);
+		end.setComplemento(complemento);
+		end.setEstado(estado);
+		end.setEndereco(rua);
+		
+		return end;
 	}
 
 }

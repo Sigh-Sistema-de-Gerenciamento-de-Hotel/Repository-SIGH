@@ -85,6 +85,15 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int linhaSelecionada = table.getSelectedRow();
+				dao = HospedagemDAO.getInstancia();
+				lista = dao.listarHospedagem();
+				hospedagemSelecionada = lista.get(linhaSelecionada);
+			}
+		});
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"}));
 		// atualiza JTable
@@ -207,20 +216,9 @@ public class TelaListagemHospedagem extends JFrame {
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				HospedagemDAO dao = HospedagemDAO.getInstancia();
-				int confirmacao = JOptionPane.showConfirmDialog(null,
-						"Excluir a hospedagem " + hospedagemSelecionada.getQuarto() + "?");
-
-				if (confirmacao == JOptionPane.YES_OPTION) {
-					Boolean validacao = dao.removerHospedagem(hospedagemSelecionada);
-					atualizarJTable();
-					if (validacao == true) {
-						JOptionPane.showMessageDialog(null,
-								"A hospedagem " + hospedagemSelecionada.getQuarto() + " foi excluída");
-
-					}
-				}
+			    TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir a hospedagem?", hospedagemSelecionada);
+				telaExclusao.setLocationRelativeTo(null);
+				telaExclusao.setVisible(true);   
 			}
 		});
 			

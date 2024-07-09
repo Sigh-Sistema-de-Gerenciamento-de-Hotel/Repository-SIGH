@@ -81,5 +81,9 @@ public class Quarto {
 	public void setPrecisaConserto(boolean precisaConserto) {
 		this.precisaConserto = precisaConserto;
 	}
+	public static Quarto getInstacia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

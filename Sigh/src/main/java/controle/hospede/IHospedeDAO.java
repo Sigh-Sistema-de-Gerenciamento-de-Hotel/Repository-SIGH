@@ -14,4 +14,5 @@ public interface IHospedeDAO {
 
 	public boolean removerHospede(Hospede hos);
 	
+	public ArrayList<Hospede> listarHospedeResp();
 }

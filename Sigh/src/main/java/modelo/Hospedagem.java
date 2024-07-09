@@ -12,6 +12,8 @@ public class Hospedagem {
 	private ArrayList<Hospede> hospedes;
 	private LocalDate dataEntrada;
 	private LocalDate dataSaida;
+	private int numHospede;
+	
 	
 	public int getId() {
 		return id;
@@ -48,6 +50,16 @@ public class Hospedagem {
 	}
 	public void setDataSaida(LocalDate dataSaida) {
 		this.dataSaida = dataSaida;
+	}
+	public int getNumHospede() {
+		return numHospede;
+	}
+	public void setNumHospede(int numHospede) {
+		this.numHospede = numHospede;
+	}
+	public void getNumHospede(int numHospede2) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
