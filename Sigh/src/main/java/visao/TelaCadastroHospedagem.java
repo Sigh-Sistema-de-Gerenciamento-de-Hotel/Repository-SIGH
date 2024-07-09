@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
+import controle.hospede.HospedeDAO;
 import controle.quarto.QuartoDAO;
 import modelo.Funcionario;
 import modelo.Hospedagem;
@@ -23,10 +24,13 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import net.miginfocom.swing.MigLayout;
 
 public class TelaCadastroHospedagem extends JFrame {
 
@@ -83,7 +87,138 @@ public class TelaCadastroHospedagem extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		JPanel panel = new JPanel();
+		panel.setBounds(1500, 355, 334, 139);
+		contentPane.add(panel);
+		panel.setLayout(new MigLayout("", "[grow]", "[][]"));
+		
+		JLabel lblNewLabel = new JLabel("Hospedes*");
+		panel.add(lblNewLabel, "cell 0 0");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JComboBox comboBoxHospede1 = new JComboBox();
+		HospedeDAO dao = HospedeDAO.getInstancia();
+		ArrayList<Hospede> hospedes = dao.listarHospedeResp();
+		for (Hospede resp : hospedes) {
+			String infos;
+			
+		
+			String nomeCompleto;
+			if(resp.getNomeSocial() == null) {
+				nomeCompleto = resp.getNome() + " " + resp.getSobrenome(); 
+			} else {
+				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome(); 
+			} 
+			String doc;
+			String cpf = String.valueOf(resp.getCpf());
+			if (resp.getCpf() == 0) {
+				doc = resp.getPassaporte();
+			} else {
+				doc = cpf; 
+			}
+			infos = nomeCompleto +" - " + doc;
+			comboBoxHospede1.addItem(infos);
+		}
+		panel.add(comboBoxHospede1, "cell 0 1,growx");
+		
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(1500, 548, 334, 139);
+		contentPane.add(panel_1);
+		panel_1.setLayout(new MigLayout("", "[grow]", "[][]"));
+		
+		JLabel lblNewLabel_1 = new JLabel("Hospedes*");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_1.add(lblNewLabel_1, "cell 0 0");
+		
+		JComboBox comboBomxHospede2 = new JComboBox();
+		for (Hospede resp : hospedes) {
+			String infos;
+			
+		
+			String nomeCompleto;
+			if(resp.getNomeSocial() == null) {
+				nomeCompleto = resp.getNome() + " " + resp.getSobrenome(); 
+			} else {
+				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome(); 
+			} 
+			String doc;
+			String cpf = String.valueOf(resp.getCpf());
+			if (resp.getCpf() == 0) {
+				doc = resp.getPassaporte();
+			} else {
+				doc = cpf; 
+			}
+			infos = nomeCompleto +" - " + doc;
+			comboBomxHospede2.addItem(infos);
+		}
+		panel_1.add(comboBomxHospede2, "cell 0 1,growx");
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(1500, 741, 334, 139);
+		contentPane.add(panel_2);
+		panel_2.setLayout(new MigLayout("", "[grow]", "[][]"));
+		
+		JLabel lblNewLabel_2 = new JLabel("Hospedes*");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblNewLabel_2, "cell 0 0");
+		
+		JComboBox comboBoxHospede3 = new JComboBox();
+		for (Hospede resp : hospedes) {
+			String infos;
+			
+		
+			String nomeCompleto;
+			if(resp.getNomeSocial() == null) {
+				nomeCompleto = resp.getNome() + " " + resp.getSobrenome(); 
+			} else {
+				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome(); 
+			} 
+			String doc;
+			String cpf = String.valueOf(resp.getCpf());
+			if (resp.getCpf() == 0) {
+				doc = resp.getPassaporte();
+			} else {
+				doc = cpf; 
+			}
+			infos = nomeCompleto +" - " + doc;
+			comboBoxHospede3.addItem(infos);
+		}
+		panel_2.add(comboBoxHospede3, "cell 0 1,growx");
+		
+		JPanel panel_2_1 = new JPanel();
+		panel_2_1.setBounds(1500, 934, 334, 139);
+		contentPane.add(panel_2_1);
+		panel_2_1.setLayout(new MigLayout("", "[grow]", "[][]"));
+		
+		JLabel lblNewLabel_3 = new JLabel("Hospedes*");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2_1.add(lblNewLabel_3, "cell 0 0");
+		
+		JComboBox comboBoxHospede4 = new JComboBox();
+		for (Hospede resp : hospedes) {
+			String infos;
+			
+		
+			String nomeCompleto;
+			if(resp.getNomeSocial() == null) {
+				nomeCompleto = resp.getNome() + " " + resp.getSobrenome(); 
+			} else {
+				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome(); 
+			} 
+			String doc;
+			String cpf = String.valueOf(resp.getCpf());
+			if (resp.getCpf() == 0) {
+				doc = resp.getPassaporte();
+			} else {
+				doc = cpf; 
+			}
+			infos = nomeCompleto +" - " + doc;
+			comboBoxHospede4.addItem(infos);
+		}
+		panel_2_1.add(comboBoxHospede4, "cell 0 1,growx");
+		
+	
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
 		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
@@ -155,6 +290,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSair.setIcon(new ImageIcon("src\\main\\resources\\botao sair.png"));
 		lblBotaoSair.setBounds(69, 955, 263, 45);
 		contentPane.add(lblBotaoSair);
+		lblMenu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblMenu.setIcon(new ImageIcon("src\\main\\resources\\fundo cinza (menu).png"));
 		lblMenu.setBounds(0, 0, 420, 1080);
@@ -175,9 +311,6 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblHospede.setBounds(502, 315, 145, 40);
 		contentPane.add(lblHospede);
 
-		
-		
-		
 
 		JLabel lblDataCheckin = new JLabel("Data check-in *");
 		lblDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -207,102 +340,83 @@ public class TelaCadastroHospedagem extends JFrame {
 		contentPane.add(txtDataCheckout);
 		txtDataCheckout.setColumns(10);
 
+
+
 		JLabel lblBotaoSalvar = new JLabel("");
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				Hospedagem hospedagem = new Hospedagem();
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Hospedagem hospedagem = new Hospedagem();
 
-				Boolean erro = false;
+        // Verificação e obtenção de dados dos campos
+        int numQuartos = 0;
+        int numHospedes = 0;
+        int numHospede = 0;
 
-				int numQuartos = (Integer) comboBoxQuartos.getSelectedItem();
-				int numHospedes = (Integer) comboBoxHospedes.getSelectedItem();
-				int numHospede = (Integer) comboBoxHospedes_1.getSelectedItem();
-				
-				
-				DateTextField dtf = new DateTextField();
-				LocalDate dataEntrada = dtf.stringParaData(txtDataCheckin.getText());
+        try {
+            numQuartos = Integer.parseInt((String) comboBoxQuartos.getSelectedItem());
+            numHospedes = Integer.parseInt((String) comboBoxHospedes.getSelectedItem());
+            numHospede = Integer.parseInt((String) comboBoxHospedes_1.getSelectedItem());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Selecione um número válido para quartos e hóspedes.");
+            return; // Retorna sem prosseguir se houver erro na conversão
+        }
 
-				if (txtDataCheckin.getText().isEmpty()) {
-					erro = true;
-					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
-					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
-				}
-				
-				LocalDate dataSaida = dtf.stringParaData(txtDataCheckout.getText());
+        DateTextField dtf = new DateTextField();
+        LocalDate dataEntrada = dtf.stringParaData(txtDataCheckin.getText());
+        LocalDate dataSaida = dtf.stringParaData(txtDataCheckout.getText());
 
-				if (txtDataCheckout.getText().isEmpty()) {
-					erro = true;
-					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
-					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
-				} 
+        boolean erro = false;
 
-				/*String preco = txtpreco.getText();
-				float precoo = 0;
-				if (preco.isEmpty()) {
-					erro = true;
-					// ERRO
-				} else {
-					try {
-						precoo = Float.valueOf(preco);
-					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "Preço precisa ser um tipo numérico");
-						erro = true;
+        // Validação dos campos obrigatórios
+        if (txtDataCheckin.getText().isEmpty() || txtDataCheckout.getText().isEmpty()) {
+            erro = true;
+            TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
+            dadosIncorretos.setLocationRelativeTo(null);
+            dadosIncorretos.setVisible(true);
+        }
 
-					}
-				}*/
+        if (!erro) {
+            // Configuração dos dados da hospedagem
+            Quarto q = new Quarto();
+            q.setNumero(numQuartos);
+            hospedagem.setQuarto(q);
+            hospedagem.setNumHospedes(numHospedes);
+            hospedagem.setDataEntrada(dataEntrada);
+            hospedagem.setDataSaida(dataSaida);
+            hospedagem.setNumHospede(numHospede);
 
-				if(erro==false) {
-					Quarto q = new Quarto();
-					q.setNumero(numQuartos);
-					hospedagem.setQuarto(q);
-					hospedagem.setNumHospedes(numHospedes);
-					hospedagem.setDataEntrada(dataEntrada);
-					hospedagem.setDataSaida(dataSaida);
-					hospedagem.setNumHospede(numHospede);
-					
-					HospedagemDAO dao = HospedagemDAO.getInstancia();
-					int id_hosp = dao.inserirHospedagem(hospedagem);
-					hospedagem.setId(id_hosp);
-					
-					Hospede hospede = new Hospede();
-					hospede.setId(numHospedes);
-					
-					
-					dao.inserirHospedeHospedagem(hospede, hospedagem);
-				
-					
-					TelaListagemHospedagem lf = new TelaListagemHospedagem(funcionarioLogado);
-					lf.setVisible(true);
-					lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					dispose();
-					TelaConfirmacao telaConfirmacao = new TelaConfirmacao(hospedagem);
-					telaConfirmacao.setVisible(true);
-				}	
+            // Inserção no banco de dados
+            HospedagemDAO dao = HospedagemDAO.getInstancia();
+            int id_hosp = dao.inserirHospedagem(hospedagem);
 
-				}			
-			
+            if (id_hosp > 0) {
+                hospedagem.setId(id_hosp);
 
-		});
+                Hospede hospede = new Hospede();
+                hospede.setId(numHospede);
+
+                dao.inserirHospedeHospedagem(hospede, hospedagem);
+
+                // Fechar a janela atual e abrir a próxima
+                TelaListagemHospedagem lf = new TelaListagemHospedagem(funcionarioLogado);
+                lf.setVisible(true);
+                lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                dispose();
+
+                TelaConfirmacao telaConfirmacao = new TelaConfirmacao(hospedagem);
+                telaConfirmacao.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao inserir a hospedagem no banco de dados.");
+            }
+        }
+    }
+});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
-		lblBotaoSalvar.setBounds(1245, 902, 343, 50);
+		lblBotaoSalvar.setBounds(512, 724, 343, 50);
 		contentPane.add(lblBotaoSalvar);
 		
-		JLabel lblNumHoespede = new JLabel("número de hospede ");
-		lblNumHoespede.setBounds(527, 723, 343, 40);
-		contentPane.add(lblNumHoespede);
 		
-		JComboBox<Integer> comboBoxHospedes_1 = new JComboBox<Integer>();
-		comboBoxHospedes_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
-		comboBoxHospedes_1.setForeground(Color.BLACK);
-		comboBoxHospedes_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBoxHospedes_1.setBounds(502, 758, 343, 48);
-		contentPane.add(comboBoxHospedes_1);
-		
-	
 	
 				
 		JLabel lblBotaoCancelar = new JLabel("");
