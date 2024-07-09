@@ -6,10 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import visao.padrao.DateTextField;
 import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -115,6 +117,7 @@ public class TelaCadastroPedido extends JFrame {
 		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -320,14 +323,33 @@ public class TelaCadastroPedido extends JFrame {
 		contentPane.add(lblHospedag);
 		
 		comboBox2Departamento = new JComboBox();
+		comboBox2Departamento.setModel(new DefaultComboBoxModel(new String[] {" Camareira", " ", " Manutenção", " ", " Recepção", 
+				" ", " Limpeza"}));
 		comboBox2Departamento.setBounds(1450, 326, 343, 48);
 		contentPane.add(comboBox2Departamento);
 		
 		comboBox1Quarto = new JComboBox();
+		comboBox1Quarto.setModel(new DefaultComboBoxModel(new String[] {" 1", " ", "2", " ", "3", " ", "4", 
+				" ", "5", " ", "6", " ", "7", " ", "8", " ", "9", " ", 
+				"10", " ", "11", " ", "12", " ", "13", " ", "14 ", " ", "15 ", " ", "16 ",
+				" ", "17", " ", "18", " ", "19 ", " ", "20 ", " ", "21",
+				" ", "22", " ", "23", " ", "24", " ", "25", " ",
+				"26", " ", "27", " ", "28", " ", "29", " ",
+				"30", " ", "31", " ", "32", " ", "33", " ", "34",
+				" ", "35", " ", "36", " ", "37", " ", "38", " ", "39", 
+				" ", "40", " ", "41", " ", "42", " ", "43", " ", "44", " ",
+				"45", " ", "46", " ", "47", " ", "48", " ", "49", " ", "50", 
+				" ", "51", " ", "52", " ", "53", " ", "54", " ", "55", " ", "56",
+				" ", "57", " ", "58", " ", "59", " ", "60", "  ", "61", " ", "62", 
+				" ", "63", " ", "64", " ", "65", " ", "66", " ", "67", " ", "68", " ",
+				"69", " ", "70", " ", "71", " ", "72", " ", "73", " ", "74", " ", "75", " ", "76", " ", "77", " ", "78", " ", "79", " ", "80", " ", "81", " ", "82", "", "83", " ", "83",
+				" ", "84", " ", "85", " ", "86", " ", "87", " ", "88", " ", "89", " ", "90", 
+				" ", "91", " ", "92", "", "93", " ", "94", " ",
+				"95", " ", "96", " ", "97", " ", "98", " ", "99", " ", "100"}));
 		comboBox1Quarto.setBounds(1450, 425, 343, 48);
 		contentPane.add(comboBox1Quarto);
 		
-		txtData = new RoundJFormattedTextField(null);
+		txtData = new DateTextField();
 		txtData.setBounds(1001, 523, 343, 48);
 		contentPane.add(txtData);
 		txtData.setColumns(10);

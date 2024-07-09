@@ -41,16 +41,18 @@ CREATE TABLE IF NOT EXISTS   `hospedes` (
   `cpf` INT NULL,
   `passaporte` VARCHAR(8) NULL,
   `email` VARCHAR(45) NOT NULL,
-  `telefone` INT NOT NULL,
+  `telefone` VARCHAR(20) NOT NULL,
   `id_endereco` INT NOT NULL,
   `id_responsavel` INT NULL,
   PRIMARY KEY (`id_hospede`),
   CONSTRAINT `fk_hospedes_enderecos`
     FOREIGN KEY (`id_endereco`)
-    REFERENCES   `enderecos` (`id_endereco`),
+    REFERENCES   `enderecos` (`id_endereco`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_hospedes_hospedes1`
     FOREIGN KEY (`id_responsavel`)
-    REFERENCES   `hospedes` (`id_hospede`));
+    REFERENCES   `hospedes` (`id_hospede`)
+    ON DELETE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -101,21 +103,24 @@ CREATE TABLE IF NOT EXISTS   `hospede_hospedagem` (
   PRIMARY KEY (`id_hospede_hospedagem`),
   CONSTRAINT `fk_hospede_hospedagem_hospedagens1`
     FOREIGN KEY (`id_hospedagem`)
-    REFERENCES   `hospedagens` (`id_hospedagem`),
+    REFERENCES   `hospedagens` (`id_hospedagem`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_hospede_hospedagem_hospedes1`
     FOREIGN KEY (`id_hospede`)
-    REFERENCES   `hospedes` (`id_hospede`),
+    REFERENCES   `hospedes` (`id_hospede`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_hospede_hospedagem_quartos1`
     FOREIGN KEY (`id_quarto`)
-    REFERENCES   `quartos` (`id_quarto`));
+    REFERENCES   `quartos` (`id_quarto`)
+    ON DELETE CASCADE);
 
 -- -----------------------------------------------------
 -- Table   `departamentos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS   `departamentos` (
-  `id_departamento` INT NOT NULL,
-  `nome_departamento` VARCHAR(45) NOT NULL, 
-  PRIMARY KEY (`id_departamento`));
+CREATE TABLE IF NOT EXISTS   `setores` (
+  `id_setor` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL, 
+  PRIMARY KEY (`id_setor`));
 
 -- -----------------------------------------------------
 -- Table   `pedidos`
@@ -128,17 +133,20 @@ CREATE TABLE IF NOT EXISTS   `pedidos` (
   `feito` TINYINT NULL,
   `id_hospedagem` INT NOT NULL,
   `id_quarto` INT NOT NULL,
-  `id_departamento` INT NOT NULL,
+  `id_setor` INT NOT NULL,
   PRIMARY KEY (`id_pedidos`),
   CONSTRAINT `fk_pedidos_hospedagens1`
     FOREIGN KEY (`id_hospedagem`)
-    REFERENCES   `hospedagens` (`id_hospedagem`),
+    REFERENCES   `hospedagens` (`id_hospedagem`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_pedidos_quartos1`
     FOREIGN KEY (`id_quarto`)
-    REFERENCES   `quartos` (`id_quarto`),
-  CONSTRAINT `fk_pedidos_departamentos1`
-    FOREIGN KEY (`id_departamento`)
-    REFERENCES `departamentos` (`id_departamento`));
+    REFERENCES   `quartos` (`id_quarto`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_pedidos_setores1`
+    FOREIGN KEY (`id_setor`)
+    REFERENCES `setores` (`id_setor`)
+    ON DELETE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -151,34 +159,12 @@ CREATE TABLE IF NOT EXISTS   `necessidades_hospede` (
   PRIMARY KEY (`id_necessidade_hospede`),
   CONSTRAINT `fk_hospedes_has_necessidades_especiais_hospedes1`
     FOREIGN KEY (`id_hospede`)
-    REFERENCES   `hospedes` (`id_hospede`),
+    REFERENCES   `hospedes` (`id_hospede`)
+    ON DELETE CASCADE,
   CONSTRAINT `fk_hospedes_has_necessidades_especiais_necessidades_especiais1`
     FOREIGN KEY (`id_necessidade`)
-    REFERENCES   `necessidades_especiais` (`id_necessidade`));
-
-
-
-
--- -----------------------------------------------------
--- Table   `cargos`
--- -----------------------------------------------------
-/*CREATE TABLE IF NOT EXISTS   `cargos` (
-  `id_cargo` INT NOT NULL,
-  `nome_cargo` VARCHAR(45) NOT NULL,
-  `id_departamento` INT NOT NULL,
-  PRIMARY KEY (`id_cargo`),
-  CONSTRAINT `fk_cargos_departamentos1`
-    FOREIGN KEY (`id_departamento`)
-    REFERENCES   `departamentos` (`id_departamento`));*/
-
--- -----------------------------------------------------
--- Table   `usuarios_senhas`
--- -----------------------------------------------------
-/*CREATE TABLE IF NOT EXISTS   `usuarios_senhas` (
-  `usuario` VARCHAR(45) NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`usuario`),
-  UNIQUE KEY unique_usuario(usuario));*/
+    REFERENCES   `necessidades_especiais` (`id_necessidade`)
+    ON DELETE CASCADE);
   
 -- -----------------------------------------------------
 -- Table   `funcionarios`
@@ -188,10 +174,15 @@ CREATE TABLE IF NOT EXISTS   `funcionarios` (
   `primeiro_nome` VARCHAR(45) NOT NULL,
   `sobrenome` VARCHAR(45) NOT NULL,
   `nome_social` VARCHAR(45) NULL,
+  `id_setor` INT NOT NULL,
   `cargo` VARCHAR(45) NOT NULL,
   `usuario` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_funcionario`));
+  PRIMARY KEY (`id_funcionario`),
+  CONSTRAINT `fk_funcionarios_setores1`
+    FOREIGN KEY (`id_setor`)
+    REFERENCES `setores` (`id_setor`)
+    ON DELETE CASCADE);
 
 -- inserts enderecos 
 insert into enderecos (cep, estado, cidade, endereco, complemento, numero) values (12345, 'Geórgia', 'San Jose', 'PO Box 40575', null, 7253);
@@ -218,26 +209,26 @@ insert into enderecos (cep, estado, cidade, endereco, complemento, numero) value
 --------------------------------------------------------------------------------------------------------------------
 
 -- inserts hospedes
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Beee', 'Wettter', null, 'Female', '2002-11-10', 'United states', null, 'us038789', 'pwetter0@irs.gov', 477748784, 1, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Josefina', 'Canby', null,'Genderfluid', '2003-02-25', 'Brazil', 875492836, 'ws637030', 'wcanby1@exblog.jp', 085921159, 2, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Addie', 'Garretts', 'Del', 'Female', '2004-01-14', 'Canada', null, 'hg403564', 'dgarretts2@vk.com', 732425848, 3, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Hesthher', 'Meletti', null, 'Genderqueer', '2003-02-08', 'Dominican Republic', null, 'kl267763', 'gmeletti3@indiatimes.com', 368262143, 4, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Aldwin', 'Peltzer', null, 'Male', '2003-05-07', 'Canada', null, 'ki635763', 'apeltzer4@ebay.com', 489161905, 5, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Israel', 'Trotman', null, 'Genderfluid', '2003-05-02', 'United States', null, 'lo316878', 'jtrotman5@mlb.com', 450432754, 6, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Fredra', 'Kliemann', null, 'Female', '2023-04-24', 'Brazil', 581063453, null, 'lkliemann6@sun.com', 189156511, 7, 3);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Zitella', 'Masarrat', null, 'Female', '2002-09-12', 'Brazil', 511874202, 'mk667060', 'smasarrat7@umich.edu', 891477005, 8, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Byram', 'Turland', 'Georgia', 'Polygender', '2002-06-28', 'Germany', null, 'ki645682', 'gturland8@mozilla.com', 864143915, 9, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Hildagard', 'Blethin', null, 'Female', '2023-02-04', 'Portugal', null, 'ol172005', 'lblethin9@bbb.org', 965583221, 10, 8);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Berkley', 'Fishlee', null, 'Male', '2000-02-01', 'Brasil', 896846771, null, 'sfishleea@tuttocitta.it', 716970713, 11, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Dukey', 'Craigs', null, 'Male', '1952-06-03', 'Brazil', 418376975, null, 'ecraigsb@pinterest.com', 329735772, 12, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Carolyne', 'Hrishchenko', null, 'Female', '2023-02-12', 'Brazil', 317234416,'ji598213', 'ahrishchenkoc@hp.com', 832475583, 13, 11);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Arabel', 'Heugle', 'Nixiie', 'Female', '2023-11-06', 'United States', null, 'ko401110', 'nheugled@sakura.ne.jp', 649333207, 14, 12);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Kayley', 'Cawsy', null, 'Female', '2023-02-07', 'Germany', null, 'ki985030', 'acawsye@prlog.org', 288564037, 15, 12);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Carmella', 'Houliston', null, 'Female', '1958-06-03', 'Portugal', null, 'ju270959', 'khoulistonf@foxnews.com', 121032215, 16, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Fabian', 'Poupard', null, 'Malee', '2023-06-03', 'Brazil', 745065736, null, 'epoooupardg@reverbnation.com', 796711112, 17, 16);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Alexandra', 'Rochelle', null, 'Femalle', '1990-09-10', 'Uruguay', null, 'dr428661', 'crochelleh@wsj.com', 319674200, 18, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Aundrea', 'Bonicelli', null, 'Female', '2023-12-03', 'Portugal', null, 'sw043537', 'nbonicellii@ask.com', 128297256, 19, 18);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Quinlan', 'Tregensoe', null, 'Male', '1989-05-19', 'Brazil', 764965966, 'se327774', 'ctregensoej@mac.com', 519622918, 20, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Beee', 'Wettter', null, 'Feminino', '2002-11-10', 'Americano  ', null, 'us038789', 'pwetter0@irs.gov', 477748784, 1, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Josefina', 'Canby', null,'Feminino', '2003-02-25', 'Brasileiro  ', 875492836, 'ws637030', 'wcanby1@exblog.jp', 085921159, 2, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Addie', 'Garretts', 'Del', 'Feminino', '2004-01-14', 'Dominicano  ', null, 'hg403564', 'dgarretts2@vk.com', 732425848, 3, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Hesthher', 'Meletti', null, 'Feminino', '2003-02-08', 'Afegão  ', null, 'kl267763', 'gmeletti3@indiatimes.com', 368262143, 4, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Aldwin', 'Peltzer', null, 'Masculino', '2003-05-07', 'Americano  ', null, 'ki635763', 'apeltzer4@ebay.com', 489161905, 5, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Israel', 'Trotman', null, 'Masculino', '2003-05-02', 'Americano  ', null, 'lo316878', 'jtrotman5@mlb.com', 450432754, 6, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Fredra', 'Kliemann', null, 'Masculino', '2023-04-24', 'Brasileiro  ', 581063453, null, 'lkliemann6@sun.com', 189156511, 7, 3);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Zitella', 'Masarrat', null, 'Masculino', '2002-09-12', 'Brasileiro  ', 511874202, 'mk667060', 'smasarrat7@umich.edu', 891477005, 8, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Byram', 'Turland', 'Georgia', 'Masculino', '2002-06-28', 'Americano  ', null, 'ki645682', 'gturland8@mozilla.com', 864143915, 9, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Hildagard', 'Blethin', null, 'Masculino', '2023-02-04', 'Americano  ', null, 'ol172005', 'lblethin9@bbb.org', 965583221, 10, 8);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Berkley', 'Fishlee', null, 'Feminino', '2000-02-01', 'Brasileiro  ', 896846771, null, 'sfishleea@tuttocitta.it', 716970713, 11, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Dukey', 'Craigs', null, 'Feminino', '1952-06-03', 'Brasileiro  ', 418376975, null, 'ecraigsb@pinterest.com', 329735772, 12, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Carolyne', 'Hrishchenko', null, 'Feminino', '2023-02-12', 'Brasileiro  ', 317234416,'ji598213', 'ahrishchenkoc@hp.com', 832475583, 13, 11);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Arabel', 'Heugle', 'Nixiie', 'Feminino', '2023-11-06', 'Americano  ', null, 'ko401110', 'nheugled@sakura.ne.jp', 649333207, 14, 12);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Kayley', 'Cawsy', null, 'Feminino', '2023-02-07', 'Americano  ', null, 'ki985030', 'acawsye@prlog.org', 288564037, 15, 12);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Carmella', 'Houliston', null, 'Feminino', '1958-06-03', 'Americano  ', null, 'ju270959', 'khoulistonf@foxnews.com', 121032215, 16, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Fabian', 'Poupard', null, 'Feminino', '2023-06-03', 'Brasileiro  ', 745065736, null, 'epoooupardg@reverbnation.com', 796711112, 17, 16);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Alexandra', 'Rochelle', null, 'Masculino', '1990-09-10', 'Americano  ', null, 'dr428661', 'crochelleh@wsj.com', 319674200, 18, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Aundrea', 'Bonicelli', null, 'Masculino', '2023-12-03', 'Americano  ', null, 'sw043537', 'nbonicellii@ask.com', 128297256, 19, 18);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Quinlan', 'Tregensoe', null, 'Masculino', '1989-05-19', 'Brasileiro  ', 764965966, 'se327774', 'ctregensoej@mac.com', 519622918, 20, null);
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -309,11 +300,8 @@ insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (17
 insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (18, 18, 685);
 insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (19, 19, 183);
 insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (20, 20, 533);
-
-
-
-insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (3, 1, 554);
 insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (3, 4, 554);
+insert into hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) values (3, 6, 554);
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -390,42 +378,45 @@ insert into usuarios_senhas (usuario, senha) values ('s', 'jC6,$jI%t+&');*/
 
 --------------------------------------------------------------------------------------------------------------------
 
--- inserts departamentos 
-insert into departamentos (id_departamento, nome_departamento) values (12, 'Limpeza');
-insert into departamentos (id_departamento, nome_departamento) values (13, 'Manutenção');
-insert into departamentos (id_departamento, nome_departamento) values (14, 'Recepção');
+-- inserts setores 
+insert into setores (id_setor, nome) values (10, 'adm');
+insert into setores (id_setor, nome) values (11, 'RH');
+insert into setores (id_setor, nome) values (12, 'Limpeza');
+insert into setores (id_setor, nome) values (13, 'Manutenção');
+insert into setores (id_setor, nome) values (14, 'Recepção');
 
 --------------------------------------------------------------------------------------------------------------------
 
 -- inserts funcionarios
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, cargo, usuario, senha) values (1, 'adm', 'adm', null, 'ADM', 'adm', 'adm');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, cargo, usuario, senha) values (2, 'Halimeda', 'Rase', null, "Faxineira", 'a', 'bL6.?8O6"4/');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, cargo, usuario, senha) values (3, 'Faina', 'Hullins', null, "Eletricista", 'b', 'kQ4>5ILf');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, cargo, usuario, senha) values (4, 'Ruthann', 'Housbie', 'Carla', "Recepcionista", 'c', 'lO0"ISW/ild');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (1, 'adm', 'adm', null, 10, 'ADM', 'adm', 'adm');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (2, 'Halimeda', 'Rase', null, 12, "Faxineira", 'a', 'bL6.?8O6"4/');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (3, 'Faina', 'Hullins', null, 13, "Eletricista", 'b', 'kQ4>5ILf');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (4, 'Ruthann', 'Housbie', 'Carla', 14, "Recepcionista", 'c', 'lO0"ISW/ild');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (5, 'RH', 'RH', null, 11, "RH", 'rh', 'rh');
 
 --------------------------------------------------------------------------------------------------------------------
 
 -- inser pedidos
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-04-21', '11:10:14', 'Limpeza', 0, 1, 980, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-03-09', '04:07:43', 'Trocar lampada', 1, 1, 980, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-09-28', '13:53:43', 'Limpeza completa', 1, 20, 533, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-04-27', '14:48:22', 'Toalhas extras', 0, 12, 857, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-10-28', '04:02:59', 'Trocar lampadas', 1, 2, 378, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-29', '02:53:02', 'Trocar roupa de cama', 1, 9, 609, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-03-17', '02:22:44', 'Arrumar chuveiro', 1, 20, 533, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-08-25', '12:01:25', 'Vazamento na pia do baheiro', 0, 13, 610, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-09-15', '13:26:43', 'Limpeza', 0, 16, 129, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-31', '13:09:37', 'Trocar roupa de cama', 1, 4, 178, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-10-24', '13:29:23', 'Arrumar cama quebrada', 1, 14, 301, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-07-18', '18:30:17', 'Trocas lampadas', 1, 6, 924, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-14', '13:36:52', 'Problema no alarme de incendio', 1, 14, 301, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-09-06', '14:25:35', 'Chuveiro não esquenta', 0, 4, 178, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-03', '03:02:27', 'Limpeza', 1, 10, 606, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-10-18', '11:47:07', 'Limpeza', 0, 6, 924, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-05-06', '13:34:38', 'Limpeza completa', 1, 6, 924, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-07-07', '13:01:37', 'Trocar toalhas e roupa de cama', 1, 18, 685, 12); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-09-23', '16:18:08', 'Porta emperrada', 1, 17, 864, 13); 
-insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_departamento) values ('2023-01-30', '22:43:12', 'Janela quebrada', 0, 3, 554, 13);
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-04-21', '11:10:14', 'Limpeza', 0, 1, 980, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-03-09', '04:07:43', 'Trocar lampada', 1, 1, 980, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-09-28', '13:53:43', 'Limpeza completa', 1, 20, 533, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-04-27', '14:48:22', 'Toalhas extras', 0, 12, 857, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-10-28', '04:02:59', 'Trocar lampadas', 1, 2, 378, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-29', '02:53:02', 'Trocar roupa de cama', 1, 9, 609, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-03-17', '02:22:44', 'Arrumar chuveiro', 1, 20, 533, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-08-25', '12:01:25', 'Vazamento na pia do baheiro', 0, 13, 610, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-09-15', '13:26:43', 'Limpeza', 0, 16, 129, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-31', '13:09:37', 'Trocar roupa de cama', 1, 4, 178, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-10-24', '13:29:23', 'Arrumar cama quebrada', 1, 14, 301, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-07-18', '18:30:17', 'Trocas lampadas', 1, 6, 924, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-14', '13:36:52', 'Problema no alarme de incendio', 1, 14, 301, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-09-06', '14:25:35', 'Chuveiro não esquenta', 0, 4, 178, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-03', '03:02:27', 'Limpeza', 1, 10, 606, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-10-18', '11:47:07', 'Limpeza', 0, 6, 924, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-05-06', '13:34:38', 'Limpeza completa', 1, 6, 924, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-07-07', '13:01:37', 'Trocar toalhas e roupa de cama', 1, 18, 685, 12); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-09-23', '16:18:08', 'Porta emperrada', 1, 17, 864, 13); 
+insert into pedidos (data, horario, descricao, feito, id_hospedagem, id_quarto, id_setor) values ('2023-01-30', '22:43:12', 'Janela quebrada', 0, 3, 554, 13);
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -445,11 +436,7 @@ SELECT COUNT(*) FROM hospedagens ;
 
 SELECT COUNT(*) FROM necessidades_hospede; 
 
-/*SELECT COUNT(*) FROM usuarios_senhas;*/
-
-SELECT COUNT(*) FROM departamentos;
-
-/*SELECT COUNT(*) FROM cargos;*/
+SELECT COUNT(*) FROM setores;
 
 SELECT COUNT(*) FROM funcionarios;
 
@@ -473,15 +460,12 @@ SELECT * FROM hospedagens ORDER BY id_hospedagem;
 
 SELECT * FROM necessidades_hospede ORDER BY id_necessidade_hospede; 
 
--- SELECT * FROM usuarios_senhas ORDER BY usuario;
-
-SELECT * FROM departamentos ORDER BY id_departamento;
+SELECT * FROM setores ORDER BY id_setor;
 
 SELECT * FROM funcionarios ORDER BY id_funcionario;
 
 SELECT * FROM pedidos ORDER BY id_pedidos;
 
--- select join para toda a tabelas com chave estrangeira 
 
 SELECT 
     necessidades_hospede.id_necessidade_hospede,
@@ -506,22 +490,11 @@ INNER JOIN quartos ON hospede_hospedagem.id_quarto = quartos.id_quarto;
 
 --------------------------------------------------------------------------------------------------------------------
 
-/*SELECT 
-       funcionarios.primeiro_nome,
-       funcionarios.id_cargo,
-       funcionarios.usuario
-FROM 
-       funcionarios
-INNER JOIN cargos ON funcionarios.id_cargo = cargos.id_cargo
-INNER JOIN usuarios_senhas ON funcionarios.usuario = usuarios_senhas.usuario;*/
-
---------------------------------------------------------------------------------------------------------------------
-
 -- select join pedidos
 SELECT * FROM pedidos 
 INNER JOIN hospedagens ON pedidos.id_hospedagem = hospedagens.id_hospedagem
 INNER JOIN quartos ON quartos.id_quarto = pedidos.id_quarto
-INNER JOIN departamentos ON departamentos.id_departamento = pedidos.id_departamento;
+INNER JOIN setores ON setores.id_setor = pedidos.id_setor;
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -565,7 +538,7 @@ UPDATE quartos SET preco = 200.00 WHERE id_quarto = 894;
 UPDATE quartos SET nummax_hospedes = 3 WHERE id_quarto = 610;
 UPDATE quartos SET num_cama_casal = 1 WHERE id_quarto = 129;
 UPDATE quartos SET nummax_hospedes  = 1 WHERE id_quarto = 378;
-UPDATE quartos SET num_cama_casal = 2 WHERE 278;
+UPDATE quartos SET num_cama_casal = 2 WHERE id_quarto = 278;
 UPDATE quartos SET num_cama_casal = 4 WHERE id_quarto = 301;
 UPDATE quartos SET num_cama_solteiro = 2 WHERE id_quarto = 178; 
 SET SQL_SAFE_UPDATES = 1;
@@ -638,27 +611,10 @@ SET SQL_SAFE_UPDATES = 1;
 
 -- updates departamentos
 SET SQL_SAFE_UPDATES = 0;
-UPDATE departamentos SET nome_departamento = 'Cozinha' WHERE id_departamento = 11;
-UPDATE departamentos SET nome_departamento = 'Limpeza' WHERE id_departamento = 12;
-UPDATE departamentos SET nome_departamento = 'Manutenção' WHERE id_departamento = 13;
-UPDATE departamentos SET nome_departamento = 'Recepção' WHERE id_departamento = 14;
+UPDATE setores SET nome = 'Limpeza' WHERE id_setor = 12;
+UPDATE setores SET nome = 'Manutenção' WHERE id_setor = 13;
+UPDATE setores SET nome = 'Recepção' WHERE id_setor = 14;
 SET SQL_SAFE_UPDATES = 1;
-
---------------------------------------------------------------------------------------------------------------------
-
-/*-- updates usuarios_senhas
-SET SQL_SAFE_UPDATES = 0;
-UPDATE usuarios_senhas SET senha = 'jdl/M<jf' WHERE usuario = 'a';
-UPDATE usuarios_senhas SET senha = 'h46fjhwk' WHERE usuario = 'b';
-UPDATE usuarios_senhas SET senha = 'gdhvnetr' WHERE usuario = 'c';
-UPDATE usuarios_senhas SET senha = 'aj534dtr' WHERE usuario = 'd';
-UPDATE usuarios_senhas SET senha = 'oetdgqje' WHERE usuario = 'e';
-UPDATE usuarios_senhas SET senha = 'shdncgft' WHERE usuario = 'f';
-UPDATE usuarios_senhas SET senha = 'afdnvjgç' WHERE usuario = 'g';
-UPDATE usuarios_senhas SET senha = 'mcg45wge' WHERE usuario = 'h';
-UPDATE usuarios_senhas SET senha = 'yhwelkft' WHERE usuario = 'i';
-UPDATE usuarios_senhas SET senha = 'msnch39t' WHERE usuario = 'j'; 
-SET SQL_SAFE_UPDATES = 1;*/
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -674,7 +630,7 @@ SET SQL_SAFE_UPDATES = 1;
 
 -- updates pedidos
 SET SQL_SAFE_UPDATES = 0;
-UPDATE pedidos SET id_departamento = 13 WHERE id_pedidos = 11;
+UPDATE pedidos SET id_setor = 13 WHERE id_pedidos = 11;
 UPDATE pedidos SET data = '2023-02-25' WHERE id_pedidos = 20;
 UPDATE pedidos SET feito = 1 WHERE id_pedidos = 12;
 UPDATE pedidos SET descricao = 'Limpeza' WHERE id_pedidos = 1;

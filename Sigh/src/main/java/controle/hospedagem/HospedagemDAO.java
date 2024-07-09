@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.*;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import modelo.Hospedagem;
 import modelo.Hospede;
 import modelo.Quarto;
 
-public class HospedagemDAO implements IHospedagemDAO{
+public class HospedagemDAO implements IHospedagemDAO {
 
 	private static HospedagemDAO instancia;
 
@@ -21,8 +22,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 
 	}
 
-	public static HospedagemDAO getInstancia() {
-
+	public static HospedagemDAO getInstancia() {;
 		if(instancia==null) {
 			instancia=new HospedagemDAO();
 		}
@@ -37,18 +37,18 @@ public class HospedagemDAO implements IHospedagemDAO{
 		Connection conBD = con.conectar();
 
 		int chaveGerada = 0;
-		
+
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
+			PreparedStatement ps = conBD.prepareStatement(SQL , Statement.RETURN_GENERATED_KEYS);
 
 			ps.setDate(1, Date.valueOf(hosp.getDataEntrada()));
 			ps.setDate(2, Date.valueOf(hosp.getDataSaida()));
 
 			ps.executeUpdate();
-			
-			ResultSet rs = ps.executeQuery();
-			
-			if (rs != null) {
+
+			ResultSet rs = ps.getGeneratedKeys();
+
+			if (rs.next()) {
 				chaveGerada = rs.getInt(1);
 			}
 
@@ -60,9 +60,6 @@ public class HospedagemDAO implements IHospedagemDAO{
 
 		return chaveGerada;
 	}
-	
-	
-	
 
 	@Override
 	public ArrayList<Hospedagem> listarHospedagem() {
@@ -83,40 +80,39 @@ public class HospedagemDAO implements IHospedagemDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
 			ResultSet rs = ps.executeQuery();
-			
+
 			hospedagens = new ArrayList<Hospedagem>();
 
-			while(rs.next()) {
+			while (rs.next()) {
 				Hospedagem hos = new Hospedagem();
 
-				// Hospedagem 
+				// Hospedagem
 				int id = rs.getInt("id_hospedagem");
 				LocalDate dataEntrada = LocalDate.parse(rs.getString("data_entrada"));
 				String dataSaidatxt = rs.getString("data_saida");
 				LocalDate dataSaida = null;
-				if(dataSaidatxt!=null) {
+				if (dataSaidatxt != null) {
 					dataSaida = LocalDate.parse(dataSaidatxt);
 				}
-				
+
 				// Hospede
 				Hospede hospede = new Hospede();
-				Integer id_hospede = rs.getInt("id_hospede"); 
+				Integer id_hospede = rs.getInt("id_hospede");
 				String genero = rs.getString("genero");
 				String dataNascimento = rs.getString("data_nascimento");
-				String nacionalidade = rs.getString("nacionalidade"); 
-				Integer cpf = rs.getInt("cpf"); 
-				String passaporte = rs.getString("passaporte"); 
-				Integer telefone = rs.getInt("telefone"); 
-				
-				hospede.setId(id_hospede);			
+				String nacionalidade = rs.getString("nacionalidade");
+				Integer cpf = rs.getInt("cpf");
+				String passaporte = rs.getString("passaporte");
+				String telefone = rs.getString("telefone");
+
+				hospede.setId(id_hospede);
 				hospede.setGenero(genero);
-				hospede.setDataNascimento(LocalDate.parse( dataNascimento));
+				hospede.setDataNascimento(LocalDate.parse(dataNascimento));
 				hospede.setNacionalidade(nacionalidade);
 				hospede.setCpf(cpf);
 				hospede.setPassaporte(passaporte);
 				hospede.setTelefone(telefone);
-				
-				
+
 				// Quarto
 				Quarto quarto = new Quarto();
 				int numero = rs.getInt("id_quarto");
@@ -130,7 +126,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 				float preco = rs.getFloat("preco");
 				boolean precisaLimpeza = rs.getBoolean("limpeza");
 				boolean precisaConserto = rs.getBoolean("conserto");
-				
+
 				quarto.setNumero(numero);
 				quarto.setNumCamaCasal(numCamaCasal);
 				quarto.setNumCamaSolteiro(numCamaSolteiro);
@@ -142,19 +138,19 @@ public class HospedagemDAO implements IHospedagemDAO{
 				quarto.setPreco(preco);
 				quarto.setPrecisaLimpeza(precisaLimpeza);
 				quarto.setPrecisaConserto(precisaConserto);
-				
+
 				// Conferindo se a hospedagem já existe
-				
+
 				boolean novaHosp = true;
 				for (Hospedagem hospedagem : hospedagens) {
-					if(hospedagem.getId() == id) {
+					if (hospedagem.getId() == id) {
 						hospedagem.getHospedes().add(hospede);
 						novaHosp = false;
-					} 
+					}
 				}
-				
+
 				// Se a hospedagem não estiver listada ainda, adiciona a listagem
-				if(novaHosp == true) {
+				if (novaHosp == true) {
 					ArrayList<Hospede> hospedes = new ArrayList<>();
 					hospedes.add(hospede);
 					hos.setHospedes(hospedes);
@@ -162,11 +158,10 @@ public class HospedagemDAO implements IHospedagemDAO{
 					hos.setDataEntrada(dataEntrada);
 					hos.setDataSaida(dataSaida);
 					hos.setQuarto(quarto);
-					
+
 					hospedagens.add(hos);
 				}
-				
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -193,7 +188,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 			ps.setDate(1, Date.valueOf(hosp.getDataSaida()));
 			ps.setDate(2, Date.valueOf(hosp.getDataEntrada()));
 			ps.setInt(3, hosp.getId());
-			
+
 			retorno = ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -202,14 +197,14 @@ public class HospedagemDAO implements IHospedagemDAO{
 			con.fecharConexao();
 		}
 
-		return (retorno == 0? false : true);
+		return (retorno == 0 ? false : true);
 
 	}
 
 	@Override
 	public boolean removerHospedagem(Hospedagem hosp) {
 		String SQL = "DELETE FROM hospedagens WHERE id_hospedagem = ?";
-		
+
 		Conexao con = Conexao.getInstancia(); // Instancia a conexao
 		Connection conBD = con.conectar(); // Cria a ponte com o MySQL
 
@@ -219,7 +214,7 @@ public class HospedagemDAO implements IHospedagemDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
 			ps.setInt(1, hosp.getId());
-			
+
 			retorno = ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -228,7 +223,42 @@ public class HospedagemDAO implements IHospedagemDAO{
 			con.fecharConexao();
 		}
 
-		return (retorno == 0? false : true);
+		return (retorno == 0 ? false : true);
+	}
+
+	@Override
+	
+	public int inserirHospedeHospedagem(Hospede hos, Hospedagem hosp) {
+		String SQL = "INSERT INTO hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) VALUES (?, ?, ?)";
+
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+
+		int chaveGerada = 0;
+
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL , Statement.RETURN_GENERATED_KEYS);
+
+			ps.setInt(1, (hosp.getId()));
+			ps.setInt(2, (hos.getId()));
+			ps.setInt(3, (hosp.getQuarto().getNumero()));
+			System.out.println(ps); 
+
+			ps.executeUpdate();
+
+			ResultSet rs = ps.getGeneratedKeys();
+
+			if (rs.next()) {
+				chaveGerada = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+
+		return chaveGerada;
 	}
 
 }
