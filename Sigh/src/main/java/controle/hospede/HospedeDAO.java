@@ -51,7 +51,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			n ++;
 		}
 		
-		if(hos.getPassaporte() != null || !hos.getPassaporte().isEmpty()) {
+		if(hos.getPassaporte() != null) {
 			SQL = SQL + ", passaporte";
 			n ++;
 		}
@@ -66,7 +66,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 		
 		SQL = SQL + ") VALUES (?";
 		
-		for(int i=1; i<n; i++) {
+		for(int i=1; i<=n; i++) {
 			SQL = SQL + ", ?";
 		}
 		
@@ -98,7 +98,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				ps.setInt(n++, hos.getCpf());
 			}
 			
-			if(hos.getPassaporte().isEmpty() || hos.getPassaporte() == null) {
+			if(hos.getPassaporte() == null) {
 				ps.setString(n++, hos.getPassaporte());
 			}
 			
@@ -300,5 +300,71 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 		}
 
 		return (retorno == 0 ? false : true);
+	}
+
+	@Override
+	public ArrayList<Hospede> listarHospedeResp() {
+		ArrayList<Hospede> hospede = new ArrayList<Hospede>();
+
+		String SQL = "SELECT * FROM hospedes WHERE data_nascimento >= ?";
+
+		Conexao con = Conexao.getInstancia();
+		Connection ConBD = con.conectar();
+
+		int ano = LocalDate.now().getYear() - 18;
+		int mes = LocalDate.now().getMonthValue();
+		int dia = LocalDate.now().getDayOfMonth();
+		
+		LocalDate data = LocalDate.of(ano, mes, dia);
+
+		try {
+			PreparedStatement ps = ConBD.prepareStatement(SQL);
+			
+			ps.setDate(1, Date.valueOf(data));
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				Hospede hos = new Hospede();
+
+				Integer id_hospede = rs.getInt("id_hospede");
+				String nome = rs.getString("primeiro_nome");
+				String sobrenome = rs.getString("sobrenome");
+				String nomeSocial = rs.getString("nome_social");
+				String genero = rs.getString("genero");
+				Date dataNascimento = rs.getDate("data_nascimento");
+				String nacionalidade = rs.getString("nacionalidade");
+				Integer cpf = rs.getInt("cpf");
+				String passaporte = rs.getString("passaporte");
+				String telefone = rs.getString("telefone");
+				String email = rs.getString("email");
+
+
+				hos.setId(id_hospede);
+				hos.setNome(nome);
+				hos.setSobrenome(sobrenome);
+				hos.setNomeSocial(nomeSocial);
+				hos.setGenero(genero);
+				hos.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
+				hos.setNacionalidade(nacionalidade);
+				hos.setCpf(cpf);
+				hos.setPassaporte(passaporte);
+				hos.setEmail(email);
+				hos.setTelefone(telefone);
+
+				hospede.add(hos);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+
+		}
+
+		return hospede;
 	}
 }
