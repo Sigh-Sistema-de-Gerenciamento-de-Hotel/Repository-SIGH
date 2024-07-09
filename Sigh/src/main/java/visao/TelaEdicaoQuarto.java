@@ -227,7 +227,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Quarto dao = Quarto.getInstacia();
+				Quarto qua = Quarto.getInstacia();
 				
 				String NumeroDoQuarto = txtNumQuarto.getText();
 				if (NumeroDoQuarto.isEmpty()) {
@@ -235,7 +235,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setNumero(Integer.valueOf(NumeroDoQuarto));
+					qua.setNumero(Integer.valueOf(NumeroDoQuarto));
 				}
 
 				String CamaCasal = txtCamaCasal.getText();
@@ -244,7 +244,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setNumCamaCasal(Integer.valueOf(CamaCasal));
+					qua.setNumCamaCasal(Integer.valueOf(CamaCasal));
 				}
 
 				String CamaSolteiro = txtCamaSolteiro.getText();
@@ -253,7 +253,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setNumCamaSolteiro(Integer.valueOf(CamaSolteiro));
+					qua.setNumCamaSolteiro(Integer.valueOf(CamaSolteiro));
 				}
 
 				String MaxDeHospedes = txtMaxDeHospedes.getText();
@@ -262,7 +262,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setNumMaxHospedes(Integer.valueOf(MaxDeHospedes));
+					qua.setNumMaxHospedes(Integer.valueOf(MaxDeHospedes));
 				}
 
 				String ArCondicionado = txtArCondicionado.getText();
@@ -271,7 +271,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setArCondicionado(Boolean.valueOf(ArCondicionado));
+					qua.setArCondicionado(Boolean.valueOf(ArCondicionado));
 				}
 
 				String Frigobar = txtFrigobar.getText();
@@ -280,7 +280,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setFrigobar(Boolean.valueOf(Frigobar));
+					qua.setFrigobar(Boolean.valueOf(Frigobar));
 				}
 				
 				String Banheira = txtBanheira.getText();
@@ -289,7 +289,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setBanheira(Boolean.valueOf(Banheira));
+					qua.setBanheira(Boolean.valueOf(Banheira));
 				}
 				
 				String Acessibilidade = txtAcessibilidade.getText();
@@ -298,7 +298,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setAcessibilidade(Acessibilidade);
+					qua.setAcessibilidade(Acessibilidade);
 				}
 				
 				String Limpeza = txtLimpeza.getText();
@@ -307,7 +307,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setPrecisaLimpeza(Boolean.valueOf(Limpeza));
+					qua.setPrecisaLimpeza(Boolean.valueOf(Limpeza));
 				}
 				
 				String Conserto = txtConserto.getText();
@@ -316,7 +316,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setPrecisaConserto(Boolean.valueOf(Conserto));
+					qua.setPrecisaConserto(Boolean.valueOf(Conserto));
 				}
 				
 				String Preco = txtPreco.getText();
@@ -325,10 +325,10 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					dao.setPreco(Float.valueOf(Preco));
+					qua.setPreco(Float.valueOf(Preco));
 				}
 				
-				
+				QuartoDAO dao = QuartoDAO.getInstacia();
 				boolean validacao = dao.atualizarQuarto(quaEditar);
 				if (validacao == true) {
 					TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
