@@ -633,9 +633,7 @@ public class TelaEdicaoHospede extends JFrame {
 					}
 					if (!passaporte.isEmpty()) {
 						hosEditar.setPassaporte(passaporte);
-					}
-				} 
-				/*else {
+					} else {
 
 					if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
 
@@ -661,7 +659,7 @@ public class TelaEdicaoHospede extends JFrame {
 					        	hosEditar.setPassaporte(passaporte);
 					        }
 					    }
-					}*/
+					}
 
 				String email = txtEmail.getText();
 				hosEditar.setEmail(email);
@@ -679,7 +677,7 @@ public class TelaEdicaoHospede extends JFrame {
 					// mensagem de ERRO
 				}
 			}    
-
+		}
 			private boolean validarPassaporte(String passaporte) {
 				// TODO Auto-generated method stub
 				return false;
