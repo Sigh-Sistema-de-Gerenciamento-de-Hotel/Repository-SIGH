@@ -3,6 +3,7 @@ package controle.endereco;
 import java.util.ArrayList;
 
 import modelo.Endereco;
+import modelo.EnderecoViaCep;
 
 public interface IEnderecoDAO {
 
@@ -15,5 +16,7 @@ public interface IEnderecoDAO {
 	public boolean removerEndereco(Endereco end);
 
 	public ArrayList<Endereco> buscarEnderecoPorCep(int cep);
+	
+	public Endereco converterEnderecoViaCep(EnderecoViaCep evc);
 
 }

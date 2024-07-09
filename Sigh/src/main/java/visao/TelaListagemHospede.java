@@ -196,19 +196,9 @@ public class TelaListagemHospede extends JFrame {
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				HospedeDAO dao = HospedeDAO.getInstancia();
-				int confirmacao = JOptionPane.showConfirmDialog(null,
-						"Excluir o hóspede " + hospedeSelecionado.getNome() + "?");
-
-				if (confirmacao == JOptionPane.YES_OPTION) {
-					Boolean validacao = dao.removerHospede(hospedeSelecionado);
-					atualizarJTableModel();
-					if (validacao == true) {
-						JOptionPane.showMessageDialog(null,
-								"O hóspede " + hospedeSelecionado.getNome() + " foi excluído");
-
-					}
-				}
+				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) hospede?", hospedeSelecionado);
+				telaExclusao.setLocationRelativeTo(null);
+				telaExclusao.setVisible(true);
 			}
 		});
 		botaoExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));

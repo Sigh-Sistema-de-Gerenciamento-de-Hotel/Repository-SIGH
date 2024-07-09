@@ -28,7 +28,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 
 	@Override
 	public boolean inserirFuncionario(Funcionario fun) {
-		String SQL = "INSERT INTO funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, usuario, senha, cargo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -40,9 +40,10 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			ps.setString(2, fun.getNome());
 			ps.setString(3, fun.getSobrenome());
 			ps.setString(4, fun.getNomeSocial());
-			ps.setString(5, fun.getUsuario());
-			ps.setString(6, fun.getSenha());
-			ps.setString(7, fun.getCargo());
+			ps.setInt(5, fun.getSetor().getId());
+			ps.setString(6, fun.getCargo());
+			ps.setString(7, fun.getUsuario());
+			ps.setString(8, fun.getSenha());
 
 			ps.executeUpdate();
 
@@ -81,6 +82,14 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				String usuario = rs.getString("usuario");
 				String senha = rs.getString("senha");
 				String cargo = rs.getString("cargo");
+				int idSetor = rs.getInt("id_setor");
+				Setor setor = null;
+				
+				for (Setor setorS : Setor.values()) {
+					if(setorS.getId() == idSetor) {
+						setor = setorS;
+					}
+				}			
 
 				fun.setId(id);
 				fun.setNome(primeiroNome);
@@ -89,6 +98,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				fun.setUsuario(usuario);
 				fun.setSenha(senha);
 				fun.setCargo(cargo);
+				fun.setSetor(setor);
 
 				funcionarios.add(fun);
 
@@ -106,7 +116,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 	@Override
 	public boolean atualizarFuncionario(Funcionario fun) {
 
-		String SQL = "UPDATE funcionarios SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, usuario = ?, senha = ?, cargo = ? WHERE id_funcionario = ?";
+		String SQL = "UPDATE funcionarios SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, id_setor = ?, cargo = ?, usuario = ?, senha = ?  WHERE id_funcionario = ?";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -119,10 +129,11 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			ps.setString(1, fun.getNome());
 			ps.setString(2, fun.getSobrenome());
 			ps.setString(3, fun.getNomeSocial());
-			ps.setString(4, fun.getUsuario());
-			ps.setString(5, fun.getSenha());
-			ps.setString(6, fun.getCargo());
-			ps.setInt(7, fun.getId());
+			ps.setInt(4, fun.getSetor().getId());
+			ps.setString(5, fun.getCargo());
+			ps.setString(6, fun.getUsuario());
+			ps.setString(7, fun.getSenha());
+			ps.setInt(8, fun.getId());
 
 			retorno = ps.executeUpdate();
 
@@ -166,13 +177,15 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 
 		ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
-		String SQL = "SELECT * FROM funcionarios WHERE id_departamento = ?";
+		String SQL = "SELECT * FROM funcionarios WHERE id_setor = ?";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, s.getId());
 
 			ResultSet rs = ps.executeQuery();
 
@@ -186,6 +199,15 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				String usuario = rs.getString("usuario");
 				String senha = rs.getString("senha");
 				String cargo = rs.getString("cargo");
+				int idSetor = rs.getInt("id_setor");
+				
+				Setor setor = null;
+				
+				for (Setor setorS : Setor.values()) {
+					if(setorS.getId() == idSetor) {
+						setor = setorS;
+					}
+				}			
 
 				fun.setId(id);
 				fun.setNome(primeiroNome);
@@ -194,6 +216,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				fun.setUsuario(usuario);
 				fun.setSenha(senha);
 				fun.setCargo(cargo);
+				fun.setSetor(setor);
 
 				funcionarios.add(fun);
 
@@ -234,6 +257,14 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				String sobrenome = rs.getString("sobrenome");
 				String nomeSocial = rs.getString("nome_social");
 				String cargo = rs.getString("cargo");
+				int idSetor = rs.getInt("id_setor");				
+				Setor setor = null;
+				
+				for (Setor setorS : Setor.values()) {
+					if(setorS.getId() == idSetor) {
+						setor = setorS;
+					}
+				}			
 
 				fun.setId(id);
 				fun.setNome(primeiroNome);
@@ -242,6 +273,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 				fun.setUsuario(usuario);
 				fun.setSenha(senha);
 				fun.setCargo(cargo);
+				fun.setSetor(setor);
 
 			}
 		} catch (SQLException e) {

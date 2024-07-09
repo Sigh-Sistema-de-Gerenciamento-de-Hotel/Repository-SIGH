@@ -24,7 +24,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 
-public class TelaConfirmacao extends JFrame {
+public class TelaConfirmacaoEdicao extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -34,7 +34,7 @@ public class TelaConfirmacao extends JFrame {
 	private String txtUsuario;
 	private String txtCargo;
 
-	public TelaConfirmacao(Funcionario func) {
+	public TelaConfirmacaoEdicao(Funcionario func) {
 		
 		this.txtNome = func.getNome();
 		this.txtSobrenome = func.getSobrenome();
@@ -62,7 +62,7 @@ public class TelaConfirmacao extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		Label lblConfirmacao = new Label("Cadastro feito com sucesso!");
+		Label lblConfirmacao = new Label("Edição feita com sucesso!");
 		lblConfirmacao.setForeground(new Color(255, 253, 253));
 		lblConfirmacao.setFont(new Font("Montserrat Thin", Font.PLAIN, 25));
 		lblConfirmacao.setBounds(30, 10, 375, 22);
@@ -134,7 +134,7 @@ public class TelaConfirmacao extends JFrame {
 
 	}
 	
-	public TelaConfirmacao(Hospede hospede) {
+	public TelaConfirmacaoEdicao(Hospede hospede) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setType(Type.POPUP);
 		setForeground(new Color(255, 253, 253));
@@ -155,7 +155,7 @@ public class TelaConfirmacao extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		Label lblConfirmacao = new Label("Cadastro feito com sucesso!");
+		Label lblConfirmacao = new Label("Edição feita com sucesso!");
 		lblConfirmacao.setForeground(new Color(255, 253, 253));
 		lblConfirmacao.setFont(new Font("Montserrat Thin", Font.PLAIN, 25));
 		lblConfirmacao.setBounds(30, 10, 375, 22);
@@ -182,7 +182,7 @@ public class TelaConfirmacao extends JFrame {
 		lblCodigo.setBounds(50, 163, 62, 22);
 		contentPane.add(lblCodigo);
 
-		String nomeCompleto = hospede.getNome() + hospede.getSobrenome();
+		String nomeCompleto = hospede.getNome() + " " + hospede.getSobrenome();
 
 		JLabel nome = new JLabel(nomeCompleto);
 		nome.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
@@ -226,7 +226,7 @@ public class TelaConfirmacao extends JFrame {
 		contentPane.add(lblNewLabel);
 	}
 	
-	public TelaConfirmacao(Hospedagem hospedagem) {
+	public TelaConfirmacaoEdicao(Hospedagem hospedagem) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setType(Type.POPUP);
 		setForeground(new Color(255, 253, 253));
@@ -247,7 +247,7 @@ public class TelaConfirmacao extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		Label lblConfirmacao = new Label("Cadastro feito com sucesso!");
+		Label lblConfirmacao = new Label("Edição feita com sucesso!");
 		lblConfirmacao.setForeground(new Color(255, 253, 253));
 		lblConfirmacao.setFont(new Font("Montserrat Thin", Font.PLAIN, 25));
 		lblConfirmacao.setBounds(30, 10, 375, 22);
@@ -305,7 +305,7 @@ public class TelaConfirmacao extends JFrame {
 		contentPane.add(lblNewLabel);
 	}
 	
-	public TelaConfirmacao(Quarto quarto) {
+	public TelaConfirmacaoEdicao(Quarto quarto) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setType(Type.POPUP);
 		setForeground(new Color(255, 253, 253));
@@ -326,7 +326,7 @@ public class TelaConfirmacao extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		Label lblConfirmacao = new Label("Cadastro feito com sucesso!");
+		Label lblConfirmacao = new Label("Edição feita com sucesso!");
 		lblConfirmacao.setForeground(new Color(255, 253, 253));
 		lblConfirmacao.setFont(new Font("Montserrat Thin", Font.PLAIN, 25));
 		lblConfirmacao.setBounds(30, 10, 375, 22);

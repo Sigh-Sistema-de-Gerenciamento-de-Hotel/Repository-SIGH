@@ -1,26 +1,23 @@
 package visao;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
-import modelo.Usuario;
+import modelo.Setor;
 import visao.padrao.RoundJFormattedTextField;
 import javax.swing.JPasswordField;
-import java.awt.Color;
 
 public class TelaCadastroFuncionario extends JFrame {
 
@@ -31,7 +28,7 @@ public class TelaCadastroFuncionario extends JFrame {
 	private JTextField txtCargoText;
 	private JTextField txtCpfText;
 	private JTextField txtSobrenomeText;
-	private JTextField txtSetorText;
+	private JComboBox<Setor> txtSetorText;
 	private JTextField txtUsuarioText;
 	private JPasswordField passwordField;
 	private Funcionario funcionarioLogado;
@@ -336,6 +333,16 @@ public class TelaCadastroFuncionario extends JFrame {
 				} else {
 					func.setCargo(cargo);
 				}
+				
+				Setor setor = (Setor) txtSetorText.getSelectedItem();
+				if (setor == null) {
+					erro = true;
+					TelaErro dadosIncorretos = new TelaErro("Insira o setor!");
+					dadosIncorretos.setLocationRelativeTo(null);
+					dadosIncorretos.setVisible(true);
+				} else {
+					func.setSetor(setor);
+				}
 
 				String usuario = txtUsuarioText.getText();
 				if (usuario.isEmpty()) {
@@ -369,8 +376,7 @@ public class TelaCadastroFuncionario extends JFrame {
 						TelaListagemFuncionario lf = new TelaListagemFuncionario(funcionarioLogado);
 						lf.setVisible(true);
 						lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func.getNome(), func.getSobrenome(),
-								func.getNomeSocial(), func.getUsuario(), func.getCargo());
+						TelaConfirmacao telaConfirmacao = new TelaConfirmacao(func);
 						telaConfirmacao.setVisible(true);
 						setVisible(false);
 					} else {
@@ -425,11 +431,12 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblSetorLabel.setBounds(650, 824, 46, 14);
 		contentPane.add(lblSetorLabel);
 
-		txtSetorText = new RoundJFormattedTextField(null);
+		JComboBox<Setor> txtSetorText = new JComboBox<Setor>();
 		txtSetorText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSetorText.setBounds(650, 850, 343, 48);
+		txtSetorText.setModel(new DefaultComboBoxModel<>(Setor.values()));
 		contentPane.add(txtSetorText);
-		txtSetorText.setColumns(10);
+		//txtSetorText.setColumns(10);
 
 		txtUsuarioText = new RoundJFormattedTextField(null);
 		txtUsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 14));
