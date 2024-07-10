@@ -45,6 +45,7 @@ public class TelaEdicaoQuarto extends JFrame {
 	private JTextField txtLimpeza;
 	private JTextField txtConserto;
 	private JTextField txtPreco;
+	private Quarto quartoEditar;
 	private static Funcionario funcionarioLogado;
 	
 
@@ -53,6 +54,7 @@ public class TelaEdicaoQuarto extends JFrame {
 	 */
 	public TelaEdicaoQuarto(Funcionario funcLogado, Quarto quaEditar) {
 		funcionarioLogado = funcLogado;
+		quartoEditar = quaEditar;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Edição Quarto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,7 +109,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblNumQuarto.setBounds(514, 344, 134, 22);
 		contentPane.add(lblNumQuarto);
 		
-		int numero = quaEditar.getNumero();
+		int numero = quartoEditar.getNumero();
 		
 		txtNumQuarto = new RoundJFormattedTextField(null);
 		txtNumQuarto.setBounds(514, 372, 334, 48);
@@ -119,7 +121,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblCamaCasal.setBounds(514, 448, 112, 22);
 		contentPane.add(lblCamaCasal);
 		
-		int numCamaCasal = quaEditar.getNumCamaCasal();
+		int numCamaCasal = quartoEditar.getNumCamaCasal();
 		
 		txtCamaCasal = new RoundJFormattedTextField(null);
 		txtCamaCasal.setBounds(514, 481, 334, 48);
@@ -131,7 +133,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblCamaSolteiro.setBounds(514, 565, 112, 22);
 		contentPane.add(lblCamaSolteiro);
 		
-		int numCamaSolteiro = quaEditar.getNumCamaSolteiro();
+		int numCamaSolteiro = quartoEditar.getNumCamaSolteiro();
 		
 		txtCamaSolteiro = new RoundJFormattedTextField(null);
 		txtCamaSolteiro.setBounds(514, 598, 334, 48);
@@ -143,7 +145,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblMaxDeHospedes.setBounds(514, 693, 134, 22);
 		contentPane.add(lblMaxDeHospedes);
 		
-		int numMaxHospedes = quaEditar.getNumMaxHospedes();
+		int numMaxHospedes = quartoEditar.getNumMaxHospedes();
 		
 		txtMaxDeHospedes = new RoundJFormattedTextField(null);
 		txtMaxDeHospedes.setBounds(514, 731, 334, 48);
@@ -185,7 +187,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblAcessibilidade.setBounds(1002, 699, 121, 22);
 		contentPane.add(lblAcessibilidade);
 		
-		String acessibilidade = quaEditar.isAcessibilidade();
+		String acessibilidade = quartoEditar.isAcessibilidade();
 		
 		txtAcessibilidade = new RoundJFormattedTextField(null);
 		txtAcessibilidade.setBounds(1002, 731, 334, 48);
@@ -216,7 +218,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblPreco.setBounds(1472, 577, 121, 22);
 		contentPane.add(lblPreco);
 		
-		float preco = quaEditar.getPreco();
+		float preco = quartoEditar.getPreco();
 		
 		txtPreco = new RoundJFormattedTextField(null);
 		txtPreco.setBounds(1472, 598, 334, 48);
@@ -227,7 +229,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Quarto qua = Quarto.getInstacia();
+				QuartoDAO dao = QuartoDAO.getInstacia();
 				
 				String NumeroDoQuarto = txtNumQuarto.getText();
 				if (NumeroDoQuarto.isEmpty()) {
@@ -235,7 +237,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setNumero(Integer.valueOf(NumeroDoQuarto));
+					quartoEditar.setNumero(Integer.valueOf(NumeroDoQuarto));
 				}
 
 				String CamaCasal = txtCamaCasal.getText();
@@ -244,7 +246,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setNumCamaCasal(Integer.valueOf(CamaCasal));
+					quartoEditar.setNumCamaCasal(Integer.valueOf(CamaCasal));
 				}
 
 				String CamaSolteiro = txtCamaSolteiro.getText();
@@ -253,7 +255,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setNumCamaSolteiro(Integer.valueOf(CamaSolteiro));
+					quartoEditar.setNumCamaSolteiro(Integer.valueOf(CamaSolteiro));
 				}
 
 				String MaxDeHospedes = txtMaxDeHospedes.getText();
@@ -262,7 +264,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setNumMaxHospedes(Integer.valueOf(MaxDeHospedes));
+					quartoEditar.setNumMaxHospedes(Integer.valueOf(MaxDeHospedes));
 				}
 
 				String ArCondicionado = txtArCondicionado.getText();
@@ -271,7 +273,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setArCondicionado(Boolean.valueOf(ArCondicionado));
+					quartoEditar.setArCondicionado(Boolean.valueOf(ArCondicionado));
 				}
 
 				String Frigobar = txtFrigobar.getText();
@@ -280,7 +282,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setFrigobar(Boolean.valueOf(Frigobar));
+					quartoEditar.setFrigobar(Boolean.valueOf(Frigobar));
 				}
 				
 				String Banheira = txtBanheira.getText();
@@ -289,7 +291,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setBanheira(Boolean.valueOf(Banheira));
+					quartoEditar.setBanheira(Boolean.valueOf(Banheira));
 				}
 				
 				String Acessibilidade = txtAcessibilidade.getText();
@@ -298,7 +300,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setAcessibilidade(Acessibilidade);
+					quartoEditar.setAcessibilidade(Acessibilidade);
 				}
 				
 				String Limpeza = txtLimpeza.getText();
@@ -307,7 +309,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setPrecisaLimpeza(Boolean.valueOf(Limpeza));
+					quartoEditar.setPrecisaLimpeza(Boolean.valueOf(Limpeza));
 				}
 				
 				String Conserto = txtConserto.getText();
@@ -316,7 +318,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setPrecisaConserto(Boolean.valueOf(Conserto));
+					quartoEditar.setPrecisaConserto(Boolean.valueOf(Conserto));
 				}
 				
 				String Preco = txtPreco.getText();
@@ -325,11 +327,10 @@ public class TelaEdicaoQuarto extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					qua.setPreco(Float.valueOf(Preco));
+					quartoEditar.setPreco(Float.valueOf(Preco));
 				}
 				
-				QuartoDAO dao = QuartoDAO.getInstacia();
-				boolean validacao = dao.atualizarQuarto(quaEditar);
+				boolean validacao = dao.atualizarQuarto(quartoEditar);
 				if (validacao == true) {
 					TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
 					tlq.setVisible(true);
