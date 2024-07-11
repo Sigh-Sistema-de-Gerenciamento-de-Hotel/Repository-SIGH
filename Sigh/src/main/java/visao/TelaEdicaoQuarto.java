@@ -128,7 +128,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		comboCamaCasal = new JComboBox<Integer>();
 		comboCamaCasal.setModel(new DefaultComboBoxModel(new Integer[] { 0, 1, 2}));
-		comboCamaCasal.setBounds(491, 705, 343, 50);
+		comboCamaCasal.setBounds(514, 481, 343, 50);
 		contentPane.add(comboCamaCasal);
 		
 		JLabel lblCamaSolteiro = new JLabel("Cama Solteiro");
@@ -140,7 +140,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		comboCamaSolteiro = new JComboBox<Integer>();
 		comboCamaSolteiro.setModel(new DefaultComboBoxModel(new Integer[] {  0, 1, 2}));
-		comboCamaSolteiro.setBounds(491, 579, 343, 50);
+		comboCamaSolteiro.setBounds(514, 598, 343, 50);
 		contentPane.add(comboCamaSolteiro);
 		
 		JLabel lblMaxDeHospedes = new JLabel("Máximo de Hóspdes*");
@@ -152,7 +152,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		comboMaxDeHospedes = new JComboBox<Integer>();
 		comboMaxDeHospedes.setModel(new DefaultComboBoxModel(new Integer[] { 0, 1, 2, 3, 4}));
-		comboMaxDeHospedes.setBounds(491, 705, 343, 50);
+		comboMaxDeHospedes.setBounds(514, 730, 343, 50);
 		contentPane.add(comboMaxDeHospedes);
 		
 		JLabel lblArCondicionado = new JLabel("Ar Condicionado");
@@ -164,7 +164,7 @@ public class TelaEdicaoQuarto extends JFrame {
 				
 		comboArCondicionado = new JComboBox();
 		comboArCondicionado.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboArCondicionado.setBounds(984, 314, 343, 50);
+		comboArCondicionado.setBounds(1002, 393, 343, 50);
 		contentPane.add(comboArCondicionado);
 		
 		JLabel lblFrigobar = new JLabel("Frigobar");
@@ -176,7 +176,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		comboFrigobar = new JComboBox();
 		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboFrigobar.setBounds(984, 314, 343, 50);
+		comboFrigobar.setBounds(1002, 493, 343, 50);
 		contentPane.add(comboFrigobar);
 		
 		JLabel lblBanheira = new JLabel("Banheira");
@@ -188,7 +188,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		comboBanheira = new JComboBox();
 		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboBanheira.setBounds(984, 314, 343, 50);
+		comboBanheira.setBounds(1002, 616, 343, 50);
 		contentPane.add(comboBanheira);
 		
 		JLabel lblAcessibilidade = new JLabel("Acessibilidade");
@@ -212,7 +212,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		comboLimpeza = new JComboBox();
 		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboLimpeza.setBounds(984, 314, 343, 50);
+		comboLimpeza.setBounds(1472, 383, 343, 50);
 		contentPane.add(comboLimpeza);
 		
 		JLabel lblConserto = new JLabel("Conserto");
@@ -224,7 +224,7 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		comboConserto = new JComboBox();
 		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboConserto.setBounds(984, 314, 343, 50);
+		comboConserto.setBounds(1472, 493, 343, 50);
 		contentPane.add(comboConserto);
 		
 		JLabel lblPreco = new JLabel("Preço");
