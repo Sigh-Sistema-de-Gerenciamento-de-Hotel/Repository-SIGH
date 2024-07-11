@@ -128,23 +128,23 @@ public class TelaEdicaoHospede extends JFrame {
 
 
 
-		JLabel lblPedidos = new JLabel("");
-		lblPedidos.addMouseListener(new MouseAdapter() {
+		JLabel menuQuarto = new JLabel("");
+		menuQuarto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 			}
 		});
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblPedidos.setBounds(68, 346, 400, 60);
-		contentPane.add(lblPedidos);
+		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		menuQuarto.setBounds(68, 346, 400, 60);
+		contentPane.add(menuQuarto);
 
 
 

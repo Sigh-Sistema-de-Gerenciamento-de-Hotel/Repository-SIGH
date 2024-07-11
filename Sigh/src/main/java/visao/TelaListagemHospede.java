@@ -66,10 +66,10 @@ public class TelaListagemHospede extends JFrame {
 		lblNewLabel_2.setBounds(67, 286, 244, 20);
 		contentPane.add(lblNewLabel_2);
 
-		JLabel lblPedidos = new JLabel("");
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblPedidos.setBounds(68, 346, 150, 20);
-		contentPane.add(lblPedidos);
+		JLabel menuQuarto = new JLabel("");
+		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		menuQuarto.setBounds(68, 346, 150, 20);
+		contentPane.add(menuQuarto);
 
 		JLabel lblHospede = new JLabel("");
 		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
