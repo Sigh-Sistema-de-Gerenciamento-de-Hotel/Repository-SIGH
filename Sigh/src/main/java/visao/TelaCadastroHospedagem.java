@@ -401,6 +401,16 @@ public class TelaCadastroHospedagem extends JFrame {
 
 					if (id_hosp > 0) {
 						hospedagem.setId(id_hosp);
+						
+						for (Hospede h : hospedagem.getHospedes()) {
+							int id = dao.inserirHospedeHospedagem(h, hospedagem);
+							if(id <= 0) {
+								TelaErro dadosIncorretos = new TelaErro("Falha ao inserir a hospedagem no banco de dados.");
+								dadosIncorretos.setLocationRelativeTo(null);
+								dadosIncorretos.setVisible(true);
+								break;
+							}
+						}
 
 						TelaListagemHospedagem lf = new TelaListagemHospedagem(funcionarioLogado);
 						lf.setVisible(true);

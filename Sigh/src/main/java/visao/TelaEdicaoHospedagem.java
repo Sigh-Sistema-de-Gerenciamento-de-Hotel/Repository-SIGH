@@ -152,10 +152,10 @@ public class TelaEdicaoHospedagem extends JFrame {
 				doc = cpf; 
 			}
 			infos = nomeCompleto +" - " + doc;
-			if(infosHospedes.size() > 1) {
-				comboBoxHospede2.setSelectedItem(infosHospedes.get(1));
-			}
 			comboBoxHospede2.addItem(infos);
+		}
+		if(infosHospedes.size() > 1) {
+			comboBoxHospede2.setSelectedItem(infosHospedes.get(1));
 		}
 		panel_1.add(comboBoxHospede2, "cell 0 1,growx");
 //		panel_1.setVisible(false);
@@ -187,10 +187,10 @@ public class TelaEdicaoHospedagem extends JFrame {
 				doc = cpf; 
 			}
 			infos = nomeCompleto +" - " + doc;
-			if(infosHospedes.size() > 2) {
-				comboBoxHospede3.setSelectedItem(infosHospedes.get(2));
-			}
 			comboBoxHospede3.addItem(infos);
+		}
+		if(infosHospedes.size() > 2) {
+			comboBoxHospede3.setSelectedItem(infosHospedes.get(2));
 		}
 		panel_2.add(comboBoxHospede3, "cell 0 1,growx");
 //		panel_2.setVisible(false);
@@ -222,10 +222,10 @@ public class TelaEdicaoHospedagem extends JFrame {
 				doc = cpf; 
 			}
 			infos = nomeCompleto +" - " + doc;
-			if(infosHospedes.size() > 3) {
-				comboBoxHospede4.setSelectedItem(infosHospedes.get(3));
-			}
 			comboBoxHospede4.addItem(infos);
+		}
+		if(infosHospedes.size() > 3) {
+			comboBoxHospede4.setSelectedItem(infosHospedes.get(3));
 		}
 		panel_3.add(comboBoxHospede4, "cell 0 1,growx");
 //		panel_3.setVisible(false);
