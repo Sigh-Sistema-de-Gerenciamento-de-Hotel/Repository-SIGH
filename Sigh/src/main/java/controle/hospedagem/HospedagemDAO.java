@@ -56,8 +56,6 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
 		}
 		
 		hosp.setId(chaveGerada);
@@ -79,23 +77,19 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 				ps.executeUpdate();
 
-				ResultSet rs = ps.executeQuery();
-
-				if (rs == null) {
-					erro = true;
-				}
+				ps.executeUpdate();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				con.fecharConexao();
 			}
 		}
+		
+		con.fecharConexao();
 
 		if(erro == false) {
-			return chaveGerada = 0;
-		} else {
 			return chaveGerada;
+		} else {
+			return chaveGerada = 0;
 		}
 	}
 
