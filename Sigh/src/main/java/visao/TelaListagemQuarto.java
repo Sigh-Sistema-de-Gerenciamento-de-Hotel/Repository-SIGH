@@ -88,11 +88,6 @@ public class TelaListagemQuarto extends JFrame {
 		lblLogoSigh.setBounds(135, 46, 144, 176);
 		contentPane.add(lblLogoSigh);
 		
-		JLabel lblFundoCinza = new JLabel("");
-		lblFundoCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
-		lblFundoCinza.setBounds(0, 0, 420, 1080);
-		contentPane.add(lblFundoCinza);
-		
 		JLabel lblMenu = new JLabel("Menu");
 		lblMenu.setForeground(new Color(128, 128, 128));
 		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -261,6 +256,11 @@ public class TelaListagemQuarto extends JFrame {
 		lblExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
 		lblExcluir.setBounds(1675, 252, 120, 34);
 		contentPane.add(lblExcluir);
+		
+		JLabel lblFundoCinza = new JLabel("");
+		lblFundoCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
+		lblFundoCinza.setBounds(0, 0, 420, 1080);
+		contentPane.add(lblFundoCinza);
 
 	}
 
