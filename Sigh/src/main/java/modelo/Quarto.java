@@ -85,5 +85,9 @@ public class Quarto {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	public boolean atualizarQuarto(Quarto quaEditar) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

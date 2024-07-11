@@ -59,14 +59,23 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 		SQL = SQL + ", email, telefone, id_endereco";
 		n += 3;
 		
-		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) < 18 && hos.getDataNascimento().getMonthValue() > LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() > LocalDate.now().getDayOfMonth()) {
+		boolean maior = false;
+		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) > 18) {
+			maior = true;
+		} else if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) == 18 && hos.getDataNascimento().getMonthValue() < LocalDate.now().getMonthValue()) {
+			maior = true;
+		} else if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) == 18 && hos.getDataNascimento().getMonthValue() == LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
+			maior = true;
+		}
+		
+		if(maior == true) {
 			SQL = SQL + ", id_responsavel";
 			n ++;
 		}
 		
 		SQL = SQL + ") VALUES (?";
 		
-		for(int i=1; i<=n; i++) {
+		for(int i=1; i<n; i++) {
 			SQL = SQL + ", ?";
 		}
 		
@@ -98,17 +107,17 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				ps.setInt(n++, hos.getCpf());
 			}
 			
-			if(hos.getPassaporte() == null) {
+			if(hos.getPassaporte() != null) {
 				ps.setString(n++, hos.getPassaporte());
 			}
 			
-			ps.setString(9, hos.getEmail());
-			ps.setString(10, hos.getTelefone());
+			ps.setString(n++, hos.getEmail());
+			ps.setString(n++, hos.getTelefone());
 			Endereco end = hos.getEndereco();
-			ps.setInt(11, end.getId());
+			ps.setInt(n++, end.getId());
 			Hospede resp = hos.getResponsavel();
 			
-			if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) >= 18 && hos.getDataNascimento().getMonthValue() <= LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
+			if(maior == true) {
 				ps.setInt(n++, resp.getId());
 			}
 
@@ -178,36 +187,44 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				end.setComplemento(complemento);
 				end.setNumero(numero);
 
-				// Responsavel
-				Hospede respon = new Hospede();
+				
+				int idResp = rs.getInt("id_responsavel");
+				if(idResp > 0) {
+					String SQLResp = "SELECT * FROM hospedes WHERE id_hospede = ?";
+					PreparedStatement psResp = ConBD.prepareStatement(SQLResp);
+					psResp.setInt(1, idResp);
+					ResultSet rsResp = psResp.executeQuery();
 
-				Integer id_hospedeR = rs.getInt("id_hospede");
-				String nomeR = rs.getString("primeiro_nome");
-				String sobrenomeR = rs.getString("sobrenome");
-				String nomeSocialR = rs.getString("nome_social");
-				String generoR = rs.getString("genero");
-				Date dataNascimentoR = rs.getDate("data_nascimento");
-				String nacionalidadeR = rs.getString("nacionalidade");
-				Integer cpfR = rs.getInt("cpf");
-				String passaporteR = rs.getString("passaporte");
-				String telefoneR = rs.getString("telefone");
+					while (rsResp.next()) {
 
-				respon.setId(id_hospedeR);
-				respon.setNome(nomeR);
-				respon.setSobrenome(sobrenomeR);
-				respon.setNomeSocial(nomeSocialR);
-				respon.setGenero(generoR);
-				respon.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimentoR)));
-				respon.setNacionalidade(nacionalidadeR);
-				respon.setCpf(cpfR);
-				respon.setPassaporte(passaporteR);
-				respon.setTelefone(telefoneR);
+						Hospede respon = new Hospede();
 
-				/*
-				 * for (Hospede h : Hospede) { if(h.getId() == id_responsavel) { respon = h;
-				 * break; } }
-				 */
+						Integer id_hospedeR = rsResp.getInt("id_hospede");
+						String nomeR = rsResp.getString("primeiro_nome");
+						String sobrenomeR = rsResp.getString("sobrenome");
+						String nomeSocialR = rsResp.getString("nome_social");
+						String generoR = rsResp.getString("genero");
+						Date dataNascimentoR = rsResp.getDate("data_nascimento");
+						String nacionalidadeR = rsResp.getString("nacionalidade");
+						Integer cpfR = rsResp.getInt("cpf");
+						String passaporteR = rsResp.getString("passaporte");
+						String telefoneR = rsResp.getString("telefone");
 
+						respon.setId(id_hospedeR);
+						respon.setNome(nomeR);
+						respon.setSobrenome(sobrenomeR);
+						respon.setNomeSocial(nomeSocialR);
+						respon.setGenero(generoR);
+						respon.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimentoR)));
+						respon.setNacionalidade(nacionalidadeR);
+						respon.setCpf(cpfR);
+						respon.setPassaporte(passaporteR);
+						respon.setTelefone(telefoneR);
+
+						hos.setResponsavel(respon);
+					}
+				}
+				
 				hos.setId(id_hospede);
 				hos.setNome(nome);
 				hos.setSobrenome(sobrenome);
@@ -218,10 +235,8 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				hos.setCpf(cpf);
 				hos.setPassaporte(passaporte);
 				hos.setEmail(email);
-				hos.setTelefone(telefoneR);
+				hos.setTelefone(telefone);
 				hos.setEndereco(end);
-				hos.setResponsavel(respon);
-
 				hospede.add(hos);
 
 			}
