@@ -11,8 +11,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controle.funcionario.FuncionarioDAO;
+import controle.hospedagem.HospedagemDAO;
 import controle.quarto.QuartoDAO;
 import modelo.Funcionario;
+import modelo.Hospedagem;
 import modelo.Quarto;
 
 import java.awt.Toolkit;
@@ -35,23 +37,6 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 	private static Funcionario funcionarioLogado;
 	
 	ArrayList<Quarto> lista = dao.listarQuarto();
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaListagemQuarto frame = new TelaListagemQuarto();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	} */
 
 	/**
 	 * Create the frame.
@@ -213,7 +198,7 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		scrollPane.setViewportView(table);
 		table.setModel(
 				new DefaultTableModel(new Object[][] {}, new String[] {"Número do Quarto", "Cama Casal", "Cama Solteiro", "Máx. Hóspedes",  "Ar Condicionado", "Frigobar", "Banheira", "Acessibilidade", "Limpeza", "Conserto", "Preço"}));
-		
+		atualizarJTableModel();
 		JLabel lblBotaoSair = new JLabel("");
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
@@ -278,4 +263,6 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		}
 		table.setModel(modelo);
 	}
+	
+
 }
