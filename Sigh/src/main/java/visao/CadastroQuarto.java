@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Toolkit;
 
-public class CadastroQuarto extends JFrame {
+public class CadastroQuarto extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -57,11 +57,11 @@ public class CadastroQuarto extends JFrame {
 	private JComboBox comboAr;
 	private JLabel menuQuartos;
 	private JTextField txtAcessibilidade;
-	Funcionario funcionarioLogado = new Funcionario();
+	Funcionario funcionarioLogado;
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -76,10 +76,11 @@ public class CadastroQuarto extends JFrame {
 		});
 	}
 
-	/**
+	
 	 * Create the frame.
 	 */
-	public CadastroQuarto() {
+	public CadastroQuarto(Funcionario func) {
+		funcionarioLogado = func;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Cadastro de Quarto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

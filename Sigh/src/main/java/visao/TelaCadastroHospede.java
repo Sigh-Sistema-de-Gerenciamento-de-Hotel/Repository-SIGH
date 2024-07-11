@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.swing.ImageIcon;
@@ -283,6 +284,40 @@ public class TelaCadastroHospede extends JFrame {
 		comboBoxPaises.setBounds(554, 515, 343, 48);
 		contentPane.add(comboBoxPaises);
 
+		JLabel lblResponsavel = new JLabel("Responsável *");
+		lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblResponsavel.setBounds(1460, 390, 200, 20);
+		contentPane.add(lblResponsavel);
+
+		JComboBox<String> comboBoxResp = new JComboBox<>();
+		comboBoxResp.setBounds(1460, 415, 343, 45);
+		HospedeDAO dao = HospedeDAO.getInstancia();
+		ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
+		for (Hospede resp : hospedesResp) {
+			String infos;
+			
+			String nomeCompleto;
+			if(resp.getNomeSocial() == null) {
+				nomeCompleto = resp.getNome() + " " + resp.getSobrenome();
+			} else {
+				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome();
+			}
+			
+			String doc;
+			String cpf = String.valueOf(resp.getCpf());
+			if(resp.getCpf() == 0) {
+				doc = resp.getPassaporte();
+			} else {
+				doc = cpf;
+			}
+			
+			infos = nomeCompleto + " - " + doc;
+			
+			comboBoxResp.addItem(infos);
+			
+		}
+		contentPane.add(comboBoxResp);
+		
 		JLabel lblCpf = new JLabel("CPF ");
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCpf.setBounds(1000, 480, 100, 20);
@@ -420,18 +455,7 @@ public class TelaCadastroHospede extends JFrame {
 		txtEmail.setBounds(1000, 815, 343, 48);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(15);
-
-		/*
-		 * JLabel lblNecessidade = new JLabel("Necessidade Especial");
-		 * lblNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		 * lblNecessidade.setBounds(554, 870, 200, 20); contentPane.add(lblNecessidade);
-		 * 
-		 * txtNecessidade = new RoundJFormattedTextField(null);
-		 * txtNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		 * txtNecessidade.setBounds(554, 915, 343, 48); contentPane.add(txtNecessidade);
-		 * txtNecessidade.setColumns(16);
-		 */
-
+		
 		JLabel lblCaminho2 = new JLabel("");
 		lblCaminho2.setIcon(new ImageIcon("src\\main\\resources\\CaminhoCadastrarHospede.png"));
 		lblCaminho2.setBounds(408, 0, 1512, 62);
@@ -555,9 +579,10 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					hos.setTelefone(telefone);
 				}
-
-				// String responsavel = txtResponsavel.getText();
-				// hos.setResponsavel(responsavel); - Esquece o responsável por enquanto
+				
+				int indexResp = comboBoxResp.getSelectedIndex();
+				Hospede resp = hospedesResp.get(indexResp);
+				hos.setResponsavel(resp);
 
 				DateTextField dtf = new DateTextField();
 				LocalDate data = dtf.stringParaData(txtData.getText());
@@ -603,13 +628,12 @@ public class TelaCadastroHospede extends JFrame {
 
 					//JOptionPane.showMessageDialog(null, "CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
 				} else {
-					/*if (!cpf.isEmpty()) {
+					if (!cpf.isEmpty()) {
 						hos.setCpf(Integer.valueOf(cpf));
 					}
 					if (!passaporte.isEmpty()) {
 						hos.setPassaporte(passaporte);
-					}
-				}else{*/
+					} else {
 				    if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
 
 				        if (!validarCPF(cpf)) {
@@ -643,9 +667,9 @@ public class TelaCadastroHospede extends JFrame {
 				//				Endereco ende = new Endereco();
 				//				ende.setId(1);
 				//				hos.setEndereco(ende);
-				Hospede resp = new Hospede();
-				resp.setId(6);
-				hos.setResponsavel(resp);
+//				Hospede resp = new Hospede();
+//				resp.setId(6);
+//				hos.setResponsavel(resp);
 
 				if (erro == false) {
 					HospedeDAO dao = HospedeDAO.getInstancia();
@@ -667,7 +691,7 @@ public class TelaCadastroHospede extends JFrame {
 					}
 				}
 			}
-
+		}
 			private boolean validarPassaporte(String passaporte) {
 				// TODO Auto-generated method stub
 				return false;

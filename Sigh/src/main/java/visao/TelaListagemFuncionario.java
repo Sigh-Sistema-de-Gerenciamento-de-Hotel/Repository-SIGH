@@ -22,7 +22,7 @@ import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
 import modelo.Funcionario;
 
-public class TelaListagemFuncionario extends JFrame {
+public class TelaListagemFuncionario extends JFrame  implements TelaListagemInterface{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -59,10 +59,19 @@ public class TelaListagemFuncionario extends JFrame {
 		menu.setBounds(67, 286, 244, 20);
 		contentPane.add(menu);
 
-		JLabel menuPedidos = new JLabel("");
-		menuPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		menuPedidos.setBounds(68, 346, 150, 20);
-		contentPane.add(menuPedidos);
+		JLabel menuQuartos = new JLabel("");
+		menuQuartos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				dispose();
+				tlq.setExtendedState(MAXIMIZED_BOTH);
+				tlq.setVisible(true);
+			}
+		});
+		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		menuQuartos.setBounds(68, 346, 150, 20);
+		contentPane.add(menuQuartos);
 
 		JLabel menuHospedes = new JLabel("");
 		menuHospedes.addMouseListener(new MouseAdapter() {
@@ -161,12 +170,14 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(botaoEditar);
 
 		JLabel botaoExcluir = new JLabel("");
+		TelaListagemFuncionario estaTela = this;
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) funcionário(a)?", funcionarioSelecionado);
+				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) funcionário(a)?", funcionarioSelecionado, estaTela);
 				telaExclusao.setLocationRelativeTo(null);
 				telaExclusao.setVisible(true);
+				
 			}
 		});   
 		botaoExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
@@ -193,7 +204,7 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_9);
 	}
 
-	protected void atualizarJTableModel() {
+	public void atualizarJTableModel() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "CPF", "Nome Completo", "Usuario", "Cargo", "Setor" });
 
