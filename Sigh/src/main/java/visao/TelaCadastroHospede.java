@@ -455,18 +455,7 @@ public class TelaCadastroHospede extends JFrame {
 		txtEmail.setBounds(1000, 815, 343, 48);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(15);
-
-		/*
-		 * JLabel lblNecessidade = new JLabel("Necessidade Especial");
-		 * lblNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		 * lblNecessidade.setBounds(554, 870, 200, 20); contentPane.add(lblNecessidade);
-		 * 
-		 * txtNecessidade = new RoundJFormattedTextField(null);
-		 * txtNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		 * txtNecessidade.setBounds(554, 915, 343, 48); contentPane.add(txtNecessidade);
-		 * txtNecessidade.setColumns(16);
-		 */
-
+		
 		JLabel lblCaminho2 = new JLabel("");
 		lblCaminho2.setIcon(new ImageIcon("src\\main\\resources\\CaminhoCadastrarHospede.png"));
 		lblCaminho2.setBounds(408, 0, 1512, 62);
@@ -590,9 +579,6 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					hos.setTelefone(telefone);
 				}
-
-				// String responsavel = txtResponsavel.getText();
-				// hos.setResponsavel(responsavel); - Esquece o responsável por enquanto
 				
 				int indexResp = comboBoxResp.getSelectedIndex();
 				Hospede resp = hospedesResp.get(indexResp);

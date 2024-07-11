@@ -58,6 +58,10 @@ public class TelaLogin extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+				passwordField = new JPasswordField();
+				passwordField.setBounds(682, 616, 547, 64);
+				contentPane.add(passwordField);
 
 		JLabel lblPessoaLogin = new JLabel("");
 		lblPessoaLogin.setIcon(new ImageIcon("src/main/resources/pessoa no login.png"));
@@ -73,15 +77,13 @@ public class TelaLogin extends JFrame {
 		txtUsuario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textField.setText("");
+				txtUsuario.setText("");
 			}
 		});
 		txtUsuario.setForeground(new Color(102, 112, 133));
 		txtUsuario.setText("       Digite seu usuário");
 		txtUsuario.setBounds(682, 486, 547, 64);
 		contentPane.add(txtUsuario);
-		txtUsuario.setColumns(10);
-		textField = new RoundJFormattedTextField(null);
 		txtUsuario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -89,9 +91,6 @@ public class TelaLogin extends JFrame {
 
 			}
 		});
-		textField.setBounds(682, 486, 547, 64);
-		contentPane.add(textField);
-		textField.setColumns(10);
 
 		JLabel lblUsuario = new JLabel("USUÁRIO *");
 		lblUsuario.setForeground(new Color(52, 64, 84));
@@ -195,7 +194,7 @@ public class TelaLogin extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/Frame 670.png"));
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/Entrar.png"));
 			}
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao entrar.png"));
@@ -213,10 +212,6 @@ public class TelaLogin extends JFrame {
 		lblFundo.setIcon(new ImageIcon("src/main/resources/fundo verde.png"));
 		lblFundo.setBounds(584, 95, 751, 895);
 		contentPane.add(lblFundo);
-
-		passwordField = new JPasswordField();
-		passwordField.setBounds(682, 616, 547, 64);
-		contentPane.add(passwordField);
 
 	}
 }

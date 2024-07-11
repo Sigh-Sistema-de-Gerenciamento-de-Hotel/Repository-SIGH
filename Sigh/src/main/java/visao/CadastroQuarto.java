@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Toolkit;
 
-public class CadastroQuarto extends JFrame {
+public class CadastroQuarto extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;

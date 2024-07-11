@@ -78,17 +78,17 @@ public class QuartoDAO implements IQuartoDAO {
 			while (rs.next()) {
 				Quarto qua = new Quarto();
 
-				int numero = rs.getInt("numero");
-				int numCamaCasal = rs.getInt("numCamaCasal");
-				int numCamaSolteiro = rs.getInt("numCamaSolteiro");
-				int numMaxHospedes = rs.getInt("numMaxHospedes");
-				boolean arCondicionado = rs.getBoolean("arCondicionado");
+				int numero = rs.getInt("id_quarto");
+				int numCamaCasal = rs.getInt("num_cama_casal");
+				int numCamaSolteiro = rs.getInt("num_cama_solteiro");
+				int numMaxHospedes = rs.getInt("nummax_hospedes");
+				boolean arCondicionado = rs.getBoolean("ar_condicionado");
 				boolean frigobar = rs.getBoolean("frigobar");
 				boolean banheira = rs.getBoolean("banheira");
 				String acessibilidade = rs.getString("acessibilidade");
 				float preco = rs.getFloat("preco");
-				boolean precisaLimpeza = rs.getBoolean("precisaLimpexa");
-				boolean precisaConserto = rs.getBoolean("precisaConserto");
+				boolean precisaLimpeza = rs.getBoolean("limpeza");
+				boolean precisaConserto = rs.getBoolean("conserto");
 
 				qua.setNumero(numero);
 				qua.setNumCamaCasal(numCamaCasal);
