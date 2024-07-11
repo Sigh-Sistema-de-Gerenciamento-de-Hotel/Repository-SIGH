@@ -132,6 +132,10 @@ public class TelaEdicaoHospede extends JFrame {
 		menuQuarto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				dispose();
+				tlq.setExtendedState(MAXIMIZED_BOTH);
+				tlq.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -166,7 +170,7 @@ public class TelaEdicaoHospede extends JFrame {
 				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 			}
 		});
-		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
 		lblHospede.setBounds(68, 407, 400, 60);
 		contentPane.add(lblHospede);
 
