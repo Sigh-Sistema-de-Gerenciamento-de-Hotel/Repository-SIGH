@@ -10,6 +10,7 @@ import java.time.*;
 import java.util.ArrayList;
 
 import controle.Conexao;
+import controle.hospede.HospedeDAO;
 import modelo.Hospedagem;
 import modelo.Hospede;
 import modelo.Quarto;
@@ -74,8 +75,6 @@ public class HospedagemDAO implements IHospedagemDAO {
 				ps.setInt(1, chaveGerada);
 				ps.setInt(2, h.getId());
 				ps.setInt(3, hosp.getQuarto().getNumero());
-
-				ps.executeUpdate();
 
 				ps.executeUpdate();
 
@@ -229,10 +228,26 @@ public class HospedagemDAO implements IHospedagemDAO {
 		
 		// Atualizando dados na tabela Hospede_hopedagem
 		
-		for (Hospede h : hosp.getHospedes()) {
-			String SQLh = "UPDATE hospede_hospedagem SET id_hospedagem = ?, id_hospede = ?, id_quarto = ?";
+		
+			SQL = "DELETE FROM hospede_hospedagem WHERE  id_hospedagem = ?";
 
 			Connection conBDh = con.conectar();
+
+			try {
+				PreparedStatement ps = conBD.prepareStatement(SQL);
+
+				ps.setInt(1, hosp.getId());
+
+				retorno = ps.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		
+		
+		for (Hospede h : hosp.getHospedes()) {
+			String SQLh = "INSERT INTO hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) VALUES (?, ?, ?)";
+
 
 			try {
 				PreparedStatement ps = conBD.prepareStatement(SQLh);
@@ -241,11 +256,11 @@ public class HospedagemDAO implements IHospedagemDAO {
 				ps.setInt(2, h.getId());
 				ps.setInt(3, hosp.getQuarto().getNumero());
 
-				retorno = ps.executeUpdate();
+				ps.executeUpdate();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 
 		con.fecharConexao();

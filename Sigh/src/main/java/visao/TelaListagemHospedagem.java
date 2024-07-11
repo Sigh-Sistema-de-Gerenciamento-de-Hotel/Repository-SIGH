@@ -28,7 +28,7 @@ import java.awt.event.MouseEvent;
 
 
 
-public class TelaListagemHospedagem extends JFrame {
+public class TelaListagemHospedagem extends JFrame implements TelaListagemInterface{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -75,7 +75,7 @@ public class TelaListagemHospedagem extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"}));
 		// atualiza JTable
-		atualizarJTable();
+		atualizarJTableModel();
 		
 		// Menu
 		
@@ -191,10 +191,11 @@ public class TelaListagemHospedagem extends JFrame {
 		
 		/*BOTÃO EXCLUIR*/
 		JLabel lblNewLabel_1 = new JLabel("");
+		TelaListagemHospedagem estaTela = this;
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			    TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir a hospedagem?", hospedagemSelecionada);
+			    TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir a hospedagem?", hospedagemSelecionada, estaTela);
 				telaExclusao.setLocationRelativeTo(null);
 				telaExclusao.setVisible(true);   
 			}
@@ -227,7 +228,7 @@ public class TelaListagemHospedagem extends JFrame {
 		contentPane.add(titulo);
 	}
 	
-	public void atualizarJTable() {
+	public void atualizarJTableModel() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Código", "Código quarto", "Nº de Hóspedes",  "Entrada", "Saída"});
 
 		dao = HospedagemDAO.getInstancia();

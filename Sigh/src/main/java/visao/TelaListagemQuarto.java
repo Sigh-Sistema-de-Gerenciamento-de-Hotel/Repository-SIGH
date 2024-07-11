@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class TelaListagemQuarto extends JFrame {
+public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -245,10 +245,11 @@ public class TelaListagemQuarto extends JFrame {
 		contentPane.add(lblEditar);
 		
 		JLabel lblExcluir = new JLabel("");
+		TelaListagemInterface estaTela = this;
 		lblExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o quarto?", quartoSelecionado);
+				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o quarto?", quartoSelecionado, estaTela);
 				telaExclusao.setLocationRelativeTo(null);
 				telaExclusao.setVisible(true);
 			}
@@ -264,7 +265,7 @@ public class TelaListagemQuarto extends JFrame {
 
 	}
 
-	protected void atualizarJTableModel() {
+	public void atualizarJTableModel() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, 
 				new String[] {"Número do Quarto", "Cama Casal", "Cama Solteiro", "Máx. Hóspedes",  "Ar Condicionado", "Frigobar", "Banheira", "Acessibilidade", "Limpeza", "Conserto", "Preço"});
 		

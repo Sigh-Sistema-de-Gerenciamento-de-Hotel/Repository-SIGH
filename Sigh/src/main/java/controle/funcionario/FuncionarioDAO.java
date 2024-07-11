@@ -159,6 +159,8 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
 			ps.setInt(1, fun.getId());
+			System.out.println(ps);
+			
 
 			retorno = ps.executeUpdate();
 
