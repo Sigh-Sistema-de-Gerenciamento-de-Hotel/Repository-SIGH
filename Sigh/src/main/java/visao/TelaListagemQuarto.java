@@ -198,7 +198,7 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		scrollPane.setViewportView(table);
 		table.setModel(
 				new DefaultTableModel(new Object[][] {}, new String[] {"Número do Quarto", "Cama Casal", "Cama Solteiro", "Máx. Hóspedes",  "Ar Condicionado", "Frigobar", "Banheira", "Acessibilidade", "Limpeza", "Conserto", "Preço"}));
-		
+		atualizarJTableModel();
 		JLabel lblBotaoSair = new JLabel("");
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
 			@Override
