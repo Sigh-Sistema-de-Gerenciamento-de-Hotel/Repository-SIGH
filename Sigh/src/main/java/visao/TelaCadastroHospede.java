@@ -65,10 +65,6 @@ public class TelaCadastroHospede extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblQuarto = new JLabel("");
-		lblQuarto.setIcon(new ImageIcon("src\\main\\resources\\menu quartoss.png"));
-		lblQuarto.setBounds(68, 563, 400, 52);
-		contentPane.add(lblQuarto);
 
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
@@ -115,25 +111,29 @@ public class TelaCadastroHospede extends JFrame {
 		lblBotaoSair.setBounds(84, 955, 263, 45);
 		contentPane.add(lblBotaoSair);
 
-		JLabel lblPedidos = new JLabel("");
-		lblPedidos.addMouseListener(new MouseAdapter() {
+		JLabel menuQuarto = new JLabel("");
+		menuQuarto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				dispose();
+				tlq.setExtendedState(MAXIMIZED_BOTH);
+				tlq.setVisible(true);
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 			}
 		});
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblPedidos.setBounds(68, 346, 400, 60);
-		contentPane.add(lblPedidos);
+		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		menuQuarto.setBounds(68, 346, 400, 60);
+		contentPane.add(menuQuarto);
 
 		JLabel lblHospede = new JLabel("");
 		lblHospede.addMouseListener(new MouseAdapter() {
@@ -155,7 +155,7 @@ public class TelaCadastroHospede extends JFrame {
 				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 			}
 		});
-		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
 		lblHospede.setBounds(68, 407, 400, 60);
 		contentPane.add(lblHospede);
 

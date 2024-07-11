@@ -136,25 +136,29 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoHospede.setBounds(68, 410, 335, 50);
 		contentPane.add(lblBotaoHospede);
 
-		JLabel lblBotaoPedido = new JLabel("");
-		lblBotaoPedido.addMouseListener(new MouseAdapter() {
+		JLabel menuQuarto = new JLabel("");
+		menuQuarto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				dispose();
+				tlq.setExtendedState(MAXIMIZED_BOTH);
+				tlq.setVisible(true);
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblBotaoPedido.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblBotaoPedido.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 			}
 		});
-		lblBotaoPedido.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
-		lblBotaoPedido.setBounds(68, 348, 335, 50);
-		contentPane.add(lblBotaoPedido);
+		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		menuQuarto.setBounds(68, 348, 335, 50);
+		contentPane.add(menuQuarto);
 
 		JLabel lblBotaoSair = new JLabel("");
 		lblBotaoSair.addMouseListener(new MouseAdapter() {
