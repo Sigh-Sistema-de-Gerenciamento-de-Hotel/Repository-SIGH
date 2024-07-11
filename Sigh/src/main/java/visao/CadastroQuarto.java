@@ -60,27 +60,10 @@ public class CadastroQuarto extends JFrame{
 	Funcionario funcionarioLogado;
 
 	/**
-	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CadastroQuarto frame = new CadastroQuarto();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	
 	 * Create the frame.
 	 */
-	public CadastroQuarto(Funcionario func) {
-		funcionarioLogado = func;
+	public CadastroQuarto(Funcionario funcLogado) {
+		this.funcionarioLogado = funcLogado;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Cadastro de Quarto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -244,15 +227,18 @@ public class CadastroQuarto extends JFrame{
 									QuartoDAO dao = QuartoDAO.getInstacia();
 									dao.inserirQuarto(quarto);
 									
-									TelaListagemFuncionario lf = new TelaListagemFuncionario(funcionarioLogado);
-									lf.setVisible(true);
-									lf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+									TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+									tlq.setVisible(true);
+									tlq.setExtendedState(JFrame.MAXIMIZED_BOTH);
 									dispose();
-								
 									TelaConfirmacao telaConfirmacao = new TelaConfirmacao(quarto);
 									telaConfirmacao.setVisible(true);
-								}		
-							
+									
+								} else {
+									TelaErro dadosIncorretos = new TelaErro("Falha ao inserir o quarto no banco de dados.");
+									dadosIncorretos.setLocationRelativeTo(null);
+									dadosIncorretos.setVisible(true);
+								}	
 			 }
 			 @Override
 			 public void mouseEntered(MouseEvent e) {
@@ -308,10 +294,10 @@ public class CadastroQuarto extends JFrame{
 		lblMenuFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcionarioLogado);
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
 				setVisible(false);
-				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
-				listaFuncionario.setVisible(true);
+				tlq.setExtendedState(MAXIMIZED_BOTH);
+				tlq.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
