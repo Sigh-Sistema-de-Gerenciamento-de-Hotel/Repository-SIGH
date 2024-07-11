@@ -23,7 +23,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 	}
 
 	public static HospedeDAO getInstancia() { // retorna a instância única da classe HospedeDAO. Implementa o padrão
-												// Singleton.//
+		// Singleton.//
 		if (instancia == null) {
 			instancia = new HospedeDAO();
 		}
@@ -32,33 +32,33 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 
 	@Override
 	public int inserirHospede(Hospede hos) {
-		
+
 		// Montando query SQL
 
 		String SQL = "INSERT INTO hospedes (primeiro_nome, sobrenome";
 		int n = 2;
-		
+
 		if(!hos.getNomeSocial().isEmpty() && hos.getNomeSocial() != null) {
 			SQL = SQL + ", nome_social";
 			n ++;
 		}
-		
+
 		SQL = SQL + ", genero, data_nascimento, nacionalidade";
 		n += 3;
-		
+
 		if(hos.getCpf() >= 0) {
 			SQL = SQL + ", cpf";
 			n ++;
 		}
-		
+
 		if(hos.getPassaporte() != null) {
 			SQL = SQL + ", passaporte";
 			n ++;
 		}
-		
+
 		SQL = SQL + ", email, telefone, id_endereco";
 		n += 3;
-		
+
 		boolean maior = false;
 		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) > 18) {
 			maior = true;
@@ -67,21 +67,21 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 		} else if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) == 18 && hos.getDataNascimento().getMonthValue() == LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
 			maior = true;
 		}
-		
+
 		if(maior == true) {
 			SQL = SQL + ", id_responsavel";
 			n ++;
 		}
-		
+
 		SQL = SQL + ") VALUES (?";
-		
+
 		for(int i=1; i<n; i++) {
 			SQL = SQL + ", ?";
 		}
-		
+
 		SQL = SQL + ")";
 		n = 3;
-		
+
 		Conexao con = Conexao.getInstancia(); // conexão com o banco de dados.//
 
 		Connection ConBD = con.conectar();
@@ -94,29 +94,29 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 
 			ps.setString(1, hos.getNome());
 			ps.setString(2, hos.getSobrenome());
-			
+
 			if(!hos.getNomeSocial().isEmpty() && hos.getNomeSocial() != null) {
 				ps.setString(n++, hos.getNomeSocial());
 			}
-			
+
 			ps.setString(n++, hos.getGenero());
 			ps.setString(n++, String.valueOf(hos.getDataNascimento()));
 			ps.setString(n++, hos.getNacionalidade());
-			
+
 			if(hos.getCpf() >= 0) {
 				ps.setInt(n++, hos.getCpf());
 			}
-			
+
 			if(hos.getPassaporte() != null) {
 				ps.setString(n++, hos.getPassaporte());
 			}
-			
+
 			ps.setString(n++, hos.getEmail());
 			ps.setString(n++, hos.getTelefone());
 			Endereco end = hos.getEndereco();
 			ps.setInt(n++, end.getId());
 			Hospede resp = hos.getResponsavel();
-			
+
 			if(maior == true) {
 				ps.setInt(n++, resp.getId());
 			}
@@ -187,7 +187,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				end.setComplemento(complemento);
 				end.setNumero(numero);
 
-				
+
 				int idResp = rs.getInt("id_responsavel");
 				if(idResp > 0) {
 					String SQLResp = "SELECT * FROM hospedes WHERE id_hospede = ?";
@@ -224,7 +224,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 						hos.setResponsavel(respon);
 					}
 				}
-				
+
 				hos.setId(id_hospede);
 				hos.setNome(nome);
 				hos.setSobrenome(sobrenome);
@@ -255,29 +255,119 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 	@Override
 	public boolean atualizarHospede(Hospede hos) {
 
-		String SQL = "UPDATE hospedes SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, genero = ?, data_nascimento = ?,  nacionalidade = ?, cpf = ?, passaporte = ?, "
-				+ "email = ?, telefone = ?,  id_endereco = ? WHERE id_hospede = ? ";
+		//		String SQL = "UPDATE hospedes SET primeiro_nome = ?, sobrenome = ?, nome_social = ?, genero = ?, data_nascimento = ?,  nacionalidade = ?, cpf = ?, passaporte = ?, "
+		//				+ "email = ?, telefone = ?,  id_endereco = ? WHERE id_hospede = ? ";
+		//
+		//		Conexao con = Conexao.getInstancia();
+		//		Connection conBD = con.conectar();
+		//
+		//		int retorno = 0;
+		//
+		//		try {
+		//			PreparedStatement ps = conBD.prepareStatement(SQL);
+		//
+		//			ps.setString(1, hos.getNome());
+		//			ps.setString(2, hos.getSobrenome());
+		//			ps.setString(3, hos.getNomeSocial());
+		//			ps.setString(4, hos.getGenero());
+		//			ps.setDate(5, Date.valueOf(hos.getDataNascimento()));
+		//			ps.setString(6, hos.getNacionalidade());
+		//			ps.setInt(7, hos.getCpf());
+		//			ps.setString(8, hos.getPassaporte());
+		//			ps.setString(9, hos.getEmail());
+		//			ps.setString(10, hos.getTelefone());
+		//			ps.setInt(11, 1);
+		//			ps.setInt(12, hos.getId());
+		//
+		//			retorno = ps.executeUpdate();
+		//
+		//		} catch (SQLException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		} finally {
+		//			con.fecharConexao();
+		//
+		//		}
+		//
+		//		return (retorno == 0 ? false : true);
 
-		Conexao con = Conexao.getInstancia();
-		Connection conBD = con.conectar();
+		// Montando query SQL
+
+		String SQL = "UPDATE hospedes SET primeiro_nome = ?, sobrenome = ?";
+
+		if(!hos.getNomeSocial().isEmpty() && hos.getNomeSocial() != null) {
+			SQL = SQL + ", nome_social = ?";
+		}
+
+		SQL = SQL + ", genero = ?, data_nascimento = ?,  nacionalidade = ?";
+
+		if(hos.getCpf() >= 0) {
+			SQL = SQL + ", cpf = ?";
+		}
+
+		if(hos.getPassaporte() != null) {
+			SQL = SQL + ", passaporte = ?";
+		}
+
+		SQL = SQL + "email = ?, telefone = ?,  id_endereco = ?";
+
+		boolean maior = false;
+		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) > 18) {
+			maior = true;
+		} else if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) == 18 && hos.getDataNascimento().getMonthValue() < LocalDate.now().getMonthValue()) {
+			maior = true;
+		} else if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) == 18 && hos.getDataNascimento().getMonthValue() == LocalDate.now().getMonthValue() && hos.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
+			maior = true;
+		}
+
+		if(maior == true) {
+			SQL = SQL + ", id_responsavel = ?";
+		}
+
+		SQL = SQL + " WHERE id_hospede = ? ";
+
+		int n = 3;
+
+		Conexao con = Conexao.getInstancia(); // conexão com o banco de dados.//
+
+		Connection ConBD = con.conectar();
 
 		int retorno = 0;
 
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
+
+			PreparedStatement ps = ConBD.prepareStatement(SQL);
 
 			ps.setString(1, hos.getNome());
 			ps.setString(2, hos.getSobrenome());
-			ps.setString(3, hos.getNomeSocial());
-			ps.setString(4, hos.getGenero());
-			ps.setDate(5, Date.valueOf(hos.getDataNascimento()));
-			ps.setString(6, hos.getNacionalidade());
-			ps.setInt(7, hos.getCpf());
-			ps.setString(8, hos.getPassaporte());
-			ps.setString(9, hos.getEmail());
-			ps.setString(10, hos.getTelefone());
-			ps.setInt(11, 1);
-			ps.setInt(12, hos.getId());
+
+			if(!hos.getNomeSocial().isEmpty() && hos.getNomeSocial() != null) {
+				ps.setString(n++, hos.getNomeSocial());
+			}
+
+			ps.setString(n++, hos.getGenero());
+			ps.setDate(n++, Date.valueOf(hos.getDataNascimento()));
+			ps.setString(n++, hos.getNacionalidade());
+
+			if(hos.getCpf() >= 0) {
+				ps.setInt(n++, hos.getCpf());
+			}
+
+			if(hos.getPassaporte() != null) {
+				ps.setString(n++, hos.getPassaporte());
+			}
+
+			ps.setString(n++, hos.getEmail());
+			ps.setString(n++, hos.getTelefone());
+			Endereco end = hos.getEndereco();
+			ps.setInt(n++, end.getId());
+			Hospede resp = hos.getResponsavel();
+
+			if(maior == true) {
+				ps.setInt(n++, resp.getId());
+			}
+
+			ps.setInt(n++, hos.getId());
 
 			retorno = ps.executeUpdate();
 
@@ -329,12 +419,12 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 		int ano = LocalDate.now().getYear() - 18;
 		int mes = LocalDate.now().getMonthValue();
 		int dia = LocalDate.now().getDayOfMonth();
-		
+
 		LocalDate data = LocalDate.of(ano, mes, dia);
 
 		try {
 			PreparedStatement ps = ConBD.prepareStatement(SQL);
-			
+
 			ps.setDate(1, Date.valueOf(data));
 
 			ResultSet rs = ps.executeQuery();

@@ -81,8 +81,6 @@ public class TelaEdicaoHospede extends JFrame {
 		lblLogo.setBounds(134, 44, 144, 176);
 		contentPane.add(lblLogo);
 
-
-
 		JLabel lblHospedagem = new JLabel("");
 		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
 		lblHospedagem.setBounds(68, 458, 400, 67);
@@ -282,40 +280,58 @@ public class TelaEdicaoHospede extends JFrame {
 		contentPane.add(txtData);
 		txtData.setColumns(18);
 
-//		JLabel lblResponsavel = new JLabel("Responsável *");
-//		lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-//		lblResponsavel.setBounds(1460, 390, 200, 20);
-//		contentPane.add(lblResponsavel);
-//
-//		JComboBox<String> comboBoxResp = new JComboBox<>();
-//		comboBoxResp.setBounds(1460, 415, 343, 45);
-//		HospedeDAO dao = HospedeDAO.getInstancia();
-//		ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
-//		int index = 1;
-//		for (Hospede resp : hospedesResp) {
-//			String infos;
-//			
-//			String nomeCompleto;
-//			if(resp.getNomeSocial() == null) {
-//				nomeCompleto = resp.getNome() + " " + resp.getSobrenome();
-//			} else {
-//				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome();
-//			}
-//			
-//			String doc;
-//			String cpf = String.valueOf(resp.getCpf());
-//			if(resp.getCpf() == 0) {
-//				doc = resp.getPassaporte();
-//			} else {
-//				doc = cpf;
-//			}
-//			
-//			infos = nomeCompleto + " - " + doc;
-//			
-//			comboBoxResp.addItem(infos);
-//			
-//		}
-//		contentPane.add(comboBoxResp);
+		JLabel lblResponsavel = new JLabel("Responsável *");
+		lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblResponsavel.setBounds(1460, 390, 200, 20);
+		contentPane.add(lblResponsavel);
+
+		Hospede r = hosEditar.getResponsavel();
+		String infosR;
+		String nomeCompletoR;
+		if(r.getNomeSocial() == null) {
+			nomeCompletoR = r.getNome() + " " + r.getSobrenome();
+		} else {
+			nomeCompletoR = r.getNomeSocial() + " " + r.getSobrenome();
+		}
+		String docR;
+		String cpfR = String.valueOf(r.getCpf());
+		if(r.getCpf() == 0) {
+			docR = r.getPassaporte();
+		} else {
+			docR = cpfR;
+		}
+		infosR = nomeCompletoR + " - " + docR;
+		
+		JComboBox<String> comboBoxResp = new JComboBox<>();
+		comboBoxResp.setBounds(1460, 415, 343, 45);
+		HospedeDAO dao = HospedeDAO.getInstancia();
+		ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
+		int index = 1;
+		for (Hospede resp : hospedesResp) {
+			String infos;
+			
+			String nomeCompleto;
+			if(resp.getNomeSocial() == null) {
+				nomeCompleto = resp.getNome() + " " + resp.getSobrenome();
+			} else {
+				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome();
+			}
+			
+			String doc;
+			String cpf = String.valueOf(resp.getCpf());
+			if(resp.getCpf() == 0) {
+				doc = resp.getPassaporte();
+			} else {
+				doc = cpf;
+			}
+			
+			infos = nomeCompleto + " - " + doc;
+			
+			comboBoxResp.addItem(infos);
+			
+		}
+		comboBoxResp.setSelectedItem(infosR);
+		contentPane.add(comboBoxResp);
 
 
 		JLabel lblNacionalidade = new JLabel("Nacionalidade *");

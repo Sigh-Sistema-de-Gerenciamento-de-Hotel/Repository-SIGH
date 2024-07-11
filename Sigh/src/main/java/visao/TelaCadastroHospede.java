@@ -570,6 +570,7 @@ public class TelaCadastroHospede extends JFrame {
 				String nomeSocial = txtNomeSocial.getText();
 				hos.setNomeSocial(nomeSocial);
 
+			
 				String telefone = txtTelefone.getText();
 				if (telefone.isEmpty()) {
 					erro = true;
