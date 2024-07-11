@@ -225,9 +225,7 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
-		}
+		} 
 		
 		// Atualizando dados na tabela Hospede_hopedagem
 		
@@ -247,11 +245,11 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				con.fecharConexao();
-			}
+			} 
 		}
 
+		con.fecharConexao();
+		
 		return (retorno == 0 ? false : true);
 
 	}

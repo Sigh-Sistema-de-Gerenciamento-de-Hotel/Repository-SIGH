@@ -41,28 +41,6 @@ public class TelaListagemHospedagem extends JFrame {
 	private DateTextField dtf = new DateTextField();
 	ArrayList<Hospedagem> lista = dao.listarHospedagem();
 	
-
-	
-	/**
-	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaListagemHospedagem frame = new TelaListagemHospedagem();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}   
-
-	
-	 * Create the frame.
-	 */
 	public TelaListagemHospedagem(Funcionario funcLogado) {
 		funcionarioLogado = funcLogado;
 		TelaListagemHospedagem janela = this;
@@ -257,7 +235,7 @@ public class TelaListagemHospedagem extends JFrame {
 
 		for (int i = 0; i < lista.size(); i++) {
 			Hospedagem hosp = lista.get(i);
-			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getHospedes().size(), dtf.formatarData(hosp.getDataEntrada()), dtf.formatarData(hosp.getDataSaida())});
+			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getNumHospedes(), dtf.formatarData(hosp.getDataEntrada()), dtf.formatarData(hosp.getDataSaida())});
 		}
 
 		table.setModel(modelo);
