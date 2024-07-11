@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class TelaConfirmacaoExclusao extends JFrame {
 
@@ -34,6 +35,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 	private HospedeDAO daoh = HospedeDAO.getInstancia();
 	private HospedagemDAO daohs = HospedagemDAO.getInstancia();
 	private QuartoDAO daoq = QuartoDAO.getInstacia();
+	
 
 	/**
 	 * Launch the application.
@@ -56,7 +58,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 	 * @wbp.parser.constructor
 	 */
 	// FUNCIONARIO
-	public TelaConfirmacaoExclusao(String mensagem, Funcionario func) {
+	public TelaConfirmacaoExclusao(String mensagem, Funcionario func, TelaListagemInterface tela) {
 		funcionarioSelecionado = func;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 144);
@@ -80,8 +82,8 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
 				
-				boolean confirmacao = dao.removerFuncionarios(funcionarioSelecionado);
-				
+				dao.removerFuncionarios(funcionarioSelecionado);
+				tela.atualizarJTableModel();
 				dispose();
 			}
 		});
@@ -104,7 +106,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 		}
 		
 	    //HOSPEDE
-		public TelaConfirmacaoExclusao(String mensagem, Hospede hospede) {
+		public TelaConfirmacaoExclusao(String mensagem, Hospede hospede, TelaListagemInterface tela) {
 			hospedeSelecionado = hospede;
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 300, 144);
@@ -128,8 +130,8 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 					HospedeDAO daoh = HospedeDAO.getInstancia();
 					
-					boolean confirmacao = daoh.removerHospede(hospedeSelecionado);
-					
+					daoh.removerHospede(hospedeSelecionado);
+					tela.atualizarJTableModel();
 					dispose();
 				}
 			});
@@ -152,7 +154,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 			}
 			
 		    //HOSPEDAGEM
-			public TelaConfirmacaoExclusao(String mensagem, Hospedagem hospedagem) {
+			public TelaConfirmacaoExclusao(String mensagem, Hospedagem hospedagem, TelaListagemInterface tela) {
 				hospedagemSelecionada = hospedagem;
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				setBounds(100, 100, 300, 144);
@@ -176,8 +178,8 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 						HospedagemDAO daohs = HospedagemDAO.getInstancia();
 						
-						boolean confirmacao = daohs.removerHospedagem(hospedagemSelecionada);
-						
+						daohs.removerHospedagem(hospedagemSelecionada);
+						tela.atualizarJTableModel();
 						dispose();
 					}
 				});
@@ -200,7 +202,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 				}
 				
 			    //QUARTO
-				public TelaConfirmacaoExclusao(String mensagem, Quarto quarto) {
+				public TelaConfirmacaoExclusao(String mensagem, Quarto quarto, TelaListagemInterface tela) {
 					quartoSelecionado = quarto;
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					setBounds(100, 100, 300, 144);
@@ -224,7 +226,9 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 							QuartoDAO daoq = QuartoDAO.getInstacia();
 							
-							boolean confirmacao = daoq.removerQuarto(quartoSelecionado);
+							daoq.removerQuarto(quartoSelecionado);
+							tela.atualizarJTableModel();
+							dispose();
 						}
 					});
 					lblBotaoConfirmar.setIcon(new ImageIcon("src/main/resources/BotaoConfirmarPequeno.png"));

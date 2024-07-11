@@ -26,6 +26,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class TelaEdicaoHospede extends JFrame {
@@ -127,23 +128,23 @@ public class TelaEdicaoHospede extends JFrame {
 
 
 
-		JLabel lblPedidos = new JLabel("");
-		lblPedidos.addMouseListener(new MouseAdapter() {
+		JLabel menuQuarto = new JLabel("");
+		menuQuarto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 			}
 		});
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblPedidos.setBounds(68, 346, 400, 60);
-		contentPane.add(lblPedidos);
+		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		menuQuarto.setBounds(68, 346, 400, 60);
+		contentPane.add(menuQuarto);
 
 
 
@@ -281,19 +282,40 @@ public class TelaEdicaoHospede extends JFrame {
 		contentPane.add(txtData);
 		txtData.setColumns(18);
 
-		/*	JLabel lblResponsável = new JLabel("Responsável ");
-		lblResponsável.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblResponsável.setBounds(1460, 390, 100, 20);
-		contentPane.add(lblResponsável);
-		 */	
-
-
-		/*	txtResponsavel = new RoundJFormattedTextField(null);
-	 	txtResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtResponsavel.setBounds(1460, 415, 343, 48);
-		contentPane.add(txtResponsavel);
-		txtResponsavel.setColumns(24);
-		 */	
+//		JLabel lblResponsavel = new JLabel("Responsável *");
+//		lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+//		lblResponsavel.setBounds(1460, 390, 200, 20);
+//		contentPane.add(lblResponsavel);
+//
+//		JComboBox<String> comboBoxResp = new JComboBox<>();
+//		comboBoxResp.setBounds(1460, 415, 343, 45);
+//		HospedeDAO dao = HospedeDAO.getInstancia();
+//		ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
+//		int index = 1;
+//		for (Hospede resp : hospedesResp) {
+//			String infos;
+//			
+//			String nomeCompleto;
+//			if(resp.getNomeSocial() == null) {
+//				nomeCompleto = resp.getNome() + " " + resp.getSobrenome();
+//			} else {
+//				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome();
+//			}
+//			
+//			String doc;
+//			String cpf = String.valueOf(resp.getCpf());
+//			if(resp.getCpf() == 0) {
+//				doc = resp.getPassaporte();
+//			} else {
+//				doc = cpf;
+//			}
+//			
+//			infos = nomeCompleto + " - " + doc;
+//			
+//			comboBoxResp.addItem(infos);
+//			
+//		}
+//		contentPane.add(comboBoxResp);
 
 
 		JLabel lblNacionalidade = new JLabel("Nacionalidade *");
@@ -442,20 +464,6 @@ public class TelaEdicaoHospede extends JFrame {
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(15);
 
-
-
-		/*JLabel lblNecessidade = new JLabel("Necessidade Especial");
-		lblNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNecessidade.setBounds(554, 870, 200, 20);
-		contentPane.add(lblNecessidade);
-
-		txtNecessidade  = new RoundJFormattedTextField(null);
-		txtNecessidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtNecessidade.setBounds(554, 915, 343, 48);
-		contentPane.add(txtNecessidade);
-		txtNecessidade.setColumns(16);*/
-
-
 		String genero = hosEditar.getGenero();
 
 		JComboBox<String> comboBoxGenero = new JComboBox<>();
@@ -581,9 +589,6 @@ public class TelaEdicaoHospede extends JFrame {
 					hosEditar.setTelefone(telefone);
 				}  
 
-				//   	String responsavel = txtResponsavel.getText();
-				//	    hos.setResponsavel(responsavel);   - Esquece o responsável por enquanto
-
 				DateTextField dtf = new DateTextField();
 				LocalDate data = dtf.stringParaData(txtData.getText());
 				if(txtData.getText().isEmpty()) {
@@ -613,9 +618,6 @@ public class TelaEdicaoHospede extends JFrame {
 					hosEditar.setNacionalidade(nacionalidade);
 				}   
 
-				// No caso de CPF e Passaporte a verificação vai ser diferente
-
-				// TENTA FAZER ASSIM:
 
 				String cpf = txtCpf.getText();
 				String passaporte = txtPassaporte.getText();
@@ -625,17 +627,13 @@ public class TelaEdicaoHospede extends JFrame {
 					TelaErro dadosIncorretos = new TelaErro("CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
-
-					//JOptionPane.showMessageDialog(null, "CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
 				} else {
 					if (!cpf.isEmpty()) {
 						hosEditar.setCpf(Integer.valueOf(cpf));
 					}
 					if (!passaporte.isEmpty()) {
 						hosEditar.setPassaporte(passaporte);
-					}
-				} 
-				/*else {
+					} else {
 
 					if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
 
@@ -644,8 +642,6 @@ public class TelaEdicaoHospede extends JFrame {
 					        	TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
 								dadosIncorretos.setLocationRelativeTo(null);
 								dadosIncorretos.setVisible(true);
-
-					            //JOptionPane.showMessageDialog(null, "CPF inválido. Por favor, insira um CPF válido.");
 					        } else {
 					        	hosEditar.setCpf(Integer.valueOf(cpf));				        }
 					    }
@@ -655,13 +651,11 @@ public class TelaEdicaoHospede extends JFrame {
 					        	TelaErro dadosIncorretos = new TelaErro("Passaporte inválido. Por favor, insira um passaporte válido.");
 								dadosIncorretos.setLocationRelativeTo(null);
 								dadosIncorretos.setVisible(true);
-
-					           //JOptionPane.showMessageDialog(null, "Passaporte inválido. Por favor, insira um passaporte válido.");
 					        } else {
 					        	hosEditar.setPassaporte(passaporte);
 					        }
 					    }
-					}*/
+					}
 
 				String email = txtEmail.getText();
 				hosEditar.setEmail(email);
@@ -679,7 +673,7 @@ public class TelaEdicaoHospede extends JFrame {
 					// mensagem de ERRO
 				}
 			}    
-
+		}
 			private boolean validarPassaporte(String passaporte) {
 				// TODO Auto-generated method stub
 				return false;

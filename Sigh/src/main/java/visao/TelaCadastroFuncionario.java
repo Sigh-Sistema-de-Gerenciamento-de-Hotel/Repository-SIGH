@@ -266,6 +266,28 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblSenhaLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSenhaLabel.setBounds(1245, 636, 80, 14);
 		contentPane.add(lblSenhaLabel);
+		
+		JLabel lblSetorLabel = new JLabel("Setor *");
+		lblSetorLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSetorLabel.setBounds(650, 824, 46, 14);
+		contentPane.add(lblSetorLabel);
+
+		JComboBox<Setor> txtSetorText = new JComboBox<Setor>();
+		txtSetorText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSetorText.setBounds(650, 850, 343, 48);
+		txtSetorText.setModel(new DefaultComboBoxModel<>(Setor.values()));
+		contentPane.add(txtSetorText);
+		//txtSetorText.setColumns(10);
+
+		txtUsuarioText = new RoundJFormattedTextField(null);
+		txtUsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtUsuarioText.setBounds(1245, 386, 343, 48);
+		contentPane.add(txtUsuarioText);
+		txtUsuarioText.setColumns(10);
+
+		passwordField = new JPasswordField();
+		passwordField.setBounds(1245, 660, 343, 48);
+		contentPane.add(passwordField);
 
 		JLabel lblBotaoSalvar = new JLabel("");
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
@@ -426,26 +448,6 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoCancelar.setBounds(1595, 902, 300, 50);
 		contentPane.add(lblBotaoCancelar);
 
-		JLabel lblSetorLabel = new JLabel("Setor *");
-		lblSetorLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSetorLabel.setBounds(650, 824, 46, 14);
-		contentPane.add(lblSetorLabel);
-
-		JComboBox<Setor> txtSetorText = new JComboBox<Setor>();
-		txtSetorText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtSetorText.setBounds(650, 850, 343, 48);
-		txtSetorText.setModel(new DefaultComboBoxModel<>(Setor.values()));
-		contentPane.add(txtSetorText);
-		//txtSetorText.setColumns(10);
-
-		txtUsuarioText = new RoundJFormattedTextField(null);
-		txtUsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtUsuarioText.setBounds(1245, 386, 343, 48);
-		contentPane.add(txtUsuarioText);
-		txtUsuarioText.setColumns(10);
-
-		passwordField = new JPasswordField();
-		passwordField.setBounds(1245, 660, 343, 48);
-		contentPane.add(passwordField);
+		
 	}
 }

@@ -10,6 +10,7 @@ import java.time.*;
 import java.util.ArrayList;
 
 import controle.Conexao;
+import controle.hospede.HospedeDAO;
 import modelo.Hospedagem;
 import modelo.Hospede;
 import modelo.Quarto;
@@ -31,6 +32,8 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 	@Override
 	public int inserirHospedagem(Hospedagem hosp) {
+		
+		// Inserindo hospedagem na tabela Hospedagens
 		String SQL = "INSERT INTO hospedagens (data_entrada, data_saida) VALUES (?, ?)";
 
 		Conexao con = Conexao.getInstancia();
@@ -54,11 +57,39 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
 		}
+		
+		hosp.setId(chaveGerada);
+		
+		boolean erro = false;
+		// Inserindo dados na tabela Hospede_hopedagem
+		
+		for (Hospede h : hosp.getHospedes()) {
+			String SQLh = "INSERT INTO hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) VALUES (?, ?, ?)";
 
-		return chaveGerada;
+			Connection conBDh = con.conectar();
+
+			try {
+				PreparedStatement ps = conBD.prepareStatement(SQLh);
+
+				ps.setInt(1, chaveGerada);
+				ps.setInt(2, h.getId());
+				ps.setInt(3, hosp.getQuarto().getNumero());
+
+				ps.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		con.fecharConexao();
+
+		if(erro == false) {
+			return chaveGerada;
+		} else {
+			return chaveGerada = 0;
+		}
 	}
 
 	@Override
@@ -193,10 +224,47 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
+		} 
+		
+		// Atualizando dados na tabela Hospede_hopedagem
+		
+		
+			SQL = "DELETE FROM hospede_hospedagem WHERE  id_hospedagem = ?";
+
+			Connection conBDh = con.conectar();
+
+			try {
+				PreparedStatement ps = conBD.prepareStatement(SQL);
+
+				ps.setInt(1, hosp.getId());
+
+				retorno = ps.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		
+		
+		for (Hospede h : hosp.getHospedes()) {
+			String SQLh = "INSERT INTO hospede_hospedagem (id_hospedagem, id_hospede, id_quarto) VALUES (?, ?, ?)";
+
+
+			try {
+				PreparedStatement ps = conBD.prepareStatement(SQLh);
+
+				ps.setInt(1, hosp.getId());
+				ps.setInt(2, h.getId());
+				ps.setInt(3, hosp.getQuarto().getNumero());
+
+				ps.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
+		con.fecharConexao();
+		
 		return (retorno == 0 ? false : true);
 
 	}
