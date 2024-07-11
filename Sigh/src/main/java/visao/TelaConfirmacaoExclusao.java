@@ -36,10 +36,6 @@ public class TelaConfirmacaoExclusao extends JFrame {
 	private HospedagemDAO daohs = HospedagemDAO.getInstancia();
 	private QuartoDAO daoq = QuartoDAO.getInstacia();
 	
-	ArrayList<Hospede> lista = daoh.listarHospede();
-	ArrayList<Funcionario> lista2 = dao.listarFuncionario();
-	ArrayList<Hospedagem> lista3 = daohs.listarHospedagem();
-	ArrayList<Quarto> lista4 = daoq.listarQuarto();
 
 	/**
 	 * Launch the application.
