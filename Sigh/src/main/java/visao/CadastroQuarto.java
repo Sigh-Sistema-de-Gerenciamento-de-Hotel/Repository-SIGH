@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Toolkit;
 
-public class CadastroQuarto extends JFrame implements TelaListagemInterface{
+public class CadastroQuarto extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -501,12 +501,6 @@ public class CadastroQuarto extends JFrame implements TelaListagemInterface{
 		lblCaminho.setIcon(new ImageIcon("src/main/resources/superior pequeno quartos.png"));
 		lblCaminho.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblCaminho);
-		
-	}
-
-	@Override
-	public void atualizarJTableModel() {
-		// TODO Auto-generated method stub
 		
 	}
 }
