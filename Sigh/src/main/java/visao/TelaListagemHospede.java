@@ -31,7 +31,7 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 
-public class TelaListagemHospede extends JFrame {
+public class TelaListagemHospede extends JFrame implements TelaListagemInterface{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -174,10 +174,11 @@ public class TelaListagemHospede extends JFrame {
 		contentPane.add(botaoEditar);
 
 		JLabel botaoExcluir = new JLabel("");
+		TelaListagemHospede estaTela = this;
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) hospede?", hospedeSelecionado);
+				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) hospede?", hospedeSelecionado, estaTela);
 				telaExclusao.setLocationRelativeTo(null);
 				telaExclusao.setVisible(true);
 			}
@@ -211,7 +212,7 @@ public class TelaListagemHospede extends JFrame {
 		contentPane.add(lblNewLabel_11);
 	}
 
-	protected void atualizarJTableModel() {
+	public void atualizarJTableModel() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Nome", "Nacionalidade",  "Telefone", "Email", "Data Nascimento", "Responsável"});
 
 		dao = HospedeDAO.getInstancia();

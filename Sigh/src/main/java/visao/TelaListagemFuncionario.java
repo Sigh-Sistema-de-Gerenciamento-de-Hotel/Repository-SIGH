@@ -22,7 +22,7 @@ import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
 import modelo.Funcionario;
 
-public class TelaListagemFuncionario extends JFrame {
+public class TelaListagemFuncionario extends JFrame  implements TelaListagemInterface{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -170,12 +170,14 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(botaoEditar);
 
 		JLabel botaoExcluir = new JLabel("");
+		TelaListagemFuncionario estaTela = this;
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) funcionário(a)?", funcionarioSelecionado);
+				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o(a) funcionário(a)?", funcionarioSelecionado, estaTela);
 				telaExclusao.setLocationRelativeTo(null);
 				telaExclusao.setVisible(true);
+				
 			}
 		});   
 		botaoExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
@@ -202,7 +204,7 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(lblNewLabel_9);
 	}
 
-	protected void atualizarJTableModel() {
+	public void atualizarJTableModel() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "CPF", "Nome Completo", "Usuario", "Cargo", "Setor" });
 
