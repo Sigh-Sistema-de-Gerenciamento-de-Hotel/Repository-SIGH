@@ -60,6 +60,15 @@ public class TelaListagemFuncionario extends JFrame {
 		contentPane.add(menu);
 
 		JLabel menuQuartos = new JLabel("");
+		menuQuartos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				dispose();
+				tlq.setExtendedState(MAXIMIZED_BOTH);
+				tlq.setVisible(true);
+			}
+		});
 		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 		menuQuartos.setBounds(68, 346, 150, 20);
 		contentPane.add(menuQuartos);
