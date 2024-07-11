@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class TelaConfirmacaoExclusao extends JFrame {
 
@@ -34,6 +35,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 	private HospedeDAO daoh = HospedeDAO.getInstancia();
 	private HospedagemDAO daohs = HospedagemDAO.getInstancia();
 	private QuartoDAO daoq = QuartoDAO.getInstacia();
+	
 
 	/**
 	 * Launch the application.
@@ -80,7 +82,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 				FuncionarioDAO dao = FuncionarioDAO.getInstancia();
 				
-				boolean confirmacao = dao.removerFuncionarios(funcionarioSelecionado);
+				dao.removerFuncionarios(funcionarioSelecionado);
 				
 				dispose();
 			}
@@ -128,7 +130,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 					HospedeDAO daoh = HospedeDAO.getInstancia();
 					
-					boolean confirmacao = daoh.removerHospede(hospedeSelecionado);
+					daoh.removerHospede(hospedeSelecionado);
 					
 					dispose();
 				}
@@ -176,7 +178,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 						HospedagemDAO daohs = HospedagemDAO.getInstancia();
 						
-						boolean confirmacao = daohs.removerHospedagem(hospedagemSelecionada);
+						daohs.removerHospedagem(hospedagemSelecionada);
 						
 						dispose();
 					}
@@ -224,7 +226,7 @@ public class TelaConfirmacaoExclusao extends JFrame {
 
 							QuartoDAO daoq = QuartoDAO.getInstacia();
 							
-							boolean confirmacao = daoq.removerQuarto(quartoSelecionado);
+							daoq.removerQuarto(quartoSelecionado);
 						}
 					});
 					lblBotaoConfirmar.setIcon(new ImageIcon("src/main/resources/BotaoConfirmarPequeno.png"));
