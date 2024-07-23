@@ -380,15 +380,6 @@ public class TelaEdicaoFuncionario extends JFrame {
 			}
 		});
 
-		JLabel lblNomeUsuario = new JLabel("JULIA ALMEIDA");
-		lblNomeUsuario.setBounds(129, 798, 100, 14);
-		contentPane.add(lblNomeUsuario);
-
-		JLabel lblConta = new JLabel("Conta");
-		lblConta.setForeground(new Color(128, 128, 128));
-		lblConta.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblConta.setBounds(79, 760, 46, 14);
-		contentPane.add(lblConta);
 		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
 		lblBotaoCancelar.setBounds(1595, 902, 300, 50);
 		contentPane.add(lblBotaoCancelar);

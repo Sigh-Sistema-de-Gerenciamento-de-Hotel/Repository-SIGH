@@ -89,7 +89,7 @@ public class TelaConfirmacaoEdicao extends JFrame {
 		lblUsuario.setBounds(50, 163, 62, 22);
 		contentPane.add(lblUsuario);
 
-		String nomeCompleto = txtNome + txtSobrenome;
+		String nomeCompleto = txtNome + " " + txtSobrenome;
 
 		JLabel nome = new JLabel(nomeCompleto);
 		nome.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
@@ -226,6 +226,9 @@ public class TelaConfirmacaoEdicao extends JFrame {
 		contentPane.add(lblNewLabel);
 	}
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public TelaConfirmacaoEdicao(Hospedagem hospedagem) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setType(Type.POPUP);
@@ -255,32 +258,32 @@ public class TelaConfirmacaoEdicao extends JFrame {
 
 		Label lblCodigo = new Label("Código: ");
 		lblCodigo.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		lblCodigo.setBounds(50, 61, 62, 22);
+		lblCodigo.setBounds(50, 61, 66, 22);
 		contentPane.add(lblCodigo);
 		
 		Label lblNumHosp = new Label("Num. Hóspedes: ");
 		lblNumHosp.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		lblNumHosp.setBounds(50, 94, 92, 22);
+		lblNumHosp.setBounds(50, 94, 145, 22);
 		contentPane.add(lblNumHosp);
 
 		Label lblNumQuarto = new Label("Cod. Quarto: ");
 		lblNumQuarto.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		lblNumQuarto.setBounds(50, 127, 106, 22);
+		lblNumQuarto.setBounds(50, 127, 104, 22);
 		contentPane.add(lblNumQuarto);
 		
 		JLabel codigo = new JLabel(String.valueOf(hospedagem.getId()));
 		codigo.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		codigo.setBounds(123, 61, 267, 22);
+		codigo.setBounds(122, 61, 268, 22);
 		contentPane.add(codigo);
 		
 		JLabel numHosp = new JLabel(String.valueOf(hospedagem.getNumHospedes()));
 		numHosp.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		numHosp.setBounds(148, 94, 225, 22);
+		numHosp.setBounds(197, 94, 176, 22);
 		contentPane.add(numHosp);
 
 		JLabel numQuarto = new JLabel(String.valueOf(hospedagem.getQuarto().getNumero()));
 		numQuarto.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		numQuarto.setBounds(161, 127, 229, 22);
+		numQuarto.setBounds(158, 127, 232, 22);
 		contentPane.add(numQuarto);
 
 

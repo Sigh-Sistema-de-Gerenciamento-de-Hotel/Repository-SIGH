@@ -44,7 +44,6 @@ public class TelaCadastroFuncionario extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		String bla;
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -53,16 +52,6 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBarraMenu.setBounds(88, 900, 260, 14);
 		contentPane.add(lblBarraMenu);
 
-		JLabel lblNomeFuncionario = new JLabel("Julia Almeida");
-		lblNomeFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNomeFuncionario.setBounds(129, 798, 100, 14);
-		contentPane.add(lblNomeFuncionario);
-
-		JLabel lblConta = new JLabel("Conta");
-		lblConta.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblConta.setForeground(SystemColor.textInactiveText);
-		lblConta.setBounds(79, 760, 46, 14);
-		contentPane.add(lblConta);
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
 		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
@@ -433,8 +422,10 @@ public class TelaCadastroFuncionario extends JFrame {
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaListagemFuncionario(funcionarioLogado).setVisible(true);
-				dispose();
+				TelaListagemFuncionario telaListFunc = new TelaListagemFuncionario(funcionarioLogado);
+				telaListFunc.setVisible(true);
+				telaListFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();			
 			}
 
 			@Override

@@ -722,8 +722,10 @@ public class TelaCadastroHospede extends JFrame {
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaListagemHospede(funcionarioLogado).setVisible(true);
-				dispose();
+				TelaListagemHospede telaListHosp = new TelaListagemHospede(funcionarioLogado);
+				telaListHosp.setVisible(true);
+				telaListHosp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();			
 			}
 
 			@Override

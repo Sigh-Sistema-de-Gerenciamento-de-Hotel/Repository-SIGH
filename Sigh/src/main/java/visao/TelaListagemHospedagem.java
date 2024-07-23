@@ -100,17 +100,6 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 		divisaoMenu.setBounds(77, 897, 243, 14);
 		contentPane.add(divisaoMenu);
 		
-		JLabel usuario = new JLabel("Júlia Almeida");
-		usuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		usuario.setBounds(129, 798, 80, 30);
-		contentPane.add(usuario);
-		
-		JLabel conta = new JLabel("Conta");
-		conta.setForeground(Color.GRAY);
-		conta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		conta.setBounds(79, 760, 46, 14);
-		contentPane.add(conta);
-		
 		JLabel funcionarios = new JLabel("Funciários");
 		funcionarios.addMouseListener(new MouseAdapter() {
 			@Override

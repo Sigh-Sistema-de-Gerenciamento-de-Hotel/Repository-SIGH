@@ -288,17 +288,6 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblBotaoHospedagemSelecionado.setBounds(43, 457, 342, 45);
 		contentPane.add(lblBotaoHospedagemSelecionado);
 
-		JLabel lblConta = new JLabel("Conta");
-		lblConta.setForeground(Color.GRAY);
-		lblConta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblConta.setBounds(79, 760, 46, 14);
-		contentPane.add(lblConta);
-
-		JLabel lblNomeConta = new JLabel("Julia Almeida");
-		lblNomeConta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNomeConta.setBounds(129, 798, 80, 30);
-		contentPane.add(lblNomeConta);
-
 		JLabel lblDivisaoMenu = new JLabel("");
 		lblDivisaoMenu.setIcon(new ImageIcon("src\\main\\resources\\divisor (menu).png"));
 		lblDivisaoMenu.setBounds(77, 897, 243, 14);
