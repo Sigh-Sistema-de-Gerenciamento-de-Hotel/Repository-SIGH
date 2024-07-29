@@ -132,7 +132,7 @@ public class HospedagemDAO implements IHospedagemDAO {
 				String genero = rs.getString("genero");
 				String dataNascimento = rs.getString("data_nascimento");
 				String nacionalidade = rs.getString("nacionalidade");
-				Integer cpf = rs.getInt("cpf");
+				String cpf = rs.getString("cpf");
 				String passaporte = rs.getString("passaporte");
 				String telefone = rs.getString("telefone");
 

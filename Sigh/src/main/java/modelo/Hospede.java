@@ -10,7 +10,7 @@ public class Hospede extends Pessoa {
 	private String genero;
 	private String nacionalidade;
 	private String passaporte;
-	private int cpf;
+	private String cpf;
 	private String telefone;
 	private String email;
 	private Endereco endereco;
@@ -56,11 +56,11 @@ public class Hospede extends Pessoa {
 		this.passaporte = passaporte;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

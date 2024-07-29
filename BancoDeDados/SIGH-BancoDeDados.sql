@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS   `hospedes` (
   `genero` VARCHAR(45) NOT NULL,
   `data_nascimento` DATE NOT NULL,
   `nacionalidade` VARCHAR(45) NOT NULL,
-  `cpf` INT NULL,
+  `cpf` VARCHAR(11) NULL,
   `passaporte` VARCHAR(8) NULL,
   `email` VARCHAR(45) NOT NULL,
   `telefone` VARCHAR(20) NOT NULL,
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS   `necessidades_hospede` (
 -- Table   `funcionarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS   `funcionarios` (
-  `id_funcionario` INT NOT NULL,
+  `id_funcionario` VARCHAR(11) NOT NULL,
   `primeiro_nome` VARCHAR(45) NOT NULL,
   `sobrenome` VARCHAR(45) NOT NULL,
   `nome_social` VARCHAR(45) NULL,
@@ -210,25 +210,25 @@ insert into enderecos (cep, estado, cidade, endereco, complemento, numero) value
 
 -- inserts hospedes
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Beee', 'Wettter', null, 'Feminino', '2002-11-10', 'Americano  ', null, 'us038789', 'pwetter0@irs.gov', 477748784, 1, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Josefina', 'Canby', null,'Feminino', '2003-02-25', 'Brasileiro  ', 875492836, 'ws637030', 'wcanby1@exblog.jp', 085921159, 2, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Josefina', 'Canby', null,'Feminino', '2003-02-25', 'Brasileiro  ', '875492836', 'ws637030', 'wcanby1@exblog.jp', 085921159, 2, null);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Addie', 'Garretts', 'Del', 'Feminino', '2004-01-14', 'Dominicano  ', null, 'hg403564', 'dgarretts2@vk.com', 732425848, 3, null);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Hesthher', 'Meletti', null, 'Feminino', '2003-02-08', 'Afegão  ', null, 'kl267763', 'gmeletti3@indiatimes.com', 368262143, 4, null);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Aldwin', 'Peltzer', null, 'Masculino', '2003-05-07', 'Americano  ', null, 'ki635763', 'apeltzer4@ebay.com', 489161905, 5, null);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Israel', 'Trotman', null, 'Masculino', '2003-05-02', 'Americano  ', null, 'lo316878', 'jtrotman5@mlb.com', 450432754, 6, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Fredra', 'Kliemann', null, 'Masculino', '2023-04-24', 'Brasileiro  ', 581063453, null, 'lkliemann6@sun.com', 189156511, 7, 3);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Zitella', 'Masarrat', null, 'Masculino', '2002-09-12', 'Brasileiro  ', 511874202, 'mk667060', 'smasarrat7@umich.edu', 891477005, 8, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Fredra', 'Kliemann', null, 'Masculino', '2023-04-24', 'Brasileiro  ', '581063453', null, 'lkliemann6@sun.com', 189156511, 7, 3);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Zitella', 'Masarrat', null, 'Masculino', '2002-09-12', 'Brasileiro  ', '511874202', 'mk667060', 'smasarrat7@umich.edu', 891477005, 8, null);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Byram', 'Turland', 'Georgia', 'Masculino', '2002-06-28', 'Americano  ', null, 'ki645682', 'gturland8@mozilla.com', 864143915, 9, null);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Hildagard', 'Blethin', null, 'Masculino', '2023-02-04', 'Americano  ', null, 'ol172005', 'lblethin9@bbb.org', 965583221, 10, 8);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Berkley', 'Fishlee', null, 'Feminino', '2000-02-01', 'Brasileiro  ', 896846771, null, 'sfishleea@tuttocitta.it', 716970713, 11, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Dukey', 'Craigs', null, 'Feminino', '1952-06-03', 'Brasileiro  ', 418376975, null, 'ecraigsb@pinterest.com', 329735772, 12, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Carolyne', 'Hrishchenko', null, 'Feminino', '2023-02-12', 'Brasileiro  ', 317234416,'ji598213', 'ahrishchenkoc@hp.com', 832475583, 13, 11);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Berkley', 'Fishlee', null, 'Feminino', '2000-02-01', 'Brasileiro  ', '896846771', null, 'sfishleea@tuttocitta.it', 716970713, 11, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Dukey', 'Craigs', null, 'Feminino', '1952-06-03', 'Brasileiro  ', '418376975', null, 'ecraigsb@pinterest.com', 329735772, 12, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Carolyne', 'Hrishchenko', null, 'Feminino', '2023-02-12', 'Brasileiro  ', '317234416','ji598213', 'ahrishchenkoc@hp.com', 832475583, 13, 11);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Arabel', 'Heugle', 'Nixiie', 'Feminino', '2023-11-06', 'Americano  ', null, 'ko401110', 'nheugled@sakura.ne.jp', 649333207, 14, 12);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Kayley', 'Cawsy', null, 'Feminino', '2023-02-07', 'Americano  ', null, 'ki985030', 'acawsye@prlog.org', 288564037, 15, 12);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Carmella', 'Houliston', null, 'Feminino', '1958-06-03', 'Americano  ', null, 'ju270959', 'khoulistonf@foxnews.com', 121032215, 16, null);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Fabian', 'Poupard', null, 'Feminino', '2023-06-03', 'Brasileiro  ', 745065736, null, 'epoooupardg@reverbnation.com', 796711112, 17, 16);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Fabian', 'Poupard', null, 'Feminino', '2023-06-03', 'Brasileiro  ', '745065736', null, 'epoooupardg@reverbnation.com', 796711112, 17, 16);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Alexandra', 'Rochelle', null, 'Masculino', '1990-09-10', 'Americano  ', null, 'dr428661', 'crochelleh@wsj.com', 319674200, 18, null);
 insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Aundrea', 'Bonicelli', null, 'Masculino', '2023-12-03', 'Americano  ', null, 'sw043537', 'nbonicellii@ask.com', 128297256, 19, 18);
-insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Quinlan', 'Tregensoe', null, 'Masculino', '1989-05-19', 'Brasileiro  ', 764965966, 'se327774', 'ctregensoej@mac.com', 519622918, 20, null);
+insert into hospedes (primeiro_nome, sobrenome, nome_social, genero, data_nascimento, nacionalidade, cpf, passaporte, email, telefone, id_endereco, id_responsavel) values ('Quinlan', 'Tregensoe', null, 'Masculino', '1989-05-19', 'Brasileiro  ', '764965966', 'se327774', 'ctregensoej@mac.com', 519622918, 20, null);
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -388,11 +388,11 @@ insert into setores (id_setor, nome) values (14, 'Recepção');
 --------------------------------------------------------------------------------------------------------------------
 
 -- inserts funcionarios
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (1, 'adm', 'adm', null, 10, 'ADM', 'adm', 'adm');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (2, 'Halimeda', 'Rase', null, 12, "Faxineira", 'a', 'bL6.?8O6"4/');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (3, 'Faina', 'Hullins', null, 13, "Eletricista", 'b', 'kQ4>5ILf');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (4, 'Ruthann', 'Housbie', 'Carla', 14, "Recepcionista", 'c', 'lO0"ISW/ild');
-insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values (5, 'RH', 'RH', null, 11, "RH", 'rh', 'rh');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values ('1', 'adm', 'adm', null, 10, 'ADM', 'adm', 'adm');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values ('2', 'Halimeda', 'Rase', null, 12, "Faxineira", 'a', 'bL6.?8O6"4/');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values ('3', 'Faina', 'Hullins', null, 13, "Eletricista", 'b', 'kQ4>5ILf');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values ('4', 'Ruthann', 'Housbie', 'Carla', 14, "Recepcionista", 'c', 'lO0"ISW/ild');
+insert into funcionarios (id_funcionario, primeiro_nome, sobrenome, nome_social, id_setor, cargo, usuario, senha) values ('5', 'RH', 'RH', null, 11, "RH", 'rh', 'rh');
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -523,7 +523,7 @@ UPDATE hospedes SET primeiro_nome = 'Hesther', cpf = 036594392 WHERE id_hospede 
 UPDATE hospedes SET nome_social = 'Nixie' WHERE id_hospede = 14;
 UPDATE hospedes SET data_nascimento = '2022-11-10', nacionalidade = 'United States' WHERE id_hospede = 1;
 UPDATE hospedes SET id_responsavel = 6 WHERE id_hospede = 4;
-UPDATE hospedes SET cpf = 418628632 WHERE id_hospede = 16;
+UPDATE hospedes SET cpf = '418628632' WHERE id_hospede = 16;
 UPDATE hospedes SET nacionalidade = 'Brazil', nome_social = 'Stillmann' WHERE id_hospede = 11;
 SET SQL_SAFE_UPDATES = 1;
 
@@ -620,10 +620,10 @@ SET SQL_SAFE_UPDATES = 1;
 
 -- updates funcionarios
 SET SQL_SAFE_UPDATES = 0;
-UPDATE funcionarios SET primeiro_nome = 'Lara' WHERE id_funcionario = 5318;
-UPDATE funcionarios SET primeiro_nome = 'Luan' WHERE id_funcionario = 4342;
-UPDATE funcionarios SET sobrenome = 'Pereira' WHERE id_funcionario = 5324;
-UPDATE funcionarios SET primeiro_nome = 'Lorela' WHERE id_funcionario = 4546;
+UPDATE funcionarios SET primeiro_nome = 'Lara' WHERE id_funcionario = '5318';
+UPDATE funcionarios SET primeiro_nome = 'Luan' WHERE id_funcionario = '4342';
+UPDATE funcionarios SET sobrenome = 'Pereira' WHERE id_funcionario = '5324';
+UPDATE funcionarios SET primeiro_nome = 'Lorela' WHERE id_funcionario = '4546';
 SET SQL_SAFE_UPDATES = 1;
 
 --------------------------------------------------------------------------------------------------------------------

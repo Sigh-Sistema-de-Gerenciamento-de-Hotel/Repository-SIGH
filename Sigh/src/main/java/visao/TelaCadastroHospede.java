@@ -272,7 +272,7 @@ public class TelaCadastroHospede extends JFrame {
 			
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if(resp.getCpf() == 0) {
+			if(resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf;
@@ -644,7 +644,7 @@ public class TelaCadastroHospede extends JFrame {
 					//JOptionPane.showMessageDialog(null, "CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
 				} else {
 					if (!cpf.isEmpty()) {
-						hos.setCpf(Integer.valueOf(cpf));
+						hos.setCpf(cpf);
 					}
 					if (!passaporte.isEmpty()) {
 						hos.setPassaporte(passaporte);
@@ -659,7 +659,7 @@ public class TelaCadastroHospede extends JFrame {
 
 				            //JOptionPane.showMessageDialog(null, "CPF inválido. Por favor, insira um CPF válido.");
 				        } else {
-				        	hos.setCpf(Integer.valueOf(cpf));				        }
+				        	hos.setCpf(cpf);				        }
 				    }
 				    if (!passaporte.isEmpty() && !passaporte.trim().isEmpty()) {
 				        if (!validarPassaporte(passaporte)) {

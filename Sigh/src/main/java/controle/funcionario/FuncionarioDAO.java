@@ -36,7 +36,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
-			ps.setInt(1, fun.getId());
+			ps.setString(1, fun.getId());
 			ps.setString(2, fun.getNome());
 			ps.setString(3, fun.getSobrenome());
 			ps.setString(4, fun.getNomeSocial());
@@ -75,7 +75,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			while (rs.next()) {
 				Funcionario fun = new Funcionario();
 
-				int id = rs.getInt("id_funcionario");
+				String id = rs.getString("id_funcionario");
 				String primeiroNome = rs.getString("primeiro_nome");
 				String sobrenome = rs.getString("sobrenome");
 				String nomeSocial = rs.getString("nome_social");
@@ -133,7 +133,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			ps.setString(5, fun.getCargo());
 			ps.setString(6, fun.getUsuario());
 			ps.setString(7, fun.getSenha());
-			ps.setInt(8, fun.getId());
+			ps.setString(8, fun.getId());
 
 			retorno = ps.executeUpdate();
 
@@ -158,7 +158,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 
-			ps.setInt(1, fun.getId());
+			ps.setString(1, fun.getId());
 			System.out.println(ps);
 			
 
@@ -194,7 +194,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			while (rs.next()) {
 				Funcionario fun = new Funcionario();
 
-				int id = rs.getInt("id_funcionario");
+				String id = rs.getString("id_funcionario");
 				String primeiroNome = rs.getString("primeiro_nome");
 				String sobrenome = rs.getString("sobrenome");
 				String nomeSocial = rs.getString("nome_social");
@@ -254,7 +254,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			while (rs.next()) {
 				fun = new Funcionario();
 
-				int id = rs.getInt("id_funcionario");
+				String id = rs.getString("id_funcionario");
 				String primeiroNome = rs.getString("primeiro_nome");
 				String sobrenome = rs.getString("sobrenome");
 				String nomeSocial = rs.getString("nome_social");

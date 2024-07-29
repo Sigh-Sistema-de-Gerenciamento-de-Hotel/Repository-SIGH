@@ -290,24 +290,15 @@ public class TelaCadastroFuncionario extends JFrame {
 
 				Boolean erro = false;
 
-				String idS = txtCpfText.getText();
+				String id = txtCpfText.getText();
 
-				if (idS.isEmpty()) {
+				if (id.isEmpty()) {
 					// ERRO
 					TelaErro dadosIncorretos = new TelaErro("Insira seu CPF!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					int id = 0;
-					try {
-						id = Integer.parseInt(idS);
-					} catch (Exception ex) {
-						TelaErro dadosIncorretos = new TelaErro("CPF precisa ser tipo inteiro!");
-						dadosIncorretos.setLocationRelativeTo(null);
-						dadosIncorretos.setVisible(true);
-						erro = true;
-					}
-					if (erro == false && id != 0) {
+					if (erro == false && !id.isEmpty()) {
 						func.setId(id);
 					}
 

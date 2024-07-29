@@ -298,7 +298,7 @@ public class TelaEdicaoHospede extends JFrame {
 			}
 			String docR;
 			String cpfR = String.valueOf(r.getCpf());
-			if(r.getCpf() == 0) {
+			if(r.getCpf().isEmpty()) {
 				docR = r.getPassaporte();
 			} else {
 				docR = cpfR;
@@ -322,7 +322,7 @@ public class TelaEdicaoHospede extends JFrame {
 				
 				String doc;
 				String cpf = String.valueOf(resp.getCpf());
-				if(resp.getCpf() == 0) {
+				if(resp.getCpf().isEmpty()) {
 					doc = resp.getPassaporte();
 				} else {
 					doc = cpf;
@@ -348,7 +348,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblCpf.setBounds(1000, 480, 100, 20);
 		contentPane.add(lblCpf);
 
-		int cpf = hosEditar.getCpf();
+		String cpf = hosEditar.getCpf();
 
 		txtCpf = new RoundJFormattedTextField(null);
 		txtCpf.setText(String.valueOf(cpf));
@@ -649,7 +649,7 @@ public class TelaEdicaoHospede extends JFrame {
 					dadosIncorretos.setVisible(true);
 				} else {
 					if (!cpf.isEmpty()) {
-						hosEditar.setCpf(Integer.valueOf(cpf));
+						hosEditar.setCpf(cpf);
 					}
 					if (!passaporte.isEmpty()) {
 						hosEditar.setPassaporte(passaporte);
@@ -663,7 +663,7 @@ public class TelaEdicaoHospede extends JFrame {
 								dadosIncorretos.setLocationRelativeTo(null);
 								dadosIncorretos.setVisible(true);
 					        } else {
-					        	hosEditar.setCpf(Integer.valueOf(cpf));				        }
+					        	hosEditar.setCpf(cpf);				        }
 					    }
 					    if (!passaporte.isEmpty() && !passaporte.trim().isEmpty()) {
 					        if (!validarPassaporte(passaporte)) {
