@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -235,62 +236,28 @@ public class TelaCadastroHospede extends JFrame {
 		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblGenero.setBounds(554, 390, 100, 20);
 		contentPane.add(lblGenero);
-
+		
 		JComboBox<String> comboBoxGenero = new JComboBox<>();
 		comboBoxGenero.setBounds(554, 415, 343, 48);
 		comboBoxGenero.addItem("Feminino");
 		comboBoxGenero.addItem("Masculino");
 		comboBoxGenero.addItem("Prefiro não dizer");
 		contentPane.add(comboBoxGenero);
+		
+		JPanel panelResp = new JPanel();
+		panelResp.setBounds(1446, 379, 374, 88);
+		panelResp.setLayout(null);
+		
+				JComboBox<String> comboBoxResp = new JComboBox<>();
+				comboBoxResp.setBounds(21, 36, 343, 45);
+				panelResp.add(comboBoxResp);
+				
+						JLabel lblResponsavel = new JLabel("Responsável *");
+						lblResponsavel.setBounds(21, 11, 200, 20);
+						panelResp.add(lblResponsavel);
+						lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JLabel lblData = new JLabel("Data de Nascimento *");
-		lblData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblData.setBounds(1000, 390, 200, 20);
-		contentPane.add(lblData);
 
-		txtData = new DateTextField();
-		txtData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtData.setBounds(1000, 415, 343, 48);
-		contentPane.add(txtData);
-		txtData.setColumns(18);
-
-		/*
-		 * JLabel lblResponsável = new JLabel("Responsável ");
-		 * lblResponsável.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		 * lblResponsável.setBounds(1460, 390, 100, 20);
-		 * contentPane.add(lblResponsável);
-		 */
-
-		/*
-		 * txtResponsavel = new RoundJFormattedTextField(null);
-		 * txtResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		 * txtResponsavel.setBounds(1460, 415, 343, 48);
-		 * contentPane.add(txtResponsavel); txtResponsavel.setColumns(24);
-		 */
-
-		JLabel lblNacionalidade = new JLabel("Nacionalidade *");
-		lblNacionalidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNacionalidade.setBounds(554, 480, 100, 20);
-		contentPane.add(lblNacionalidade);
-
-		JComboBox<String> comboBoxPaises = new JComboBox<>();
-		String[] paises = java.util.Locale.getISOCountries();
-		for (String pais : paises) {
-
-			Locale obj = new Locale("", pais);
-			String nomePais =  obj.getDisplayCountry();
-			comboBoxPaises.addItem(nomePais);
-		}
-		comboBoxPaises.setBounds(554, 515, 343, 48);
-		contentPane.add(comboBoxPaises);
-
-		JLabel lblResponsavel = new JLabel("Responsável *");
-		lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblResponsavel.setBounds(1460, 390, 200, 20);
-		contentPane.add(lblResponsavel);
-
-		JComboBox<String> comboBoxResp = new JComboBox<>();
-		comboBoxResp.setBounds(1460, 415, 343, 45);
 		HospedeDAO dao = HospedeDAO.getInstancia();
 		ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
 		for (Hospede resp : hospedesResp) {
@@ -316,7 +283,54 @@ public class TelaCadastroHospede extends JFrame {
 			comboBoxResp.addItem(infos);
 			
 		}
-		contentPane.add(comboBoxResp);
+
+		JLabel lblData = new JLabel("Data de Nascimento *");
+		lblData.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblData.setBounds(1000, 390, 200, 20);
+		contentPane.add(lblData);
+
+		txtData = new DateTextField();
+		txtData.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				DateTextField dtf = new DateTextField();
+				LocalDate data = dtf.stringParaData(txtData.getText());
+				boolean maior = false;
+				
+				if(ChronoUnit.YEARS.between(data, LocalDate.now()) > 18) {
+					maior = true;
+				} else if(ChronoUnit.YEARS.between(data, LocalDate.now()) == 18 && data.getMonthValue() < LocalDate.now().getMonthValue()) {
+					maior = true;
+				} else if(ChronoUnit.YEARS.between(data, LocalDate.now()) == 18 && data.getMonthValue() == LocalDate.now().getMonthValue() && data.getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
+					maior = true;
+				}
+				
+				if(maior != true) {
+					contentPane.add(panelResp);
+				}
+			}
+		});
+		txtData.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtData.setBounds(1000, 415, 343, 48);
+		contentPane.add(txtData);
+		txtData.setColumns(18);
+		
+
+		JLabel lblNacionalidade = new JLabel("Nacionalidade *");
+		lblNacionalidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNacionalidade.setBounds(554, 480, 100, 20);
+		contentPane.add(lblNacionalidade);
+
+		JComboBox<String> comboBoxPaises = new JComboBox<>();
+		String[] paises = java.util.Locale.getISOCountries();
+		for (String pais : paises) {
+
+			Locale obj = new Locale("", pais);
+			String nomePais =  obj.getDisplayCountry();
+			comboBoxPaises.addItem(nomePais);
+		}
+		comboBoxPaises.setBounds(554, 515, 343, 48);
+		contentPane.add(comboBoxPaises);
 		
 		JLabel lblCpf = new JLabel("CPF ");
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -694,12 +708,12 @@ public class TelaCadastroHospede extends JFrame {
 			}
 		}
 			private boolean validarPassaporte(String passaporte) {
-				// TODO Auto-generated method stub
+				
 				return false;
 			}
 
 			private boolean validarCPF(String cpf) {
-				// TODO Auto-generated method stub
+				
 				return false;
 			}
 
@@ -753,6 +767,6 @@ public class TelaCadastroHospede extends JFrame {
 		txtEmail.setText("amanda@ifsc.edu.br");
 		txtTelefone.setText("477894561230");
 		txtPassaporte.setText("123456");
-
+	
 	}
 }

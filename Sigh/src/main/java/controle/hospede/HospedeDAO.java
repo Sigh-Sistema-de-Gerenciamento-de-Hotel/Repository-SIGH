@@ -68,7 +68,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			maior = true;
 		}
 
-		if(maior == true) {
+		if(maior != true) {
 			SQL = SQL + ", id_responsavel";
 			n ++;
 		}

@@ -26,6 +26,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -172,7 +173,6 @@ public class TelaEdicaoHospede extends JFrame {
 		lblHospede.setBounds(68, 407, 400, 60);
 		contentPane.add(lblHospede);
 
-		JLabel lblNewLabel_44 = new JLabel("");
 
 		JLabel lblFuncionario = new JLabel("");
 		lblHospede.addMouseListener(new MouseAdapter() {
@@ -196,31 +196,20 @@ public class TelaEdicaoHospede extends JFrame {
 		lblFuncionario.setBounds(68, 515, 374, 52);
 		contentPane.add(lblFuncionario);
 
-
-		JLabel lblNewLabel_66 = new JLabel("");
-
-
-
 		JLabel lblDivisoriaSair = new JLabel("");
 		lblDivisoriaSair.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
 		lblDivisoriaSair.setBounds(77, 897, 243, 14);
 		contentPane.add(lblDivisoriaSair);
-
-
-
+		
 		JLabel lblMenu = new JLabel("");
 		lblMenu.setBounds(0, 0, 420, 1083);
 		lblMenu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		contentPane.add(lblMenu);
 
-
-
 		JLabel lblCaminho = new JLabel("");
 		lblCaminho.setIcon(new ImageIcon("src/main/resources/Frame 675.png"));
 		lblCaminho.setBounds(420, 0, 1500, 62);
 		contentPane.add(lblCaminho);
-
-
 
 		JLabel lblNome = new JLabel("Nome *");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -283,60 +272,71 @@ public class TelaEdicaoHospede extends JFrame {
 		txtData.setBounds(1000, 415, 343, 48);
 		contentPane.add(txtData);
 		txtData.setColumns(18);
-
-		JLabel lblResponsavel = new JLabel("Responsável *");
-		lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblResponsavel.setBounds(1460, 390, 200, 20);
-		contentPane.add(lblResponsavel);
-
-		Hospede r = hosEditar.getResponsavel();
-		String infosR;
-		String nomeCompletoR;
-		if(r.getNomeSocial() == null) {
-			nomeCompletoR = r.getNome() + " " + r.getSobrenome();
-		} else {
-			nomeCompletoR = r.getNomeSocial() + " " + r.getSobrenome();
-		}
-		String docR;
-		String cpfR = String.valueOf(r.getCpf());
-		if(r.getCpf() == 0) {
-			docR = r.getPassaporte();
-		} else {
-			docR = cpfR;
-		}
-		infosR = nomeCompletoR + " - " + docR;
 		
-		JComboBox<String> comboBoxResp = new JComboBox<>();
-		comboBoxResp.setBounds(1460, 415, 343, 45);
-		HospedeDAO dao = HospedeDAO.getInstancia();
-		ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
-		int index = 1;
-		for (Hospede resp : hospedesResp) {
-			String infos;
-			
-			String nomeCompleto;
-			if(resp.getNomeSocial() == null) {
-				nomeCompleto = resp.getNome() + " " + resp.getSobrenome();
-			} else {
-				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome();
-			}
-			
-			String doc;
-			String cpf = String.valueOf(resp.getCpf());
-			if(resp.getCpf() == 0) {
-				doc = resp.getPassaporte();
-			} else {
-				doc = cpf;
-			}
-			
-			infos = nomeCompleto + " - " + doc;
-			
-			comboBoxResp.addItem(infos);
-			
+		boolean maior = false;
+		if(ChronoUnit.YEARS.between(hosEditar.getDataNascimento(), LocalDate.now()) > 18) {
+			maior = true;
+		} else if(ChronoUnit.YEARS.between(hosEditar.getDataNascimento(), LocalDate.now()) == 18 && hosEditar.getDataNascimento().getMonthValue() < LocalDate.now().getMonthValue()) {
+			maior = true;
+		} else if(ChronoUnit.YEARS.between(hosEditar.getDataNascimento(), LocalDate.now()) == 18 && hosEditar.getDataNascimento().getMonthValue() == LocalDate.now().getMonthValue() && hosEditar.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
+			maior = true;
 		}
-		comboBoxResp.setSelectedItem(infosR);
-		contentPane.add(comboBoxResp);
+		
+		if(maior == false) {
+			JLabel lblResponsavel = new JLabel("Responsável *");
+			lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblResponsavel.setBounds(1460, 390, 200, 20);
+			contentPane.add(lblResponsavel);
 
+			Hospede r = hosEditar.getResponsavel();
+			String infosR;
+			String nomeCompletoR;
+			if(r.getNomeSocial() == null) {
+				nomeCompletoR = r.getNome() + " " + r.getSobrenome();
+			} else {
+				nomeCompletoR = r.getNomeSocial() + " " + r.getSobrenome();
+			}
+			String docR;
+			String cpfR = String.valueOf(r.getCpf());
+			if(r.getCpf() == 0) {
+				docR = r.getPassaporte();
+			} else {
+				docR = cpfR;
+			}
+			infosR = nomeCompletoR + " - " + docR;
+			
+			JComboBox<String> comboBoxResp = new JComboBox<>();
+			comboBoxResp.setBounds(1460, 415, 343, 45);
+			HospedeDAO dao = HospedeDAO.getInstancia();
+			ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
+			int index = 1;
+			for (Hospede resp : hospedesResp) {
+				String infos;
+				
+				String nomeCompleto;
+				if(resp.getNomeSocial() == null) {
+					nomeCompleto = resp.getNome() + " " + resp.getSobrenome();
+				} else {
+					nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome();
+				}
+				
+				String doc;
+				String cpf = String.valueOf(resp.getCpf());
+				if(resp.getCpf() == 0) {
+					doc = resp.getPassaporte();
+				} else {
+					doc = cpf;
+				}
+				
+				infos = nomeCompleto + " - " + doc;
+				
+				comboBoxResp.addItem(infos);
+				
+			}
+			comboBoxResp.setSelectedItem(infosR);
+			contentPane.add(comboBoxResp);
+
+		}
 
 		JLabel lblNacionalidade = new JLabel("Nacionalidade *");
 		lblNacionalidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
