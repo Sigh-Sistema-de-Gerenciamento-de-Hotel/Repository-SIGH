@@ -53,22 +53,29 @@ public class TelaEdicaoFuncionario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblPedidos = new JLabel("");
-		lblPedidos.addMouseListener(new MouseAdapter() {
+		JLabel menuQuarto = new JLabel("");
+		menuQuarto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				dispose();
+				tlq.setExtendedState(MAXIMIZED_BOTH);
+				tlq.setVisible(true);
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 			}
 		});
+		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		menuQuarto.setBounds(68, 348, 335, 50);
+		contentPane.add(menuQuarto);
 
 		JLabel lblHospedes = new JLabel("");
 		lblHospedes.addMouseListener(new MouseAdapter() {
@@ -90,6 +97,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 			}
 		});
+		lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		lblHospedes.setBounds(68, 407, 400, 60);
+		contentPane.add(lblHospedes);
 
 		JLabel lblHospedagem = new JLabel("");
 		lblHospedagem.addMouseListener(new MouseAdapter() {
@@ -370,15 +380,6 @@ public class TelaEdicaoFuncionario extends JFrame {
 			}
 		});
 
-		JLabel lblNomeUsuario = new JLabel("JULIA ALMEIDA");
-		lblNomeUsuario.setBounds(129, 798, 100, 14);
-		contentPane.add(lblNomeUsuario);
-
-		JLabel lblConta = new JLabel("Conta");
-		lblConta.setForeground(new Color(128, 128, 128));
-		lblConta.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblConta.setBounds(79, 760, 46, 14);
-		contentPane.add(lblConta);
 		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
 		lblBotaoCancelar.setBounds(1595, 902, 300, 50);
 		contentPane.add(lblBotaoCancelar);
@@ -403,9 +404,9 @@ public class TelaEdicaoFuncionario extends JFrame {
 		lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 		lblHospedes.setBounds(68, 410, 335, 50);
 		contentPane.add(lblHospedes);
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblPedidos.setBounds(68, 348, 335, 50);
-		contentPane.add(lblPedidos);
+		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
+		menuQuarto.setBounds(68, 348, 335, 50);
+		contentPane.add(menuQuarto);
 
 		JLabel lblLogoSigh = new JLabel("");
 		lblLogoSigh.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));

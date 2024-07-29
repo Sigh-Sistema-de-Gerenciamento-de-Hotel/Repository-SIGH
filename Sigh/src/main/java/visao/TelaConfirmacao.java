@@ -89,7 +89,7 @@ public class TelaConfirmacao extends JFrame {
 		lblUsuario.setBounds(50, 163, 62, 22);
 		contentPane.add(lblUsuario);
 
-		String nomeCompleto = txtNome + txtSobrenome;
+		String nomeCompleto = txtNome + " " + txtSobrenome;
 
 		JLabel nome = new JLabel(nomeCompleto);
 		nome.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
@@ -260,7 +260,7 @@ public class TelaConfirmacao extends JFrame {
 		
 		Label lblNumHosp = new Label("Num. Hóspedes: ");
 		lblNumHosp.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		lblNumHosp.setBounds(50, 94, 92, 22);
+		lblNumHosp.setBounds(50, 94, 145, 22);
 		contentPane.add(lblNumHosp);
 
 		Label lblNumQuarto = new Label("Cod. Quarto: ");
@@ -275,7 +275,7 @@ public class TelaConfirmacao extends JFrame {
 		
 		JLabel numHosp = new JLabel(String.valueOf(hospedagem.getNumHospedes()));
 		numHosp.setFont(new Font("Montserrat Thin", Font.PLAIN, 15));
-		numHosp.setBounds(148, 94, 225, 22);
+		numHosp.setBounds(197, 94, 176, 22);
 		contentPane.add(numHosp);
 
 		JLabel numQuarto = new JLabel(String.valueOf(hospedagem.getQuarto().getNumero()));

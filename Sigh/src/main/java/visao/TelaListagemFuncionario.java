@@ -68,6 +68,14 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 				tlq.setExtendedState(MAXIMIZED_BOTH);
 				tlq.setVisible(true);
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				menuQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+			}
 		});
 		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 		menuQuartos.setBounds(68, 346, 150, 20);
@@ -81,6 +89,14 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 				dispose();
 				tlh.setExtendedState(MAXIMIZED_BOTH);
 				tlh.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				menuHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				menuHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 			}
 		});
 		menuHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
