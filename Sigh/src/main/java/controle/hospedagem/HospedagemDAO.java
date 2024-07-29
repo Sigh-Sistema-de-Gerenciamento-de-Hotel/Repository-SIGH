@@ -109,6 +109,7 @@ public class HospedagemDAO implements IHospedagemDAO {
 
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
+			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 

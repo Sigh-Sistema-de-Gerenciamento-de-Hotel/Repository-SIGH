@@ -410,9 +410,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSalvar.setBounds(512, 724, 343, 50);
 		contentPane.add(lblBotaoSalvar);
 
-
-
-
+		
 		JLabel lblBotaoCancelar = new JLabel("");
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override

@@ -28,6 +28,9 @@ public class Hospedagem {
 	public int getNumHospedes() {
 		return numHospedes;
 	}
+	public int getTotalHospedes() {
+		return hospedes.size();
+	}
 	public void setNumHospedes(int numHospedes) {
 		this.numHospedes = numHospedes;
 	}
