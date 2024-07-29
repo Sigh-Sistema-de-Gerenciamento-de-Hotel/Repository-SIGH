@@ -64,6 +64,13 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 				dispose();
 			}
 		});
+		
+		JLabel lblMenu = new JLabel("Menu");
+		lblMenu.setForeground(new Color(128, 128, 128));
+		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblMenu.setBounds(67, 289, 46, 14);
+		contentPane.add(lblMenu);
+		
 		lblCadastrar.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
 		lblCadastrar.setBounds(1293, 252, 120, 34);
 		contentPane.add(lblCadastrar);
@@ -72,12 +79,6 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		lblLogoSigh.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
 		lblLogoSigh.setBounds(135, 46, 144, 176);
 		contentPane.add(lblLogoSigh);
-		
-		JLabel lblMenu = new JLabel("Menu");
-		lblMenu.setForeground(new Color(128, 128, 128));
-		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMenu.setBounds(67, 289, 46, 14);
-		contentPane.add(lblMenu);
 		
 		JLabel lblCaminhoListagemQuarto = new JLabel("");
 		lblCaminhoListagemQuarto.setIcon(new ImageIcon("src/main/resources/CaminhoListagemQuarto.png"));
@@ -89,23 +90,23 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		lblTitulo.setBounds(446, 108, 1455, 126);
 		contentPane.add(lblTitulo);
 		
-		JLabel lblPedidos = new JLabel("");
-		lblPedidos.addMouseListener(new MouseAdapter() {
+		JLabel lblQuarto = new JLabel("");
+		lblQuarto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				lblQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
+				lblQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 			}
 		});
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
-		lblPedidos.setBounds(68, 348, 335, 50);
-		contentPane.add(lblPedidos);
+		lblQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+		lblQuarto.setBounds(68,346, 335, 50);
+		contentPane.add(lblQuarto);
 		
 		JLabel lblHospedes = new JLabel("");
 		lblHospedes.addMouseListener(new MouseAdapter() {
@@ -173,11 +174,6 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		lblFuncionarios.setBounds(68, 523, 335, 50);
 		contentPane.add(lblFuncionarios);
 		
-		JLabel lblQuarto = new JLabel("");
-		lblQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
-		lblQuarto.setBounds(91, 590, 335, 50);
-		contentPane.add(lblQuarto);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(null);
 		scrollPane.setBackground(new Color(255, 255, 255));
@@ -208,6 +204,14 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 				funcionarioLogado = null;
 				TelaLogin tela = new TelaLogin();
 				tela.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 			}
 		});
 		
