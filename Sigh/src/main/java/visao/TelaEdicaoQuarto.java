@@ -87,19 +87,103 @@ public class TelaEdicaoQuarto extends JFrame {
 				lblQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 			}
 		});
+		
+		JLabel lblHospedes = new JLabel("");
+		lblHospedes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+			}
+		});
+		
+		JLabel lblHospedagem = new JLabel("");
+		lblHospedagem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+			}
+		});
+		
+		JLabel lblFuncionarios = new JLabel("");
+		lblFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+			}
+		});
+		
+		JLabel lblBotaoSair = new JLabel("");
+		lblBotaoSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				funcionarioLogado = null;
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+			}
+		});
+		
+		JLabel lblMenu = new JLabel("Menu");
+		lblMenu.setForeground(new Color(128, 128, 128));
+		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblMenu.setBounds(67, 289, 46, 14);
+		contentPane.add(lblMenu);
+		
+		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+		lblBotaoSair.setBounds(84, 958, 270, 40);
+		contentPane.add(lblBotaoSair);
+		lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+		lblFuncionarios.setBounds(68, 523, 335, 50);
+		contentPane.add(lblFuncionarios);
+		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+		lblHospedagem.setBounds(68, 472, 335, 50);
+		contentPane.add(lblHospedagem);
+		lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		lblHospedes.setBounds(68, 410, 335, 50);
+		contentPane.add(lblHospedes);
+		
+		JLabel lblLogoSigh = new JLabel("");
+		lblLogoSigh.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
+		lblLogoSigh.setBounds(135, 46, 144, 176);
+		contentPane.add(lblLogoSigh);
 		lblQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-		lblQuartos.setBounds(91, 590, 335, 50);
+		lblQuartos.setBounds(67, 344, 336, 50);
 		contentPane.add(lblQuartos);
 		
 		JLabel lblFundoCinza = new JLabel("");
 		lblFundoCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		lblFundoCinza.setBounds(0, 0, 420, 1080);
 		contentPane.add(lblFundoCinza);
-		
-		JLabel lblLogoSigh = new JLabel("");
-		lblLogoSigh.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
-		lblLogoSigh.setBounds(135, 46, 144, 176);
-		contentPane.add(lblLogoSigh);
 		
 		JLabel lblTituloEditarQuarto = new JLabel("");
 		lblTituloEditarQuarto.setIcon(new ImageIcon("src/main/resources/TituloEditarQuarto.png"));
@@ -391,118 +475,10 @@ public class TelaEdicaoQuarto extends JFrame {
 		lblBotaoCancelar.setBounds(1685, 929, 134, 35);
 		contentPane.add(lblBotaoCancelar);
 		
-		JLabel lblMenu = new JLabel("Menu");
-		lblMenu.setForeground(new Color(128, 128, 128));
-		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMenu.setBounds(67, 289, 46, 14);
-		contentPane.add(lblMenu);
-		
 		JLabel lblCaminhoEditarQuarto = new JLabel("");
 		lblCaminhoEditarQuarto.setIcon(new ImageIcon("src/main/resources/CaminhoEditarQuarto.png"));
 		lblCaminhoEditarQuarto.setBounds(420, 0, 1500, 62);
 		contentPane.add(lblCaminhoEditarQuarto);
-		
-		JLabel lblPedidos = new JLabel("");
-		lblPedidos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
-			}
-		});
-		lblPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblPedidos.setBounds(68, 348, 335, 50);
-		contentPane.add(lblPedidos);
-		
-		JLabel lblHospedes = new JLabel("");
-		lblHospedes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-			}
-		});
-		lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		lblHospedes.setBounds(68, 410, 335, 50);
-		contentPane.add(lblHospedes);
-		
-		JLabel lblHospedagem = new JLabel("");
-		lblHospedagem.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-			}
-		});
-		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblHospedagem.setBounds(68, 472, 335, 50);
-		contentPane.add(lblHospedagem);
-		
-		JLabel lblFuncionarios = new JLabel("");
-		lblFuncionarios.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-			}
-		});
-		lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblFuncionarios.setBounds(68, 523, 335, 50);
-		contentPane.add(lblFuncionarios);
-		
-		JLabel lblConta = new JLabel("Conta");
-		lblConta.setForeground(new Color(128, 128, 128));
-		lblConta.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblConta.setBounds(79, 760, 46, 14);
-		contentPane.add(lblConta);
-		
-		JLabel lblNomeUsuario = new JLabel("JULIA ALMEIDA");
-		lblNomeUsuario.setBounds(129, 798, 100, 14);
-		contentPane.add(lblNomeUsuario);
-		
-		JLabel lblBotaoSair = new JLabel("");
-		lblBotaoSair.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
-			}
-		});
-		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
-		lblBotaoSair.setBounds(84, 958, 270, 40);
-		contentPane.add(lblBotaoSair);
 		
 	}
 

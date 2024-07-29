@@ -1,5 +1,6 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -40,7 +41,6 @@ public class CadastroQuarto extends JFrame{
 	private JLabel lblConserto;
 	private JLabel lblPreco;
 	private JLabel lblLogo;
-	private JLabel lblMenuPedidos;
 	private JLabel lblMenuHospede;
 	private JLabel lblMenuHospedagem;
 	private JLabel lblMenuFuncionarios;
@@ -70,6 +70,12 @@ public class CadastroQuarto extends JFrame{
 		setBounds(100, 100, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		JLabel lblMenu = new JLabel("Menu");
+		lblMenu.setForeground(new Color(128, 128, 128));
+		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblMenu.setBounds(67, 289, 46, 14);
+		contentPane.add(lblMenu);
 		
 		comboCamaCasal = new JComboBox<Integer>();
 		comboCamaCasal.setModel(
@@ -257,7 +263,8 @@ public class CadastroQuarto extends JFrame{
 		BotaoCancelar.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
-		         dispose();	
+					new TelaListagemQuarto(funcionarioLogado).setVisible(true);
+					dispose();
 		    }
 		    @Override
 		    public void mouseEntered(MouseEvent e) {
@@ -269,27 +276,27 @@ public class CadastroQuarto extends JFrame{
 			}
 		});
 		BotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-		BotaoCancelar.setBounds(1682, 931, 134, 24);
+		BotaoCancelar.setBounds(1682, 928, 134, 35);
 		contentPane.add(BotaoCancelar);
-
-		/*menuQuartos = new JLabel("");
-		menuQuartos.addMouseListener(new MouseAdapter() {
+		
+		JLabel lblMenuQuartos = new JLabel("");
+		lblMenuQuartos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				menuQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));//
+				lblMenuQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+				lblMenuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
 			}
 		});
-		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-		menuQuartos.setBounds(91, 590, 335, 50);
-		contentPane.add(menuQuartos);*/
-
+		lblMenuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		lblMenuQuartos.setBounds(91, 346, 400, 60);
+		contentPane.add(lblMenuQuartos);
+		
 		lblMenuFuncionarios = new JLabel("");
 		lblMenuFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
@@ -312,11 +319,6 @@ public class CadastroQuarto extends JFrame{
 		lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
 		lblMenuFuncionarios.setBounds(91, 532, 335, 50);
 		contentPane.add(lblMenuFuncionarios);
-
-		lblDivisormenu = new JLabel("");
-		lblDivisormenu.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
-		lblDivisormenu.setBounds(90, 897, 400, 30);
-		contentPane.add(lblDivisormenu);
 
 		lblSair = new JLabel("");
 		lblSair.addMouseListener(new MouseAdapter() {
@@ -388,26 +390,6 @@ public class CadastroQuarto extends JFrame{
 		lblMenuHospede.setBounds(92, 404, 335, 50);
 		contentPane.add(lblMenuHospede);
 
-		lblMenuPedidos = new JLabel("");
-		lblMenuPedidos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblMenuPedidos.setIcon(new ImageIcon("src/main/resources/menu - pedidos selecionado.png"));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblMenuPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-			}
-		});
-
-		lblMenuPedidos.setIcon(new ImageIcon("src/main/resources/menu pedidos.png"));
-		lblMenuPedidos.setBounds(92, 345, 335, 50);
-		contentPane.add(lblMenuPedidos);
-
 		lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
 		lblLogo.setBounds(135, 42, 144, 176);
@@ -419,6 +401,13 @@ public class CadastroQuarto extends JFrame{
 		contentPane.add(lblCadastrarQuartos);
 
 		txtpreco = new RoundJFormattedTextField(null);
+		txtpreco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//não consegui fazer a mascara de preço
+			}
+		});
 		txtpreco.setColumns(10);
 		txtpreco.setBounds(1506, 575, 343, 50);
 		contentPane.add(txtpreco);
