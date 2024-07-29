@@ -128,7 +128,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			comboBoxHospede2.addItem(infos);
 		}
 		panel_1.add(comboBoxHospede2, "cell 0 1,growx");
-//		panel_1.setVisible(false);
+		panel_1.setVisible(false);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(1500, 741, 334, 139);
@@ -137,7 +137,7 @@ public class TelaCadastroHospedagem extends JFrame {
 
 		JLabel lblNewLabel_2 = new JLabel("Hospedes*");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_2, "cell 0 0");
+//		panel_2.add(lblNewLabel_2, "cell 0 0");
 
 		JComboBox<String> comboBoxHospede3 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
@@ -226,6 +226,14 @@ public class TelaCadastroHospedagem extends JFrame {
 				listaFuncionario.setVisible(true);
 
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+			}
 		});
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
 		lblBotaoFuncionarios.setBounds(67, 523, 295, 38);
@@ -236,20 +244,71 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblSimboloSigh.setBounds(130, 35, 161, 182);
 		contentPane.add(lblSimboloSigh);
 
-		JLabel lblBotaoPedidos = new JLabel("");
-		lblBotaoPedidos.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
-		lblBotaoPedidos.setBounds(67, 345, 295, 38);
-		contentPane.add(lblBotaoPedidos);
+		JLabel lblBotaoQuarto = new JLabel("");
+		lblBotaoQuarto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto listaQuarto = new TelaListagemQuarto(funcionarioLogado);
+				setVisible(false);
+				listaQuarto.setExtendedState(MAXIMIZED_BOTH);
+				listaQuarto.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+			}
+		});
+		lblBotaoQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		lblBotaoQuarto.setBounds(67, 345, 295, 38);
+		contentPane.add(lblBotaoQuarto);
 
 		JLabel lblBotaoHospedes = new JLabel("");
-		lblBotaoHospedes.setIcon(new ImageIcon("src\\main\\resources\\menu - hospede.png"));
+		lblBotaoHospedes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede listaHospede = new TelaListagemHospede(funcionarioLogado);
+				setVisible(false);
+				listaHospede.setExtendedState(MAXIMIZED_BOTH);
+				listaHospede.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+			}
+		});
+		lblBotaoHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
 		lblBotaoHospedes.setBounds(67, 407, 295, 38);
 		contentPane.add(lblBotaoHospedes);
 
-		JLabel lblBotaoHospedagemSelecionado = new JLabel("");
-		lblBotaoHospedagemSelecionado.setIcon(new ImageIcon("src\\main\\resources\\menu hospedagem selecionado.png"));
-		lblBotaoHospedagemSelecionado.setBounds(43, 457, 342, 45);
-		contentPane.add(lblBotaoHospedagemSelecionado);
+		JLabel lblBotaoHospedagem = new JLabel("");
+		lblBotaoHospedagem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem listaHospedagem = new TelaListagemHospedagem(funcionarioLogado);
+				setVisible(false);
+				listaHospedagem.setExtendedState(MAXIMIZED_BOTH);
+				listaHospedagem.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+			}
+		});
+		lblBotaoHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+		lblBotaoHospedagem.setBounds(43, 457, 342, 45);
+		contentPane.add(lblBotaoHospedagem);
 
 		JLabel lblDivisaoMenu = new JLabel("");
 		lblDivisaoMenu.setIcon(new ImageIcon("src\\main\\resources\\divisor (menu).png"));
@@ -409,16 +468,29 @@ public class TelaCadastroHospedagem extends JFrame {
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(512, 724, 343, 50);
 		contentPane.add(lblBotaoSalvar);
-
 		
 		JLabel lblBotaoCancelar = new JLabel("");
 		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaListagemHospedagem(funcionarioLogado).setVisible(true);
+				TelaListagemHospedagem telaListHospedagem = new TelaListagemHospedagem(funcionarioLogado);
+				telaListHospedagem.setVisible(true);
+				telaListHospedagem.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+			}
 		});
+		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+		lblBotaoCancelar.setBounds(948, 724, 145, 37);
+		contentPane.add(lblBotaoCancelar);
+
 	}
 }
 
