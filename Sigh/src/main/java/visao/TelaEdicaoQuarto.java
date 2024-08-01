@@ -31,6 +31,7 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import javax.swing.JRadioButton;
 
 public class TelaEdicaoQuarto extends JFrame {
 
@@ -41,12 +42,7 @@ public class TelaEdicaoQuarto extends JFrame {
 	private JComboBox<Integer>comboCamaCasal;
 	private JComboBox<Integer>comboCamaSolteiro;
 	private JComboBox<Integer>comboMaxDeHospedes;
-	private JComboBox comboArCondicionado;
-	private JComboBox comboFrigobar;
-	private JComboBox comboBanheira;
 	private JTextField txtAcessibilidade;
-	private JComboBox comboLimpeza;
-	private JComboBox comboConserto;
 	private JTextField txtPreco;
 	private Quarto quartoEditar;
 	private static Funcionario funcionarioLogado;
@@ -245,11 +241,6 @@ public class TelaEdicaoQuarto extends JFrame {
 		contentPane.add(lblArCondicionado);
 		
 		Boolean ArCondicionado = quaEditar.isArCondicionado();
-				
-		comboArCondicionado = new JComboBox();
-		comboArCondicionado.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboArCondicionado.setBounds(1002, 393, 343, 50);
-		contentPane.add(comboArCondicionado);
 		
 		JLabel lblFrigobar = new JLabel("Frigobar");
 		lblFrigobar.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -258,22 +249,12 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		Boolean Frigobar = quaEditar.isFrigobar();
 		
-		comboFrigobar = new JComboBox();
-		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboFrigobar.setBounds(1002, 493, 343, 50);
-		contentPane.add(comboFrigobar);
-		
 		JLabel lblBanheira = new JLabel("Banheira");
 		lblBanheira.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblBanheira.setBounds(1002, 571, 121, 22);
 		contentPane.add(lblBanheira);
 		
 		Boolean Banheira = quaEditar.isBanheira();
-		
-		comboBanheira = new JComboBox();
-		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboBanheira.setBounds(1002, 616, 343, 50);
-		contentPane.add(comboBanheira);
 		
 		JLabel lblAcessibilidade = new JLabel("Acessibilidade");
 		lblAcessibilidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -294,22 +275,12 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		Boolean Limpeza = quaEditar.isPrecisaLimpeza();
 		
-		comboLimpeza = new JComboBox();
-		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboLimpeza.setBounds(1472, 383, 343, 50);
-		contentPane.add(comboLimpeza);
-		
 		JLabel lblConserto = new JLabel("Conserto");
 		lblConserto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblConserto.setBounds(1472, 460, 121, 22);
 		contentPane.add(lblConserto);
 		
 		Boolean Conserto = quaEditar.isPrecisaConserto();
-		
-		comboConserto = new JComboBox();
-		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboConserto.setBounds(1472, 493, 343, 50);
-		contentPane.add(comboConserto);
 		
 		JLabel lblPreco = new JLabel("Preço");
 		lblPreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -322,6 +293,47 @@ public class TelaEdicaoQuarto extends JFrame {
 		txtPreco.setBounds(1472, 598, 334, 48);
 		contentPane.add(txtPreco);
 		txtPreco.setColumns(10);
+		
+		JRadioButton RadioButtonArCondicionadoSim = new JRadioButton("Sim");
+		RadioButtonArCondicionadoSim.setBounds(1002, 385, 109, 23);
+		contentPane.add(RadioButtonArCondicionadoSim);
+		
+		JRadioButton RadioButtonArCondicionadoNao = new JRadioButton("Não");
+		RadioButtonArCondicionadoNao.setBounds(1002, 410, 109, 23);
+		contentPane.add(RadioButtonArCondicionadoNao);
+		
+		JRadioButton RadioButtonFrigobarSim = new JRadioButton("Sim");
+		RadioButtonFrigobarSim.setBounds(1002, 495, 109, 23);
+		contentPane.add(RadioButtonFrigobarSim);
+		
+		JRadioButton RadioButtonFrigobarNao = new JRadioButton("Não");
+		RadioButtonFrigobarNao.setBounds(1002, 523, 109, 23);
+		contentPane.add(RadioButtonFrigobarNao);
+		
+		JRadioButton RadioButtonBanheiraSim = new JRadioButton("Sim");
+		RadioButtonBanheiraSim.setBounds(1002, 612, 109, 23);
+		contentPane.add(RadioButtonBanheiraSim);
+		
+		JRadioButton RadioButtonBanheiraNao = new JRadioButton("Não");
+		RadioButtonBanheiraNao.setBounds(1002, 638, 109, 23);
+		contentPane.add(RadioButtonBanheiraNao);
+		
+		JRadioButton RadioButtonLimpezaSim = new JRadioButton("Sim");
+		RadioButtonLimpezaSim.setBounds(1472, 385, 109, 23);
+		contentPane.add(RadioButtonLimpezaSim);
+		
+		JRadioButton RadioButtonLimpezaNao = new JRadioButton("Não");
+		RadioButtonLimpezaNao.setBounds(1472, 410, 109, 23);
+		contentPane.add(RadioButtonLimpezaNao);
+		
+		JRadioButton RadioButtonConsertoSim = new JRadioButton("Sim");
+		RadioButtonConsertoSim.setBounds(1472, 495, 109, 23);
+		contentPane.add(RadioButtonConsertoSim);
+		
+		JRadioButton RadioButtonConsertoNao = new JRadioButton("Não");
+		RadioButtonConsertoNao.setBounds(1472, 523, 109, 23);
+		contentPane.add(RadioButtonConsertoNao);
+		
 		
 		JLabel lblBotaoSalvar = new JLabel("");
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
@@ -365,8 +377,8 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setNumMaxHospedes(Integer.valueOf(MaxDeHospedes));
 				}
 
-				String ArCondicionado = (String) comboArCondicionado.getSelectedItem();
-				if (ArCondicionado.isEmpty()) {
+				Boolean ArCondicionado = RadioButtonArCondicionadoSim.isSelected();
+				if (ArCondicionado.booleanValue()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de ar condicionado");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
@@ -374,8 +386,8 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setArCondicionado(Boolean.valueOf(ArCondicionado));
 				}
 
-				String Frigobar = (String) comboFrigobar.getSelectedItem();
-				if (Frigobar.isEmpty()) {
+				Boolean Frigobar = RadioButtonFrigobarSim.isSelected();
+				if (Frigobar.booleanValue()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de frigobar");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
@@ -383,8 +395,8 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setFrigobar(Boolean.valueOf(Frigobar));
 				}
 				
-				String Banheira = (String) comboBanheira.getSelectedItem();
-				if (Banheira.isEmpty()) {
+				Boolean Banheira = RadioButtonBanheiraSim.isSelected();
+				if (Banheira.booleanValue()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de banheira");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
@@ -401,8 +413,8 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setAcessibilidade(Acessibilidade);
 				}
 				
-				String Limpeza = (String) comboLimpeza.getSelectedItem();
-				if (Limpeza.isEmpty()) {
+				Boolean Limpeza = RadioButtonLimpezaSim.isSelected();
+				if (Limpeza.booleanValue()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de Limpeza");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
@@ -410,8 +422,8 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setPrecisaLimpeza(Boolean.valueOf(Limpeza));
 				}
 				
-				String Conserto = (String) comboConserto.getSelectedItem();
-				if (Conserto.isEmpty()) {
+				Boolean Conserto = RadioButtonConsertoSim.isSelected();
+				if (Conserto.booleanValue()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de Conserto");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);

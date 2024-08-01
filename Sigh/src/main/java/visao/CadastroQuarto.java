@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Toolkit;
+import javax.swing.JRadioButton;
 
 public class CadastroQuarto extends JFrame{
 
@@ -49,15 +50,20 @@ public class CadastroQuarto extends JFrame{
 	private JComboBox<Integer>comboCamaCasal;
 	private JComboBox<Integer>comboCamaSolteiro;
 	private JComboBox<Integer>comboNHospedes;
-	private JComboBox comboFrigobar;
-	private JComboBox comboBanheira;
-	private JComboBox comboLimpeza;
-	private JComboBox comboConserto;
 	private JTextField txtNumQuarto;
-	private JComboBox comboAr;
 	private JLabel menuQuartos;
 	private JTextField txtAcessibilidade;
 	Funcionario funcionarioLogado;
+	private JRadioButton RadioButtonArCondicionadoSim;
+	private JRadioButton RadioButtonArCondicionadoNao;
+	private JRadioButton RadioButtonFrigobarSim;
+	private JRadioButton RadioButtonFrigobarNao;
+	private JRadioButton RadioButtonBanheiraSim;
+	private JRadioButton RadioButtonBanheiraNao;
+	private JRadioButton RadioButtonLimpezaSim;
+	private JRadioButton RadioButtonLimpezaNao;
+	private JRadioButton RadioButtonConsertoSim;
+	private JRadioButton RadioButtonConsertoNao;
 
 	/**
 	 * Create the frame.
@@ -82,7 +88,7 @@ public class CadastroQuarto extends JFrame{
 				new DefaultComboBoxModel(new Integer[] {  0, 1, 2 }));
 		comboCamaCasal.setBounds(491, 442, 343, 50);
 		contentPane.add(comboCamaCasal);
-
+		
 		comboCamaSolteiro = new JComboBox<Integer>();
 		comboCamaSolteiro.setModel(
 				new DefaultComboBoxModel(new Integer[] {  0, 1, 2}));
@@ -95,26 +101,6 @@ public class CadastroQuarto extends JFrame{
 		comboNHospedes.setBounds(491, 705, 343, 50);
 		contentPane.add(comboNHospedes);
 
-		comboFrigobar = new JComboBox();
-		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboFrigobar.setBounds(985, 442, 343, 50);
-		contentPane.add(comboFrigobar);
-
-		comboBanheira = new JComboBox();
-		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboBanheira.setBounds(985, 580, 343, 50);
-		contentPane.add(comboBanheira);
-
-		comboLimpeza = new JComboBox();
-		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboLimpeza.setBounds(1506, 313, 343, 50);
-		contentPane.add(comboLimpeza);
-
-		comboConserto = new JComboBox();
-		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboConserto.setBounds(1506, 440, 343, 50);
-		contentPane.add(comboConserto);
-
 		txtNumQuarto = new RoundJFormattedTextField(null);
 		txtNumQuarto.setBounds(491, 313, 343, 50);
 		contentPane.add(txtNumQuarto);
@@ -124,11 +110,6 @@ public class CadastroQuarto extends JFrame{
 		txtAcessibilidade.setBounds(985, 705, 343, 50);
 		contentPane.add(txtAcessibilidade);
 		txtAcessibilidade.setColumns(10);
-
-		comboAr = new JComboBox();
-		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
-		comboAr.setBounds(984, 314, 343, 50);
-		contentPane.add(comboAr);
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -160,44 +141,45 @@ public class CadastroQuarto extends JFrame{
 								int camaSolteiro = (Integer) comboCamaSolteiro.getSelectedItem();
 								int numMaxHospedes = (Integer) comboNHospedes.getSelectedItem();
 
-								String arCondicionado = (String) comboAr.getSelectedItem();
+								Boolean arCondicionado = RadioButtonArCondicionadoSim.isSelected();
 								Boolean ar = null;
-								if (arCondicionado.isEmpty()) {
-									erro = true;
-									// ERRO
-								} else {
-									if(arCondicionado == "sim") {
+									if(arCondicionado == true) {
 										ar = true;
 									} else {
 										ar = false;
 									}
-								}
 
-								String frigobar = (String) comboFrigobar.getSelectedItem();
+								Boolean frigobar = RadioButtonFrigobarSim.isSelected();
 							    Boolean frigo = null; 	
-								if (frigobar.isEmpty()) {
-									erro = true;
-									// ERRO
-								} else {
-									if(frigobar == "sim") {
+									if(frigobar == true) {
 										frigo = true;
 									} else {
 										frigo = false;
 									}
-								}
 
-								String banheira = (String) comboBanheira.getSelectedItem();
+								Boolean banheira = RadioButtonBanheiraSim.isSelected();
 								Boolean ban = null; 
-								if (banheira.isEmpty()) {
-									erro = true;
-									// ERRO
-								} else {
-									if(banheira == "sim") {
+									if(banheira == true) {
 										ban = true;
 									} else {
 										ban = false;
 									}
-								}
+								
+								Boolean limpeza = RadioButtonLimpezaSim.isSelected();
+								Boolean lim = null; 
+									if(limpeza == true) {
+										lim = true;
+									} else {
+										lim = false;
+									}
+								
+								Boolean conserto = RadioButtonConsertoSim.isSelected();
+								Boolean con = null; 
+								if(conserto == true) {
+										con = true;
+									} else {
+										con = false;
+									}
 
 								String acessibilidade = txtAcessibilidade.getText();
 								if (acessibilidade.isEmpty()) {
@@ -476,6 +458,46 @@ public class CadastroQuarto extends JFrame{
 		lblCaminho.setIcon(new ImageIcon("src/main/resources/superior pequeno quartos.png"));
 		lblCaminho.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblCaminho);
+		
+		RadioButtonArCondicionadoSim = new JRadioButton("Sim");
+		RadioButtonArCondicionadoSim.setBounds(985, 327, 109, 23);
+		contentPane.add(RadioButtonArCondicionadoSim);
+		
+		RadioButtonArCondicionadoNao = new JRadioButton("Não");
+		RadioButtonArCondicionadoNao.setBounds(985, 353, 109, 23);
+		contentPane.add(RadioButtonArCondicionadoNao);
+		
+		RadioButtonFrigobarSim = new JRadioButton("Sim");
+		RadioButtonFrigobarSim.setBounds(985, 456, 109, 23);
+		contentPane.add(RadioButtonFrigobarSim);
+		
+		RadioButtonFrigobarNao = new JRadioButton("Não");
+		RadioButtonFrigobarNao.setBounds(985, 482, 109, 23);
+		contentPane.add(RadioButtonFrigobarNao);
+		
+		RadioButtonBanheiraSim = new JRadioButton("Sim");
+		RadioButtonBanheiraSim.setBounds(985, 593, 109, 23);
+		contentPane.add(RadioButtonBanheiraSim);
+		
+		RadioButtonBanheiraNao = new JRadioButton("Não");
+		RadioButtonBanheiraNao.setBounds(985, 619, 109, 23);
+		contentPane.add(RadioButtonBanheiraNao);
+		
+		RadioButtonLimpezaSim = new JRadioButton("Sim");
+		RadioButtonLimpezaSim.setBounds(1506, 327, 109, 23);
+		contentPane.add(RadioButtonLimpezaSim);
+		
+		RadioButtonLimpezaNao = new JRadioButton("Não");
+		RadioButtonLimpezaNao.setBounds(1506, 353, 109, 23);
+		contentPane.add(RadioButtonLimpezaNao);
+		
+		RadioButtonConsertoSim = new JRadioButton("Sim");
+		RadioButtonConsertoSim.setBounds(1506, 456, 109, 23);
+		contentPane.add(RadioButtonConsertoSim);
+		
+		RadioButtonConsertoNao = new JRadioButton("Não");
+		RadioButtonConsertoNao.setBounds(1506, 482, 109, 23);
+		contentPane.add(RadioButtonConsertoNao);
 		
 	}
 }
