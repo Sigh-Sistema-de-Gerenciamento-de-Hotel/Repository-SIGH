@@ -136,6 +136,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblNewLabel_1, "cell 0 0");
 
+		
 		JComboBox<String> comboBoxHospede2 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
 			String infos;
@@ -171,6 +172,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_2.add(lblNewLabel_2, "cell 0 0");
 
+		
 		JComboBox<String> comboBoxHospede3 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
 			String infos;
@@ -204,8 +206,9 @@ public class TelaEdicaoHospedagem extends JFrame {
 
 		JLabel lblNewLabel_3 = new JLabel("Hospedes*");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_3.add(lblNewLabel_3, "cell 0 0");
-
+		panel_3.add(lblNewLabel_3, "cell 0 0");		
+		
+		//		ArrayList<Hospede> hosp4 = hospSelecionada.getHospedes();
 		JComboBox<String> comboBoxHospede4 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
 			String infos;
@@ -232,7 +235,20 @@ public class TelaEdicaoHospedagem extends JFrame {
 		panel_3.add(comboBoxHospede4, "cell 0 1,growx");
 		panel_3.setVisible(false);
 		
-
+		int NumHosp = hospSelecionada.getNumHospedes();
+		panel_1.setVisible(false);
+		panel_2.setVisible(false);
+		panel_3.setVisible(false);
+		if(NumHosp >= 2) {
+			panel_1.setVisible(true);
+		}
+		if(NumHosp >= 3) {
+			panel_2.setVisible(true);
+		}
+		if(NumHosp == 4) {
+			panel_3.setVisible(true);
+		}
+		
 		comboBoxNumHosp = new JComboBox<Integer>();
 		comboBoxNumHosp.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -256,17 +272,27 @@ public class TelaEdicaoHospedagem extends JFrame {
 		comboBoxNumHosp.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxNumHosp.setSelectedItem(hospSelecionada.getNumHospedes());
 		comboBoxNumHosp.setBounds(502, 355, 343, 48);
+		comboBoxNumHosp.setSelectedItem(NumHosp);
 		contentPane.add(comboBoxNumHosp);
+		
+		
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
 		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcionarioLogado);
-				setVisible(false);
-				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
 				listaFuncionario.setVisible(true);
-
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
 			}
 		});
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
@@ -278,10 +304,27 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblSimboloSigh.setBounds(130, 35, 161, 182);
 		contentPane.add(lblSimboloSigh);
 
-		JLabel lblBotaoPedidos = new JLabel("");
-		lblBotaoPedidos.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
-		lblBotaoPedidos.setBounds(67, 345, 295, 38);
-		contentPane.add(lblBotaoPedidos);
+		JLabel lblBotaoQuarto = new JLabel("");
+		lblBotaoQuarto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				tlq.setVisible(true);
+				tlq.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			    dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoQuarto.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
+			}
+		});
+		lblBotaoQuarto.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
+		lblBotaoQuarto.setBounds(67, 345, 295, 38);
+		contentPane.add(lblBotaoQuarto);
 
 		JLabel lblBotaoHospedes = new JLabel("");
 		lblBotaoHospedes.setIcon(new ImageIcon("src\\main\\resources\\menu - hospede.png"));
@@ -449,6 +492,14 @@ public class TelaEdicaoHospedagem extends JFrame {
 						dadosIncorretos.setVisible(true);
 					}
 				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 			}
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
