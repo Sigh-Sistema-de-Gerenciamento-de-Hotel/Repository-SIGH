@@ -98,7 +98,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			comboBoxHospede1.addItem(infos);
 		}
 		panel.add(comboBoxHospede1, "cell 0 1,growx");
-//		panel.setVisible(false);
+
 
 
 		JPanel panel_1 = new JPanel();
@@ -141,7 +141,7 @@ public class TelaCadastroHospedagem extends JFrame {
 
 		JLabel lblNewLabel_2 = new JLabel("Hospedes*");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-//		panel_2.add(lblNewLabel_2, "cell 0 0");
+
 
 		JComboBox<String> comboBoxHospede3 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
@@ -471,6 +471,14 @@ public class TelaCadastroHospedagem extends JFrame {
 					}
 				}
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
+			}
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(512, 724, 343, 50);
@@ -495,7 +503,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			}
 		});
 		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-		lblBotaoCancelar.setBounds(948, 724, 145, 37);
+		lblBotaoCancelar.setBounds(885, 726, 145, 37);
 		contentPane.add(lblBotaoCancelar);
 
 	}

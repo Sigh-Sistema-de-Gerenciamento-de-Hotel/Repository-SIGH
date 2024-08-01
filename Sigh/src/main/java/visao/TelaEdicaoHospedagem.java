@@ -31,6 +31,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class TelaEdicaoHospedagem extends JFrame {
 
@@ -134,6 +136,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblNewLabel_1, "cell 0 0");
 
+		
 		JComboBox<String> comboBoxHospede2 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
 			String infos;
@@ -158,7 +161,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			comboBoxHospede2.addItem(infos);
 		}
 		panel_1.add(comboBoxHospede2, "cell 0 1,growx");
-//		panel_1.setVisible(false);
+		panel_1.setVisible(false);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(1500, 741, 334, 139);
@@ -169,6 +172,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_2.add(lblNewLabel_2, "cell 0 0");
 
+		
 		JComboBox<String> comboBoxHospede3 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
 			String infos;
@@ -193,7 +197,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			comboBoxHospede3.addItem(infos);
 		}
 		panel_2.add(comboBoxHospede3, "cell 0 1,growx");
-//		panel_2.setVisible(false);
+		panel_2.setVisible(false);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(1500, 934, 334, 139);
@@ -202,8 +206,9 @@ public class TelaEdicaoHospedagem extends JFrame {
 
 		JLabel lblNewLabel_3 = new JLabel("Hospedes*");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_3.add(lblNewLabel_3, "cell 0 0");
-
+		panel_3.add(lblNewLabel_3, "cell 0 0");		
+		
+		//		ArrayList<Hospede> hosp4 = hospSelecionada.getHospedes();
 		JComboBox<String> comboBoxHospede4 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
 			String infos;
@@ -228,40 +233,66 @@ public class TelaEdicaoHospedagem extends JFrame {
 			comboBoxHospede4.addItem(infos);
 		}
 		panel_3.add(comboBoxHospede4, "cell 0 1,growx");
-//		panel_3.setVisible(false);
-
+		panel_3.setVisible(false);
+		
+		int NumHosp = hospSelecionada.getNumHospedes();
+		panel_1.setVisible(false);
+		panel_2.setVisible(false);
+		panel_3.setVisible(false);
+		if(NumHosp >= 2) {
+			panel_1.setVisible(true);
+		}
+		if(NumHosp >= 3) {
+			panel_2.setVisible(true);
+		}
+		if(NumHosp == 4) {
+			panel_3.setVisible(true);
+		}
+		
 		comboBoxNumHosp = new JComboBox<Integer>();
+		comboBoxNumHosp.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				panel_1.setVisible(false);
+				panel_2.setVisible(false);
+				panel_3.setVisible(false);
+				int num = (int) comboBoxNumHosp.getSelectedItem();
+				if(num >= 2) {
+					panel_1.setVisible(true);
+				}
+				if(num >= 3) {
+					panel_2.setVisible(true);
+				}
+				if(num == 4) {
+					panel_3.setVisible(true);
+				}
+			}
+		});
 		comboBoxNumHosp.setModel(new DefaultComboBoxModel<Integer>(new Integer[] {1, 2, 3, 4}));
 		comboBoxNumHosp.setForeground(Color.BLACK);
 		comboBoxNumHosp.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxNumHosp.setSelectedItem(hospSelecionada.getNumHospedes());
 		comboBoxNumHosp.setBounds(502, 355, 343, 48);
-//		comboBoxNumHosp.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				int num = (int) comboBoxNumHosp.getSelectedItem();
-//				if(num >= 2) {
-//					panel_1.setVisible(true);
-//				}
-//				if(num >= 3) {
-//					panel_2.setVisible(true);
-//				}
-//				if(num == 4) {
-//					panel_3.setVisible(true);
-//				}
-//			}
-//		});
+		comboBoxNumHosp.setSelectedItem(NumHosp);
 		contentPane.add(comboBoxNumHosp);
+		
+		
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
 		lblBotaoFuncionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TelaListagemFuncionario listaFuncionario = new TelaListagemFuncionario(funcionarioLogado);
-				setVisible(false);
-				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
 				listaFuncionario.setVisible(true);
-
+				listaFuncionario.setExtendedState(MAXIMIZED_BOTH);
+				dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
 			}
 		});
 		lblBotaoFuncionarios.setIcon(new ImageIcon("src\\main\\resources\\menu funcionarios.png"));
@@ -273,10 +304,27 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblSimboloSigh.setBounds(130, 35, 161, 182);
 		contentPane.add(lblSimboloSigh);
 
-		JLabel lblBotaoPedidos = new JLabel("");
-		lblBotaoPedidos.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
-		lblBotaoPedidos.setBounds(67, 345, 295, 38);
-		contentPane.add(lblBotaoPedidos);
+		JLabel lblBotaoQuarto = new JLabel("");
+		lblBotaoQuarto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
+				tlq.setVisible(true);
+				tlq.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			    dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoQuarto.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
+			}
+		});
+		lblBotaoQuarto.setIcon(new ImageIcon("src\\main\\resources\\menu pedidos.png"));
+		lblBotaoQuarto.setBounds(67, 345, 295, 38);
+		contentPane.add(lblBotaoQuarto);
 
 		JLabel lblBotaoHospedes = new JLabel("");
 		lblBotaoHospedes.setIcon(new ImageIcon("src\\main\\resources\\menu - hospede.png"));
@@ -319,12 +367,12 @@ public class TelaEdicaoHospedagem extends JFrame {
 		contentPane.add(lblMenu);
 
 		JLabel lblParteSuperiorPequena = new JLabel("");
-		lblParteSuperiorPequena.setIcon(new ImageIcon("src/main/resources/Caminho Cadastrar Hospedagem.png"));
+		lblParteSuperiorPequena.setIcon(new ImageIcon("src/main/resources/caminho Editar Hospedagem.png"));
 		lblParteSuperiorPequena.setBounds(420, 0, 1500, 62);
 		contentPane.add(lblParteSuperiorPequena);
 
 		JLabel lblRetanguloBranco = new JLabel("");
-		lblRetanguloBranco.setIcon(new ImageIcon("src/main/resources/Titulo Cadastrar Hospedagem.png"));
+		lblRetanguloBranco.setIcon(new ImageIcon("src/main/resources/Titulo Editar hospedagem.png"));
 		lblRetanguloBranco.setBounds(440, 100, 1455, 119);
 		contentPane.add(lblRetanguloBranco);
 
@@ -445,22 +493,35 @@ public class TelaEdicaoHospedagem extends JFrame {
 					}
 				}
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src/main/resources/botao salvar  claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
+			}
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(512, 724, 343, 50);
 		contentPane.add(lblBotaoSalvar);
-
-
-
-
-		JLabel lblBotaoCancelar = new JLabel("");
-		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new TelaListagemHospedagem(funcionarioLogado).setVisible(true);
 				dispose();
 			}
 		});
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
+		lblNewLabel_4.setBounds(1098, 736, 161, 38);
+		contentPane.add(lblNewLabel_4);
+
+
+
+			}
+		
 	}
-}
+
 
