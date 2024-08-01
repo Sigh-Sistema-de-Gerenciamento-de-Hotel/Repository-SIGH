@@ -200,7 +200,7 @@ public class TelaEdicaoHospede extends JFrame {
 		lblDivisoriaSair.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
 		lblDivisoriaSair.setBounds(77, 897, 243, 14);
 		contentPane.add(lblDivisoriaSair);
-		
+
 		JLabel lblMenu = new JLabel("");
 		lblMenu.setBounds(0, 0, 420, 1083);
 		lblMenu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
@@ -272,7 +272,7 @@ public class TelaEdicaoHospede extends JFrame {
 		txtData.setBounds(1000, 415, 343, 48);
 		contentPane.add(txtData);
 		txtData.setColumns(18);
-		
+
 		boolean maior = false;
 		if(ChronoUnit.YEARS.between(hosEditar.getDataNascimento(), LocalDate.now()) > 18) {
 			maior = true;
@@ -281,7 +281,7 @@ public class TelaEdicaoHospede extends JFrame {
 		} else if(ChronoUnit.YEARS.between(hosEditar.getDataNascimento(), LocalDate.now()) == 18 && hosEditar.getDataNascimento().getMonthValue() == LocalDate.now().getMonthValue() && hosEditar.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
 			maior = true;
 		}
-		
+
 		if(maior == false) {
 			JLabel lblResponsavel = new JLabel("Responsável *");
 			lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -304,7 +304,7 @@ public class TelaEdicaoHospede extends JFrame {
 				docR = cpfR;
 			}
 			infosR = nomeCompletoR + " - " + docR;
-			
+
 			JComboBox<String> comboBoxResp = new JComboBox<>();
 			comboBoxResp.setBounds(1460, 415, 343, 45);
 			HospedeDAO dao = HospedeDAO.getInstancia();
@@ -312,14 +312,14 @@ public class TelaEdicaoHospede extends JFrame {
 			int index = 1;
 			for (Hospede resp : hospedesResp) {
 				String infos;
-				
+
 				String nomeCompleto;
 				if(resp.getNomeSocial() == null) {
 					nomeCompleto = resp.getNome() + " " + resp.getSobrenome();
 				} else {
 					nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome();
 				}
-				
+
 				String doc;
 				String cpf = String.valueOf(resp.getCpf());
 				if(resp.getCpf().isEmpty()) {
@@ -327,11 +327,11 @@ public class TelaEdicaoHospede extends JFrame {
 				} else {
 					doc = cpf;
 				}
-				
+
 				infos = nomeCompleto + " - " + doc;
-				
+
 				comboBoxResp.addItem(infos);
-				
+
 			}
 			comboBoxResp.setSelectedItem(infosR);
 			contentPane.add(comboBoxResp);
@@ -518,18 +518,20 @@ public class TelaEdicaoHospede extends JFrame {
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				boolean erro = false;
 				HospedeDAO dao = HospedeDAO.getInstancia();
 				EnderecoDAO daoEnd = EnderecoDAO.getInstancia();
-				
+
 				// Edição Endereco 
-				
+
 				Endereco end = hosEditar.getEndereco();
-				
+
 				String cep = txtCep.getText();
 				if (cep.isEmpty()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira o CEP");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					end.setCep(Integer.valueOf(cep));
 				}
@@ -539,6 +541,7 @@ public class TelaEdicaoHospede extends JFrame {
 					TelaErro dadosIncorretos = new TelaErro("Insira o endereço");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					end.setEndereco(rua);
 				}
@@ -548,6 +551,7 @@ public class TelaEdicaoHospede extends JFrame {
 					TelaErro dadosIncorretos = new TelaErro("Insira a cidade");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					end.setCidade(cidade);
 				}
@@ -557,6 +561,7 @@ public class TelaEdicaoHospede extends JFrame {
 					TelaErro dadosIncorretos = new TelaErro("Insira o estado");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					end.setEstado(estado);
 				}
@@ -566,6 +571,7 @@ public class TelaEdicaoHospede extends JFrame {
 					TelaErro dadosIncorretos = new TelaErro("Insira o número");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					end.setNumero(Integer.valueOf(numero));
 				}
@@ -574,25 +580,27 @@ public class TelaEdicaoHospede extends JFrame {
 				if (!complemento.isEmpty()) {
 					end.setComplemento(complemento);
 				}
-				
+
 				boolean validacaoEnd = daoEnd.atualizarEndereco(end);
-				
+
 				// Edição Hóspede
 
 				String nome = txtNome.getText();
 				if (nome.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira seu Nome!");
+					TelaErro dadosIncorretos = new TelaErro("Insira Nome!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					hosEditar.setNome(nome);
 				}
 
 				String sobrenome = txtSobrenome.getText();
 				if (sobrenome.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira sua Sobrenome!");
+					TelaErro dadosIncorretos = new TelaErro("Insira Sobrenome!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					hosEditar.setSobrenome(sobrenome);
 				}
@@ -602,9 +610,10 @@ public class TelaEdicaoHospede extends JFrame {
 
 				String telefone = txtTelefone.getText(); 
 				if (telefone.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira seu Telefone!");
+					TelaErro dadosIncorretos = new TelaErro("Insira Telefone!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					hosEditar.setTelefone(telefone);
 				}  
@@ -615,6 +624,7 @@ public class TelaEdicaoHospede extends JFrame {
 					TelaErro dadosIncorretos = new TelaErro("Insira uma Data válida!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					hosEditar.setDataNascimento(data);
 				}  
@@ -624,6 +634,7 @@ public class TelaEdicaoHospede extends JFrame {
 				TelaErro dadosIncorretos = new TelaErro("Insira seu Gênero!");
 				dadosIncorretos.setLocationRelativeTo(null);
 				dadosIncorretos.setVisible(true);
+				erro = true;
 				} else {                                                
 					hosEditar.setGenero(genero);
 				}                                                
@@ -634,11 +645,13 @@ public class TelaEdicaoHospede extends JFrame {
 					TelaErro dadosIncorretos = new TelaErro("Insira sua Nacionalidade!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
 				} else {
 					hosEditar.setNacionalidade(nacionalidade);
 				}   
 
 
+				// No caso de CPF e Passaporte a verificação vai ser diferente
 				String cpf = txtCpf.getText();
 				String passaporte = txtPassaporte.getText();
 
@@ -647,61 +660,80 @@ public class TelaEdicaoHospede extends JFrame {
 					TelaErro dadosIncorretos = new TelaErro("CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
+					erro = true;
+
 				} else {
-					if (!cpf.isEmpty()) {
-						hosEditar.setCpf(cpf);
-					}
-					if (!passaporte.isEmpty()) {
-						hosEditar.setPassaporte(passaporte);
-					} else {
+					if(!cpf.isEmpty()){
+						boolean valida = validarCPF(cpf);
 
-					if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
-
-					        if (!validarCPF(cpf)) {
-					            // Exibir mensagem de erro 
-					        	TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
-								dadosIncorretos.setLocationRelativeTo(null);
-								dadosIncorretos.setVisible(true);
-					        } else {
-					        	hosEditar.setCpf(cpf);				        }
-					    }
-					    if (!passaporte.isEmpty() && !passaporte.trim().isEmpty()) {
-					        if (!validarPassaporte(passaporte)) {
-					            // Exibir mensagem de erro
-					        	TelaErro dadosIncorretos = new TelaErro("Passaporte inválido. Por favor, insira um passaporte válido.");
-								dadosIncorretos.setLocationRelativeTo(null);
-								dadosIncorretos.setVisible(true);
-					        } else {
-					        	hosEditar.setPassaporte(passaporte);
-					        }
-					    }
+						if(valida == true) {
+							hosEditar.setCpf(cpf);
+						} else {
+							TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
+							dadosIncorretos.setLocationRelativeTo(null);
+							dadosIncorretos.setVisible(true);
+							erro = true;
+						}
 					}
+					if(!passaporte.isEmpty()) {
+						passaporte = passaporte.toUpperCase();
+						boolean valida = validarPassaporte(passaporte);
+
+						if(valida == true) {
+							hosEditar.setPassaporte(passaporte);
+						} else {
+							TelaErro dadosIncorretos = new TelaErro("Passaporte inválido");
+							dadosIncorretos.setLocationRelativeTo(null);
+							dadosIncorretos.setVisible(true);
+							erro = true;
+						}
+					}
+				}
+
 
 				String email = txtEmail.getText();
 				hosEditar.setEmail(email);
 
-
-				boolean validacao = dao.atualizarHospede(hosEditar);
-				if (validacao == true && validacaoEnd == true) {
-					TelaListagemHospede lh = new TelaListagemHospede(funcLogado);
-					lh.setVisible(true);
-					lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					TelaConfirmacaoEdicao telaConfirmacaoEd = new TelaConfirmacaoEdicao(hosEditar);
-					telaConfirmacaoEd.setVisible(true);
-					dispose();
-				} else {
-					// mensagem de ERRO
+				if(erro == false) {
+					boolean validacao = dao.atualizarHospede(hosEditar);
+					if (validacao == true && validacaoEnd == true) {
+						TelaListagemHospede lh = new TelaListagemHospede(funcLogado);
+						lh.setVisible(true);
+						lh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						TelaConfirmacaoEdicao telaConfirmacaoEd = new TelaConfirmacaoEdicao(hosEditar);
+						telaConfirmacaoEd.setVisible(true);
+						dispose();
+					} else {
+						TelaErro dadosIncorretos = new TelaErro("Erro ao editar hóspede.");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);
+					}
 				}
-			}    
-		}
+			}
 			private boolean validarPassaporte(String passaporte) {
-				// TODO Auto-generated method stub
-				return false;
+				if(passaporte.trim().isEmpty() || passaporte == null) {
+					return false;
+				} else if(passaporte.length() != 8) {
+					return false;
+				} else if(!passaporte.substring(0, 2).matches("[A-Z]*")){
+					return false;				
+				} else if(!passaporte.substring(2).matches("[0-9]+")) {
+					return false;
+				} else {
+					return true;
+				}
 			}
 
 			private boolean validarCPF(String cpf) {
-				// TODO Auto-generated method stub
-				return false;
+				if(cpf.trim().isEmpty() || cpf == null) {
+					return false;
+				} else if(!cpf.matches("[0-9]+")) {
+					return false;
+				} else if(cpf.length() != 11) {
+					return false;
+				} else {
+					return true;
+				}
 			}
 
 			@Override

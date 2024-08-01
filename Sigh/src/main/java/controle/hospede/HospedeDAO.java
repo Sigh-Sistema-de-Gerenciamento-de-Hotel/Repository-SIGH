@@ -117,7 +117,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			ps.setInt(n++, end.getId());
 			Hospede resp = hos.getResponsavel();
 
-			if(maior == true) {
+			if(maior == false) {
 				ps.setInt(n++, resp.getId());
 			}
 
@@ -320,7 +320,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			maior = true;
 		}
 
-		if(maior == true) {
+		if(maior != true) {
 			SQL = SQL + ", id_responsavel = ?";
 		}
 
@@ -363,7 +363,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			ps.setInt(n++, end.getId());
 			Hospede resp = hos.getResponsavel();
 
-			if(maior == true) {
+			if(maior != true) {
 				ps.setInt(n++, resp.getId());
 			}
 

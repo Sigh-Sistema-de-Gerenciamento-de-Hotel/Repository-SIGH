@@ -298,17 +298,22 @@ public class TelaCadastroFuncionario extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
-					if (erro == false && !id.isEmpty()) {
+					boolean valida = validarCPF(id);
+					if(valida == true) {
 						func.setId(id);
+					} else {
+						TelaErro dadosIncorretos = new TelaErro("CPF inválido");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);
+						erro = true;
 					}
-
 				}
 
 				String nome = txtNomeText.getText();
 				if (nome.isEmpty()) {
 					erro = true;
 					// ERRO
-					TelaErro dadosIncorretos = new TelaErro("Insira seu nome!");
+					TelaErro dadosIncorretos = new TelaErro("Insira nome!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
@@ -319,7 +324,7 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (sobrenome.isEmpty()) {
 					erro = true;
 					// ERRO
-					TelaErro dadosIncorretos = new TelaErro("Insira seu sobrenome!");
+					TelaErro dadosIncorretos = new TelaErro("Insira sobrenome!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
@@ -333,7 +338,7 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (cargo.isEmpty()) {
 					erro = true;
 					// ERRO
-					TelaErro dadosIncorretos = new TelaErro("Insira seu cargo!");
+					TelaErro dadosIncorretos = new TelaErro("Insira cargo!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
@@ -354,7 +359,7 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (usuario.isEmpty()) {
 					erro = true;
 					// ERRO
-					TelaErro dadosIncorretos = new TelaErro("Insira seu usuário!");
+					TelaErro dadosIncorretos = new TelaErro("Insira usuário!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
@@ -365,7 +370,7 @@ public class TelaCadastroFuncionario extends JFrame {
 				if (senhaChar == null) {
 					erro = true;
 					// ERRO
-					TelaErro dadosIncorretos = new TelaErro("Insira sua senha!");
+					TelaErro dadosIncorretos = new TelaErro("Insira senha!");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				} else {
@@ -391,6 +396,18 @@ public class TelaCadastroFuncionario extends JFrame {
 						dadosIncorretos.setLocationRelativeTo(null);
 						dadosIncorretos.setVisible(true);
 					}
+				}
+			}
+			
+			private boolean validarCPF(String cpf) {
+				if(cpf.trim().isEmpty() || cpf == null) {
+					return false;
+				} else if(!cpf.matches("[0-9]+")) {
+					return false;
+				} else if(cpf.length() != 11) {
+					return false;
+				} else {
+					return true;
 				}
 			}
 
