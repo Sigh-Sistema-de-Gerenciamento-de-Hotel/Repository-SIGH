@@ -98,7 +98,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			comboBoxHospede1.addItem(infos);
 		}
 		panel.add(comboBoxHospede1, "cell 0 1,growx");
-//		panel.setVisible(false);
+
 
 
 		JPanel panel_1 = new JPanel();
@@ -141,7 +141,7 @@ public class TelaCadastroHospedagem extends JFrame {
 
 		JLabel lblNewLabel_2 = new JLabel("Hospedes*");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-//		panel_2.add(lblNewLabel_2, "cell 0 0");
+
 
 		JComboBox<String> comboBoxHospede3 = new JComboBox<>();
 		for (Hospede resp : hospedes) {
