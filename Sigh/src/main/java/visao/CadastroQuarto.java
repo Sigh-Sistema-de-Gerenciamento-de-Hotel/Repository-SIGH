@@ -50,15 +50,15 @@ public class CadastroQuarto extends JFrame{
 	private JComboBox<Integer>comboCamaCasal;
 	private JComboBox<Integer>comboCamaSolteiro;
 	private JComboBox<Integer>comboNHospedes;
+	private JComboBox comboFrigobar;
+	private JComboBox comboBanheira;
+	private JComboBox comboLimpeza;
+	private JComboBox comboConserto;
+	private JComboBox comboAr;
 	private JTextField txtNumQuarto;
 	private JLabel menuQuartos;
 	private JTextField txtAcessibilidade;
 	Funcionario funcionarioLogado;
-	private JComboBox comboBoxArCondicionado;
-	private JComboBox comboBoxFrigobar;
-	private JComboBox comboBoxBanheira;
-	private JComboBox comboBoxLimpeza;
-	private JComboBox comboBoxConserto;
 
 	/**
 	 * Create the frame.
@@ -95,7 +95,27 @@ public class CadastroQuarto extends JFrame{
 				new DefaultComboBoxModel(new Integer[] { 0, 1, 2, 3, 4}));
 		comboNHospedes.setBounds(491, 705, 343, 50);
 		contentPane.add(comboNHospedes);
+		
+		comboFrigobar = new JComboBox();
+		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboFrigobar.setBounds(985, 442, 343, 50);
+		contentPane.add(comboFrigobar);
 
+		comboBanheira = new JComboBox();
+		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboBanheira.setBounds(985, 580, 343, 50);
+		contentPane.add(comboBanheira);
+
+		comboLimpeza = new JComboBox();
+		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboLimpeza.setBounds(1506, 313, 343, 50);
+		contentPane.add(comboLimpeza);
+
+		comboConserto = new JComboBox();
+		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboConserto.setBounds(1506, 440, 343, 50);
+		contentPane.add(comboConserto);
+		
 		txtNumQuarto = new RoundJFormattedTextField(null);
 		txtNumQuarto.setBounds(491, 313, 343, 50);
 		contentPane.add(txtNumQuarto);
@@ -106,25 +126,10 @@ public class CadastroQuarto extends JFrame{
 		contentPane.add(txtAcessibilidade);
 		txtAcessibilidade.setColumns(10);
 		
-		comboBoxArCondicionado = new JComboBox();
-		comboBoxArCondicionado.setBounds(985, 330, 343, 50);
-		contentPane.add(comboBoxArCondicionado);
-		
-		comboBoxFrigobar = new JComboBox();
-		comboBoxFrigobar.setBounds(985, 468, 343, 50);
-		contentPane.add(comboBoxFrigobar);
-		
-		comboBoxBanheira = new JComboBox();
-		comboBoxBanheira.setBounds(985, 601, 343, 50);
-		contentPane.add(comboBoxBanheira);
-		
-		comboBoxLimpeza = new JComboBox();
-		comboBoxLimpeza.setBounds(1506, 327, 343, 53);
-		contentPane.add(comboBoxLimpeza);
-		
-		comboBoxConserto = new JComboBox();
-		comboBoxConserto.setBounds(1506, 456, 343, 50);
-		contentPane.add(comboBoxConserto);
+		comboAr = new JComboBox();
+		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboAr.setBounds(984, 314, 343, 50);
+		contentPane.add(comboAr);
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -156,7 +161,7 @@ public class CadastroQuarto extends JFrame{
 								int camaSolteiro = (Integer) comboCamaSolteiro.getSelectedItem();
 								int numMaxHospedes = (Integer) comboNHospedes.getSelectedItem();
 
-								String arCondicionado = (String) comboBoxArCondicionado.getSelectedItem();
+								String arCondicionado = (String) comboAr.getSelectedItem();
 								Boolean ar = null;
 								if (arCondicionado.isEmpty()) {
 									erro = true;
@@ -169,7 +174,7 @@ public class CadastroQuarto extends JFrame{
 									}
 								}
 
-								String frigobar = (String) comboBoxFrigobar.getSelectedItem();
+								String frigobar = (String) comboFrigobar.getSelectedItem();
 							    Boolean frigo = null; 	
 								if (frigobar.isEmpty()) {
 									erro = true;
@@ -182,7 +187,7 @@ public class CadastroQuarto extends JFrame{
 									}
 								}
 
-								String banheira = (String) comboBoxBanheira.getSelectedItem();
+								String banheira = (String) comboBanheira.getSelectedItem();
 								Boolean ban = null; 
 								if (banheira.isEmpty()) {
 									erro = true;
@@ -195,7 +200,7 @@ public class CadastroQuarto extends JFrame{
 									}
 								}
 								
-								String limpeza = (String) comboBoxLimpeza.getSelectedItem();
+								String limpeza = (String) comboLimpeza.getSelectedItem();
 								Boolean lim = null; 
 								if (limpeza.isEmpty()) {
 									erro = true;
@@ -208,7 +213,7 @@ public class CadastroQuarto extends JFrame{
 									}
 								}
 								
-								String conserto = (String) comboBoxConserto.getSelectedItem();
+								String conserto = (String) comboConserto.getSelectedItem();
 								Boolean con = null; 
 								if (conserto.isEmpty()) {
 									erro = true;

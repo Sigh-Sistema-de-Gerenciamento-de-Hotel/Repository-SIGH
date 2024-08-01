@@ -43,6 +43,11 @@ public class TelaEdicaoQuarto extends JFrame {
 	private JComboBox<Integer>comboCamaCasal;
 	private JComboBox<Integer>comboCamaSolteiro;
 	private JComboBox<Integer>comboMaxDeHospedes;
+	private JComboBox comboArCondicionado;
+	private JComboBox comboFrigobar;
+	private JComboBox comboBanheira;
+	private JComboBox comboLimpeza;
+	private JComboBox comboConserto;
 	private JTextField txtAcessibilidade;
 	private JTextField txtPreco;
 	private Quarto quartoEditar;
@@ -236,28 +241,6 @@ public class TelaEdicaoQuarto extends JFrame {
 		comboMaxDeHospedes.setBounds(514, 730, 343, 50);
 		contentPane.add(comboMaxDeHospedes);
 		
-		JComboBox comboBoxArCondicionado = new JComboBox(); //colocar sim ou nao
-		/*comboBox2Departamento.setModel(new DefaultComboBoxModel(new String[] {" Camareira", " ", " Manutenção", " ", " Recepção", 
-		" ", " Limpeza"}));*/
-		comboBoxArCondicionado.setBounds(1002, 383, 334, 48);
-		contentPane.add(comboBoxArCondicionado);
-		
-		JComboBox comboBoxFrigobar = new JComboBox(); //colocar sim ou nao
-		comboBoxFrigobar.setBounds(1002, 495, 334, 50);
-		contentPane.add(comboBoxFrigobar);
-		
-		JComboBox comboBoxBanheira = new JComboBox(); //colocar sim ou nao
-		comboBoxBanheira.setBounds(1002, 612, 334, 50);
-		contentPane.add(comboBoxBanheira);
-		
-		JComboBox comboBoxLimpeza = new JComboBox(); //colocar sim ou nao
-		comboBoxLimpeza.setBounds(1472, 385, 334, 46);
-		contentPane.add(comboBoxLimpeza);
-		
-		JComboBox comboBoxConserto = new JComboBox(); //colocar sim ou nao
-		comboBoxConserto.setBounds(1472, 495, 334, 50);
-		contentPane.add(comboBoxConserto);
-		
 		JLabel lblArCondicionado = new JLabel("Ar Condicionado");
 		lblArCondicionado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblArCondicionado.setBounds(1002, 350, 136, 22);
@@ -265,6 +248,12 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		Boolean ArCondicionado = quaEditar.isArCondicionado();
 		
+		comboArCondicionado = new JComboBox();
+		comboArCondicionado.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboArCondicionado.setBounds(1002, 393, 343, 50);
+		contentPane.add(comboArCondicionado);
+		
+
 		JLabel lblFrigobar = new JLabel("Frigobar");
 		lblFrigobar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFrigobar.setBounds(1002, 454, 121, 22);
@@ -272,12 +261,22 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		Boolean Frigobar = quaEditar.isFrigobar();
 		
+		comboFrigobar = new JComboBox();
+		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboFrigobar.setBounds(1002, 493, 343, 50);
+		contentPane.add(comboFrigobar);
+		
 		JLabel lblBanheira = new JLabel("Banheira");
 		lblBanheira.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblBanheira.setBounds(1002, 571, 121, 22);
 		contentPane.add(lblBanheira);
 		
 		Boolean Banheira = quaEditar.isBanheira();
+		
+		comboBanheira = new JComboBox();
+		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboBanheira.setBounds(1002, 616, 343, 50);
+		contentPane.add(comboBanheira);
 		
 		JLabel lblAcessibilidade = new JLabel("Acessibilidade");
 		lblAcessibilidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -298,12 +297,22 @@ public class TelaEdicaoQuarto extends JFrame {
 		
 		Boolean Limpeza = quaEditar.isPrecisaLimpeza();
 		
+		comboLimpeza = new JComboBox();
+		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboLimpeza.setBounds(1472, 383, 343, 50);
+		contentPane.add(comboLimpeza);
+		
 		JLabel lblConserto = new JLabel("Conserto");
 		lblConserto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblConserto.setBounds(1472, 460, 121, 22);
 		contentPane.add(lblConserto);
 		
 		Boolean Conserto = quaEditar.isPrecisaConserto();
+		
+		comboConserto = new JComboBox();
+		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboConserto.setBounds(1472, 493, 343, 50);
+		contentPane.add(comboConserto);
 		
 		JLabel lblPreco = new JLabel("Preço");
 		lblPreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -339,7 +348,7 @@ public class TelaEdicaoQuarto extends JFrame {
 				int CamaSolteiro = (Integer) comboCamaSolteiro.getSelectedItem();
 				int MaxDeHospedes = (Integer) comboMaxDeHospedes.getSelectedItem();
 				
-				String ArCondicionado = (String) comboBoxArCondicionado.getSelectedItem();
+				String ArCondicionado = (String) comboArCondicionado.getSelectedItem();
 				if (ArCondicionado.isEmpty()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de ar condicionado");
 					dadosIncorretos.setLocationRelativeTo(null);
@@ -348,7 +357,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setArCondicionado(Boolean.valueOf(ArCondicionado));
 				}
 
-				String Frigobar = (String) comboBoxFrigobar.getSelectedItem();
+				String Frigobar = (String) comboFrigobar.getSelectedItem();
 				if (Frigobar.isEmpty()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de frigobar");
 					dadosIncorretos.setLocationRelativeTo(null);
@@ -357,7 +366,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setFrigobar(Boolean.valueOf(Frigobar));
 				}
 				
-				String Banheira = (String) comboBoxBanheira.getSelectedItem();
+				String Banheira = (String) comboBanheira.getSelectedItem();
 				if (Banheira.isEmpty()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de banheira");
 					dadosIncorretos.setLocationRelativeTo(null);
@@ -375,7 +384,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setAcessibilidade(Acessibilidade);
 				}
 				
-				String Limpeza = (String) comboBoxLimpeza.getSelectedItem();
+				String Limpeza = (String) comboLimpeza.getSelectedItem();
 				if (Limpeza.isEmpty()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de Limpeza");
 					dadosIncorretos.setLocationRelativeTo(null);
@@ -384,7 +393,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setPrecisaLimpeza(Boolean.valueOf(Limpeza));
 				}
 				
-				String Conserto = (String) comboBoxConserto.getSelectedItem();
+				String Conserto = (String) comboConserto.getSelectedItem();
 				if (Conserto.isEmpty()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de Conserto");
 					dadosIncorretos.setLocationRelativeTo(null);
