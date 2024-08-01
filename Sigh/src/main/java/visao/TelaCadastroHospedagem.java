@@ -488,7 +488,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			}
 		});
 		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-		lblBotaoCancelar.setBounds(948, 724, 145, 37);
+		lblBotaoCancelar.setBounds(885, 726, 145, 37);
 		contentPane.add(lblBotaoCancelar);
 
 	}

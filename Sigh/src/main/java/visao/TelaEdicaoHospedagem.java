@@ -319,12 +319,12 @@ public class TelaEdicaoHospedagem extends JFrame {
 		contentPane.add(lblMenu);
 
 		JLabel lblParteSuperiorPequena = new JLabel("");
-		lblParteSuperiorPequena.setIcon(new ImageIcon("src/main/resources/Caminho Cadastrar Hospedagem.png"));
+		lblParteSuperiorPequena.setIcon(new ImageIcon("src/main/resources/caminho Editar Hospedagem.png"));
 		lblParteSuperiorPequena.setBounds(420, 0, 1500, 62);
 		contentPane.add(lblParteSuperiorPequena);
 
 		JLabel lblRetanguloBranco = new JLabel("");
-		lblRetanguloBranco.setIcon(new ImageIcon("src/main/resources/Titulo Cadastrar Hospedagem.png"));
+		lblRetanguloBranco.setIcon(new ImageIcon("src/main/resources/Titulo Editar hospedagem.png"));
 		lblRetanguloBranco.setBounds(440, 100, 1455, 119);
 		contentPane.add(lblRetanguloBranco);
 
@@ -449,18 +449,23 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
 		lblBotaoSalvar.setBounds(512, 724, 343, 50);
 		contentPane.add(lblBotaoSalvar);
-
-
-
-
-		JLabel lblBotaoCancelar = new JLabel("");
-		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new TelaListagemHospedagem(funcionarioLogado).setVisible(true);
 				dispose();
 			}
 		});
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
+		lblNewLabel_4.setBounds(1098, 736, 161, 38);
+		contentPane.add(lblNewLabel_4);
+
+
+
+			}
+		
 	}
-}
+
 
