@@ -31,6 +31,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class TelaCadastroHospedagem extends JFrame {
 
@@ -96,6 +98,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			comboBoxHospede1.addItem(infos);
 		}
 		panel.add(comboBoxHospede1, "cell 0 1,growx");
+//		panel.setVisible(false);
 
 
 		JPanel panel_1 = new JPanel();
@@ -134,6 +137,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		panel_2.setBounds(1500, 741, 334, 139);
 		contentPane.add(panel_2);
 		panel_2.setLayout(new MigLayout("", "[grow]", "[][]"));
+		
 
 		JLabel lblNewLabel_2 = new JLabel("Hospedes*");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -160,7 +164,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			comboBoxHospede3.addItem(infos);
 		}
 		panel_2.add(comboBoxHospede3, "cell 0 1,growx");
-//		panel_2.setVisible(false);
+		panel_2.setVisible(false);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(1500, 934, 334, 139);
@@ -192,28 +196,31 @@ public class TelaCadastroHospedagem extends JFrame {
 			comboBoxHospede4.addItem(infos);
 		}
 		panel_3.add(comboBoxHospede4, "cell 0 1,growx");
-//		panel_3.setVisible(false);
+		panel_3.setVisible(false);
 
 		comboBoxNumHosp = new JComboBox<Integer>();
+		comboBoxNumHosp.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				panel_1.setVisible(false);
+				panel_2.setVisible(false);
+				panel_3.setVisible(false);
+				int num = (int) comboBoxNumHosp.getSelectedItem();
+				if(num >= 2) {
+					panel_1.setVisible(true);
+				}
+				if(num >= 3) {
+					panel_2.setVisible(true);
+				}
+				if(num == 4) {
+					panel_3.setVisible(true);
+				}
+			}
+		});
 		comboBoxNumHosp.setModel(new DefaultComboBoxModel<Integer>(new Integer[] {1, 2, 3, 4}));
+		comboBoxNumHosp.setSelectedItem(1);
 		comboBoxNumHosp.setForeground(Color.BLACK);
 		comboBoxNumHosp.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxNumHosp.setBounds(502, 355, 343, 48);
-//		comboBoxNumHosp.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				int num = (int) comboBoxNumHosp.getSelectedItem();
-//				if(num >= 2) {
-//					panel_1.setVisible(true);
-//				}
-//				if(num >= 3) {
-//					panel_2.setVisible(true);
-//				}
-//				if(num == 4) {
-//					panel_3.setVisible(true);
-//				}
-//			}
-//		});
 		contentPane.add(comboBoxNumHosp);
 
 		JLabel lblBotaoFuncionarios = new JLabel("");
