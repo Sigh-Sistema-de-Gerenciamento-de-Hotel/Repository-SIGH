@@ -92,7 +92,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(h.getCpf());
-			if (h.getCpf().isEmpty()) {
+			if (h.getCpf() == null || h.getCpf().isEmpty()) {
 				doc = h.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -115,7 +115,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(h.getCpf());
-			if (h.getCpf().isEmpty()) {
+			if (h.getCpf() == null || h.getCpf().isEmpty()) {
 				doc = h.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -149,7 +149,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -185,7 +185,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -221,7 +221,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 

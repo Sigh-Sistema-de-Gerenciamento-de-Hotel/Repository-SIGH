@@ -61,10 +61,6 @@ public class TelaListagemHospede extends JFrame implements TelaListagemInterface
 		lblNewLabel_1.setBounds(135, 46, 144, 176);
 		contentPane.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_2 = new JLabel("Menu");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(67, 286, 244, 20);
-		contentPane.add(lblNewLabel_2);
 
 		JLabel menuQuarto = new JLabel("");
 		menuQuarto.addMouseListener(new MouseAdapter() {
@@ -78,10 +74,12 @@ public class TelaListagemHospede extends JFrame implements TelaListagemInterface
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+				menuQuarto.setBounds(51, 346, 340, 40);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+				menuQuarto.setBounds(68, 346, 340, 40);
 			}
 		});
 		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
@@ -89,23 +87,6 @@ public class TelaListagemHospede extends JFrame implements TelaListagemInterface
 		contentPane.add(menuQuarto);
 
 		JLabel lblHospede = new JLabel("");
-		lblHospede.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
-				dispose();
-				tlh.setExtendedState(MAXIMIZED_BOTH);
-				tlh.setVisible(true);
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-			}
-		});
 		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
 		lblHospede.setBounds(51, 400, 340, 40);
 		contentPane.add(lblHospede);
