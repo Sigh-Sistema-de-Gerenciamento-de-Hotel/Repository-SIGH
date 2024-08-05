@@ -136,6 +136,11 @@ public class HospedagemDAO implements IHospedagemDAO {
 				Integer cpf = rs.getInt("cpf");
 				String passaporte = rs.getString("passaporte");
 				String telefone = rs.getString("telefone");
+				String primeiro_nome = rs.getString("primeiro_nome");
+				String sobrenome = rs.getString("sobrenome");
+				String nome_social = rs.getString("nome_social");
+				String email = rs.getString("email");
+
 
 				hospede.setId(id_hospede);
 				hospede.setGenero(genero);
@@ -144,6 +149,10 @@ public class HospedagemDAO implements IHospedagemDAO {
 				hospede.setCpf(cpf);
 				hospede.setPassaporte(passaporte);
 				hospede.setTelefone(telefone);
+				hospede.setNome(primeiro_nome);
+				hospede.setNomeSocial(nome_social);
+				hospede.setSobrenome(sobrenome);
+				hospede.setEmail(email);
 
 				// Quarto
 				Quarto quarto = new Quarto();

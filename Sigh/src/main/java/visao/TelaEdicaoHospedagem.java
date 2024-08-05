@@ -235,7 +235,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 		panel_3.add(comboBoxHospede4, "cell 0 1,growx");
 		panel_3.setVisible(false);
 		
-		int NumHosp = hospSelecionada.getNumHospedes();
+		int NumHosp = hospSelecionada.getTotalHospedes();
 		panel_1.setVisible(false);
 		panel_2.setVisible(false);
 		panel_3.setVisible(false);
