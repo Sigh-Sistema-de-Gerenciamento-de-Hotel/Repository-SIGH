@@ -419,7 +419,7 @@ public class TelaEdicaoFuncionario extends JFrame {
 		contentPane.add(lblFundoCinza);
 
 		JLabel lblCaminho = new JLabel("");
-		lblCaminho.setIcon(new ImageIcon("src/main/resources/CaminhoEditarFuncionario.png"));
+		lblCaminho.setIcon(new ImageIcon("src/main/resources/Caminho Editar funcionário.png"));
 		lblCaminho.setBounds(420, 0, 1500, 62);
 		contentPane.add(lblCaminho);
 

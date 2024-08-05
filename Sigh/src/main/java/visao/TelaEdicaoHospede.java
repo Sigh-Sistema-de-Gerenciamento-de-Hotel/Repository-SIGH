@@ -207,7 +207,7 @@ public class TelaEdicaoHospede extends JFrame {
 		contentPane.add(lblMenu);
 
 		JLabel lblCaminho = new JLabel("");
-		lblCaminho.setIcon(new ImageIcon("src/main/resources/Frame 675.png"));
+		lblCaminho.setIcon(new ImageIcon("src/main/resources/Caminho Editar Hospede.png"));
 		lblCaminho.setBounds(420, 0, 1500, 62);
 		contentPane.add(lblCaminho);
 
@@ -511,7 +511,7 @@ public class TelaEdicaoHospede extends JFrame {
 
 
 		JLabel lblTitulo2 = new JLabel("");
-		lblTitulo2.setIcon(new ImageIcon("src/main/resources/TituloCadastrarHospede.png"));
+		lblTitulo2.setIcon(new ImageIcon("src/main/resources/TituloEditarHospedes.png"));
 		lblTitulo2.setBounds(446, 108, 1455, 119);
 		contentPane.add(lblTitulo2);
 

@@ -218,6 +218,11 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 		lblNewLabel_9.setIcon(new ImageIcon("src/main/resources/TituloListagemFuncionario.png"));
 		lblNewLabel_9.setBounds(444, 115, 1455, 126);
 		contentPane.add(lblNewLabel_9);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("src/main/resources/caminho listagem funcionário.png"));
+		lblNewLabel.setBounds(420, 0, 1500, 60);
+		contentPane.add(lblNewLabel);
 	}
 
 	public void atualizarJTableModel() {

@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Toolkit;
+import javax.swing.JRadioButton;
 
 public class CadastroQuarto extends JFrame{
 
@@ -53,8 +54,8 @@ public class CadastroQuarto extends JFrame{
 	private JComboBox comboBanheira;
 	private JComboBox comboLimpeza;
 	private JComboBox comboConserto;
-	private JTextField txtNumQuarto;
 	private JComboBox comboAr;
+	private JTextField txtNumQuarto;
 	private JLabel menuQuartos;
 	private JTextField txtAcessibilidade;
 	Funcionario funcionarioLogado;
@@ -82,7 +83,7 @@ public class CadastroQuarto extends JFrame{
 				new DefaultComboBoxModel(new Integer[] {  0, 1, 2 }));
 		comboCamaCasal.setBounds(491, 442, 343, 50);
 		contentPane.add(comboCamaCasal);
-
+		
 		comboCamaSolteiro = new JComboBox<Integer>();
 		comboCamaSolteiro.setModel(
 				new DefaultComboBoxModel(new Integer[] {  0, 1, 2}));
@@ -94,7 +95,7 @@ public class CadastroQuarto extends JFrame{
 				new DefaultComboBoxModel(new Integer[] { 0, 1, 2, 3, 4}));
 		comboNHospedes.setBounds(491, 705, 343, 50);
 		contentPane.add(comboNHospedes);
-
+		
 		comboFrigobar = new JComboBox();
 		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
 		comboFrigobar.setBounds(985, 442, 343, 50);
@@ -114,7 +115,7 @@ public class CadastroQuarto extends JFrame{
 		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
 		comboConserto.setBounds(1506, 440, 343, 50);
 		contentPane.add(comboConserto);
-
+		
 		txtNumQuarto = new RoundJFormattedTextField(null);
 		txtNumQuarto.setBounds(491, 313, 343, 50);
 		contentPane.add(txtNumQuarto);
@@ -124,7 +125,7 @@ public class CadastroQuarto extends JFrame{
 		txtAcessibilidade.setBounds(985, 705, 343, 50);
 		contentPane.add(txtAcessibilidade);
 		txtAcessibilidade.setColumns(10);
-
+		
 		comboAr = new JComboBox();
 		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
 		comboAr.setBounds(984, 314, 343, 50);
@@ -166,7 +167,7 @@ public class CadastroQuarto extends JFrame{
 									erro = true;
 									// ERRO
 								} else {
-									if(arCondicionado == "sim") {
+									if(arCondicionado == "Sim") {
 										ar = true;
 									} else {
 										ar = false;
@@ -179,7 +180,7 @@ public class CadastroQuarto extends JFrame{
 									erro = true;
 									// ERRO
 								} else {
-									if(frigobar == "sim") {
+									if(frigobar == "Sim") {
 										frigo = true;
 									} else {
 										frigo = false;
@@ -192,10 +193,36 @@ public class CadastroQuarto extends JFrame{
 									erro = true;
 									// ERRO
 								} else {
-									if(banheira == "sim") {
+									if(banheira == "Sim") {
 										ban = true;
 									} else {
 										ban = false;
+									}
+								}
+								
+								String limpeza = (String) comboLimpeza.getSelectedItem();
+								Boolean lim = null; 
+								if (limpeza.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									if(limpeza == "Sim") {
+										lim = true;
+									} else {
+										lim = false;
+									}
+								}
+								
+								String conserto = (String) comboConserto.getSelectedItem();
+								Boolean con = null; 
+								if (conserto.isEmpty()) {
+									erro = true;
+									// ERRO
+								} else {
+									if(conserto == "Sim") {
+										con = true;
+									} else {
+										con = false;
 									}
 								}
 
@@ -476,6 +503,8 @@ public class CadastroQuarto extends JFrame{
 		lblCaminho.setIcon(new ImageIcon("src/main/resources/superior pequeno quartos.png"));
 		lblCaminho.setBounds(408, 0, 1512, 62);
 		contentPane.add(lblCaminho);
+		
+	
 		
 	}
 }

@@ -59,6 +59,7 @@ public class TelaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+				
 				passwordField = new JPasswordField();
 				passwordField.setBounds(682, 616, 547, 64);
 				contentPane.add(passwordField);

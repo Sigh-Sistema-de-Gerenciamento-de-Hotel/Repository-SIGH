@@ -20,6 +20,7 @@ import visao.padrao.RoundJFormattedTextField;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -31,6 +32,7 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import javax.swing.JRadioButton;
 
 public class TelaEdicaoQuarto extends JFrame {
 
@@ -44,9 +46,9 @@ public class TelaEdicaoQuarto extends JFrame {
 	private JComboBox comboArCondicionado;
 	private JComboBox comboFrigobar;
 	private JComboBox comboBanheira;
-	private JTextField txtAcessibilidade;
 	private JComboBox comboLimpeza;
 	private JComboBox comboConserto;
+	private JTextField txtAcessibilidade;
 	private JTextField txtPreco;
 	private Quarto quartoEditar;
 	private static Funcionario funcionarioLogado;
@@ -245,12 +247,13 @@ public class TelaEdicaoQuarto extends JFrame {
 		contentPane.add(lblArCondicionado);
 		
 		Boolean ArCondicionado = quaEditar.isArCondicionado();
-				
+		
 		comboArCondicionado = new JComboBox();
 		comboArCondicionado.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
 		comboArCondicionado.setBounds(1002, 393, 343, 50);
 		contentPane.add(comboArCondicionado);
 		
+
 		JLabel lblFrigobar = new JLabel("Frigobar");
 		lblFrigobar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFrigobar.setBounds(1002, 454, 121, 22);
@@ -322,12 +325,15 @@ public class TelaEdicaoQuarto extends JFrame {
 		txtPreco.setBounds(1472, 598, 334, 48);
 		contentPane.add(txtPreco);
 		txtPreco.setColumns(10);
+	
 		
 		JLabel lblBotaoSalvar = new JLabel("");
 		lblBotaoSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				QuartoDAO dao = QuartoDAO.getInstacia();
+			
 				
 				String NumeroDoQuarto = txtNumQuarto.getText();
 				if (NumeroDoQuarto.isEmpty()) {
@@ -338,33 +344,10 @@ public class TelaEdicaoQuarto extends JFrame {
 					quartoEditar.setNumero(Integer.valueOf(NumeroDoQuarto));
 				}
 
-				String CamaCasal = (String) comboCamaCasal.getSelectedItem();
-				if(CamaCasal.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira a quantidade de camas para Casal");
-					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
-				} else {
-					quartoEditar.setNumCamaCasal(Integer.valueOf(CamaCasal));
-				}
+				int CamaCasal = (Integer) comboCamaCasal.getSelectedItem();
+				int CamaSolteiro = (Integer) comboCamaSolteiro.getSelectedItem();
+				int MaxDeHospedes = (Integer) comboMaxDeHospedes.getSelectedItem();
 				
-				String CamaSolteiro = (String) comboCamaSolteiro.getSelectedItem();
-				if (CamaSolteiro.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira a quantidade de camas para Solteiro");
-					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
-				} else {
-					quartoEditar.setNumCamaSolteiro(Integer.valueOf(CamaSolteiro));
-				}
-
-				String MaxDeHospedes = (String) comboMaxDeHospedes.getSelectedItem();
-				if (MaxDeHospedes.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("Insira o Máximo de Hóspedes");
-					dadosIncorretos.setLocationRelativeTo(null);
-					dadosIncorretos.setVisible(true);
-				} else {
-					quartoEditar.setNumMaxHospedes(Integer.valueOf(MaxDeHospedes));
-				}
-
 				String ArCondicionado = (String) comboArCondicionado.getSelectedItem();
 				if (ArCondicionado.isEmpty()) {
 					TelaErro dadosIncorretos = new TelaErro("Insira se precisa de ar condicionado");
