@@ -67,7 +67,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JPanel panel = new JPanel();
-		panel.setBounds(1500, 355, 334, 139);
+		panel.setBounds(502, 486, 343, 74);
 		contentPane.add(panel);
 		panel.setLayout(new MigLayout("", "[grow]", "[][]"));
 
@@ -102,7 +102,7 @@ public class TelaCadastroHospedagem extends JFrame {
 
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(1500, 548, 334, 139);
+		panel_1.setBounds(1010, 486, 334, 80);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new MigLayout("", "[grow]", "[][]"));
 
@@ -134,7 +134,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		panel_1.setVisible(false);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(1500, 741, 334, 139);
+		panel_2.setBounds(502, 623, 334, 95);
 		contentPane.add(panel_2);
 		panel_2.setLayout(new MigLayout("", "[grow]", "[][]"));
 		
@@ -167,7 +167,7 @@ public class TelaCadastroHospedagem extends JFrame {
 		panel_2.setVisible(false);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1500, 934, 334, 139);
+		panel_3.setBounds(1010, 623, 334, 95);
 		contentPane.add(panel_3);
 		panel_3.setLayout(new MigLayout("", "[grow]", "[][]"));
 
@@ -365,12 +365,12 @@ public class TelaCadastroHospedagem extends JFrame {
 
 		JLabel lblDataCheckin = new JLabel("Data check-in *");
 		lblDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataCheckin.setBounds(502, 510, 145, 40);
+		lblDataCheckin.setBounds(515, 779, 145, 40);
 		contentPane.add(lblDataCheckin);
 
 		txtDataCheckin = new DateTextField();
 		txtDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDataCheckin.setBounds(502, 548, 343, 48);
+		txtDataCheckin.setBounds(515, 814, 343, 48);
 		contentPane.add(txtDataCheckin);
 		txtDataCheckin.setColumns(10);
 
@@ -381,12 +381,12 @@ public class TelaCadastroHospedagem extends JFrame {
 
 		JLabel lblDataCheckout = new JLabel("Data check-out");
 		lblDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataCheckout.setBounds(1010, 510, 145, 40);
+		lblDataCheckout.setBounds(1010, 779, 145, 40);
 		contentPane.add(lblDataCheckout);
 
 		txtDataCheckout = new DateTextField();
 		txtDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDataCheckout.setBounds(1010, 548, 343, 48);
+		txtDataCheckout.setBounds(1010, 814, 343, 48);
 		contentPane.add(txtDataCheckout);
 		txtDataCheckout.setColumns(10);
 
@@ -481,7 +481,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			}
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
-		lblBotaoSalvar.setBounds(512, 724, 343, 50);
+		lblBotaoSalvar.setBounds(1300, 915, 300, 60);
 		contentPane.add(lblBotaoSalvar);
 		
 		JLabel lblBotaoCancelar = new JLabel("");
@@ -503,7 +503,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			}
 		});
 		lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
-		lblBotaoCancelar.setBounds(885, 726, 145, 37);
+		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
 		contentPane.add(lblBotaoCancelar);
 
 	}
