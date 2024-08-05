@@ -17,6 +17,8 @@ import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
 import modelo.Setor;
 import visao.padrao.RoundJFormattedTextField;
+import visao.padrao.RoundJPasswordField;
+
 import javax.swing.JPasswordField;
 
 public class TelaCadastroFuncionario extends JFrame {
@@ -30,7 +32,7 @@ public class TelaCadastroFuncionario extends JFrame {
 	private JTextField txtSobrenomeText;
 	private JComboBox<Setor> txtSetorText;
 	private JTextField txtUsuarioText;
-	private JPasswordField passwordField;
+	private RoundJPasswordField passwordField;
 	private Funcionario funcionarioLogado;
 
 	/**
@@ -278,7 +280,7 @@ public class TelaCadastroFuncionario extends JFrame {
 		contentPane.add(txtUsuarioText);
 		txtUsuarioText.setColumns(10);
 
-		passwordField = new JPasswordField();
+		passwordField = new RoundJPasswordField();
 		passwordField.setBounds(1245, 660, 343, 48);
 		contentPane.add(passwordField);
 
