@@ -281,6 +281,11 @@ public class TelaEdicaoHospede extends JFrame {
 		} else if(ChronoUnit.YEARS.between(hosEditar.getDataNascimento(), LocalDate.now()) == 18 && hosEditar.getDataNascimento().getMonthValue() == LocalDate.now().getMonthValue() && hosEditar.getDataNascimento().getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
 			maior = true;
 		}
+		
+		JComboBox<String> comboBoxResp = new JComboBox<>();
+		comboBoxResp.setBounds(1460, 415, 343, 45);
+		HospedeDAO dao = HospedeDAO.getInstancia();
+		ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
 
 		if(maior == false) {
 			JLabel lblResponsavel = new JLabel("Responsável *");
@@ -298,18 +303,14 @@ public class TelaEdicaoHospede extends JFrame {
 			}
 			String docR;
 			String cpfR = String.valueOf(r.getCpf());
-			if(r.getCpf().isEmpty()) {
+			if(r.getCpf() == null || r.getCpf().isEmpty()) {
 				docR = r.getPassaporte();
 			} else {
 				docR = cpfR;
 			}
 			infosR = nomeCompletoR + " - " + docR;
 
-			JComboBox<String> comboBoxResp = new JComboBox<>();
-			comboBoxResp.setBounds(1460, 415, 343, 45);
-			HospedeDAO dao = HospedeDAO.getInstancia();
-			ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
-			int index = 1;
+			
 			for (Hospede resp : hospedesResp) {
 				String infos;
 
@@ -322,7 +323,7 @@ public class TelaEdicaoHospede extends JFrame {
 
 				String doc;
 				String cpf = String.valueOf(resp.getCpf());
-				if(resp.getCpf().isEmpty()) {
+				if(resp.getCpf() == null || resp.getCpf().isEmpty()) {
 					doc = resp.getPassaporte();
 				} else {
 					doc = cpf;
@@ -628,6 +629,11 @@ public class TelaEdicaoHospede extends JFrame {
 				} else {
 					hosEditar.setDataNascimento(data);
 				}  
+				
+					int indexResp = comboBoxResp.getSelectedIndex();
+					Hospede resp = hospedesResp.get(indexResp);
+					hosEditar.setResponsavel(resp);
+		
 
 				String genero = (String) comboBoxGenero.getSelectedItem();
 				if (genero.isEmpty()) {;

@@ -309,7 +309,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			SQL = SQL + ", passaporte = ?";
 		}
 
-		SQL = SQL + "email = ?, telefone = ?,  id_endereco = ?";
+		SQL = SQL + ", email = ?, telefone = ?,  id_endereco = ?";
 
 		boolean maior = false;
 		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) > 18) {
@@ -361,9 +361,9 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			ps.setString(n++, hos.getTelefone());
 			Endereco end = hos.getEndereco();
 			ps.setInt(n++, end.getId());
-			Hospede resp = hos.getResponsavel();
 
 			if(maior != true) {
+				Hospede resp = hos.getResponsavel();
 				ps.setInt(n++, resp.getId());
 			}
 
@@ -411,7 +411,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 	public ArrayList<Hospede> listarHospedeResp() {
 		ArrayList<Hospede> hospede = new ArrayList<Hospede>();
 
-		String SQL = "SELECT * FROM hospedes WHERE data_nascimento >= ?";
+		String SQL = "SELECT * FROM hospedes WHERE data_nascimento <= ?";
 
 		Conexao con = Conexao.getInstancia();
 		Connection ConBD = con.conectar();
