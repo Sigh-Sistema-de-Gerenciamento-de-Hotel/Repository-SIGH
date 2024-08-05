@@ -365,12 +365,12 @@ public class TelaCadastroHospedagem extends JFrame {
 
 		JLabel lblDataCheckin = new JLabel("Data check-in *");
 		lblDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataCheckin.setBounds(515, 779, 145, 40);
+		lblDataCheckin.setBounds(502, 745, 145, 40);
 		contentPane.add(lblDataCheckin);
 
 		txtDataCheckin = new DateTextField();
 		txtDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDataCheckin.setBounds(515, 814, 343, 48);
+		txtDataCheckin.setBounds(502, 776, 343, 48);
 		contentPane.add(txtDataCheckin);
 		txtDataCheckin.setColumns(10);
 
@@ -381,12 +381,12 @@ public class TelaCadastroHospedagem extends JFrame {
 
 		JLabel lblDataCheckout = new JLabel("Data check-out");
 		lblDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataCheckout.setBounds(1010, 779, 145, 40);
+		lblDataCheckout.setBounds(1010, 745, 145, 40);
 		contentPane.add(lblDataCheckout);
 
 		txtDataCheckout = new DateTextField();
 		txtDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDataCheckout.setBounds(1010, 814, 343, 48);
+		txtDataCheckout.setBounds(1010, 776, 343, 48);
 		contentPane.add(txtDataCheckout);
 		txtDataCheckout.setColumns(10);
 

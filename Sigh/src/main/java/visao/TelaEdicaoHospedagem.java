@@ -384,14 +384,14 @@ public class TelaEdicaoHospedagem extends JFrame {
 
 		JLabel lblDataCheckin = new JLabel("Data check-in *");
 		lblDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataCheckin.setBounds(502, 779, 145, 40);
+		lblDataCheckin.setBounds(502, 740, 145, 40);
 		contentPane.add(lblDataCheckin);
 
 		LocalDate dataIn = hospSelecionada.getDataEntrada();
 		String dataCheckIn = dateTf.formatarData(dataIn);
 		txtDataCheckin = new DateTextField();
 		txtDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDataCheckin.setBounds(502, 779, 145, 40);
+		txtDataCheckin.setBounds(502, 776, 343, 48);
 		txtDataCheckin.setText(dataCheckIn);
 		contentPane.add(txtDataCheckin);
 		txtDataCheckin.setColumns(10);
@@ -401,16 +401,16 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblQuartos.setBounds(1010, 315, 145, 40);
 		contentPane.add(lblQuartos);
 
-		JLabel lblDataCheckout = new JLabel("Data check-out");
+		JLabel lblDataCheckout = new JLabel("Data check-out*");
 		lblDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataCheckout.setBounds(1010, 779, 145, 40);
+		lblDataCheckout.setBounds(1010, 740, 145, 40);
 		contentPane.add(lblDataCheckout);
 
 		LocalDate dataOut = hospSelecionada.getDataEntrada();
 		String dataCheckOut = dateTf.formatarData(dataOut);
 		txtDataCheckout = new DateTextField();
 		txtDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDataCheckout.setBounds(1010, 814, 343, 48);
+		txtDataCheckout.setBounds(1010, 776, 343, 48);
 		txtDataCheckout.setText(dataCheckOut);
 		contentPane.add(txtDataCheckout);
 		txtDataCheckout.setColumns(10);
