@@ -46,7 +46,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 		SQL = SQL + ", genero, data_nascimento, nacionalidade";
 		n += 3;
 
-		if(hos.getCpf() >= 0) {
+		if(hos.getCpf() != null) {
 			SQL = SQL + ", cpf";
 			n ++;
 		}
@@ -103,8 +103,8 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			ps.setString(n++, String.valueOf(hos.getDataNascimento()));
 			ps.setString(n++, hos.getNacionalidade());
 
-			if(hos.getCpf() >= 0) {
-				ps.setInt(n++, hos.getCpf());
+			if(hos.getCpf() != null) {
+				ps.setString(n++, hos.getCpf());
 			}
 
 			if(hos.getPassaporte() != null) {
@@ -117,7 +117,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			ps.setInt(n++, end.getId());
 			Hospede resp = hos.getResponsavel();
 
-			if(maior == true) {
+			if(maior == false) {
 				ps.setInt(n++, resp.getId());
 			}
 
@@ -164,7 +164,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				String genero = rs.getString("genero");
 				Date dataNascimento = rs.getDate("data_nascimento");
 				String nacionalidade = rs.getString("nacionalidade");
-				Integer cpf = rs.getInt("cpf");
+				String cpf = rs.getString("cpf");
 				String passaporte = rs.getString("passaporte");
 				String telefone = rs.getString("telefone");
 				String email = rs.getString("email");
@@ -206,7 +206,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 						String generoR = rsResp.getString("genero");
 						Date dataNascimentoR = rsResp.getDate("data_nascimento");
 						String nacionalidadeR = rsResp.getString("nacionalidade");
-						Integer cpfR = rsResp.getInt("cpf");
+						String cpfR = rsResp.getString("cpf");
 						String passaporteR = rsResp.getString("passaporte");
 						String telefoneR = rsResp.getString("telefone");
 
@@ -301,7 +301,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 
 		SQL = SQL + ", genero = ?, data_nascimento = ?,  nacionalidade = ?";
 
-		if(hos.getCpf() >= 0) {
+		if(hos.getCpf() != null) {
 			SQL = SQL + ", cpf = ?";
 		}
 
@@ -309,7 +309,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			SQL = SQL + ", passaporte = ?";
 		}
 
-		SQL = SQL + "email = ?, telefone = ?,  id_endereco = ?";
+		SQL = SQL + ", email = ?, telefone = ?,  id_endereco = ?";
 
 		boolean maior = false;
 		if(ChronoUnit.YEARS.between(hos.getDataNascimento(), LocalDate.now()) > 18) {
@@ -320,7 +320,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			maior = true;
 		}
 
-		if(maior == true) {
+		if(maior != true) {
 			SQL = SQL + ", id_responsavel = ?";
 		}
 
@@ -349,8 +349,8 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			ps.setDate(n++, Date.valueOf(hos.getDataNascimento()));
 			ps.setString(n++, hos.getNacionalidade());
 
-			if(hos.getCpf() >= 0) {
-				ps.setInt(n++, hos.getCpf());
+			if(hos.getCpf() != null) {
+				ps.setString(n++, hos.getCpf());
 			}
 
 			if(hos.getPassaporte() != null) {
@@ -361,9 +361,9 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 			ps.setString(n++, hos.getTelefone());
 			Endereco end = hos.getEndereco();
 			ps.setInt(n++, end.getId());
-			Hospede resp = hos.getResponsavel();
 
-			if(maior == true) {
+			if(maior != true) {
+				Hospede resp = hos.getResponsavel();
 				ps.setInt(n++, resp.getId());
 			}
 
@@ -411,7 +411,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 	public ArrayList<Hospede> listarHospedeResp() {
 		ArrayList<Hospede> hospede = new ArrayList<Hospede>();
 
-		String SQL = "SELECT * FROM hospedes WHERE data_nascimento >= ?";
+		String SQL = "SELECT * FROM hospedes WHERE data_nascimento <= ?";
 
 		Conexao con = Conexao.getInstancia();
 		Connection ConBD = con.conectar();
@@ -440,7 +440,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				String genero = rs.getString("genero");
 				Date dataNascimento = rs.getDate("data_nascimento");
 				String nacionalidade = rs.getString("nacionalidade");
-				Integer cpf = rs.getInt("cpf");
+				String cpf = rs.getString("cpf");
 				String passaporte = rs.getString("passaporte");
 				String telefone = rs.getString("telefone");
 				String email = rs.getString("email");

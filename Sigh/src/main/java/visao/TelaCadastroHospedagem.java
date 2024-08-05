@@ -89,7 +89,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(h.getCpf());
-			if (h.getCpf() == 0) {
+			if (h.getCpf().isEmpty()) {
 				doc = h.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -122,7 +122,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf() == 0) {
+			if (resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -155,7 +155,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf() == 0) {
+			if (resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -187,7 +187,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf() == 0) {
+			if (resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 

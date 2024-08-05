@@ -236,52 +236,52 @@ public class TelaCadastroHospede extends JFrame {
 		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblGenero.setBounds(554, 390, 100, 20);
 		contentPane.add(lblGenero);
-		
+
 		JComboBox<String> comboBoxGenero = new JComboBox<>();
 		comboBoxGenero.setBounds(554, 415, 343, 48);
 		comboBoxGenero.addItem("Feminino");
 		comboBoxGenero.addItem("Masculino");
 		comboBoxGenero.addItem("Prefiro não dizer");
 		contentPane.add(comboBoxGenero);
-		
+
 		JPanel panelResp = new JPanel();
 		panelResp.setBounds(1446, 379, 374, 88);
 		panelResp.setLayout(null);
-		
-				JComboBox<String> comboBoxResp = new JComboBox<>();
-				comboBoxResp.setBounds(21, 36, 343, 45);
-				panelResp.add(comboBoxResp);
-				
-						JLabel lblResponsavel = new JLabel("Responsável *");
-						lblResponsavel.setBounds(21, 11, 200, 20);
-						panelResp.add(lblResponsavel);
-						lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+
+		JComboBox<String> comboBoxResp = new JComboBox<>();
+		comboBoxResp.setBounds(21, 36, 343, 45);
+		panelResp.add(comboBoxResp);
+
+		JLabel lblResponsavel = new JLabel("Responsável *");
+		lblResponsavel.setBounds(21, 11, 200, 20);
+		panelResp.add(lblResponsavel);
+		lblResponsavel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 
 		HospedeDAO dao = HospedeDAO.getInstancia();
 		ArrayList<Hospede> hospedesResp = dao.listarHospedeResp();
 		for (Hospede resp : hospedesResp) {
 			String infos;
-			
+
 			String nomeCompleto;
 			if(resp.getNomeSocial() == null) {
 				nomeCompleto = resp.getNome() + " " + resp.getSobrenome();
 			} else {
 				nomeCompleto = resp.getNomeSocial() + " " + resp.getSobrenome();
 			}
-			
+
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if(resp.getCpf() == 0) {
+			if(resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf;
 			}
-			
+
 			infos = nomeCompleto + " - " + doc;
-			
+
 			comboBoxResp.addItem(infos);
-			
+
 		}
 
 		JLabel lblData = new JLabel("Data de Nascimento *");
@@ -296,7 +296,7 @@ public class TelaCadastroHospede extends JFrame {
 				DateTextField dtf = new DateTextField();
 				LocalDate data = dtf.stringParaData(txtData.getText());
 				boolean maior = false;
-				
+
 				if(ChronoUnit.YEARS.between(data, LocalDate.now()) > 18) {
 					maior = true;
 				} else if(ChronoUnit.YEARS.between(data, LocalDate.now()) == 18 && data.getMonthValue() < LocalDate.now().getMonthValue()) {
@@ -304,7 +304,7 @@ public class TelaCadastroHospede extends JFrame {
 				} else if(ChronoUnit.YEARS.between(data, LocalDate.now()) == 18 && data.getMonthValue() == LocalDate.now().getMonthValue() && data.getDayOfMonth() <= LocalDate.now().getDayOfMonth()) {
 					maior = true;
 				}
-				
+
 				if(maior != true) {
 					contentPane.add(panelResp);
 				}
@@ -314,7 +314,7 @@ public class TelaCadastroHospede extends JFrame {
 		txtData.setBounds(1000, 415, 343, 48);
 		contentPane.add(txtData);
 		txtData.setColumns(18);
-		
+
 
 		JLabel lblNacionalidade = new JLabel("Nacionalidade *");
 		lblNacionalidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -331,7 +331,7 @@ public class TelaCadastroHospede extends JFrame {
 		}
 		comboBoxPaises.setBounds(554, 515, 343, 48);
 		contentPane.add(comboBoxPaises);
-		
+
 		JLabel lblCpf = new JLabel("CPF ");
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCpf.setBounds(1000, 480, 100, 20);
@@ -469,7 +469,7 @@ public class TelaCadastroHospede extends JFrame {
 		txtEmail.setBounds(1000, 815, 343, 48);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(15);
-		
+
 		JLabel lblCaminho2 = new JLabel("");
 		lblCaminho2.setIcon(new ImageIcon("src\\main\\resources\\CaminhoCadastrarHospede.png"));
 		lblCaminho2.setBounds(408, 0, 1512, 62);
@@ -584,7 +584,7 @@ public class TelaCadastroHospede extends JFrame {
 				String nomeSocial = txtNomeSocial.getText();
 				hos.setNomeSocial(nomeSocial);
 
-			
+
 				String telefone = txtTelefone.getText();
 				if (telefone.isEmpty()) {
 					erro = true;
@@ -594,7 +594,7 @@ public class TelaCadastroHospede extends JFrame {
 				} else {
 					hos.setTelefone(telefone);
 				}
-				
+
 				int indexResp = comboBoxResp.getSelectedIndex();
 				Hospede resp = hospedesResp.get(indexResp);
 				hos.setResponsavel(resp);
@@ -641,50 +641,36 @@ public class TelaCadastroHospede extends JFrame {
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 
-					//JOptionPane.showMessageDialog(null, "CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
 				} else {
-					if (!cpf.isEmpty()) {
-						hos.setCpf(Integer.valueOf(cpf));
+					if(!cpf.isEmpty()){
+						boolean valida = validarCPF(cpf);
+
+						if(valida == true) {
+							hos.setCpf(cpf);
+						} else {
+							TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
+							dadosIncorretos.setLocationRelativeTo(null);
+							dadosIncorretos.setVisible(true);
+							erro = true;
+						}
 					}
-					if (!passaporte.isEmpty()) {
-						hos.setPassaporte(passaporte);
-					} else {
-				    if (!cpf.isEmpty() && !cpf.trim().isEmpty()) {
+					if(!passaporte.isEmpty()) {
+						passaporte = passaporte.toUpperCase();
+						boolean valida = validarPassaporte(passaporte);
 
-				        if (!validarCPF(cpf)) {
-				            // Exibir mensagem de erro 
-				        	TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
+						if(valida == true) {
+							hos.setPassaporte(passaporte);
+						} else {
+							TelaErro dadosIncorretos = new TelaErro("Passaporte inválido. Por favor, insira um passaporte válido.");
 							dadosIncorretos.setLocationRelativeTo(null);
 							dadosIncorretos.setVisible(true);
-
-				            //JOptionPane.showMessageDialog(null, "CPF inválido. Por favor, insira um CPF válido.");
-				        } else {
-				        	hos.setCpf(Integer.valueOf(cpf));				        }
-				    }
-				    if (!passaporte.isEmpty() && !passaporte.trim().isEmpty()) {
-				        if (!validarPassaporte(passaporte)) {
-				            // Exibir mensagem de erro
-				        	TelaErro dadosIncorretos = new TelaErro("Passaporte inválido. Por favor, insira um passaporte válido.");
-							dadosIncorretos.setLocationRelativeTo(null);
-							dadosIncorretos.setVisible(true);
-
-				           //JOptionPane.showMessageDialog(null, "Passaporte inválido. Por favor, insira um passaporte válido.");
-				        } else {
-				            hos.setPassaporte(passaporte);
-				        }
-				    }
+							erro = true;
+						}
+					}
 				}
 
 				String email = txtEmail.getText();
-				hos.setEmail(email);
-
-				// TESTE / ALTERAR
-				//				Endereco ende = new Endereco();
-				//				ende.setId(1);
-				//				hos.setEndereco(ende);
-//				Hospede resp = new Hospede();
-//				resp.setId(6);
-//				hos.setResponsavel(resp);
+				hos.setEmail(email);			
 
 				if (erro == false) {
 					HospedeDAO dao = HospedeDAO.getInstancia();
@@ -702,19 +688,38 @@ public class TelaCadastroHospede extends JFrame {
 						dispose();
 
 					} else {
-						// mensagem de ERRO
+						TelaErro dadosIncorretos = new TelaErro("Erro ao cadastrar hóspede");
+						dadosIncorretos.setLocationRelativeTo(null);
+						dadosIncorretos.setVisible(true);
 					}
 				}
 			}
-		}
 			private boolean validarPassaporte(String passaporte) {
-				
-				return false;
+
+				if(passaporte.trim().isEmpty() || passaporte == null) {
+					return false;
+				} else if(passaporte.length() != 8) {
+					return false;
+				} else if(!passaporte.substring(0, 2).matches("[A-Z]*")){
+					return false;				
+				} else if(!passaporte.substring(2).matches("[0-9]+")) {
+					return false;
+				} else {
+					return true;
+				}
+
 			}
 
 			private boolean validarCPF(String cpf) {
-				
-				return false;
+				if(cpf.trim().isEmpty() || cpf == null) {
+					return false;
+				} else if(!cpf.matches("[0-9]+")) {
+					return false;
+				} else if(cpf.length() != 11) {
+					return false;
+				} else {
+					return true;
+				}
 			}
 
 			@Override
@@ -767,6 +772,6 @@ public class TelaCadastroHospede extends JFrame {
 		txtEmail.setText("amanda@ifsc.edu.br");
 		txtTelefone.setText("477894561230");
 		txtPassaporte.setText("123456");
-	
+
 	}
 }
