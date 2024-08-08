@@ -72,12 +72,6 @@ public class CadastroQuarto extends JFrame{
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		JLabel lblMenu = new JLabel("Menu");
-		lblMenu.setForeground(new Color(128, 128, 128));
-		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMenu.setBounds(67, 289, 46, 14);
-		contentPane.add(lblMenu);
-		
 		comboCamaCasal = new JComboBox<Integer>();
 		comboCamaCasal.setModel(
 				new DefaultComboBoxModel(new Integer[] {  0, 1, 2 }));
@@ -311,18 +305,14 @@ public class CadastroQuarto extends JFrame{
 		lblMenuQuartos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblMenuQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblMenuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+				CadastroQuarto tcq = new CadastroQuarto(funcionarioLogado);
+				dispose();
+				tcq.setExtendedState(MAXIMIZED_BOTH);
+				tcq.setVisible(true);
 			}
 		});
-		lblMenuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-		lblMenuQuartos.setBounds(91, 346, 400, 60);
+		lblMenuQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+		lblMenuQuartos.setBounds(51, 346, 400, 60);
 		contentPane.add(lblMenuQuartos);
 		
 		lblMenuFuncionarios = new JLabel("");
@@ -337,15 +327,17 @@ public class CadastroQuarto extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+				lblMenuFuncionarios.setBounds(51, 532, 335, 50);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+				lblMenuFuncionarios.setBounds(68, 532, 335, 50);
 			}
 		});
 		lblMenuFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblMenuFuncionarios.setBounds(91, 532, 335, 50);
+		lblMenuFuncionarios.setBounds(68, 532, 335, 50);
 		contentPane.add(lblMenuFuncionarios);
 
 		lblSair = new JLabel("");
@@ -377,22 +369,24 @@ public class CadastroQuarto extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
-				tlh.setVisible(true);
-				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();
+				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblMenuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+				lblMenuHospedagem.setBounds(51, 468, 335, 50);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblMenuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+				lblMenuHospedagem.setBounds(68, 468, 335, 50);
 			}
 		});
 		lblMenuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblMenuHospedagem.setBounds(91, 468, 335, 50);
+		lblMenuHospedagem.setBounds(68, 468, 335, 50);
 		contentPane.add(lblMenuHospedagem);
 
 		lblMenuHospede = new JLabel("");
@@ -407,15 +401,17 @@ public class CadastroQuarto extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblMenuHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+				lblMenuHospede.setBounds(51, 404, 335, 50);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblMenuHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+				lblMenuHospede.setBounds(68, 404, 335, 50);
 			}
 		});
 		lblMenuHospede.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		lblMenuHospede.setBounds(92, 404, 335, 50);
+		lblMenuHospede.setBounds(68, 404, 335, 50);
 		contentPane.add(lblMenuHospede);
 
 		lblLogo = new JLabel("");

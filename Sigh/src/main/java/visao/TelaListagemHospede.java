@@ -74,21 +74,21 @@ public class TelaListagemHospede extends JFrame implements TelaListagemInterface
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
-				menuQuarto.setBounds(51, 346, 340, 40);
+				menuQuarto.setBounds(51, 357, 365, 40);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-				menuQuarto.setBounds(68, 346, 340, 40);
+				menuQuarto.setBounds(68, 357, 365, 62);
 			}
 		});
 		menuQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-		menuQuarto.setBounds(68, 346, 340, 40);
+		menuQuarto.setBounds(68, 357, 365, 71);
 		contentPane.add(menuQuarto);
 
 		JLabel lblHospede = new JLabel("");
 		lblHospede.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
-		lblHospede.setBounds(51, 400, 340, 40);
+		lblHospede.setBounds(51, 412, 365, 54);
 		contentPane.add(lblHospede);
 
 		JLabel lblHospedagem = new JLabel("");
@@ -103,14 +103,16 @@ public class TelaListagemHospede extends JFrame implements TelaListagemInterface
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+				lblHospedagem.setBounds(51, 472, 340, 54);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+				lblHospedagem.setBounds(68, 472, 340, 54);
 			}
 		});
 		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		lblHospedagem.setBounds(68, 472, 340, 40);
+		lblHospedagem.setBounds(68, 472, 340, 54);
 		contentPane.add(lblHospedagem);
 
 		JLabel lblFuncionario = new JLabel("");
@@ -122,13 +124,23 @@ public class TelaListagemHospede extends JFrame implements TelaListagemInterface
 				tlf.setExtendedState(MAXIMIZED_BOTH);
 				tlf.setVisible(true);
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+				lblFuncionario.setBounds(51, 520, 340, 54);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+				lblFuncionario.setBounds(68, 520, 340, 54);
+			}
 		});
 		lblFuncionario.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		lblFuncionario.setBounds(68, 530, 150, 20);
+		lblFuncionario.setBounds(68, 525, 340, 54);
 		contentPane.add(lblFuncionario);
 
-		JLabel lblNewLabel_8 = new JLabel("");
-		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+		JLabel botaoSair = new JLabel("");
+		botaoSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Logoff
@@ -137,10 +149,17 @@ public class TelaListagemHospede extends JFrame implements TelaListagemInterface
 				TelaLogin tela = new TelaLogin();
 				tela.setVisible(true);
 			}
+			public void mouseEntered(MouseEvent e) {
+				botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+			}
 		});
-		lblNewLabel_8.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
-		lblNewLabel_8.setBounds(84, 955, 263, 45);
-		contentPane.add(lblNewLabel_8);
+		botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+		botaoSair.setBounds(84, 955, 263, 45);
+		contentPane.add(botaoSair);
 
 		JLabel lblNewLabel_7 = new JLabel("");
 		lblNewLabel_7.setIcon(new ImageIcon("src/main/resources/barra funcionários.png"));

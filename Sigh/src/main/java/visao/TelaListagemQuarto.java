@@ -65,11 +65,6 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 			}
 		});
 		
-		JLabel lblMenu = new JLabel("Menu");
-		lblMenu.setForeground(new Color(128, 128, 128));
-		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMenu.setBounds(67, 289, 46, 14);
-		contentPane.add(lblMenu);
 		
 		lblCadastrar.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
 		lblCadastrar.setBounds(1293, 252, 120, 34);
@@ -91,21 +86,8 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		contentPane.add(lblTitulo);
 		
 		JLabel lblQuarto = new JLabel("");
-		lblQuarto.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblQuarto.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-			}
-		});
 		lblQuarto.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
-		lblQuarto.setBounds(68,346, 335, 50);
+		lblQuarto.setBounds(51,346, 335, 50);
 		contentPane.add(lblQuarto);
 		
 		JLabel lblHospedes = new JLabel("");
@@ -120,10 +102,12 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+				lblHospedes.setBounds(51, 410, 335, 50);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+				lblHospedes.setBounds(68, 410, 335, 50);
 			}
 		});
 		lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
@@ -142,10 +126,12 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+				lblHospedagem.setBounds(51, 472, 335, 50);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+				lblHospedagem.setBounds(68, 472, 335, 50);
 			}
 		});
 		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
@@ -164,10 +150,12 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+				lblFuncionarios.setBounds(51, 523, 335, 50);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+				lblFuncionarios.setBounds(68, 523, 335, 50);
 			}
 		});
 		lblFuncionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
