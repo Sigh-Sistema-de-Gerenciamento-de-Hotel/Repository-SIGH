@@ -17,15 +17,17 @@ import javax.swing.border.EmptyBorder;
 import controle.funcionario.FuncionarioDAO;
 import modelo.Funcionario;
 import visao.padrao.RoundJFormattedTextField;
+import visao.padrao.RoundJPasswordField;
 
 public class TelaLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
 	private JTextField txtUsuario;
+	private JTextField passwordFieldMostrar;
 	private JPasswordField passwordField;
 	private FuncionarioDAO func = FuncionarioDAO.getInstancia();
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -59,10 +61,45 @@ public class TelaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-				
-				passwordField = new JPasswordField();
-				passwordField.setBounds(682, 616, 547, 64);
-				contentPane.add(passwordField);
+		JPanel panel = new JPanel();
+		panel.setBounds(658, 581, 591, 150);
+		panel.setBackground(new Color(208, 217, 218));
+		contentPane.add(panel);
+		panel.setLayout(null);
+		panel.setVisible(false);
+		
+		JLabel lblSenhaPane = new JLabel("SENHA *");
+		lblSenhaPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblSenhaPane.setBounds(23, 11, 80, 14);
+		panel.add(lblSenhaPane);
+
+		passwordFieldMostrar = new RoundJFormattedTextField(null);
+		passwordFieldMostrar.setForeground(new Color(102, 112, 133));
+		passwordFieldMostrar.setBounds(23, 36, 547, 64);
+		panel.add(passwordFieldMostrar);
+		
+		JLabel lblEsconderSenha = new JLabel("");
+		lblEsconderSenha.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String senha = passwordFieldMostrar.getText();
+				passwordField.setText(senha);
+				panel.setVisible(false);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblEsconderSenha.setIcon(new ImageIcon("src/main/resources/EscoderSenha.png"));
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblEsconderSenha.setIcon(new ImageIcon("src/main/resources/EsconderSenhaHover.png"));
+			}
+		});
+		lblEsconderSenha.setIcon(new ImageIcon("src/main/resources/EscoderSenha.png"));
+		lblEsconderSenha.setBounds(23, 111, 200, 25);
+		panel.add(lblEsconderSenha);
 
 		JLabel lblPessoaLogin = new JLabel("");
 		lblPessoaLogin.setIcon(new ImageIcon("src/main/resources/pessoa no login.png"));
@@ -104,10 +141,19 @@ public class TelaLogin extends JFrame {
 		lblSenha.setBounds(682, 590, 80, 14);
 		contentPane.add(lblSenha);
 
+		passwordField = new RoundJPasswordField();
+		passwordField.setBounds(682, 616, 547, 64);
+		contentPane.add(passwordField);
+
+
 		JLabel lblMostrarSenha = new JLabel("");
 		lblMostrarSenha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				char[] senha = passwordField.getPassword();
+				String senhaS = String.valueOf(senha);
+				passwordFieldMostrar.setText(senhaS);
+				panel.setVisible(true);
 			}
 
 			@Override
@@ -121,7 +167,7 @@ public class TelaLogin extends JFrame {
 			}
 		});
 		lblMostrarSenha.setIcon(new ImageIcon("src/main/resources/mostrar senha preto.png"));
-		lblMostrarSenha.setBounds(687, 698, 200, 10);
+		lblMostrarSenha.setBounds(682, 691, 200, 25);
 		contentPane.add(lblMostrarSenha);
 
 		JLabel lblBotaoSalvar = new JLabel("");
