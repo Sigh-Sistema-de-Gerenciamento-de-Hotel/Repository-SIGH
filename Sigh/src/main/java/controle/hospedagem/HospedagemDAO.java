@@ -34,7 +34,13 @@ public class HospedagemDAO implements IHospedagemDAO {
 	public int inserirHospedagem(Hospedagem hosp) {
 		
 		// Inserindo hospedagem na tabela Hospedagens
-		String SQL = "INSERT INTO hospedagens (data_entrada, data_saida) VALUES (?, ?)";
+		String SQL = "INSERT INTO hospedagens (data_entrada";
+		
+		if(hosp.getDataSaida() != null) {
+			SQL = SQL + ", data_saida) VALUES (?, ?)";
+		} else {
+			SQL = SQL + ") VALUES (?)";
+		}
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -45,7 +51,10 @@ public class HospedagemDAO implements IHospedagemDAO {
 			PreparedStatement ps = conBD.prepareStatement(SQL , Statement.RETURN_GENERATED_KEYS);
 
 			ps.setDate(1, Date.valueOf(hosp.getDataEntrada()));
-			ps.setDate(2, Date.valueOf(hosp.getDataSaida()));
+			
+			if(hosp.getDataSaida() != null) {
+				ps.setDate(2, Date.valueOf(hosp.getDataSaida()));
+			}
 
 			ps.executeUpdate();
 

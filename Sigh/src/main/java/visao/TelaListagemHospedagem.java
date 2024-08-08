@@ -90,6 +90,13 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 				tela.setVisible(true);
 				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
+			public void mouseEntered(MouseEvent e) {
+				botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+			}
 		});
 		botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		botaoSair.setBounds(69, 955, 263, 45);
@@ -100,7 +107,7 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 		divisaoMenu.setBounds(77, 897, 243, 14);
 		contentPane.add(divisaoMenu);
 		
-		JLabel funcionarios = new JLabel("Funciários");
+		JLabel funcionarios = new JLabel("");
 		funcionarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -111,41 +118,26 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				funcionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+				funcionarios.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
+				funcionarios.setBounds(35, 517, 363, 51);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				funcionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
+				funcionarios.setBounds(57, 517, 363, 51);
 			}
 		});
 		funcionarios.setIcon(new ImageIcon("src/main/resources/menu funcionarios.png"));
-		funcionarios.setBounds(57, 517, 306, 51);
+		funcionarios.setBounds(57, 517, 363, 51);
 		contentPane.add(funcionarios);
 		
-		JLabel hospedagem = new JLabel("Hospedagem");
-		hospedagem.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				TelaListagemHospedagem tlh = new TelaListagemHospedagem(funcionarioLogado);
-				tlh.setVisible(true);
-				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				dispose();
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				hospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				hospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-			}
-		});
+		JLabel hospedagem = new JLabel("");
 		hospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
-		hospedagem.setBounds(57, 461, 263, 45);
+		hospedagem.setBounds(35, 461, 363, 45);
 		contentPane.add(hospedagem);
 		
-		JLabel pedidos = new JLabel("");
-		pedidos.addMouseListener(new MouseAdapter() {
+		JLabel quartos = new JLabel("");
+		quartos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
@@ -155,18 +147,20 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				pedidos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+				quartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+				quartos.setBounds(35, 337, 363, 51);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				pedidos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+				quartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+				quartos.setBounds(57, 337, 363, 51);
 			}
 		});
-		pedidos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-		pedidos.setBounds(57, 337, 275, 51);
-		contentPane.add(pedidos);
+		quartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+		quartos.setBounds(57, 337, 363, 51);
+		contentPane.add(quartos);
 		
-		JLabel hospedes = new JLabel("Hóspedes");
+		JLabel hospedes = new JLabel("");
 		hospedes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -178,22 +172,24 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				hospedes.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+				hospedes.setBounds(35, 399, 363, 45);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				hospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+				hospedes.setBounds(57, 399, 363, 45);
 			}
 		});
 		hospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		hospedes.setBounds(57, 399, 263, 45);
+		hospedes.setBounds(57, 399, 363, 45);
 		contentPane.add(hospedes);
 		
-		JLabel logo = new JLabel("Logo");
+		JLabel logo = new JLabel("");
 		logo.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
 		logo.setBounds(135, 46, 144, 176);
 		contentPane.add(logo);
 		
-		JLabel menu = new JLabel("Menu");
+		JLabel menu = new JLabel("");
 		menu.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
 		menu.setBounds(0, 0, 420, 1080);
 		contentPane.add(menu);	
@@ -266,7 +262,12 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 
 		for (int i = 0; i < lista.size(); i++) {
 			Hospedagem hosp = lista.get(i);
-			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getTotalHospedes(), dtf.formatarData(hosp.getDataEntrada()), dtf.formatarData(hosp.getDataSaida())});
+			if(hosp.getDataSaida() == null) {
+				modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getTotalHospedes(), dtf.formatarData(hosp.getDataEntrada())});
+			} else {
+				modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getTotalHospedes(), dtf.formatarData(hosp.getDataEntrada()), dtf.formatarData(hosp.getDataSaida())});
+			}
+			
 		}
 
 		table.setModel(modelo);

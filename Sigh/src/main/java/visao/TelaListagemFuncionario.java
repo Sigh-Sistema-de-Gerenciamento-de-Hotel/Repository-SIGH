@@ -54,11 +54,6 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 		logo.setBounds(135, 46, 144, 176);
 		contentPane.add(logo);
 
-		JLabel menu = new JLabel("Menu");
-		menu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		menu.setBounds(67, 286, 244, 20);
-		contentPane.add(menu);
-
 		JLabel menuQuartos = new JLabel("");
 		menuQuartos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -71,14 +66,16 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				menuQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+				menuQuartos.setBounds(28, 332, 328, 45);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
+				menuQuartos.setBounds(48, 332, 328, 45);
 			}
 		});
 		menuQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-		menuQuartos.setBounds(68, 346, 150, 20);
+		menuQuartos.setBounds(48, 332, 343, 45);
 		contentPane.add(menuQuartos);
 
 		JLabel menuHospedes = new JLabel("");
@@ -93,14 +90,16 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				menuHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+				menuHospedes.setBounds(28, 393, 343, 45);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				menuHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+				menuHospedes.setBounds(48, 393, 343, 45);
 			}
 		});
 		menuHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
-		menuHospedes.setBounds(68, 407, 150, 20);
+		menuHospedes.setBounds(48, 393, 343, 45);
 		contentPane.add(menuHospedes);
 
 		JLabel menuHospedagem = new JLabel("");
@@ -112,14 +111,24 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 				tlh.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				menuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+				menuHospedagem.setBounds(28, 461, 335, 45);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				menuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+				menuHospedagem.setBounds(48, 461, 335, 45);
+			}
 		});
 		menuHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
-		menuHospedagem.setBounds(68, 472, 150, 20);
+		menuHospedagem.setBounds(48, 461, 335, 45);
 		contentPane.add(menuHospedagem);
 
 		JLabel menuFuncionario = new JLabel("");
 		menuFuncionario.setIcon(new ImageIcon("src/main/resources/menu - funcionarios selecionado.png"));
-		menuFuncionario.setBounds(48, 520, 335, 45);
+		menuFuncionario.setBounds(28, 520, 335, 45);
 		contentPane.add(menuFuncionario);
 
 		JLabel botaoSair = new JLabel("");
@@ -133,16 +142,18 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 				tela.setVisible(true);
 				tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair cinza claro.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
+			}
 		});
 		botaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		botaoSair.setBounds(84, 955, 263, 45);
 		contentPane.add(botaoSair);
-
-		JLabel fundoCinza = new JLabel("");
-		fundoCinza.setForeground(new Color(0, 128, 0));
-		fundoCinza.setBounds(0, 0, 420, 1080);
-		fundoCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
-		contentPane.add(fundoCinza);
 
 		JLabel barra = new JLabel("");
 		barra.setIcon(new ImageIcon("src/main/resources/barra funcionários.png"));
@@ -223,6 +234,12 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 		lblNewLabel.setIcon(new ImageIcon("src/main/resources/caminho listagem funcionário.png"));
 		lblNewLabel.setBounds(420, 0, 1500, 60);
 		contentPane.add(lblNewLabel);
+		
+				JLabel fundoCinza = new JLabel("");
+				fundoCinza.setForeground(new Color(0, 128, 0));
+				fundoCinza.setBounds(0, 0, 420, 1080);
+				fundoCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));
+				contentPane.add(fundoCinza);
 	}
 
 	public void atualizarJTableModel() {

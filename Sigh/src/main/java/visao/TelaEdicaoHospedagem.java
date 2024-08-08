@@ -1,12 +1,9 @@
 package visao;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
 import controle.hospede.HospedeDAO;
 import controle.quarto.QuartoDAO;
@@ -15,17 +12,13 @@ import modelo.Hospedagem;
 import modelo.Hospede;
 import modelo.Quarto;
 import visao.padrao.DateTextField;
-import visao.padrao.RoundJFormattedTextField;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -71,7 +64,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JPanel panel = new JPanel();
-		panel.setBounds(1500, 355, 334, 139);
+		panel.setBounds(502, 486, 343, 74);
 		contentPane.add(panel);
 		panel.setLayout(new MigLayout("", "[grow]", "[][]"));
 
@@ -92,7 +85,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(h.getCpf());
-			if (h.getCpf().isEmpty()) {
+			if (h.getCpf() == null || h.getCpf().isEmpty()) {
 				doc = h.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -115,7 +108,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(h.getCpf());
-			if (h.getCpf().isEmpty()) {
+			if (h.getCpf() == null || h.getCpf().isEmpty()) {
 				doc = h.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -128,7 +121,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(1500, 548, 334, 139);
+		panel_1.setBounds(1010, 486, 334, 80);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new MigLayout("", "[grow]", "[][]"));
 
@@ -149,7 +142,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -164,7 +157,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 		panel_1.setVisible(false);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(1500, 741, 334, 139);
+		panel_2.setBounds(502, 623, 334, 95);
 		contentPane.add(panel_2);
 		panel_2.setLayout(new MigLayout("", "[grow]", "[][]"));
 
@@ -185,7 +178,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -200,7 +193,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 		panel_2.setVisible(false);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1500, 934, 334, 139);
+		panel_3.setBounds(1010, 623, 334, 95);
 		contentPane.add(panel_3);
 		panel_3.setLayout(new MigLayout("", "[grow]", "[][]"));
 
@@ -221,7 +214,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -384,14 +377,14 @@ public class TelaEdicaoHospedagem extends JFrame {
 
 		JLabel lblDataCheckin = new JLabel("Data check-in *");
 		lblDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataCheckin.setBounds(502, 510, 145, 40);
+		lblDataCheckin.setBounds(502, 740, 145, 40);
 		contentPane.add(lblDataCheckin);
 
 		LocalDate dataIn = hospSelecionada.getDataEntrada();
 		String dataCheckIn = dateTf.formatarData(dataIn);
 		txtDataCheckin = new DateTextField();
 		txtDataCheckin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDataCheckin.setBounds(502, 548, 343, 48);
+		txtDataCheckin.setBounds(502, 776, 343, 48);
 		txtDataCheckin.setText(dataCheckIn);
 		contentPane.add(txtDataCheckin);
 		txtDataCheckin.setColumns(10);
@@ -401,19 +394,21 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblQuartos.setBounds(1010, 315, 145, 40);
 		contentPane.add(lblQuartos);
 
-		JLabel lblDataCheckout = new JLabel("Data check-out");
+		JLabel lblDataCheckout = new JLabel("Data check-out*");
 		lblDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataCheckout.setBounds(1010, 510, 145, 40);
+		lblDataCheckout.setBounds(1010, 740, 145, 40);
 		contentPane.add(lblDataCheckout);
 
-		LocalDate dataOut = hospSelecionada.getDataEntrada();
-		String dataCheckOut = dateTf.formatarData(dataOut);
 		txtDataCheckout = new DateTextField();
 		txtDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDataCheckout.setBounds(1010, 548, 343, 48);
-		txtDataCheckout.setText(dataCheckOut);
+		txtDataCheckout.setBounds(1010, 776, 343, 48);
 		contentPane.add(txtDataCheckout);
 		txtDataCheckout.setColumns(10);
+		if(hospSelecionada.getDataSaida() != null) {
+			LocalDate dataOut = hospSelecionada.getDataSaida();
+			String dataCheckOut = dateTf.formatarData(dataOut);
+			txtDataCheckout.setText(dataCheckOut);
+		}
 
 
 
@@ -503,7 +498,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			}
 		});
 		lblBotaoSalvar.setIcon(new ImageIcon("src\\main\\resources\\botao salvar.png"));
-		lblBotaoSalvar.setBounds(512, 724, 343, 50);
+		lblBotaoSalvar.setBounds(1300, 915, 300, 60);
 		contentPane.add(lblBotaoSalvar);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
@@ -515,7 +510,7 @@ public class TelaEdicaoHospedagem extends JFrame {
 			}
 		});
 		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
-		lblNewLabel_4.setBounds(1098, 736, 161, 38);
+		lblNewLabel_4.setBounds(1670, 930, 150, 40);
 		contentPane.add(lblNewLabel_4);
 
 
