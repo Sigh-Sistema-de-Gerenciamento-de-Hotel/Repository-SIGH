@@ -60,9 +60,9 @@ public class TelaLogin extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		JPanel panel = new JPanel();
-		panel.setBounds(658, 584, 591, 136);
+		panel.setBounds(658, 581, 591, 150);
 		panel.setBackground(new Color(208, 217, 218));
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -77,10 +77,29 @@ public class TelaLogin extends JFrame {
 		passwordFieldMostrar.setForeground(new Color(102, 112, 133));
 		passwordFieldMostrar.setBounds(23, 36, 547, 64);
 		panel.add(passwordFieldMostrar);
+		
+		JLabel lblEsconderSenha = new JLabel("");
+		lblEsconderSenha.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String senha = passwordFieldMostrar.getText();
+				passwordField.setText(senha);
+				panel.setVisible(false);
+			}
 
-		passwordField = new RoundJPasswordField();
-		passwordField.setBounds(682, 616, 547, 64);
-		contentPane.add(passwordField);
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblEsconderSenha.setIcon(new ImageIcon("src/main/resources/EscoderSenha.png"));
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblEsconderSenha.setIcon(new ImageIcon("src/main/resources/EsconderSenhaHover.png"));
+			}
+		});
+		lblEsconderSenha.setIcon(new ImageIcon("src/main/resources/EscoderSenha.png"));
+		lblEsconderSenha.setBounds(23, 111, 200, 25);
+		panel.add(lblEsconderSenha);
 
 		JLabel lblPessoaLogin = new JLabel("");
 		lblPessoaLogin.setIcon(new ImageIcon("src/main/resources/pessoa no login.png"));
@@ -122,14 +141,18 @@ public class TelaLogin extends JFrame {
 		lblSenha.setBounds(682, 590, 80, 14);
 		contentPane.add(lblSenha);
 
-		boolean mostrarSenha = false;
+		passwordField = new RoundJPasswordField();
+		passwordField.setBounds(682, 616, 547, 64);
+		contentPane.add(passwordField);
+
 
 		JLabel lblMostrarSenha = new JLabel("");
 		lblMostrarSenha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				char[] senha = passwordField.getPassword();
-				passwordFieldMostrar.setText(senha.toString());
+				String senhaS = String.valueOf(senha);
+				passwordFieldMostrar.setText(senhaS);
 				panel.setVisible(true);
 			}
 
@@ -144,7 +167,7 @@ public class TelaLogin extends JFrame {
 			}
 		});
 		lblMostrarSenha.setIcon(new ImageIcon("src/main/resources/mostrar senha preto.png"));
-		lblMostrarSenha.setBounds(687, 698, 200, 10);
+		lblMostrarSenha.setBounds(682, 691, 200, 25);
 		contentPane.add(lblMostrarSenha);
 
 		JLabel lblBotaoSalvar = new JLabel("");
