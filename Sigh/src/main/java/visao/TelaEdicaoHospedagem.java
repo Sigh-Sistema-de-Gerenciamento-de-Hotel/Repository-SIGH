@@ -1,12 +1,9 @@
 package visao;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controle.funcionario.FuncionarioDAO;
 import controle.hospedagem.HospedagemDAO;
 import controle.hospede.HospedeDAO;
 import controle.quarto.QuartoDAO;
@@ -15,17 +12,13 @@ import modelo.Hospedagem;
 import modelo.Hospede;
 import modelo.Quarto;
 import visao.padrao.DateTextField;
-import visao.padrao.RoundJFormattedTextField;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -406,14 +399,16 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblDataCheckout.setBounds(1010, 740, 145, 40);
 		contentPane.add(lblDataCheckout);
 
-		LocalDate dataOut = hospSelecionada.getDataEntrada();
-		String dataCheckOut = dateTf.formatarData(dataOut);
 		txtDataCheckout = new DateTextField();
 		txtDataCheckout.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDataCheckout.setBounds(1010, 776, 343, 48);
-		txtDataCheckout.setText(dataCheckOut);
 		contentPane.add(txtDataCheckout);
 		txtDataCheckout.setColumns(10);
+		if(hospSelecionada.getDataSaida() != null) {
+			LocalDate dataOut = hospSelecionada.getDataSaida();
+			String dataCheckOut = dateTf.formatarData(dataOut);
+			txtDataCheckout.setText(dataCheckOut);
+		}
 
 
 

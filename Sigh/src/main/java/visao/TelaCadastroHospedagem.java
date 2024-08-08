@@ -89,7 +89,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(h.getCpf());
-			if (h.getCpf().isEmpty()) {
+			if (h.getCpf() == null || h.getCpf().isEmpty()) {
 				doc = h.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -122,7 +122,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -155,7 +155,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -187,7 +187,7 @@ public class TelaCadastroHospedagem extends JFrame {
 			} 
 			String doc;
 			String cpf = String.valueOf(resp.getCpf());
-			if (resp.getCpf().isEmpty()) {
+			if (resp.getCpf() == null || resp.getCpf().isEmpty()) {
 				doc = resp.getPassaporte();
 			} else {
 				doc = cpf; 
@@ -412,7 +412,7 @@ public class TelaCadastroHospedagem extends JFrame {
 				DateTextField dtf = new DateTextField();
 
 				// Validação dos campos obrigatórios
-				if (txtDataCheckin.getText().isEmpty() || txtDataCheckout.getText().isEmpty()) {
+				if (txtDataCheckin.getText().isEmpty()) {
 					erro = true;
 					TelaErro dadosIncorretos = new TelaErro("Insira uma Data Válida!");
 					dadosIncorretos.setLocationRelativeTo(null);
@@ -421,8 +421,11 @@ public class TelaCadastroHospedagem extends JFrame {
 					LocalDate dataEntrada = dtf.stringParaData(txtDataCheckin.getText());
 					hospedagem.setDataEntrada(dataEntrada);
 
-					LocalDate dataSaida = dtf.stringParaData(txtDataCheckout.getText());
-					hospedagem.setDataSaida(dataSaida);
+					if(txtDataCheckout.getText().isEmpty()) {
+						LocalDate dataSaida = dtf.stringParaData(txtDataCheckout.getText());
+						hospedagem.setDataSaida(dataSaida);
+					}
+					
 				}
 
 				int indexHosp;

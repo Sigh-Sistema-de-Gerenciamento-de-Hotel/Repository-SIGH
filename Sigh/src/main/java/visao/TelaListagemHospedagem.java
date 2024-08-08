@@ -262,7 +262,12 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 
 		for (int i = 0; i < lista.size(); i++) {
 			Hospedagem hosp = lista.get(i);
-			modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getTotalHospedes(), dtf.formatarData(hosp.getDataEntrada()), dtf.formatarData(hosp.getDataSaida())});
+			if(hosp.getDataSaida() == null) {
+				modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getTotalHospedes(), dtf.formatarData(hosp.getDataEntrada())});
+			} else {
+				modelo.addRow(new Object[] { hosp.getId(), hosp.getQuarto().getNumero(), hosp.getTotalHospedes(), dtf.formatarData(hosp.getDataEntrada()), dtf.formatarData(hosp.getDataSaida())});
+			}
+			
 		}
 
 		table.setModel(modelo);
