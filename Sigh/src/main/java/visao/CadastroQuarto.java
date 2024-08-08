@@ -97,22 +97,22 @@ public class CadastroQuarto extends JFrame{
 		contentPane.add(comboNHospedes);
 		
 		comboFrigobar = new JComboBox();
-		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboFrigobar.setModel(new DefaultComboBoxModel(new String[] { "", "Sim", "Não" }));
 		comboFrigobar.setBounds(985, 442, 343, 50);
 		contentPane.add(comboFrigobar);
 
 		comboBanheira = new JComboBox();
-		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboBanheira.setModel(new DefaultComboBoxModel(new String[] { "", "Sim", "Não" }));
 		comboBanheira.setBounds(985, 580, 343, 50);
 		contentPane.add(comboBanheira);
 
 		comboLimpeza = new JComboBox();
-		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboLimpeza.setModel(new DefaultComboBoxModel(new String[] { "", "Sim", "Não" }));
 		comboLimpeza.setBounds(1506, 313, 343, 50);
 		contentPane.add(comboLimpeza);
 
 		comboConserto = new JComboBox();
-		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboConserto.setModel(new DefaultComboBoxModel(new String[] { "", "Sim", "Não" }));
 		comboConserto.setBounds(1506, 440, 343, 50);
 		contentPane.add(comboConserto);
 		
@@ -127,7 +127,7 @@ public class CadastroQuarto extends JFrame{
 		txtAcessibilidade.setColumns(10);
 		
 		comboAr = new JComboBox();
-		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "sim", "não" }));
+		comboAr.setModel(new DefaultComboBoxModel(new String[] { "", "Sim", "Não" }));
 		comboAr.setBounds(984, 314, 343, 50);
 		contentPane.add(comboAr);
 		
@@ -231,7 +231,7 @@ public class CadastroQuarto extends JFrame{
 									erro = true;
 									// ERRO
 								} 
-
+									
 								String preco = txtpreco.getText();
 								float precoo = 0;
 								if (preco.isEmpty()) {
@@ -245,6 +245,7 @@ public class CadastroQuarto extends JFrame{
 										erro = true;
 
 									}
+									
 								}
 
 								if(erro==false) {

@@ -263,7 +263,33 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		
 		for (int i = 0; i < lista.size(); i++) {
 			Quarto qua = lista.get(i);
-			modelo.addRow(new Object[] {qua.getNumero(), qua.getNumCamaCasal(), qua.getNumCamaSolteiro(), qua.getNumMaxHospedes(), qua.isArCondicionado(), qua.isFrigobar(), qua.isBanheira(), qua.isAcessibilidade(), qua.isPrecisaLimpeza(), qua.isPrecisaConserto(), qua.getPreco()});
+			
+			String arCond = "Não";
+			if(qua.isArCondicionado()) {
+				arCond = "Sim";
+			}
+			
+			String frigo = "Não";
+			if(qua.isFrigobar()) {
+				frigo = "Sim";
+			}
+			
+			String ban = "Não";
+			if(qua.isBanheira()) {
+				ban = "Sim";
+			}
+			
+			String lim = "Não";
+			if(qua.isPrecisaLimpeza()) {
+				lim = "Sim";
+			}
+			
+			String con = "Não";
+			if(qua.isPrecisaConserto()) {
+				con = "Sim";
+			}
+			
+			modelo.addRow(new Object[] {qua.getNumero(), qua.getNumCamaCasal(), qua.getNumCamaSolteiro(), qua.getNumMaxHospedes(), arCond, frigo, ban, qua.isAcessibilidade(), lim, con, qua.getPreco()});
 		}
 		table.setModel(modelo);
 	}
