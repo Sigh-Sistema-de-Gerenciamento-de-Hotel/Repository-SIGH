@@ -37,6 +37,10 @@ public class TelaEdicaoHospedagem extends JFrame {
 	private JComboBox <Integer> comboBoxQuartos;
 	private JComboBox <Integer> comboBoxNumHosp; 
 	private Funcionario funcionarioLogado;
+	/**
+	 * @wbp.nonvisual location=1811,929
+	 */
+
 
 	public TelaEdicaoHospedagem(Funcionario funcLogado, Hospedagem hospSelecionada) {
 		this.funcionarioLogado = funcLogado;
@@ -501,22 +505,35 @@ public class TelaEdicaoHospedagem extends JFrame {
 		lblBotaoSalvar.setBounds(1300, 915, 300, 60);
 		contentPane.add(lblBotaoSalvar);
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+		JLabel lblBotaoCancelar = new JLabel("");
+		lblBotaoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaListagemHospedagem(funcionarioLogado).setVisible(true);
-				dispose();
+				TelaListagemFuncionario telaListFunc = new TelaListagemFuncionario(funcionarioLogado);
+				telaListFunc.setVisible(true);
+				telaListFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();			
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar azul escuro.png"));
+				lblBotaoCancelar.setBounds(1670, 930, 150, 40);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblBotaoCancelar.setIcon(new ImageIcon("src/main/resources/botao cancelar.png"));
+				lblBotaoCancelar.setBounds(1670, 930, 150, 40);
 			}
 		});
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Aluno\\Downloads\\Repository-SIGH\\Sigh\\src\\main\\resources\\botao cancelar.png"));
-		lblNewLabel_4.setBounds(1670, 930, 150, 40);
-		contentPane.add(lblNewLabel_4);
 
+		lblBotaoCancelar.setIcon(new ImageIcon("src\\main\\resources\\botao cancelar.png"));
+		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
+		contentPane.add(lblBotaoCancelar);
 
 
 			}
-		
 	}
 
 

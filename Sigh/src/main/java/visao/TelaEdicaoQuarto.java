@@ -80,45 +80,58 @@ public class TelaEdicaoQuarto extends JFrame {
 				tlq.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();
 			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));//
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblQuartos.setIcon(new ImageIcon("src/main/resources/menu quartoss.png"));
-			}
 		});
+		lblQuartos.setIcon(new ImageIcon("src/main/resources/menu - quartos selecionado.png"));
+		lblQuartos.setBounds(51, 346, 400, 60);
+		contentPane.add(lblQuartos);
 		
 		JLabel lblHospedes = new JLabel("");
 		lblHospedes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospede tlh = new TelaListagemHospede(funcionarioLogado);
+				dispose();
+				tlh.setExtendedState(MAXIMIZED_BOTH);
+				tlh.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospedes selecionado.png"));
+				lblHospedes.setBounds(51, 404, 335, 50);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+				lblHospedes.setBounds(68, 404, 335, 50);
 			}
 		});
+		lblHospedes.setIcon(new ImageIcon("src/main/resources/menu - hospede.png"));
+		lblHospedes.setBounds(68, 404, 335, 50);
+		contentPane.add(lblHospedes);
 		
 		JLabel lblHospedagem = new JLabel("");
 		lblHospedagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaListagemHospedagem tlhp = new TelaListagemHospedagem(funcionarioLogado);
+				dispose();
+				tlhp.setExtendedState(MAXIMIZED_BOTH);
+				tlhp.setVisible(true);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem selecionado.png"));
+				lblHospedagem.setBounds(51, 468, 335, 50);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+				lblHospedagem.setBounds(68, 468, 335, 50);
 			}
 		});
+		lblHospedagem.setIcon(new ImageIcon("src/main/resources/menu hospedagem.png"));
+		lblHospedagem.setBounds(68, 468, 335, 50);
+		contentPane.add(lblHospedagem);
 		
 		JLabel lblFuncionarios = new JLabel("");
 		lblFuncionarios.addMouseListener(new MouseAdapter() {
@@ -154,12 +167,6 @@ public class TelaEdicaoQuarto extends JFrame {
 				lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 			}
 		});
-		
-		JLabel lblMenu = new JLabel("Menu");
-		lblMenu.setForeground(new Color(128, 128, 128));
-		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMenu.setBounds(67, 289, 46, 14);
-		contentPane.add(lblMenu);
 		
 		lblBotaoSair.setIcon(new ImageIcon("src/main/resources/botao sair.png"));
 		lblBotaoSair.setBounds(84, 958, 270, 40);

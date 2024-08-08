@@ -102,11 +102,6 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 		botaoSair.setBounds(69, 955, 263, 45);
 		contentPane.add(botaoSair);
 		
-		JLabel divisaoMenu = new JLabel("Divisão Menu");
-		divisaoMenu.setIcon(new ImageIcon("src/main/resources/divisor (menu).png"));
-		divisaoMenu.setBounds(77, 897, 243, 14);
-		contentPane.add(divisaoMenu);
-		
 		JLabel funcionarios = new JLabel("");
 		funcionarios.addMouseListener(new MouseAdapter() {
 			@Override
