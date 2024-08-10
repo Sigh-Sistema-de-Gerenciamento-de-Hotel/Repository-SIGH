@@ -627,10 +627,12 @@ public class TelaEdicaoHospede extends JFrame {
 					hosEditar.setDataNascimento(data);
 				}  
 				
+				if(hosEditar.getResponsavel() != null) {
+				
 					int indexResp = comboBoxResp.getSelectedIndex();
 					Hospede resp = hospedesResp.get(indexResp);
 					hosEditar.setResponsavel(resp);
-		
+				}
 
 				String genero = (String) comboBoxGenero.getSelectedItem();
 				if (genero.isEmpty()) {;
