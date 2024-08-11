@@ -1,6 +1,7 @@
 package visao;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -58,6 +59,8 @@ public class TelaCadastroHospede extends JFrame {
 	 */
 	public TelaCadastroHospede(Funcionario funcLogado) {
 		funcionarioLogado = funcLogado;
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
+		setTitle("Cadastro de Hóspede");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 1080);
 		contentPane = new JPanel();

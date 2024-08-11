@@ -11,6 +11,7 @@ import controle.quarto.QuartoDAO;
 import modelo.Funcionario;
 import modelo.Quarto;
 import visao.padrao.RoundJFormattedTextField;
+import visao.padrao.RoundJTextField;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -115,7 +116,7 @@ public class CadastroQuarto extends JFrame{
 		contentPane.add(txtNumQuarto);
 		txtNumQuarto.setColumns(10);
 		
-		txtAcessibilidade = new JTextField();
+		txtAcessibilidade = new RoundJFormattedTextField(null);
 		txtAcessibilidade.setBounds(985, 705, 343, 50);
 		contentPane.add(txtAcessibilidade);
 		txtAcessibilidade.setColumns(10);
@@ -286,8 +287,10 @@ public class CadastroQuarto extends JFrame{
 		BotaoCancelar.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
-					new TelaListagemQuarto(funcionarioLogado).setVisible(true);
+		    	TelaListagemQuarto tlq = new TelaListagemQuarto(funcionarioLogado);
 					dispose();
+					tlq.setExtendedState(MAXIMIZED_BOTH);
+					tlq.setVisible(true);
 		    }
 		    @Override
 		    public void mouseEntered(MouseEvent e) {

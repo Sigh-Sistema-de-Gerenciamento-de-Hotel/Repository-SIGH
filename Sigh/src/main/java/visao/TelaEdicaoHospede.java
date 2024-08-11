@@ -3,6 +3,7 @@ package visao;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -62,6 +63,8 @@ public class TelaEdicaoHospede extends JFrame {
 	 */
 	public TelaEdicaoHospede(Funcionario funcLogado, Hospede hosEditar) {
 		funcionarioLogado = funcLogado;
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
+		setTitle("Ediçao de Hóspede");
 		DateTextField dateTf = new DateTextField();
 		this.hosEditar = hosEditar;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

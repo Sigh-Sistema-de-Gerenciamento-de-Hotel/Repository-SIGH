@@ -45,7 +45,7 @@ public class TelaListagemHospedagem extends JFrame implements TelaListagemInterf
 		funcionarioLogado = funcLogado;
 		TelaListagemHospedagem janela = this;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
-		setTitle("Listagem Hospedagem");
+		setTitle("Listagem de Hospedagem");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 777, 648);
 		contentPane = new JPanel();

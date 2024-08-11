@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
@@ -47,6 +48,8 @@ public class TelaCadastroHospedagem extends JFrame {
 
 	public TelaCadastroHospedagem(Funcionario funcLogado) {
 		this.funcionarioLogado = funcLogado;
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
+		setTitle("Cadastro de Hospedagem");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1471, 912);
 		contentPane = new JPanel();

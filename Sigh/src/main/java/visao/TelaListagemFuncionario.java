@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class TelaListagemFuncionario extends JFrame  implements TelaListagemInte
 	 */
 	public TelaListagemFuncionario(Funcionario funcLogado) {
 		funcionarioLogado = funcLogado;
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Listagem de funcionário");
 		TelaListagemFuncionario janela = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

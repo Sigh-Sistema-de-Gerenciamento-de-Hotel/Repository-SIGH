@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class TelaListagemHospede extends JFrame implements TelaListagemInterface
 
 	public TelaListagemHospede(Funcionario funcLogado) {
 		funcionarioLogado = funcLogado;
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
 		setTitle("Listagem de Hospede");
 		TelaListagemHospede janela = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

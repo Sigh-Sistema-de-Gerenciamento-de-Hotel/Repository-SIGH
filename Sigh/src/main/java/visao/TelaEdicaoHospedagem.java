@@ -15,6 +15,7 @@ import visao.padrao.DateTextField;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
@@ -44,6 +45,8 @@ public class TelaEdicaoHospedagem extends JFrame {
 
 	public TelaEdicaoHospedagem(Funcionario funcLogado, Hospedagem hospSelecionada) {
 		this.funcionarioLogado = funcLogado;
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/logo sigh.png"));
+		setTitle("Edição de Hospedagem");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1471, 912);
 		contentPane = new JPanel();
