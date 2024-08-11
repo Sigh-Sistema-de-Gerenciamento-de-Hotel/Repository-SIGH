@@ -67,8 +67,37 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		
 		
 		lblCadastrar.setIcon(new ImageIcon("src/main/resources/botao cadastrar.png"));
-		lblCadastrar.setBounds(1293, 252, 120, 34);
+		lblCadastrar.setBounds(1400, 164, 120, 34);
 		contentPane.add(lblCadastrar);
+		
+
+		JLabel lblEditar = new JLabel("");
+		lblEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaEdicaoQuarto telaEdQua = new TelaEdicaoQuarto(funcionarioLogado, quartoSelecionado);
+				telaEdQua.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				telaEdQua.setVisible(true);
+				dispose();
+			}
+		});  
+		lblEditar.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
+		lblEditar.setBounds(1570, 164, 120, 34);
+		contentPane.add(lblEditar);
+		
+		JLabel lblExcluir = new JLabel("");
+		TelaListagemInterface estaTela = this;
+		lblExcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o quarto?", quartoSelecionado, estaTela);
+				telaExclusao.setLocationRelativeTo(null);
+				telaExclusao.setVisible(true);
+			}
+		}); 
+		lblExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
+		lblExcluir.setBounds(1740, 164, 120, 34);
+		contentPane.add(lblExcluir);
 		
 		JLabel lblLogoSigh = new JLabel("");
 		lblLogoSigh.setIcon(new ImageIcon("src/main/resources/logo sigh.png"));
@@ -166,7 +195,7 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		scrollPane.setBorder(null);
 		scrollPane.setBackground(new Color(255, 255, 255));
 		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		scrollPane.setBounds(444, 369, 1391, 569);
+		scrollPane.setBounds(444, 308, 1455, 600);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -207,33 +236,6 @@ public class TelaListagemQuarto extends JFrame implements TelaListagemInterface{
 		lblBotaoSair.setBounds(84, 955, 263, 45);
 		contentPane.add(lblBotaoSair);
 		
-		JLabel lblEditar = new JLabel("");
-		lblEditar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				TelaEdicaoQuarto telaEdQua = new TelaEdicaoQuarto(funcionarioLogado, quartoSelecionado);
-				telaEdQua.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				telaEdQua.setVisible(true);
-				dispose();
-			}
-		});  
-		lblEditar.setIcon(new ImageIcon("src/main/resources/botaoEditar.png"));
-		lblEditar.setBounds(1478, 252, 120, 34);
-		contentPane.add(lblEditar);
-		
-		JLabel lblExcluir = new JLabel("");
-		TelaListagemInterface estaTela = this;
-		lblExcluir.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				TelaConfirmacaoExclusao telaExclusao = new TelaConfirmacaoExclusao("Você deseja excluir o quarto?", quartoSelecionado, estaTela);
-				telaExclusao.setLocationRelativeTo(null);
-				telaExclusao.setVisible(true);
-			}
-		}); 
-		lblExcluir.setIcon(new ImageIcon("src/main/resources/botaoExcluir.png"));
-		lblExcluir.setBounds(1675, 252, 120, 34);
-		contentPane.add(lblExcluir);
 		
 		JLabel lblFundoCinza = new JLabel("");
 		lblFundoCinza.setIcon(new ImageIcon("src/main/resources/fundo cinza (menu).png"));

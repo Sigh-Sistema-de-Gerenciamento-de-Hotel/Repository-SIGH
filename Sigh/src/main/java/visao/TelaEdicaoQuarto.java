@@ -340,8 +340,13 @@ public class TelaEdicaoQuarto extends JFrame {
 				}
 				
 				int CamaCasal = (Integer) comboCamaCasal.getSelectedItem();
+				quartoEditar.setNumCamaCasal(CamaCasal);
+				
 				int CamaSolteiro = (Integer) comboCamaSolteiro.getSelectedItem();
+				quartoEditar.setNumCamaSolteiro(CamaSolteiro);
+				
 				int MaxDeHospedes = (Integer) comboMaxDeHospedes.getSelectedItem();
+				quartoEditar.setNumMaxHospedes(MaxDeHospedes);
 				
 				String ArCondicionado = (String) comboArCondicionado.getSelectedItem();
 				if (ArCondicionado.isEmpty()) {
@@ -416,7 +421,7 @@ public class TelaEdicaoQuarto extends JFrame {
 					dispose();
 				} else {
 					// mensagem de ERRO
-					TelaErro dadosIncorretos = new TelaErro("Falha ao inserir o quarto no banco de dados.");
+					TelaErro dadosIncorretos = new TelaErro("Falha ao editar o quarto.");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 				}

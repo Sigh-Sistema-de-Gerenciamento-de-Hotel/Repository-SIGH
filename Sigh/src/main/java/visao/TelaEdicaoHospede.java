@@ -381,8 +381,7 @@ public class TelaEdicaoHospede extends JFrame {
 		txtCep.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtCep.setBounds(554, 615, 343, 48);
 		contentPane.add(txtCep);
-		txtCep.setColumns(13);
-
+		
 		String estado = hosEditar.getEndereco().getEstado();
 
 		JLabel lblEstado = new JLabel("Estado *");
@@ -580,6 +579,11 @@ public class TelaEdicaoHospede extends JFrame {
 				}
 
 				boolean validacaoEnd = daoEnd.atualizarEndereco(end);
+				if(validacaoEnd == true) {
+					hosEditar.setEndereco(end);
+				} else {
+					erro = true;
+				}
 
 				// Edição Hóspede
 
@@ -662,7 +666,7 @@ public class TelaEdicaoHospede extends JFrame {
 
 				// Verifica se ambos os campos estão vazios
 				if (cpf.isEmpty() && passaporte.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
+					TelaErro dadosIncorretos = new TelaErro("CPF e Passaporte estão vazios.");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 					erro = true;
@@ -674,7 +678,7 @@ public class TelaEdicaoHospede extends JFrame {
 						if(valida == true) {
 							hosEditar.setCpf(cpf);
 						} else {
-							TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
+							TelaErro dadosIncorretos = new TelaErro("CPF inválido.");
 							dadosIncorretos.setLocationRelativeTo(null);
 							dadosIncorretos.setVisible(true);
 							erro = true;

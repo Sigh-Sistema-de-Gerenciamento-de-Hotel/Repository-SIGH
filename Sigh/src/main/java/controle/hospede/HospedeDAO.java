@@ -179,6 +179,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				String endereco = rs.getString("endereco");
 				String complemento = rs.getString("complemento");
 				int numero = rs.getInt("numero");
+				int cep = rs.getInt("cep");
 
 				end.setId(id);
 				end.setEstado(estado);
@@ -186,6 +187,7 @@ public class HospedeDAO implements IHospedeDAO { // HospedeDAO implementa a inte
 				end.setEndereco(endereco);
 				end.setComplemento(complemento);
 				end.setNumero(numero);
+				end.setCep(cep);
 
 
 				int idResp = rs.getInt("id_responsavel");

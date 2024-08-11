@@ -561,8 +561,6 @@ public class TelaCadastroHospede extends JFrame {
 				Hospede hos = new Hospede();
 				hos.setEndereco(end);
 
-				// Só fazer o if isEmpty() se o campo for obrigatório
-
 				String nome = txtNome.getText();
 				if (nome.isEmpty()) {
 					erro = true;
@@ -641,7 +639,7 @@ public class TelaCadastroHospede extends JFrame {
 
 				// Verifica se ambos os campos estão vazios
 				if (cpf.isEmpty() && passaporte.isEmpty()) {
-					TelaErro dadosIncorretos = new TelaErro("CPF e Passaporte estão vazios. Preencha pelo menos um dos campos.");
+					TelaErro dadosIncorretos = new TelaErro("CPF e Passaporte estão vazios.");
 					dadosIncorretos.setLocationRelativeTo(null);
 					dadosIncorretos.setVisible(true);
 
@@ -652,7 +650,7 @@ public class TelaCadastroHospede extends JFrame {
 						if(valida == true) {
 							hos.setCpf(cpf);
 						} else {
-							TelaErro dadosIncorretos = new TelaErro("CPF inválido. Por favor, insira um CPF válido.");
+							TelaErro dadosIncorretos = new TelaErro("CPF inválido.");
 							dadosIncorretos.setLocationRelativeTo(null);
 							dadosIncorretos.setVisible(true);
 							erro = true;
@@ -665,7 +663,7 @@ public class TelaCadastroHospede extends JFrame {
 						if(valida == true) {
 							hos.setPassaporte(passaporte);
 						} else {
-							TelaErro dadosIncorretos = new TelaErro("Passaporte inválido. Por favor, insira um passaporte válido.");
+							TelaErro dadosIncorretos = new TelaErro("Passaporte inválido.");
 							dadosIncorretos.setLocationRelativeTo(null);
 							dadosIncorretos.setVisible(true);
 							erro = true;
@@ -766,16 +764,6 @@ public class TelaCadastroHospede extends JFrame {
 		lblBotaoCancelar.setBounds(1670, 930, 150, 40);
 		contentPane.add(lblBotaoCancelar);
 
-
-		// PARAMETROS PRONTOS PARA TESTE
-		txtCpf.setText("78945612311");
-		txtData.setText("01/01/2000");
-		txtNome.setText("Amanda");
-		txtSobrenome.setText("Amanda");
-		txtNomeSocial.setText("Amanda");
-		txtEmail.setText("amanda@ifsc.edu.br");
-		txtTelefone.setText("477894561230");
-		txtPassaporte.setText("123456");
 
 	}
 }

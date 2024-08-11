@@ -251,6 +251,7 @@ public class CadastroQuarto extends JFrame{
 									quarto.setBanheira(ban);
 									quarto.setAcessibilidade(acessibilidade);
 									quarto.setPreco(precoo);
+									quarto.setNumMaxHospedes(numMaxHospedes);
 									
 									QuartoDAO dao = QuartoDAO.getInstacia();
 									dao.inserirQuarto(quarto);
@@ -263,7 +264,7 @@ public class CadastroQuarto extends JFrame{
 									telaConfirmacao.setVisible(true);
 									
 								} else {
-									TelaErro dadosIncorretos = new TelaErro("Falha ao inserir o quarto no banco de dados.");
+									TelaErro dadosIncorretos = new TelaErro("Falha ao inserir quarto.");
 									dadosIncorretos.setLocationRelativeTo(null);
 									dadosIncorretos.setVisible(true);
 								}	
