@@ -79,28 +79,28 @@ public class QuartoDAO implements IQuartoDAO {
 				Quarto qua = new Quarto();
 
 				int numero = rs.getInt("id_quarto");
-				int numCamaCasal = rs.getInt("num_cama_casal");
-				int numCamaSolteiro = rs.getInt("num_cama_solteiro");
-				int numMaxHospedes = rs.getInt("nummax_hospedes");
-				boolean arCondicionado = rs.getBoolean("ar_condicionado");
-				boolean frigobar = rs.getBoolean("frigobar");
-				boolean banheira = rs.getBoolean("banheira");
-				String acessibilidade = rs.getString("acessibilidade");
-				float preco = rs.getFloat("preco");
-				boolean precisaLimpeza = rs.getBoolean("limpeza");
 				boolean precisaConserto = rs.getBoolean("conserto");
-
+				boolean precisaLimpeza = rs.getBoolean("limpeza");
+				String acessibilidade = rs.getString("acessibilidade");
+				boolean banheira = rs.getBoolean("banheira");
+				boolean frigobar = rs.getBoolean("frigobar");
+				boolean arCondicionado = rs.getBoolean("ar_condicionado");
+				float preco = rs.getFloat("preco");
+				int numMaxHospedes = rs.getInt("nummax_hospedes");
+				int numCamaSolteiro = rs.getInt("num_cama_solteiro");
+				int numCamaCasal = rs.getInt("num_cama_casal");
+			
 				qua.setNumero(numero);
-				qua.setNumCamaCasal(numCamaCasal);
-				qua.setNumCamaSolteiro(numCamaSolteiro);
-				qua.setNumMaxHospedes(numMaxHospedes);
-				qua.setArCondicionado(arCondicionado);
-				qua.setFrigobar(frigobar);
-				qua.setBanheira(banheira);
-				qua.setAcessibilidade(acessibilidade);
-				qua.setPreco(preco);
-				qua.setPrecisaLimpeza(precisaLimpeza);
 				qua.setPrecisaConserto(precisaConserto);
+				qua.setPrecisaLimpeza(precisaLimpeza);
+				qua.setAcessibilidade(acessibilidade);
+				qua.setBanheira(banheira);
+				qua.setFrigobar(frigobar);
+				qua.setArCondicionado(arCondicionado);
+				qua.setPreco(preco);
+				qua.setNumMaxHospedes(numMaxHospedes);
+				qua.setNumCamaSolteiro(numCamaSolteiro);
+				qua.setNumCamaCasal(numCamaCasal);
 
 				quartos.add(qua);
 
@@ -120,7 +120,7 @@ public class QuartoDAO implements IQuartoDAO {
 	@Override
 	public boolean atualizarQuarto(Quarto qua) { 
 
-		String SQL = "UPDATE quartos SET num_cama_casal = ?, num_cama_solteiro = ?, nummax_hospedes = ?, ar_condicionado = ?, frigobar = ?, banheira = ?, acessibilidade = ?, preco = ?, limpeza = ?, conserto = ? WHERE numero = ?";
+		String SQL = "UPDATE quartos SET conserto = ?, limpeza = ?, acessibilidade = ?, banheira = ?, frigobar = ?, ar_condicionado = ?, preco = ?, nummax_hospedes = ?, num_cama_solteiro = ?, num_cama_casal = ? WHERE id_quarto = ?";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -129,20 +129,19 @@ public class QuartoDAO implements IQuartoDAO {
 
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-
-			ps.setInt(1, qua.getNumero());
-			ps.setInt(2, qua.getNumCamaCasal());
-			ps.setInt(3, qua.getNumCamaSolteiro());
-			ps.setInt(4, qua.getNumMaxHospedes());
-			ps.setBoolean(5, qua.isArCondicionado());
-			ps.setBoolean(6, qua.isFrigobar());
-			ps.setBoolean(7, qua.isBanheira());
-			ps.setString(8, qua.isAcessibilidade());
-			ps.setFloat(9, qua.getPreco());
-			ps.setBoolean(10, qua.isPrecisaLimpeza());
-			ps.setBoolean(11, qua.isPrecisaConserto());
+		
+			ps.setBoolean(1, qua.isPrecisaConserto());
+			ps.setBoolean(2, qua.isPrecisaLimpeza());
+			ps.setString(3, qua.isAcessibilidade());
+			ps.setBoolean(4, qua.isBanheira());
+			ps.setBoolean(5, qua.isFrigobar());
+			ps.setBoolean(6, qua.isArCondicionado());
+			ps.setFloat(7, qua.getPreco());
+			ps.setInt(8, qua.getNumMaxHospedes());
+			ps.setInt(9, qua.getNumCamaSolteiro());
+			ps.setInt(10, qua.getNumCamaCasal());
+			ps.setInt(11, qua.getNumero());
 			
-
 			retorno = ps.executeUpdate();
 
 		} catch (SQLException e) {
