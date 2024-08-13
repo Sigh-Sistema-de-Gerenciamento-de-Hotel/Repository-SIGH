@@ -7,12 +7,12 @@ O sistema tem como objetivo geral que os funcionários do hotel tenham controle 
 ## Diagrama de Casos de Uso
 O diagrama a seguir mostra a visão geral das funções do sistema, incluindo os dois atores e os quatorze casos de usos identificados no projeto.
 <br>
-![](https://github.com/Sigh-Sistema-de-Gerenciamento-de-Hotel/Repository-SIGH/blob/5fb004fb562199ba115ba1891b08079772a83298/CasosUsos.drawio.png)
+![](https://github.com/Sigh-Sistema-de-Gerenciamento-de-Hotel/Repository-SIGH/blob/67862024acfe5c761919e4b65f8430c34efb9ac5/DiagramasEImagens/CasoDeUso.drawio.png)
 
 ## Diagrama de Classes
 Para gerenciar os cadastros e usuários, foram desenvolvidas classes que englobam todas as informações necessárias ao funcionamento da aplicação. 
 <br>
-![](https://github.com/Sigh-Sistema-de-Gerenciamento-de-Hotel/Repository-SIGH/blob/5fb004fb562199ba115ba1891b08079772a83298/Sigh.umlcdd.png)
+![](https://github.com/Sigh-Sistema-de-Gerenciamento-de-Hotel/Repository-SIGH/blob/67862024acfe5c761919e4b65f8430c34efb9ac5/DiagramasEImagens/SighDiagramaClasses.png)
 
 ## Diagrama de Entidade-Relacionamento
 O diagrama entidade-relacionamento mostra a estrutura da base de dados do projeto, incluindo informações sobre as sete tabelas e suas respectivas colunas e relações.
